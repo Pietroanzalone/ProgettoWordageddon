@@ -4,15 +4,19 @@
 <?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettowordageddon.ui.controller.HomeController">
    <children>
-      <VBox alignment="CENTER" prefHeight="720.0" prefWidth="1280.0">
+      <VBox fx:id="accessPage" alignment="CENTER" prefHeight="720.0" prefWidth="1280.0" visible="false">
          <children>
-            <HBox fx:id="navbar" id="navbar" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="1281.0">
+            <HBox id="navbar" fx:id="navbar" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="1281.0">
                <children>
                   <Button fx:id="B_exit" mnemonicParsing="false" onAction="#exit" text="X" textAlignment="CENTER">
                      <HBox.margin>
@@ -37,6 +41,180 @@
                            <children>
                               <Button id="registratiButton" fx:id="B_registrati" mnemonicParsing="false" text="REGISTRATI" />
                               <Button id="accediButton" fx:id="B_accedi" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Accedi" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <VBox fx:id="registrationPage" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1280.0" visible="false">
+         <children>
+            <HBox id="navbar" fx:id="navbar1" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="1280.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <ImageView fx:id="registrationHomeButton" fitHeight="36.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/FrecciaSx_nera.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="1200.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="670.0" prefWidth="1280.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="670.0" prefWidth="1280.0">
+                     <children>
+                        <Label id="title" prefHeight="120.0" prefWidth="1280.0" text="Registrati">
+                           <padding>
+                              <Insets bottom="50.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="T_RegUser" alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Username">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="T_RegPass" alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Password">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="T_RegConfPass" alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Conferma Password">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="27.0" />
+                           </font>
+                        </TextField>
+                        <Button id="registratiButton" fx:id="B_registrati2" mnemonicParsing="false" text="REGISTRATI">
+                           <VBox.margin>
+                              <Insets top="100.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <VBox fx:id="loginPage" alignment="CENTER" layoutX="20.0" layoutY="20.0" prefHeight="720.0" prefWidth="1280.0" visible="false">
+         <children>
+            <HBox id="navbar" fx:id="navbar11" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="1280.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <ImageView fx:id="accessHomeButton1" fitHeight="36.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/FrecciaSx_nera.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="1200.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="670.0" prefWidth="1280.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="670.0" prefWidth="1280.0">
+                     <children>
+                        <Label id="title" prefHeight="120.0" prefWidth="1280.0" text="Accedi ">
+                           <padding>
+                              <Insets bottom="50.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="T_UserAccess" alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Username">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="T_PassAccess" alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Password">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </TextField>
+                        <Button id="registratiButton" fx:id="B_accedi1" mnemonicParsing="false" text="ACCEDI">
+                           <VBox.margin>
+                              <Insets top="100.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <VBox fx:id="loginPage1" alignment="CENTER" layoutX="30.0" layoutY="30.0" prefHeight="720.0" prefWidth="1280.0">
+         <children>
+            <HBox id="navbar" fx:id="navbar111" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="1280.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <ImageView fx:id="logoutButton" fitHeight="36.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/FrecciaSx_nera.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="1200.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="670.0" prefWidth="1280.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="600.0" prefWidth="1280.0">
+                     <children>
+                        <Label id="title" prefHeight="120.0" prefWidth="1280.0" text="Home">
+                           <padding>
+                              <Insets bottom="50.0" />
+                           </padding>
+                        </Label>
+                        <Button id="registratiButton" fx:id="B_startQuiz" mnemonicParsing="false" text="Inizia Quiz">
+                           <VBox.margin>
+                              <Insets bottom="30.0" top="100.0" />
+                           </VBox.margin>
+                        </Button>
+                        <HBox alignment="CENTER" prefHeight="135.0" prefWidth="200.0">
+                           <children>
+                              <Button id="registratiButton" fx:id="B_leaderBoard" mnemonicParsing="false" text="Leaderboard">
+                                 <HBox.margin>
+                                    <Insets left="70.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button id="registratiButton" fx:id="B_RecuperaSession" mnemonicParsing="false" text="Recupera Sessione">
+                                 <HBox.margin>
+                                    <Insets left="200.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="135.0" prefWidth="200.0">
+                           <children>
+                              <Button id="registratiButton" fx:id="B_controlPanel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Panello di Controllo" textAlignment="RIGHT">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Button>
                            </children>
                         </HBox>
                      </children>
