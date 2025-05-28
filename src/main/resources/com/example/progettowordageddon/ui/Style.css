@@ -1,0 +1,51 @@
+#home {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #efefef 0%, #acc7cb 100%);
+    -fx-font-family: 'Segoe UI';
+}
+
+#home #title {
+    -fx-alignment: center;
+    -fx-text-fill: #435457;
+    -fx-font-size: 80px;
+    -fx-font-weight: bolder;
+}
+
+#home #registratiButton {
+    -fx-background-color: #749dab;
+    -fx-background-radius: 10;
+    -fx-border-style: solid;
+    -fx-border-radius: 5;
+    -fx-border-width: 3;
+    -fx-border-color: #262e35;
+    -fx-font-size: 30px;
+    -fx-text-fill: white;
+    -fx-font-weight: bolder;
+}
+
+#home #accediButton {
+    -fx-background-color: #e7eff8;
+    -fx-background-radius: 10;
+    -fx-border-radius: 5;
+    -fx-border-width: 3;
+    -fx-border-color: #95a2ab;
+    -fx-font-size: 25px;
+}
+
+#home .button:hover {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, #8f8f8f, 5, 0.1, 3, 3);
+}
+
+#home #navbar {
+    -fx-background-color: rgba(0, 0, 0, 0.05);
+}
+
+#home #navbar .button {
+    -fx-pref-height: 40;
+    -fx-pref-width: 40;
+    -fx-background-color: rgba(255, 130, 130, 0.5);
+    -fx-background-radius: 100%;
+    -fx-font-size: 20px;
+    -fx-font-weight: bolder;
+    -fx-text-fill: #c64949;
+}

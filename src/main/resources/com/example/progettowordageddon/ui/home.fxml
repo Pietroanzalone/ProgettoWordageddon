@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettowordageddon.ui.controller.HomeController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="720.0" prefWidth="1280.0">
+         <children>
+            <HBox fx:id="navbar" id="navbar" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="1281.0">
+               <children>
+                  <Button fx:id="B_exit" mnemonicParsing="false" onAction="#exit" text="X" textAlignment="CENTER">
+                     <HBox.margin>
+                        <Insets left="1200.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="670.0" prefWidth="1280.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="670.0" prefWidth="1280.0">
+                     <children>
+                        <Label id="title" prefHeight="120.0" prefWidth="1280.0" text="Wordageddon">
+                           <padding>
+                              <Insets bottom="100.0" />
+                           </padding>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="90.0" prefWidth="1280.0" spacing="300.0">
+                           <children>
+                              <Button id="registratiButton" fx:id="B_registrati" mnemonicParsing="false" text="REGISTRATI" />
+                              <Button id="accediButton" fx:id="B_accedi" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Accedi" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+   <rotationAxis>
+      <Point3D />
+   </rotationAxis>
+</AnchorPane>
