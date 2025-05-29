@@ -1,36 +1,26 @@
 package com.example.progettowordageddon.ui.controller;
 
-import javafx.application.Platform;
+import com.example.progettowordageddon.model.Logger;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 
-public class HomeController {
-    @FXML
-    private HBox navbar;
-
-    public void initialize() {
-        Platform.runLater(() -> {
-            Scene scene = navbar.getScene();
-            if (scene != null)
-                scene.setOnMouseMoved(event -> {
-                    double mouseY = event.getSceneY();
-                    double navbarBottomY = navbar.localToScene(navbar.getBoundsInLocal()).getMaxY();
-
-                    if (mouseY > navbarBottomY) {
-                        if (navbar.getOpacity() > 0)
-                            navbar.setOpacity(navbar.getOpacity() - 0.1);
-                    } else
-                        navbar.setOpacity(1);
-                });
-        });
-    }
+public class HomeController extends Controller {
 
     @FXML
-    private void exit() {
-        Platform.exit();
-    }
+    private void registratiClicked() {
+        // In attesa della creazione della schermata
+        // "Registrati", questo pulsante porta direttamente
+        // alla schermata "Utente"
+        Logger.log("Cliccato il pulsante: REGISTRATI");
+        cambiaSchermata("utente.fxml");
+    };
+
+    @FXML
+    private void accediClicked() {
+        // In attesa della creazione della schermata
+        // "Accedi", questo pulsante porta direttamente
+        // alla schermata "Utente"
+        Logger.log("Cliccato il pulsante: ACCEDI");
+        cambiaSchermata("utente.fxml");
+    };
 
 }

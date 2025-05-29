@@ -10,7 +10,7 @@
     -fx-font-weight: bolder;
 }
 
-#home #registratiButton {
+#home .mainButton {
     -fx-background-color: #749dab;
     -fx-background-radius: 10;
     -fx-border-style: solid;
@@ -22,7 +22,7 @@
     -fx-font-weight: bolder;
 }
 
-#home #accediButton {
+#home .minorButton {
     -fx-background-color: #e7eff8;
     -fx-background-radius: 10;
     -fx-border-radius: 5;
@@ -40,7 +40,7 @@
     -fx-background-color: rgba(0, 0, 0, 0.05);
 }
 
-#home #navbar .button {
+#home #navbar #exitButton {
     -fx-pref-height: 40;
     -fx-pref-width: 40;
     -fx-background-color: rgba(255, 130, 130, 0.5);
