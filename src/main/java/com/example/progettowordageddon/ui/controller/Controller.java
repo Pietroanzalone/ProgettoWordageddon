@@ -64,7 +64,7 @@ public class Controller {
 
     protected void setLogoutIcon() {
         try {
-            ImageView icon = new ImageView(getClass().getResource("/com/example/progettowordageddon/ui/Images/Logout.png").toExternalForm());
+            ImageView icon = new ImageView(getClass().getResource("/com/example/progettowordageddon/ui/Assets/Logout.png").toExternalForm());
             icon.setFitWidth(20);
             icon.setFitHeight(20);
             B_logout.setGraphic(icon);
