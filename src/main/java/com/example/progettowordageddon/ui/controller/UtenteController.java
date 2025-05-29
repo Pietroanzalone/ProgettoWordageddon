@@ -17,6 +17,7 @@ public class UtenteController extends Controller {
     @Override
     public void initialize() {
         super.initialize();
+        setLogoutIcon();
         if (Sessione.utente.getUsername() == null)
             Logger.error("Utente non inizializzato");
         L_titolo.setText("Benvenuto, " + Sessione.utente.getUsername());

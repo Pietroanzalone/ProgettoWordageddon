@@ -12,7 +12,7 @@ public class HomeController extends Controller {
         // alla schermata "Utente"
         Logger.log("Cliccato il pulsante: REGISTRATI");
         Logger.error("REGISTRATI non ancora implementato");
-        cambiaSchermata("Utente.fxml");
+        cambiaSchermata("Utente");
     };
 
     @FXML
@@ -22,7 +22,7 @@ public class HomeController extends Controller {
         // alla schermata "Utente"
         Logger.log("Cliccato il pulsante: ACCEDI");
         Logger.error("ACCEDI non ancora implementato");
-        cambiaSchermata("Utente.fxml");
+        cambiaSchermata("Utente");
     };
 
 }

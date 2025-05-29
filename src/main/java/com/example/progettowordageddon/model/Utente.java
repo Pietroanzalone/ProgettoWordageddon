@@ -17,4 +17,16 @@ public class Utente {
         return isAdmin;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Utente u)
+            return username.equals(u.username);
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return username.hashCode();
+    }
+
 }
