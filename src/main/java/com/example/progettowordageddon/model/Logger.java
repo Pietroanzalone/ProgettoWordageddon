@@ -6,6 +6,7 @@ public class Logger {
 
     private static final String RESET = "\u001B[0m";
     private static final String ROSSO = "\u001B[31m";
+    private static final String ROSSOGRASSETTO = "\u001B[1;31m";
     private static final String GIALLO = "\u001B[33m";
     private static final String BLU = "\u001B[34m";
 
@@ -57,7 +58,7 @@ public class Logger {
      */
     public static void fatal(String messaggio) {
         if (!loggingAttivo) return;
-        System.out.println(RESET + "[" + ROSSO + "FATAL" + RESET + "] " + messaggio);
+        System.out.println(RESET + "[" + ROSSOGRASSETTO + "FATAL" + RESET + "] " + messaggio);
     }
 
 }
