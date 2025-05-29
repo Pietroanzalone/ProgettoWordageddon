@@ -28,7 +28,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="670.0" prefWidth="1280.0">
                      <children>
-                        <Label id="title" prefHeight="120.0" prefWidth="1280.0" text="Wordageddon">
+                        <Label id="title" prefHeight="120.0" prefWidth="1280.0" text=" Wordageddon ">
                            <padding>
                               <Insets bottom="100.0" />
                            </padding>

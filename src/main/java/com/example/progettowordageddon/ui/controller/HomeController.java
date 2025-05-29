@@ -11,7 +11,7 @@ public class HomeController extends Controller {
         // "Registrati", questo pulsante porta direttamente
         // alla schermata "Utente"
         Logger.log("Cliccato il pulsante: REGISTRATI");
-        cambiaSchermata("utente.fxml");
+        cambiaSchermata("Utente.fxml");
     };
 
     @FXML
@@ -20,7 +20,7 @@ public class HomeController extends Controller {
         // "Accedi", questo pulsante porta direttamente
         // alla schermata "Utente"
         Logger.log("Cliccato il pulsante: ACCEDI");
-        cambiaSchermata("utente.fxml");
+        cambiaSchermata("Utente.fxml");
     };
 
 }
