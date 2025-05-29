@@ -2,7 +2,6 @@ package com.example.progettowordageddon.model;
 
 public class Logger {
     /** Flag per attivare o disattivare globalmente il logging. */
-    private static final boolean loggingAttivo = true;
 
     private static final String RESET = "\u001B[0m";
     private static final String ROSSO = "\u001B[31m";
@@ -19,7 +18,7 @@ public class Logger {
      *       dell'applicazione (es. "File caricato", "Utente loggato").
      */
     public static void log(String messaggio) {
-        if (!loggingAttivo) return;
+        if (!Sessione.loggingAttivo) return;
         System.out.println(RESET + "[" + BLU + "INFO" + RESET + "] " + messaggio);
     }
 
@@ -31,7 +30,7 @@ public class Logger {
      * @note Da usare per situazioni anomale ma non critiche (es. "Configurazione mancante, uso valori di default").
      */
     public static void warn(String messaggio) {
-        if (!loggingAttivo) return;
+        if (!Sessione.loggingAttivo) return;
         System.out.println(RESET + "[" + GIALLO + "WARN" + RESET + "] " + messaggio);
     }
 
@@ -44,7 +43,7 @@ public class Logger {
      *       ma che indica comunque un'anomalia (es. "File non trovato").
      */
     public static void error(String messaggio) {
-        if (!loggingAttivo) return;
+        if (!Sessione.loggingAttivo) return;
         System.out.println(RESET + "[" + ROSSO + "ERROR" + RESET + "] " + messaggio);
     }
 
@@ -57,7 +56,7 @@ public class Logger {
      *       come errori non gestibili o blocchi totali (es. "Database non raggiungibile").
      */
     public static void fatal(String messaggio) {
-        if (!loggingAttivo) return;
+        if (!Sessione.loggingAttivo) return;
         System.out.println(RESET + "[" + ROSSOGRASSETTO + "FATAL" + RESET + "] " + messaggio);
     }
 

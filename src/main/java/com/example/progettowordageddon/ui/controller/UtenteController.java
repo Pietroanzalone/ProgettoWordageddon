@@ -1,7 +1,7 @@
 package com.example.progettowordageddon.ui.controller;
 
-import com.example.progettowordageddon.Main;
 import com.example.progettowordageddon.model.Logger;
+import com.example.progettowordageddon.model.Sessione;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,8 +17,10 @@ public class UtenteController extends Controller {
     @Override
     public void initialize() {
         super.initialize();
-        L_titolo.setText("Benvenuto, " + Main.utente.getUsername());
-        B_pannelloDiControllo.setVisible(Main.utente.isAdmin());
+        if (Sessione.utente.getUsername() == null)
+            Logger.error("Utente non inizializzato");
+        L_titolo.setText("Benvenuto, " + Sessione.utente.getUsername());
+        B_pannelloDiControllo.setVisible(Sessione.utente.isAdmin());
     }
 
     @FXML

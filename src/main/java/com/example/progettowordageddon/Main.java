@@ -1,8 +1,6 @@
 package com.example.progettowordageddon;
 
 import java.io.IOException;
-
-import com.example.progettowordageddon.model.Utente;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,7 +8,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Main extends Application {
-    public static Utente utente = new Utente(null, false);
 
     public static void main(String[] args) {
         launch();
