@@ -1,18 +1,17 @@
 package com.example.progettowordageddon.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 public class Stopwords {
-    private static final List<String> stopwords = new ArrayList<>();
+    private static final Set<String> stopwords = new HashSet<>();
 
     public static void pulisci() {
         stopwords.clear();
     }
 
     public static void aggiungi(String stopword) {
-        if (!stopwords.contains(stopword))
-            stopwords.add(stopword);
+        stopwords.add(stopword);
     }
 
     public static void rimuovi(String stopword) {
@@ -23,4 +22,5 @@ public class Stopwords {
         if (parola.length() <= 1) return true;
         return stopwords.contains(parola);
     }
+
 }
