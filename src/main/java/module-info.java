@@ -1,6 +1,7 @@
 module com.example.progettowordageddon {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens com.example.progettowordageddon to javafx.fxml;
