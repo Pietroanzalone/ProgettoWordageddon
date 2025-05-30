@@ -11,8 +11,7 @@ public class HomeController extends Controller {
         // "Registrati", questo pulsante porta direttamente
         // alla schermata "Utente"
         Logger.log("Cliccato il pulsante: REGISTRATI");
-        Logger.error("REGISTRATI non ancora implementato");
-        cambiaSchermata("Utente");
+        cambiaSchermata("Registrati");
     };
 
     @FXML
@@ -21,8 +20,7 @@ public class HomeController extends Controller {
         // "Accedi", questo pulsante porta direttamente
         // alla schermata "Utente"
         Logger.log("Cliccato il pulsante: ACCEDI");
-        Logger.error("ACCEDI non ancora implementato");
-        cambiaSchermata("Utente");
+        cambiaSchermata("Accedi");
     };
 
 }

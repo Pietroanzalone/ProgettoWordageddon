@@ -1,8 +1,6 @@
 package com.example.progettowordageddon;
 
 import java.io.IOException;
-
-import com.example.progettowordageddon.model.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,8 +8,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Main extends Application {
-
-    private Database db=new Database();
 
     public static void main(String[] args) {
         launch();
@@ -25,8 +21,6 @@ public class Main extends Application {
         stage.setTitle("WORDAGEDDON");
         stage.setScene(scene);
         stage.show();
-
-        db.getConnection();
     }
 
 }

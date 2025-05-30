@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="WordageddonDB" uuid="e314baf1-c745-44a6-bdcf-52dca6769ebd">
+    <data-source source="LOCAL" name="WordageddonDB" uuid="12d28dd0-4bce-4544-a9ad-740e9eab295c">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\anzal\OneDrive\Documenti\NetBeansProjects\mavenproject1\ProgettoWordageddon\WordageddonDB.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\cerlo\OneDrive - Università di Salerno\CARLO\Codici\JAVA\ProgettoWordageddon\WordageddonDB.db</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
       </jdbc-additional-properties>

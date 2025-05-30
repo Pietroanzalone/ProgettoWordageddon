@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettowordageddon.ui.controller.UtenteController">
+<AnchorPane id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettowordageddon.ui.controller.RegistratiController">
     <children>
         <VBox alignment="CENTER" prefHeight="720.0" prefWidth="1280.0">
             <children>
@@ -54,7 +54,7 @@
                                     <Insets top="50.0" />
                                  </VBox.margin>
                               </TextField>
-                              <TextField fx:id="T_confPasswSignInPage" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Password">
+                              <TextField fx:id="T_confPasswSignInPage" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Conferma Password">
                                  <font>
                                     <Font size="36.0" />
                                  </font>

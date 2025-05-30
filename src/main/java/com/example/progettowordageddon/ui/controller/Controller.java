@@ -47,7 +47,7 @@ public class Controller {
 
     @FXML
     private void logout() {
-        Sessione.utente = new Utente(null, false);
+        Sessione.utente = new Utente(null, null, true, false);
         cambiaSchermata("Home");
     }
 
