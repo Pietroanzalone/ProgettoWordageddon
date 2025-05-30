@@ -87,7 +87,10 @@ public class Utente {
     }
 
     /**
-     * Applica l'hashing SHA-256 a una stringa.
+     * Applica l'hashing SHA-256 a una password.
+     * @param password Password da hashare.
+     * @return Password hashata
+     *
      */
     public static String hashPassword(String password) {
         try {

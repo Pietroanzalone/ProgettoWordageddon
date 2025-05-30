@@ -1,4 +1,4 @@
-package com.example.progettowordageddon.ui.controller;
+package com.example.progettowordageddon.ui;
 
 import com.example.progettowordageddon.model.Logger;
 import javafx.fxml.FXML;

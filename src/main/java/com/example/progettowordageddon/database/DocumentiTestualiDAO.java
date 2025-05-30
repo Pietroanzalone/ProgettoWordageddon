@@ -1,4 +1,4 @@
-package com.example.progettowordageddon.model.dao;
+package com.example.progettowordageddon.database;
 
 import com.example.progettowordageddon.model.*;
 
