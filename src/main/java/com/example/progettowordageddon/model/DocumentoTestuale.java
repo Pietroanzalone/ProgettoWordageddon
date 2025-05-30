@@ -7,12 +7,14 @@ import java.util.regex.Pattern;
 public class DocumentoTestuale {
     private String nome;
     private Lingua lingua;
+    private Difficolta difficolta;
     private String testo;
     private final Map<String, Integer> conteggioParole;
 
-    public DocumentoTestuale(String nome, Lingua lingua, String testo) {
+    public DocumentoTestuale(String nome, Lingua lingua, Difficolta difficolta, String testo) {
         this.nome = nome;
         this.lingua = lingua;
+        this.difficolta = difficolta;
         this.testo = testo;
         conteggioParole = new HashMap<>();
         aggiornaConteggioParole();
@@ -32,6 +34,14 @@ public class DocumentoTestuale {
 
     public void setLingua(Lingua lingua) {
         this.lingua = lingua;
+    }
+
+    public Difficolta getDifficolta() {
+        return difficolta;
+    }
+
+    public void setDifficolta(Difficolta difficolta) {
+        this.difficolta = difficolta;
     }
 
     public String getTesto() {
@@ -97,7 +107,7 @@ public class DocumentoTestuale {
 
     @Override
     public String toString() {
-        return "\"" + nome + "\" [" + lingua.toString() + "]";
+        return "\"" + nome + "\" [" + lingua + "] [" + difficolta + "]";
     }
 
     @Override
@@ -144,7 +154,7 @@ public class DocumentoTestuale {
                         "impaurita. <<Se non mi uccidi>> disse <<Ti indicherò dove vive la " +
                         "ragazzina che cerchi tanto!>> Tutto contento, Omero lo liberò e si " +
                         "fece condurre dove viveva Agnese...";
-        DocumentoTestuale dt = new DocumentoTestuale("Favola", Lingua.ITALIANO, testo);
+        DocumentoTestuale dt = new DocumentoTestuale("Favola", Lingua.ITALIANO, Difficolta.DIFFICILE, testo);
         System.out.println("Documento: " + dt);
         System.out.println(dt.getTesto());
         dt.getConteggioParole().forEach((s, integer) -> System.out.println(s + " " + integer));
