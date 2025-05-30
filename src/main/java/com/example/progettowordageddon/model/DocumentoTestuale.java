@@ -1,7 +1,6 @@
 package com.example.progettowordageddon.model;
 
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,12 +8,13 @@ public class DocumentoTestuale {
     private String nome;
     private Lingua lingua;
     private String testo;
-    private final Map<String, Integer> conteggioParole = new HashMap<>();
+    private final Map<String, Integer> conteggioParole;
 
     public DocumentoTestuale(String nome, Lingua lingua, String testo) {
         this.nome = nome;
         this.lingua = lingua;
         this.testo = testo;
+        conteggioParole = new HashMap<>();
         aggiornaConteggioParole();
     }
 
@@ -40,32 +40,47 @@ public class DocumentoTestuale {
 
     public void setTesto(String testo) {
         this.testo = testo;
+        aggiornaConteggioParole();
     }
 
     public Map<String, Integer> getConteggioParole() {
-        return conteggioParole;
+        return new HashMap<>(conteggioParole);
+    }
+
+    public boolean contiene(String parola) {
+        return conteggioParole.containsKey(parola);
     }
 
     public int getConteggioParola(String parola) {
-        return conteggioParole.get(parola);
+        if (contiene(parola))
+            return conteggioParole.get(parola);
+        return 0;
     }
 
-    public String getParolaComune() {
-        String parolaComune = "";
-        int maxFrequenza = 0;
+    public List<String> getParoleComuni(DocumentoTestuale altro) {
+        if (altro == null) return new ArrayList<>();
+        Set<String> comuniSet = new HashSet<>(conteggioParole.keySet());
+        comuniSet.retainAll(altro.getConteggioParole().keySet());
+        return new ArrayList<>(comuniSet);
+    }
+
+    public List<String> getParolePiuFrequenti() {
+        List<String> parolePiuFrequenti = new ArrayList<>();
+        int maxConteggio = 0;
 
         for (Map.Entry<String, Integer> entry : conteggioParole.entrySet()) {
             String parola = entry.getKey();
-            int frequenza = entry.getValue();
-
-            if (frequenza > maxFrequenza ||
-                frequenza == maxFrequenza && parola.length() > parolaComune.length()) {
-                parolaComune = parola;
-                maxFrequenza = frequenza;
+            int conteggio = entry.getValue();
+            if (conteggio == maxConteggio)
+                parolePiuFrequenti.add(parola);
+            if (conteggio > maxConteggio) {
+                parolePiuFrequenti.clear();
+                parolePiuFrequenti.add(parola);
+                maxConteggio = conteggio;
             }
         }
 
-        return parolaComune;
+        return parolePiuFrequenti;
     }
 
     private void aggiornaConteggioParole() {
@@ -78,6 +93,23 @@ public class DocumentoTestuale {
             if (!Stopwords.contiene(parola))
                 conteggioParole.put(parola, conteggioParole.getOrDefault(parola, 0) + 1);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "\"" + nome + "\" [" + lingua.toString() + "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof DocumentoTestuale dt)
+            return nome.equals(dt.nome);
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return nome.hashCode();
     }
 
     public static void main(String[] args) {
@@ -113,7 +145,7 @@ public class DocumentoTestuale {
                         "ragazzina che cerchi tanto!>> Tutto contento, Omero lo liberò e si " +
                         "fece condurre dove viveva Agnese...";
         DocumentoTestuale dt = new DocumentoTestuale("Favola", Lingua.ITALIANO, testo);
-        System.out.println("Parola comune: " + dt.getParolaComune());
+        System.out.println("Documento: " + dt);
         System.out.println(dt.getTesto());
         dt.getConteggioParole().forEach((s, integer) -> System.out.println(s + " " + integer));
     }
