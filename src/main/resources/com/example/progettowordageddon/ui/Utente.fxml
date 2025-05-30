@@ -14,12 +14,12 @@
             <children>
                 <HBox id="navbar" fx:id="navbar" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="1281.0">
                     <children>
-                        <Button id="logoutButton" fx:id="B_logout" mnemonicParsing="false" onAction="#logout" text="&lt;" textAlignment="CENTER">
+                        <Button id="logoutButton" fx:id="B_logout" mnemonicParsing="false" onAction="#home" text="&lt;" textAlignment="CENTER">
                             <HBox.margin>
                                 <Insets right="1140.0" />
                             </HBox.margin>
                         </Button>
-                  <Button id="exitButton" fx:id="B_exit" layoutX="1230.0" layoutY="15.0" mnemonicParsing="false" onAction="#exit" text="X" textAlignment="CENTER" />
+                  <Button id="exitButton" fx:id="B_exit" layoutX="1230.0" layoutY="15.0" mnemonicParsing="false" onAction="#chiudi" text="X" textAlignment="CENTER" />
                     </children>
                     <VBox.margin>
                         <Insets />

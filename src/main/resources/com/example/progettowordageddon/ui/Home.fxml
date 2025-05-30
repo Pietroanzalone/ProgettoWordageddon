@@ -14,7 +14,7 @@
          <children>
             <HBox id="navbar" fx:id="navbar" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="1281.0">
                <children>
-                  <Button id="exitButton" fx:id="B_exit" mnemonicParsing="false" onAction="#exit" text="X" textAlignment="CENTER">
+                  <Button id="exitButton" fx:id="B_exit" mnemonicParsing="false" onAction="#chiudi" text="X" textAlignment="CENTER">
                      <HBox.margin>
                         <Insets left="1200.0" />
                      </HBox.margin>

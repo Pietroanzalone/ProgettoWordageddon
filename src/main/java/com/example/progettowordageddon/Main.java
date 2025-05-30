@@ -29,15 +29,7 @@ public class Main extends Application {
         launch();
     }
 
-    /**
-     * Inizializza lo stage principale dell'applicazione.
-     *
-     * Carica l'interfaccia grafica definita nel file {@code Home.fxml},
-     * imposta lo stile della finestra come undecorated e mostra la scena.
-     *
-     * @param stage Lo stage principale fornito da JavaFX.
-     * @throws IOException Se il file FXML non viene caricato correttamente.
-     */
+    /// \cond DOXYGEN_SKIP
     @Override
     public void start(Stage stage) throws IOException {
         stage.initStyle(StageStyle.UNDECORATED);
@@ -47,5 +39,6 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
+    /// \endcond
 
 }

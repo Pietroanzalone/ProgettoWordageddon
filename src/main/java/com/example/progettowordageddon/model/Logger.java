@@ -1,16 +1,17 @@
 package com.example.progettowordageddon.model;
 
 public class Logger {
-    /** Flag per attivare o disattivare globalmente il logging. */
 
+    /** \cond DOXY_SKIP */
     private static final String RESET = "\u001B[0m";
     private static final String ROSSO = "\u001B[31m";
     private static final String ROSSOGRASSETTO = "\u001B[1;31m";
     private static final String GIALLO = "\u001B[33m";
     private static final String BLU = "\u001B[34m";
+    /** \endcond */
 
     /**
-     * Stampa un messaggio informativo in blu.
+     * @brief Stampa un messaggio informativo in blu.
      *
      * @param messaggio Il messaggio da stampare.
      *
@@ -23,7 +24,7 @@ public class Logger {
     }
 
     /**
-     * Stampa un messaggio di warning (avviso) in giallo.
+     * @brief Stampa un messaggio di warning (avviso) in giallo.
      *
      * @param messaggio Il messaggio di avviso.
      *
@@ -35,7 +36,7 @@ public class Logger {
     }
 
     /**
-     * Stampa un messaggio di errore in rosso.
+     * @brief Stampa un messaggio di errore in rosso.
      *
      * @param messaggio Il messaggio di errore.
      *
@@ -48,7 +49,7 @@ public class Logger {
     }
 
     /**
-     * Stampa un messaggio di errore critico (fatale) in rosso.
+     * @brief Stampa un messaggio di errore critico (fatale) in rosso.
      *
      * @param messaggio Il messaggio critico.
      *

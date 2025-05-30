@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * e aggiornamento sul database tramite JDBC.
  */
 class DAO {
-    /** URL di connessione al database SQLite */
+    /** @brief URL di connessione al database SQLite */
     private static final String DB_URL = "jdbc:sqlite:WordageddonDB.db";
 
     /**

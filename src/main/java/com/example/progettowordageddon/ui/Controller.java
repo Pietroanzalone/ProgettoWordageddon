@@ -13,31 +13,35 @@ import javafx.scene.layout.HBox;
 
 /**
  * @class Controller
- * @brief Controller principale per la gestione della UI.
+ * @brief Controllore principale per la gestione della UI.
  *
- * Gestisce la navbar, il logout e il cambio schermata.
+ * Implementa funzioni di base, come il cambio di schermata e la chiusura
+ * dell'applicazione.
+ * Inoltre, gestisce interamente la barra di navigazione in alto.
  */
 public class Controller {
 
-    /** Barra di navigazione principale */
+    /** \cond DOXY_SKIP */
     @FXML
     private HBox navbar;
 
-    /** Pulsante di ritorno alla schermata Home */
     @FXML
     private Button B_logout;
+    /** \endcond */
 
     /**
-     * @brief Inizializza la navbar.
-     * Metodo chiamato automaticamente all'inizializzazione del controller.
+     * @brief Metodo chiamato automaticamente all'inizializzazione del controller.
+     *
+     * Inizializza la barra di navigazione usando {@link initNavbar}.
      */
     public void initialize() {
         initNavbar();
     }
 
     /**
-     * @brief Inizializza la navbar impostando un listener per la trasparenza in base alla posizione del mouse.
-     * La navbar diventa trasparente quando il mouse si sposta sotto la sua area.
+     * @brief Imposta la logica della barra di navigazione in alto.
+     *
+     * Aggiunge un listener che rende la barra di navigazione trasparente quando il mouse si sposta sotto la sua area.
      */
     private void initNavbar() {
         Platform.runLater(() -> {
@@ -58,19 +62,23 @@ public class Controller {
 
     /**
      * @brief Esce dall'applicazione.
+     *
+     * Chiude la finestra.
      * Metodo associato al pulsante rosso in alto a destra.
      */
     @FXML
-    private void exit() {
+    private void chiudi() {
         Platform.exit();
     }
 
     /**
      * @brief Ritorna alla schermata Home.
+     *
      * Resetta la sessione e cambia schermata alla Home.
+     * Metodo associato al pulsante giallo in alto a sinistra.
      */
     @FXML
-    private void logout() {
+    private void home() {
         Sessione.utente = new Utente(null, null, true, false);
         cambiaSchermata("Home");
     }
@@ -79,6 +87,16 @@ public class Controller {
      * @brief Cambia la schermata visualizzata caricando il file FXML indicato.
      *
      * @param nomeSchermata Nome della schermata (file FXML senza estensione) da caricare.
+     *
+     * @note Questo è il metodo principale da usare per i pulsanti.
+     *
+     * Esempio:
+     * ```java
+     * @FXML
+     * public void accediClicked() {
+     *     cambiaSchermata("Accedi");
+     * }
+     * ```
      */
     protected void cambiaSchermata(String nomeSchermata) {
         try {
@@ -94,18 +112,20 @@ public class Controller {
     /**
      * @brief Imposta l'icona del bottone di logout.
      *
-     * Questo metodo va utilizzato da tutti i controller,
+     * @note Questo metodo va utilizzato da tutti i controller,
      * escluso HomeController dato che non ha il pulsante
      * "Logout" al suo interno.
      *
      * Esempio:
-     * @verbatim
-     @Override
-     public void initialize() {
-         super.initialize();
-         setLogoutIcon();
-     } @endverbatim
+     * ```java
+     * @Override
+     * public void initialize() {
+     *     super.initialize();
+     *     setLogoutIcon();
+     * }
+     * ```
      */
+
     protected void setLogoutIcon() {
         try {
             ImageView icon = new ImageView(getClass().getResource("/com/example/progettowordageddon/ui/Assets/Logout.png").toExternalForm());
