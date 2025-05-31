@@ -39,28 +39,6 @@ public class Controller {
     }
 
     /**
-     * @brief Imposta la logica della barra di navigazione in alto.
-     *
-     * Aggiunge un listener che rende la barra di navigazione trasparente quando il mouse si sposta sotto la sua area.
-     */
-    private void initNavbar() {
-        Platform.runLater(() -> {
-            Scene scene = navbar.getScene();
-            if (scene != null)
-                scene.setOnMouseMoved(event -> {
-                    double mouseY = event.getSceneY();
-                    double navbarBottomY = navbar.localToScene(navbar.getBoundsInLocal()).getMaxY();
-
-                    if (mouseY > navbarBottomY) {
-                        if (navbar.getOpacity() > 0)
-                            navbar.setOpacity(navbar.getOpacity() - 0.1);
-                    } else
-                        navbar.setOpacity(1);
-                });
-        });
-    }
-
-    /**
      * @brief Esce dall'applicazione.
      *
      * Chiude la finestra.
@@ -88,7 +66,7 @@ public class Controller {
      *
      * @param nomeSchermata Nome della schermata (file FXML senza estensione) da caricare.
      *
-     * @note Questo è il metodo principale da usare per i pulsanti.
+     * @note Questo è il metodo principale da usare per i pulsanti _@FXML_.
      *
      * Esempio:
      * ```java
@@ -113,8 +91,8 @@ public class Controller {
      * @brief Imposta l'icona del bottone di logout.
      *
      * @note Questo metodo va utilizzato da tutti i controller,
-     * escluso HomeController dato che non ha il pulsante
-     * "Logout" al suo interno.
+     *       escluso HomeController che non ha il pulsante "Logout"
+     *       al suo interno.
      *
      * Esempio:
      * ```java
@@ -125,7 +103,6 @@ public class Controller {
      * }
      * ```
      */
-
     protected void setLogoutIcon() {
         try {
             ImageView icon = new ImageView(getClass().getResource("/com/example/progettowordageddon/ui/Assets/Logout.png").toExternalForm());
@@ -136,6 +113,28 @@ public class Controller {
         } catch (NullPointerException e) {
             Logger.error(e.getMessage());
         }
+    }
+
+    /**
+     * @brief Imposta la logica della barra di navigazione in alto.
+     *
+     * Aggiunge un listener che rende la barra di navigazione trasparente quando il mouse si sposta sotto la sua area.
+     */
+    private void initNavbar() {
+        Platform.runLater(() -> {
+            Scene scene = navbar.getScene();
+            if (scene != null)
+                scene.setOnMouseMoved(event -> {
+                    double mouseY = event.getSceneY();
+                    double navbarBottomY = navbar.localToScene(navbar.getBoundsInLocal()).getMaxY();
+
+                    if (mouseY > navbarBottomY) {
+                        if (navbar.getOpacity() > 0)
+                            navbar.setOpacity(navbar.getOpacity() - 0.1);
+                    } else
+                        navbar.setOpacity(1);
+                });
+        });
     }
 
 }

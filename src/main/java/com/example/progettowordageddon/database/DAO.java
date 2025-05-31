@@ -13,7 +13,13 @@ import java.util.ArrayList;
  */
 class DAO {
     /** @brief URL di connessione al database SQLite */
-    private static final String DB_URL = "jdbc:sqlite:WordageddonDB.db";
+    private static final String DB_URL;
+
+    /** \cond DOXY_SKIP */
+    static {
+        DB_URL = "jdbc:sqlite:WordageddonDB.db";
+    }
+    /** \endcond */
 
     /**
      * @brief Stabilisce una connessione al database.
@@ -90,4 +96,5 @@ class DAO {
             }
         }
     }
+
 }
