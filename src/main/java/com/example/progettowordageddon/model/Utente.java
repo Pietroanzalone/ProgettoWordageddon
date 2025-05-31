@@ -6,29 +6,30 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * @class Utente
- * @brief Rappresenta un utente del sistema Wordageddon.
+ * @brief Un utente dell'applicazione.
  *
  * La classe gestisce le credenziali dell'utente, incluso l'hashing della password
- * tramite SHA-256 senza l'uso di dipendenze esterne. Fornisce anche metodi
- * per verificare le credenziali e rappresentare l'utente come stringa.
+ * tramite [SHA-256](https://it.wikipedia.org/wiki/Secure_Hash_Algorithm) senza
+ * l'uso di dipendenze esterne. Fornisce anche metodi per verificare le credenziali
+ * e rappresentare l'utente come stringa.
  */
 public class Utente {
 
-    /** Nome utente univoco. */
+    /** @brief Username univoco. */
     private final String username;
 
-    /** Password dell'utente. Se hashedPassword è true,
-     * è memorizzata in forma hash. */
+    /** @brief Password dell'utente.
+     *
+     * Se hashedPassword è true, è memorizzata in forma hash. */
     private String password;
 
-    /** Flag che indica se la password è stata già sottoposta ad hashing. */
+    /** @brief Flag che indica se la password è stata già sottoposta ad hashing. */
     private boolean hashedPassword;
 
-    /** Flag che indica se l'utente ha privilegi di amministratore. */
+    /** @brief Flag che indica se l'utente ha privilegi di amministratore. */
     private final boolean isAdmin;
 
-    /**
-     * Costruttore completo per la classe Utente.
+    /** @brief Costruttore completo per la classe Utente.
      *
      * @param username Nome utente.
      * @param password Password in chiaro o hash.
@@ -42,41 +43,39 @@ public class Utente {
         this.isAdmin = isAdmin;
     }
 
-    /**
-     * Restituisce il nome utente.
-     * @return Username.
+    /** @brief Restituisce il nome utente.
+     * @return L'username dell'utente.
      */
     public String getUsername() {
         return username;
     }
 
-    /**
-     * Restituisce la password.
-     * @return Password.
+    /** @brief Restituisce la password.
+     *
+     * Se hashedPassword è true, la password
+     * restituita è criptata.
+     * @return La password dell'utente.
      */
     public String getPassword() {
         return password;
     }
 
-    /**
-     * Verifica se la password è già hashata.
+    /** @brief Verifica se la password è già hashata.
      * @return True se la password è hashata.
      */
     public boolean isHashedPassword() {
         return hashedPassword;
     }
 
-    /**
-     * Verifica se l'utente è un amministratore.
+    /** @brief Verifica se l'utente è un amministratore.
      * @return True se l'utente ha privilegi di admin.
      */
     public boolean isAdmin() {
         return isAdmin;
     }
 
-    /**
-     * Applica l'hashing SHA-256 alla password, se non già hashata.
-     * Ignora la richiesta se la password è già hashata.
+    /** @brief Applica l'hashing [SHA-256](https://it.wikipedia.org/wiki/Secure_Hash_Algorithm)
+     * alla password, se non già hashata. Ignora la richiesta se la password è già hashata.
      */
     public void hash() {
         if (hashedPassword)
@@ -86,10 +85,10 @@ public class Utente {
         hashedPassword = true;
     }
 
-    /**
-     * Applica l'hashing SHA-256 a una password.
-     * @param password Password da hashare.
-     * @return Password hashata
+    /** @brief Applica l'hashing [SHA-256](https://it.wikipedia.org/wiki/Secure_Hash_Algorithm)
+     * a una password.
+     * @param password La password da hashare.
+     * @return La password hashata
      *
      */
     public static String hashPassword(String password) {
@@ -102,20 +101,16 @@ public class Utente {
         }
     }
 
-    /**
-     * Converte un array di byte in una stringa esadecimale.
-     * @param hash Array di byte.
-     * @return Stringa esadecimale.
-     */
+    /** \cond DOXY_SKIP */
     private static String bytesToHex(byte[] hash) {
         StringBuilder hexString = new StringBuilder(2 * hash.length);
         for (byte b : hash)
             hexString.append(String.format("%02x", b));
         return hexString.toString();
     }
+    /** \endcond */
 
-    /**
-     * Verifica se una password in chiaro corrisponde all'hash memorizzato.
+    /** @brief Verifica se una password in chiaro corrisponde all'hash memorizzato.
      * @param password Password in chiaro da verificare.
      * @return True se la password è corretta.
      */
@@ -131,8 +126,7 @@ public class Utente {
         }
     }
 
-    /**
-     * Confronta due oggetti Utente in base all'username.
+    /** @brief Confronta due oggetti Utente in base all'username.
      * @param obj Oggetto da confrontare.
      * @return True se gli username coincidono.
      */
@@ -143,8 +137,7 @@ public class Utente {
         return false;
     }
 
-    /**
-     * Calcola l'hash code basato sull'username.
+    /** @brief Calcola l'hash code basato sull'username.
      * @return Hash code.
      */
     @Override
@@ -152,8 +145,8 @@ public class Utente {
         return username.hashCode();
     }
 
-    /**
-     * Rappresenta l'utente come stringa.
+    /** @brief Rappresenta l'utente come stringa.
+     *
      * Se è admin, aggiunge un asterisco.
      * @return Stringa rappresentativa dell'utente.
      */

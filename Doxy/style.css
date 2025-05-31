@@ -4,7 +4,10 @@
 
 * {
     font-family: "Segoe UI", sans-serif;
-    --font-family-monospace: "JetBrains Mono", courier;
+}
+
+code {
+    font-family: "JetBrains Mono", monospace;
 }
 
 body {
@@ -69,6 +72,10 @@ td.entry > span:first-child {
 
 h2.memtitle > span.permalink {
     display: none;
+}
+
+dt {
+    font-size: large;
 }
 
 html {

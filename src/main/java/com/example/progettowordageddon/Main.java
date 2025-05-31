@@ -10,7 +10,7 @@ import javafx.stage.StageStyle;
 
 /**
  * @class Main
- * @brief Punto di ingresso dell'applicazione Wordageddon.
+ * @brief Il punto di ingresso dell'applicazione Wordageddon.
  *
  * La classe Main estende
  * [Application](https://docs.oracle.com/javase/8/javafx/api/javafx/application/Application.html)
@@ -21,7 +21,7 @@ import javafx.stage.StageStyle;
 public class Main extends Application {
 
     /**
-     * Metodo principale che lancia l'applicazione JavaFX.
+     * @brief Metodo principale che lancia l'applicazione JavaFX.
      *
      * @param args Argomenti da linea di comando (non utilizzati).
      */

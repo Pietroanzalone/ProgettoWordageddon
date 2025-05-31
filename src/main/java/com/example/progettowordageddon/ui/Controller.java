@@ -13,7 +13,7 @@ import javafx.scene.layout.HBox;
 
 /**
  * @class Controller
- * @brief Controllore principale per la gestione della UI.
+ * @brief Il controller principale per la gestione della UI.
  *
  * Implementa funzioni di base, come il cambio di schermata e la chiusura
  * dell'applicazione.

@@ -32,12 +32,12 @@ class DAO {
     }
 
     /**
-     * @brief Esegue una query SELECT parametrizzata e restituisce i risultati.
+     * @brief Esegue una query `SELECT` parametrizzata e restituisce i risultati.
      *
      * Abilita le foreign key, prepara la query, imposta i parametri e
      * restituisce la lista di risultati come array di oggetti.
      *
-     * @param query La query SQL SELECT da eseguire, con eventuali placeholder '?'.
+     * @param query La query SQL da eseguire, con eventuali placeholder '?'.
      * @param parametri Parametri da sostituire ai placeholder della query.
      * @return Lista di righe risultanti, ogni riga rappresentata come array di Object.
      * @throws SQLException Se si verifica un errore durante l'esecuzione della query.
@@ -71,12 +71,12 @@ class DAO {
     }
 
     /**
-     * @brief Esegue una query di aggiornamento (INSERT, UPDATE, DELETE) parametrizzata.
+     * @brief Esegue una query `INSERT`, `UPDATE` o `DELETE` parametrizzata.
      *
      * Abilita le foreign key, prepara la query, imposta i parametri e
      * esegue l'update sul database.
      *
-     * @param query La query SQL di aggiornamento da eseguire, con eventuali placeholder '?'.
+     * @param query La query SQL da eseguire, con eventuali placeholder '?'.
      * @param parametri Parametri da sostituire ai placeholder della query.
      * @throws SQLException Se si verifica un errore durante l'esecuzione della query.
      */
