@@ -17,7 +17,7 @@ class DAO {
 
     /** \cond DOXY_SKIP */
     static {
-        DB_URL = "jdbc:sqlite:WordageddonDB.db";
+        DB_URL = "jdbc:sqlite:database/WordageddonDB.db";
     }
     /** \endcond */
 
