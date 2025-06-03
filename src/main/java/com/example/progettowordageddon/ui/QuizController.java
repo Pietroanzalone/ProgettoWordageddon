@@ -1,5 +1,6 @@
 package com.example.progettowordageddon.ui;
 
+import com.example.progettowordageddon.model.SessioneQuiz;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -20,11 +21,11 @@ public class QuizController extends Controller {
     @Override
     public void initialize(){
         QuizTextArea.setEditable(false);
-
+        String diff= SessioneQuiz.getDifficolta();
+        gestisciDifficolta(diff);
     }
 
-    @FXML
-    private void gestisciDifficolta(String difficolta){
+    public void gestisciDifficolta(String difficolta){
         switch(difficolta){
             case "Facile":
                 QuizTimer.setText("00:30");
