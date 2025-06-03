@@ -82,6 +82,7 @@ public class Controller {
             Parent root = loader.load();
             Scene scene = navbar.getScene();
             if (scene != null) scene.setRoot(root);
+            Sessione.schermata = nomeSchermata;
         } catch (IOException e) {
             Logger.error(e.getMessage());
         }
@@ -105,10 +106,7 @@ public class Controller {
      */
     protected void setLogoutIcon() {
         try {
-            ImageView icon = new ImageView(getClass().getResource("/com/example/progettowordageddon/ui/Assets/Logout.png").toExternalForm());
-            icon.setFitWidth(20);
-            icon.setFitHeight(20);
-            B_logout.setGraphic(icon);
+            B_logout.setGraphic(caricaImmagine("Logout.png", 20, 20));
             B_logout.setText("");
         } catch (NullPointerException e) {
             Logger.error(e.getMessage());
@@ -135,6 +133,21 @@ public class Controller {
                         navbar.setOpacity(1);
                 });
         });
+    }
+
+    /**
+     * @brief Carica un'immagine dalla cartella Assets e la trasforma in un'icona
+     *
+     * @param nome Nome del file (compresa l'estensione)
+     * @param width Larghezza dell'icona
+     * @param height Altezza dell'icona
+     * @return Icona utilizzabile
+     */
+    protected ImageView caricaImmagine(String nome, int width, int height) {
+        ImageView icona = new ImageView(getClass().getResource("/com/example/progettowordageddon/ui/Assets/" + nome).toExternalForm());
+        icona.setFitWidth(width);
+        icona.setFitHeight(height);
+        return icona;
     }
 
 }

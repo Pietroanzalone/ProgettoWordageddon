@@ -4,8 +4,9 @@ import com.example.progettowordageddon.model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-
 public class IniziaQuizController extends Controller {
+    private Lingua linguaScelta = Lingua.ITALIANO;
+    private Difficolta difficoltaScelta = Difficolta.FACILE;
 
     @FXML
     private MenuButton B_difficolta;
@@ -14,47 +15,70 @@ public class IniziaQuizController extends Controller {
     private MenuButton B_lingua;
 
     @FXML
-    private MenuItem facile;
+    private MenuItem DIF_facile;
 
     @FXML
-    private MenuItem media;
+    private MenuItem DIF_media;
 
     @FXML
-    private MenuItem difficile;
+    private MenuItem DIF_difficile;
 
     @FXML
-    private MenuItem italiano;
+    private MenuItem LIN_italiano;
 
     @FXML
-    private MenuItem inglese;
+    private MenuItem LIN_inglese;
 
     @FXML
-    private MenuItem spagnolo;
+    private MenuItem LIN_spagnolo;
 
     @FXML
-    private MenuItem francese;
+    private MenuItem LIN_francese;
 
     @Override
     public void initialize() {
         super.initialize();
         setLogoutIcon();
         initDifficolta();
-
+        initLingua();
     }
 
     private void initDifficolta() {
         styleDifficolta();
-        facile.setOnAction(e -> {
+        DIF_facile.setOnAction(e -> {
+            difficoltaScelta = Difficolta.FACILE;
             B_difficolta.setText("Facile");
             styleDifficolta();
         });
-        media.setOnAction(e -> {
+        DIF_media.setOnAction(e -> {
+            difficoltaScelta = Difficolta.MEDIA;
             B_difficolta.setText("Media");
             styleDifficolta();
         });
-        difficile.setOnAction(e -> {
+        DIF_difficile.setOnAction(e -> {
+            difficoltaScelta = Difficolta.DIFFICILE;
             B_difficolta.setText("Difficile");
             styleDifficolta();
+        });
+    }
+
+    private void initLingua() {
+        styleLingua();
+        LIN_italiano.setOnAction(e -> {
+            linguaScelta = Lingua.ITALIANO;
+            styleLingua();
+        });
+        LIN_inglese.setOnAction(e -> {
+            linguaScelta = Lingua.INGLESE;
+            styleLingua();
+        });
+        LIN_francese.setOnAction(e -> {
+            linguaScelta = Lingua.FRANCESE;
+            styleLingua();
+        });
+        LIN_spagnolo.setOnAction(e -> {
+            linguaScelta = Lingua.SPAGNOLO;
+            styleLingua();
         });
     }
 
@@ -69,10 +93,17 @@ public class IniziaQuizController extends Controller {
         B_difficolta.setStyle("-fx-background-color: " + color + ";");
     }
 
+    private void styleLingua() {
+        B_lingua.setGraphic(caricaImmagine(linguaScelta.toString() + ".png", 130, 70));
+        B_lingua.setText("");
+        B_lingua.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+    }
+
     @FXML
     private void iniziaClicked() {
         Logger.log("Cliccato il pulsante: INIZIA");
-        Logger.log("Difficolta scelta: " + B_difficolta.getText());
+        Logger.log("Difficolta scelta: " + difficoltaScelta.name());
+        Logger.log("Lingua scelta: " + linguaScelta);
         Sessione.quizAttivo = true;
         cambiaSchermata("Quiz");
     }

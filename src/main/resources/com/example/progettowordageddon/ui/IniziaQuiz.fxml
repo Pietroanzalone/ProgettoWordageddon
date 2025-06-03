@@ -40,20 +40,20 @@
                            <children>
                               <MenuButton fx:id="B_difficolta" mnemonicParsing="false" popupSide="LEFT" styleClass="menu" text="Facile">
                                 <items>
-                                   <MenuItem fx:id="facile" mnemonicParsing="false" text="Facile" />
-                                   <MenuItem fx:id="media" mnemonicParsing="false" text="Media" />
-                                  <MenuItem fx:id="difficile" mnemonicParsing="false" text="Difficile" />
+                                   <MenuItem fx:id="DIF_facile" mnemonicParsing="false" text="Facile" />
+                                   <MenuItem fx:id="DIF_media" mnemonicParsing="false" text="Media" />
+                                  <MenuItem fx:id="DIF_difficile" mnemonicParsing="false" text="Difficile" />
                                 </items>
                                  <font>
                                     <Font size="36.0" />
                                  </font>
                               </MenuButton>
-                              <MenuButton fx:id="B_lingua" mnemonicParsing="false" popupSide="RIGHT" styleClass="menu" text="Italiano">
+                              <MenuButton id="linguaSelect" fx:id="B_lingua" mnemonicParsing="false" popupSide="RIGHT" styleClass="menu" text="Italiano">
                                 <items>
-                                  <MenuItem fx:id="italiano" mnemonicParsing="false" text="Italiano" />
-                                   <MenuItem fx:id="francese" mnemonicParsing="false" text="Francese" />
-                                   <MenuItem fx:id="inglese" mnemonicParsing="false" text="Inglese" />
-                                   <MenuItem fx:id="spagnolo" mnemonicParsing="false" text="Spagnolo" />
+                                  <MenuItem fx:id="LIN_italiano" mnemonicParsing="false" text="Italiano" />
+                                   <MenuItem fx:id="LIN_inglese" mnemonicParsing="false" text="Inglese" />
+                                   <MenuItem fx:id="LIN_francese" mnemonicParsing="false" text="Francese" />
+                                   <MenuItem fx:id="LIN_spagnolo" mnemonicParsing="false" text="Spagnolo" />
                                 </items>
                                  <font>
                                     <Font size="36.0" />
