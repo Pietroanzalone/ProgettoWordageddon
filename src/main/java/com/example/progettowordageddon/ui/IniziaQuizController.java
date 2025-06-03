@@ -1,9 +1,7 @@
 package com.example.progettowordageddon.ui;
 
-import com.example.progettowordageddon.model.Logger;
+import com.example.progettowordageddon.model.*;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 
 
@@ -42,11 +40,6 @@ public class IniziaQuizController extends Controller {
         setLogoutIcon();
         initDifficolta();
 
-        italiano.setOnAction(e-> B_lingua.setText("Italiano"));
-        francese.setOnAction(e-> B_lingua.setText("Francese"));
-        inglese.setOnAction(e-> B_lingua.setText("Inglese"));
-        spagnolo.setOnAction(e-> B_lingua.setText("Spagnolo"));
-
     }
 
     private void initDifficolta() {
@@ -80,6 +73,8 @@ public class IniziaQuizController extends Controller {
     private void iniziaClicked() {
         Logger.log("Cliccato il pulsante: INIZIA");
         Logger.log("Difficolta scelta: " + B_difficolta.getText());
+        Sessione.quizAttivo = true;
         cambiaSchermata("Quiz");
     }
+
 }

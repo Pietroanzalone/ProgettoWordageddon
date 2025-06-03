@@ -1,11 +1,9 @@
 package com.example.progettowordageddon.ui;
 
-import com.example.progettowordageddon.model.SessioneQuiz;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import com.example.progettowordageddon.model.*;
+import javafx.animation.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.util.Duration;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -19,13 +17,12 @@ public class QuizController extends Controller {
     private Label QuizTimer;
 
     @Override
-    public void initialize(){
+    public void initialize() {
         QuizTextArea.setEditable(false);
-        String diff= SessioneQuiz.getDifficolta();
-        gestisciDifficolta(diff);
+        gestisciDifficolta(String.valueOf(Sessione.difficolta));
     }
 
-    public void gestisciDifficolta(String difficolta){
+    public void gestisciDifficolta(String difficolta) {
         switch(difficolta){
             case "Facile":
                 QuizTimer.setText("00:30");
@@ -42,7 +39,7 @@ public class QuizController extends Controller {
         }
     }
 
-    public void startTimer(int secondi ){
+    public void startTimer(int secondi) {
         AtomicInteger tempo = new AtomicInteger(secondi);
          Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             int rimanenti = tempo.getAndDecrement();
