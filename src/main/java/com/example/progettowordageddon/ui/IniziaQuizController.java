@@ -1,7 +1,7 @@
 package com.example.progettowordageddon.ui;
 
 import com.example.progettowordageddon.model.Logger;
-import com.example.progettowordageddon.model.Sessione;
+import com.example.progettowordageddon.model.SessioneQuiz;
 import com.example.progettowordageddon.model.Utente;
 import javafx.fxml.FXML;import javafx.scene.control.MenuButton;
 import javafx.scene.control.Button;
@@ -43,9 +43,18 @@ public class IniziaQuizController extends Controller {
         super.initialize();
         setLogoutIcon();
 
-        facile.setOnAction(e -> B_SelettoreDifficolta.setText("Facile"));
-        media.setOnAction(e -> B_SelettoreDifficolta.setText("Media"));
-        difficile.setOnAction(e -> B_SelettoreDifficolta.setText("Difficile"));
+        facile.setOnAction(e -> {
+            B_SelettoreDifficolta.setText("Facile");
+            SessioneQuiz.setDifficolta("Facile");
+        });
+        media.setOnAction(e -> {
+            B_SelettoreDifficolta.setText("Media");
+            SessioneQuiz.setDifficolta("Media");
+        });
+        difficile.setOnAction(e -> {
+            B_SelettoreDifficolta.setText("Difficile");
+            SessioneQuiz.setDifficolta("Difficile");
+        });
 
         italiano.setOnAction(e-> B_SelettoreLingua.setText("Italiano"));
         francese.setOnAction(e-> B_SelettoreLingua.setText("Francese"));
