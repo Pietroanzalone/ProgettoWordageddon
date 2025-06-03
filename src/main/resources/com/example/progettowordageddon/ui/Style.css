@@ -66,3 +66,33 @@
     -fx-font-size: 18;
     -fx-pref-height: 25;
 }
+
+#home MenuButton {
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-background-radius: 25;
+}
+
+#home MenuButton {
+    -fx-padding: 10;
+}
+
+#home MenuButton * {
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+}
+
+#home MenuButton > * > * {
+    -fx-shape: "";
+    -fx-background-color: transparent;
+    -fx-min-width: 0;
+    -fx-pref-width: 0;
+    -fx-max-width: 0;
+    -fx-min-height: 0;
+    -fx-pref-height: 0;
+    -fx-max-height: 0;
+}
+
+#home MenuButton:hover {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, #8f8f8f, 5, 0.1, 3, 3);
+}

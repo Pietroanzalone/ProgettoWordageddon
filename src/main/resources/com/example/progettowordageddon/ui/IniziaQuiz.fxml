@@ -10,23 +10,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettowordageddon.ui.IniziaQuizController">
+<AnchorPane id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettowordageddon.ui.IniziaQuizController">
    <children>
       <VBox alignment="CENTER" prefHeight="720.0" prefWidth="1280.0">
          <children>
-            <HBox id="navbar" fx:id="navbar" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="1280.0">
-               <children>
-                  <Button id="logoutButton" fx:id="B_logout" mnemonicParsing="false" onAction="#homeUtente" text="&lt;" textAlignment="CENTER" />
-                  <Button id="exitButton" fx:id="B_exit" mnemonicParsing="false" onAction="#chiudi" text="X" textAlignment="CENTER">
-                     <HBox.margin>
-                        <Insets left="1200.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </HBox>
+             <HBox id="navbar" fx:id="navbar" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="1281.0">
+                 <children>
+                     <Button id="logoutButton" fx:id="B_logout" mnemonicParsing="false" onAction="#home" text="&lt;" textAlignment="CENTER">
+                         <HBox.margin>
+                             <Insets right="1140.0" />
+                         </HBox.margin>
+                     </Button>
+                     <Button id="exitButton" fx:id="B_exit" layoutX="1230.0" layoutY="15.0" mnemonicParsing="false" onAction="#chiudi" text="X" textAlignment="CENTER" />
+                 </children>
+                 <VBox.margin>
+                     <Insets />
+                 </VBox.margin>
+             </HBox>
             <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="670.0" prefWidth="1280.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="670.0" prefWidth="1280.0">
@@ -38,7 +38,7 @@
                         </Label>
                         <HBox alignment="CENTER" prefHeight="90.0" prefWidth="1280.0" spacing="300.0">
                            <children>
-                              <MenuButton fx:id="B_SelettoreDifficolta" mnemonicParsing="false" popupSide="LEFT" text="Facile">
+                              <MenuButton fx:id="B_difficolta" mnemonicParsing="false" popupSide="LEFT" styleClass="menu" text="Facile">
                                 <items>
                                    <MenuItem fx:id="facile" mnemonicParsing="false" text="Facile" />
                                    <MenuItem fx:id="media" mnemonicParsing="false" text="Media" />
@@ -48,7 +48,7 @@
                                     <Font size="36.0" />
                                  </font>
                               </MenuButton>
-                              <MenuButton fx:id="B_SelettoreLingua" mnemonicParsing="false" popupSide="RIGHT" text="Italiano">
+                              <MenuButton fx:id="B_lingua" mnemonicParsing="false" popupSide="RIGHT" styleClass="menu" text="Italiano">
                                 <items>
                                   <MenuItem fx:id="italiano" mnemonicParsing="false" text="Italiano" />
                                    <MenuItem fx:id="francese" mnemonicParsing="false" text="Francese" />
@@ -63,7 +63,10 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="B_StartQuiz" mnemonicParsing="false" onAction="#IniziaClicked" styleClass="minorButton" text="Inizia " />
+                              <Button fx:id="B_StartQuiz" mnemonicParsing="false" onAction="#iniziaClicked" styleClass="mainButton" text="INIZIA">
+                                 <HBox.margin>
+                                    <Insets top="100.0" />
+                                 </HBox.margin></Button>
                            </children>
                         </HBox>
                      </children>

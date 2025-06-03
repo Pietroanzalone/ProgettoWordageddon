@@ -9,18 +9,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettowordageddon.ui.QuizController">
+<AnchorPane id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettowordageddon.ui.QuizController">
    <children>
       <VBox alignment="CENTER" prefHeight="720.0" prefWidth="1280.0">
          <children>
             <HBox id="navbar" fx:id="navbar" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="1281.0">
                <children>
-                  <Button id="logoutButton" fx:id="B_logout" mnemonicParsing="false" onAction="#home" text="&lt;" textAlignment="CENTER" />
-                  <Button id="exitButton" fx:id="B_exit" mnemonicParsing="false" onAction="#chiudi" text="X" textAlignment="CENTER">
+                  <Button id="logoutButton" fx:id="B_logout" mnemonicParsing="false" onAction="#home" text="&lt;" textAlignment="CENTER">
                      <HBox.margin>
-                        <Insets left="1200.0" />
+                        <Insets right="1140.0" />
                      </HBox.margin>
                   </Button>
+                  <Button id="exitButton" fx:id="B_exit" layoutX="1230.0" layoutY="15.0" mnemonicParsing="false" onAction="#chiudi" text="X" textAlignment="CENTER" />
                </children>
                <VBox.margin>
                   <Insets />

@@ -1,21 +1,19 @@
 package com.example.progettowordageddon.ui;
 
 import com.example.progettowordageddon.model.Logger;
-import com.example.progettowordageddon.model.Sessione;
-import com.example.progettowordageddon.model.Utente;
-import javafx.fxml.FXML;import javafx.scene.control.MenuButton;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
 
 
 public class IniziaQuizController extends Controller {
 
     @FXML
-    private MenuButton B_SelettoreDifficolta;
+    private MenuButton B_difficolta;
 
     @FXML
-    private MenuButton B_SelettoreLingua;
-
+    private MenuButton B_lingua;
 
     @FXML
     private MenuItem facile;
@@ -42,27 +40,46 @@ public class IniziaQuizController extends Controller {
     public void initialize() {
         super.initialize();
         setLogoutIcon();
+        initDifficolta();
 
-        facile.setOnAction(e -> B_SelettoreDifficolta.setText("Facile"));
-        media.setOnAction(e -> B_SelettoreDifficolta.setText("Media"));
-        difficile.setOnAction(e -> B_SelettoreDifficolta.setText("Difficile"));
-
-        italiano.setOnAction(e-> B_SelettoreLingua.setText("Italiano"));
-        francese.setOnAction(e-> B_SelettoreLingua.setText("Francese"));
-        inglese.setOnAction(e-> B_SelettoreLingua.setText("Inglese"));
-        spagnolo.setOnAction(e-> B_SelettoreLingua.setText("Spagnolo"));
+        italiano.setOnAction(e-> B_lingua.setText("Italiano"));
+        francese.setOnAction(e-> B_lingua.setText("Francese"));
+        inglese.setOnAction(e-> B_lingua.setText("Inglese"));
+        spagnolo.setOnAction(e-> B_lingua.setText("Spagnolo"));
 
     }
 
-    @FXML
-    private void homeUtente() {
-        cambiaSchermata("Utente");
+    private void initDifficolta() {
+        styleDifficolta();
+        facile.setOnAction(e -> {
+            B_difficolta.setText("Facile");
+            styleDifficolta();
+        });
+        media.setOnAction(e -> {
+            B_difficolta.setText("Media");
+            styleDifficolta();
+        });
+        difficile.setOnAction(e -> {
+            B_difficolta.setText("Difficile");
+            styleDifficolta();
+        });
+    }
+
+    private void styleDifficolta() {
+        String color = "rgba(255, 255, 255, 0.5)";
+        if ("Facile".equals(B_difficolta.getText()))
+            color = "rgba(50,205,50,0.5)";
+        else if ("Media".equals(B_difficolta.getText()))
+            color = "rgba(223,223,93,0.5)";
+        else if ("Difficile".equals(B_difficolta.getText()))
+            color = "rgba(248,168,150,0.5)";
+        B_difficolta.setStyle("-fx-background-color: " + color + ";");
     }
 
     @FXML
-    private void IniziaClicked(){
-        Logger.log("Cliccato il pulsante: INIZIA ");
-        Logger.error("QUIZ non ancora implementato");
+    private void iniziaClicked() {
+        Logger.log("Cliccato il pulsante: INIZIA");
+        Logger.log("Difficolta scelta: " + B_difficolta.getText());
         cambiaSchermata("Quiz");
     }
 }
