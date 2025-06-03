@@ -105,6 +105,7 @@ public class IniziaQuizController extends Controller {
         Logger.log("Difficolta scelta: " + difficoltaScelta.name());
         Logger.log("Lingua scelta: " + linguaScelta);
         Sessione.quizAttivo = true;
+        Sessione.difficolta = difficoltaScelta;
         cambiaSchermata("Quiz");
     }
 

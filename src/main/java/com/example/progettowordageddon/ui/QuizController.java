@@ -50,5 +50,12 @@ public class QuizController extends Controller {
         }));
         timeline.setCycleCount(secondi);
         timeline.play();
+        if(tempo.get()==0){
+            cambiaSchermata("Domanda");
+        }
+    }
+
+    public void prontoClicked(){
+        cambiaSchermata("Domanda");
     }
 }

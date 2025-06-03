@@ -45,7 +45,7 @@ public class UtenteController extends Controller {
     @FXML
     private void pannelloDiControlloClicked() {
         Logger.log("Cliccato il pulsante: PANNELLO DI CONTROLLO");
-        Logger.error("PANNELLO DI CONTROLLO non ancora implementato");
+        cambiaSchermata("ControlPanel");
     };
 
 }
