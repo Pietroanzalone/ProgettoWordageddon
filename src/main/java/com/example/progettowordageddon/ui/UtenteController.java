@@ -28,6 +28,7 @@ public class UtenteController extends Controller {
     private void iniziaQuizClicked() {
         Logger.log("Cliccato il pulsante: INIZIA QUIZ");
         Logger.error("INIZIA QUIZ non ancora implementato");
+        cambiaSchermata("IniziaQuiz");
     };
 
     @FXML
