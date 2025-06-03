@@ -1,9 +1,7 @@
 package com.example.progettowordageddon.ui;
 
 import com.example.progettowordageddon.database.UtentiDAO;
-import com.example.progettowordageddon.model.Logger;
-import com.example.progettowordageddon.model.Sessione;
-import com.example.progettowordageddon.model.Utente;
+import com.example.progettowordageddon.model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -56,13 +54,15 @@ public class RegistratiController extends Controller {
             alert.setTitle("Errore");
             alert.setHeaderText("SQL Exception");
             alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
     }
 
     private void logicaUsername() {
         L_usernameWarn.setVisible(false);
         T_username.textProperty().addListener((observable, oldValue, newValue) ->
-            L_usernameWarn.setVisible(UtentiDAO.contiene(newValue)));
+            L_usernameWarn.setVisible(UtentiDAO.contiene(newValue))
+        );
     }
 
     private void logicaPassword() {

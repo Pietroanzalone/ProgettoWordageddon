@@ -31,11 +31,16 @@ public class UtentiDAO {
         DAO.eseguiUpdate("DELETE FROM Utenti WHERE username = ?", username);
     }
 
-    public static Utente get(String username) throws SQLException {
-        var righe = DAO.eseguiSelect(
-            "SELECT * FROM Utenti WHERE username = ?", username);
-        if (righe.isEmpty()) return null;
-        return generaUtente(righe.get(0));
+    public static Utente get(String username) {
+        try {
+            var righe = DAO.eseguiSelect(
+                    "SELECT * FROM Utenti WHERE username = ?", username);
+            if (righe.isEmpty()) return null;
+            return generaUtente(righe.get(0));
+        } catch (SQLException e) {
+            Logger.error("SQL Exception: " + e.getMessage());
+            return null;
+        }
     }
 
     public static void aggiornaUsername(String usernameVecchio, String usernameNuovo) throws SQLException {
@@ -64,12 +69,7 @@ public class UtentiDAO {
     }
 
     public static boolean contiene(String username) {
-        try {
-            return (get(username) != null);
-        } catch (SQLException e) {
-            Logger.error("SQL Exception: " + e.getMessage());
-            return true;
-        }
+        return (get(username) != null);
     }
 
     private static Utente generaUtente(Object[] tokens) {
