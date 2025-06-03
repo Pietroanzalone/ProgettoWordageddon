@@ -63,8 +63,13 @@ public class UtentiDAO {
         """, admin, username);
     }
 
-    public static boolean contiene(String username) throws SQLException {
-        return (get(username) != null);
+    public static boolean contiene(String username) {
+        try {
+            return (get(username) != null);
+        } catch (SQLException e) {
+            Logger.error("SQL Exception: " + e.getMessage());
+            return true;
+        }
     }
 
     private static Utente generaUtente(Object[] tokens) {
@@ -72,7 +77,7 @@ public class UtentiDAO {
             (String) tokens[0],
             (String) tokens[1],
             true,
-            (boolean) tokens[2]
+            ((int) tokens[2] == 1)
         );
     }
 
