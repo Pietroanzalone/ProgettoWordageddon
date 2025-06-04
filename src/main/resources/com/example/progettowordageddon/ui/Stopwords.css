@@ -1,0 +1,26 @@
+.list-view {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #efefef 0%, #acc7cb 100%);
+    -fx-effect: dropshadow(gaussian, #8f8f8f, 10, 0.3, 10, 10);
+    -fx-border-width: 0;
+}
+
+.list-cell {
+    -fx-alignment: center;
+    -fx-font-size: 20;
+    -fx-background-color: rgba(0, 0, 0, 0.05);
+    -fx-border-width: 0;
+}
+
+.list-cell:odd {
+    -fx-background-color: rgba(0, 0, 0, 0.02);
+}
+
+.list-cell:selected {
+    -fx-font-weight: bolder;
+    -fx-font-size: 22;
+    -fx-text-fill: black;
+}
+
+.list-view :empty {
+    -fx-background-color: transparent;
+}
