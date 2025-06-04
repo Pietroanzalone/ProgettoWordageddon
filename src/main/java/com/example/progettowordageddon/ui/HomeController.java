@@ -25,7 +25,7 @@ public class HomeController extends Controller {
 
     @Override
     public void initialize() {
-        initNavbar();
+        impostaNavbar();
     }
 
 }

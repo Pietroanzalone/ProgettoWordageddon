@@ -11,82 +11,98 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettowordageddon.ui.RegistratiController">
+<AnchorPane id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17.0.6"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettowordageddon.ui.RegistratiController">
     <children>
         <VBox alignment="CENTER" prefHeight="720.0" prefWidth="1280.0">
             <children>
-                <HBox id="navbar" fx:id="navbar" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="1281.0">
+                <HBox id="navbar" fx:id="navbar" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity"
+                      prefHeight="50.0" prefWidth="1281.0">
                     <children>
-                        <Button id="logoutButton" fx:id="B_logout" mnemonicParsing="false" onAction="#home" text="&lt;" textAlignment="CENTER">
+                        <Button id="logoutButton" fx:id="B_logout" mnemonicParsing="false" onAction="#logout" text="&lt;"
+                                textAlignment="CENTER">
                             <HBox.margin>
-                                <Insets right="1140.0" />
+                                <Insets right="1140.0"/>
                             </HBox.margin>
                         </Button>
-                  <Button id="exitButton" fx:id="B_exit" layoutX="1230.0" layoutY="15.0" mnemonicParsing="false" onAction="#chiudi" text="X" textAlignment="CENTER" />
+                        <Button id="exitButton" fx:id="B_exit" layoutX="1230.0" layoutY="15.0" mnemonicParsing="false"
+                                onAction="#chiudi" text="X" textAlignment="CENTER"/>
                     </children>
                     <VBox.margin>
-                        <Insets />
+                        <Insets/>
                     </VBox.margin>
                 </HBox>
                 <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="670.0" prefWidth="1280.0">
-               <children>
-                  <VBox prefHeight="100.0" prefWidth="1280.0">
-                     <children>
-                        <Label id="title" prefHeight="120.0" prefWidth="1280.0" text="Registrati">
-                           <VBox.margin>
-                              <Insets top="50.0" />
-                           </VBox.margin>
-                        </Label>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <TextField fx:id="T_username" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Username">
-                                 <font>
-                                    <Font size="36.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets top="50.0" />
-                                 </VBox.margin>
-                              </TextField>
-                              <Label fx:id="L_usernameWarn" layoutX="511.0" layoutY="401.0" maxHeight="-Infinity" minHeight="-Infinity" styleClass="warning" text="Username già presente">
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <PasswordField fx:id="P_password" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Password">
-                                 <font>
-                                    <Font size="36.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets top="15.0" />
-                                 </VBox.margin>
-                              </PasswordField>
-                              <PasswordField fx:id="P_confermaPassword" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Conferma Password">
-                                 <font>
-                                    <Font size="36.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets top="50.0" />
-                                 </VBox.margin>
-                              </PasswordField>
-                              <Label fx:id="L_passwordWarn" maxHeight="-Infinity" minHeight="-Infinity" styleClass="warning" text="Le due password non corrispondono">
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <Button fx:id="B_registrati" mnemonicParsing="false" onAction="#registratiClicked" styleClass="mainButton" text="REGISTRATI">
-                                 <VBox.margin>
-                                    <Insets top="15.0" />
-                                 </VBox.margin>
-                              </Button>
-                           </children>
+                    <children>
+                        <VBox prefHeight="100.0" prefWidth="1280.0">
+                            <children>
+                                <Label id="title" prefHeight="120.0" prefWidth="1280.0" text="Registrati">
+                                    <VBox.margin>
+                                        <Insets top="50.0"/>
+                                    </VBox.margin>
+                                </Label>
+                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                    <children>
+                                        <TextField fx:id="T_username" alignment="CENTER" maxHeight="-Infinity"
+                                                   maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                                                   promptText="Username">
+                                            <font>
+                                                <Font size="36.0"/>
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets top="50.0"/>
+                                            </VBox.margin>
+                                        </TextField>
+                                        <Label fx:id="L_usernameWarn" layoutX="511.0" layoutY="401.0"
+                                               maxHeight="-Infinity" minHeight="-Infinity" styleClass="warning"
+                                               text="Username già presente">
+                                            <VBox.margin>
+                                                <Insets top="10.0"/>
+                                            </VBox.margin>
+                                        </Label>
+                                        <PasswordField fx:id="P_password" alignment="CENTER" maxHeight="-Infinity"
+                                                       maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                                                       promptText="Password">
+                                            <font>
+                                                <Font size="36.0"/>
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets top="15.0"/>
+                                            </VBox.margin>
+                                        </PasswordField>
+                                        <PasswordField fx:id="P_confermaPassword" alignment="CENTER"
+                                                       maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                                       minWidth="-Infinity" promptText="Conferma Password">
+                                            <font>
+                                                <Font size="36.0"/>
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets top="50.0"/>
+                                            </VBox.margin>
+                                        </PasswordField>
+                                        <Label fx:id="L_passwordWarn" maxHeight="-Infinity" minHeight="-Infinity"
+                                               styleClass="warning" text="Le due password non corrispondono">
+                                            <VBox.margin>
+                                                <Insets top="10.0"/>
+                                            </VBox.margin>
+                                        </Label>
+                                        <Button fx:id="B_registrati" mnemonicParsing="false"
+                                                onAction="#registratiClicked" styleClass="mainButton" text="REGISTRATI">
+                                            <VBox.margin>
+                                                <Insets top="15.0"/>
+                                            </VBox.margin>
+                                        </Button>
+                                    </children>
+                                </VBox>
+                            </children>
                         </VBox>
-                     </children>
-                  </VBox>
-               </children></AnchorPane>
+                    </children>
+                </AnchorPane>
             </children>
         </VBox>
     </children>
     <rotationAxis>
-        <Point3D />
+        <Point3D/>
     </rotationAxis>
 </AnchorPane>

@@ -8,55 +8,78 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettowordageddon.ui.UtenteController">
+<AnchorPane id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17.0.6"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettowordageddon.ui.UtenteController">
     <children>
         <VBox alignment="CENTER" prefHeight="720.0" prefWidth="1280.0">
             <children>
-                <HBox id="navbar" fx:id="navbar" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="1281.0">
+                <HBox id="navbar" fx:id="navbar" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity"
+                      prefHeight="50.0" prefWidth="1281.0">
                     <children>
-                        <Button id="logoutButton" fx:id="B_logout" mnemonicParsing="false" onAction="#home" text="&lt;" textAlignment="CENTER">
+                        <Button id="logoutButton" fx:id="B_logout" mnemonicParsing="false" onAction="#logout"
+                                text="&lt;" textAlignment="CENTER">
                             <HBox.margin>
-                                <Insets right="1140.0" />
+                                <Insets/>
                             </HBox.margin>
                         </Button>
-                  <Button id="exitButton" fx:id="B_exit" layoutX="1230.0" layoutY="15.0" mnemonicParsing="false" onAction="#chiudi" text="X" textAlignment="CENTER" />
+                        <Button id="homeButton" fx:id="B_home" layoutX="40.0" layoutY="15.0" mnemonicParsing="false"
+                                onAction="#home" text="H" textAlignment="CENTER">
+                            <HBox.margin>
+                                <Insets left="550.0" right="550.0"/>
+                            </HBox.margin>
+                        </Button>
+                        <Button id="exitButton" fx:id="B_exit" layoutX="1230.0" layoutY="15.0" mnemonicParsing="false"
+                                onAction="#chiudi" text="X" textAlignment="CENTER"/>
                     </children>
                     <VBox.margin>
-                        <Insets />
+                        <Insets/>
                     </VBox.margin>
                 </HBox>
                 <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="670.0" prefWidth="1280.0">
                     <children>
                         <VBox alignment="CENTER" prefHeight="670.0" prefWidth="1280.0">
                             <children>
-                                <Label id="title" fx:id="L_titolo" prefHeight="120.0" prefWidth="1280.0" text="Benvenuto, [UTENTE]">
+                                <Label id="title" fx:id="L_titolo" prefHeight="120.0" prefWidth="1280.0"
+                                       text="Benvenuto, [UTENTE]">
                                     <padding>
-                                        <Insets bottom="100.0" />
+                                        <Insets bottom="100.0"/>
                                     </padding>
                                 </Label>
                                 <HBox alignment="CENTER" prefHeight="90.0" prefWidth="1280.0" spacing="300.0">
                                     <children>
-                                        <Button fx:id="B_iniziaQuiz" mnemonicParsing="false" onAction="#iniziaQuizClicked" styleClass="mainButton" text="INIZIA QUIZ">
-                                 <HBox.margin>
-                                    <Insets bottom="50.0" />
-                                 </HBox.margin></Button>
+                                        <Button fx:id="B_iniziaQuiz" mnemonicParsing="false"
+                                                onAction="#iniziaQuizClicked" styleClass="mainButton"
+                                                text="INIZIA QUIZ">
+                                            <HBox.margin>
+                                                <Insets bottom="50.0"/>
+                                            </HBox.margin>
+                                        </Button>
                                     </children>
                                 </HBox>
-                        <HBox alignment="CENTER" layoutX="10.0" layoutY="398.0" prefHeight="90.0" prefWidth="1280.0" spacing="300.0">
-                           <children>
-                              <Button fx:id="B_recuperaSessione" mnemonicParsing="false" onAction="#recuperaSessioneClicked" prefWidth="250.0" styleClass="minorButton" text="Recupera sessione" />
-                              <Button fx:id="B_leaderboard" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#leaderboardClicked" prefWidth="250.0" styleClass="minorButton" text="Leaderboard" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" layoutX="10.0" layoutY="342.0" prefHeight="90.0" prefWidth="1280.0" spacing="300.0">
-                           <children>
-                              <Button fx:id="B_pannelloDiControllo" mnemonicParsing="false" onAction="#pannelloDiControlloClicked" prefWidth="270.0" styleClass="minorButton" text="Pannello di controllo">
-                                 <HBox.margin>
-                                    <Insets bottom="50.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                        </HBox>
+                                <HBox alignment="CENTER" layoutX="10.0" layoutY="398.0" prefHeight="90.0"
+                                      prefWidth="1280.0" spacing="300.0">
+                                    <children>
+                                        <Button fx:id="B_recuperaSessione" mnemonicParsing="false"
+                                                onAction="#recuperaSessioneClicked" prefWidth="250.0"
+                                                styleClass="minorButton" text="Recupera sessione"/>
+                                        <Button fx:id="B_leaderboard" layoutX="10.0" layoutY="10.0"
+                                                mnemonicParsing="false" onAction="#leaderboardClicked" prefWidth="250.0"
+                                                styleClass="minorButton" text="Leaderboard"/>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER" layoutX="10.0" layoutY="342.0" prefHeight="90.0"
+                                      prefWidth="1280.0" spacing="300.0">
+                                    <children>
+                                        <Button fx:id="B_pannelloDiControllo" mnemonicParsing="false"
+                                                onAction="#pannelloDiControlloClicked" prefWidth="270.0"
+                                                styleClass="minorButton" text="Pannello di controllo">
+                                            <HBox.margin>
+                                                <Insets bottom="50.0"/>
+                                            </HBox.margin>
+                                        </Button>
+                                    </children>
+                                </HBox>
                             </children>
                         </VBox>
                     </children>
@@ -65,6 +88,6 @@
         </VBox>
     </children>
     <rotationAxis>
-        <Point3D />
+        <Point3D/>
     </rotationAxis>
 </AnchorPane>

@@ -17,10 +17,14 @@ public class UtenteController extends Controller {
     @Override
     public void initialize() {
         super.initialize();
-        if (Sessione.utente.getUsername() == null)
+        if (Sessione.utente.getUsername() == null) {
             Logger.error("Utente non inizializzato");
-        L_titolo.setText("Benvenuto, " + Sessione.utente.getUsername());
-        B_pannelloDiControllo.setVisible(Sessione.utente.isAdmin());
+            L_titolo.setText("Benvenuto, NULL");
+            B_pannelloDiControllo.setVisible(false);
+        } else {
+            L_titolo.setText("Benvenuto, " + Sessione.utente.getUsername());
+            B_pannelloDiControllo.setVisible(Sessione.utente.isAdmin());
+        }
     }
 
     @FXML

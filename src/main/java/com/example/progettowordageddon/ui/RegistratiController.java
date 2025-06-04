@@ -29,7 +29,9 @@ public class RegistratiController extends Controller {
 
     @Override
     public void initialize() {
-        super.initialize();
+        impostaNavbar();
+        impostaIconaLogout();
+
         logicaUsername();
         logicaPassword();
         logicaPulsanteRegistrazione();

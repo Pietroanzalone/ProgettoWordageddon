@@ -24,7 +24,9 @@ public class AccediController extends Controller {
 
     @Override
     public void initialize() {
-        super.initialize();
+        impostaNavbar();
+        impostaIconaLogout();
+
         logicaUsername();
         logicaPassword();
         logicaPulsanteAccesso();

@@ -46,16 +46,19 @@ public class IniziaQuizController extends Controller {
         styleDifficolta();
         DIF_facile.setOnAction(e -> {
             difficoltaScelta = Difficolta.FACILE;
+            Logger.log("Difficolta scelta: FACILE");
             B_difficolta.setText("Facile");
             styleDifficolta();
         });
         DIF_media.setOnAction(e -> {
             difficoltaScelta = Difficolta.MEDIA;
+            Logger.log("Difficolta scelta: MEDIA");
             B_difficolta.setText("Media");
             styleDifficolta();
         });
         DIF_difficile.setOnAction(e -> {
             difficoltaScelta = Difficolta.DIFFICILE;
+            Logger.log("Difficolta scelta: DIFFICILE");
             B_difficolta.setText("Difficile");
             styleDifficolta();
         });
@@ -65,18 +68,22 @@ public class IniziaQuizController extends Controller {
         styleLingua();
         LIN_italiano.setOnAction(e -> {
             linguaScelta = Lingua.ITALIANO;
+            Logger.log("Lingua scelta: ITALIANO");
             styleLingua();
         });
         LIN_inglese.setOnAction(e -> {
             linguaScelta = Lingua.INGLESE;
+            Logger.log("Lingua scelta: INGLESE");
             styleLingua();
         });
         LIN_francese.setOnAction(e -> {
             linguaScelta = Lingua.FRANCESE;
+            Logger.log("Lingua scelta: FRANCESE");
             styleLingua();
         });
         LIN_spagnolo.setOnAction(e -> {
             linguaScelta = Lingua.SPAGNOLO;
+            Logger.log("Lingua scelta: SPAGNOLO");
             styleLingua();
         });
     }

@@ -60,6 +60,16 @@
     -fx-text-fill: #c6c449;
 }
 
+#home #navbar #homeButton {
+    -fx-pref-height: 40;
+    -fx-pref-width: 40;
+    -fx-background-color: rgba(157, 255, 130, 0.5);
+    -fx-background-radius: 100%;
+    -fx-font-size: 20px;
+    -fx-font-weight: bolder;
+    -fx-text-fill: #64c649;
+}
+
 #home .warning {
     -fx-background-color: #FFF9827F;
     -fx-font-style: italic;
