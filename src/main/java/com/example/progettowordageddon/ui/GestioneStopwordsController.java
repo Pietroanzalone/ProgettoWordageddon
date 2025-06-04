@@ -1,6 +1,7 @@
 package com.example.progettowordageddon.ui;
 
 import com.example.progettowordageddon.database.StopwordsDAO;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -42,19 +43,11 @@ public class GestioneStopwordsController extends Controller {
                 return;
             }
 
-            try {
-                if (StopwordsDAO.contiene(newValue.trim().toLowerCase())) {
-                    L_warn.setText(newValue + " è già presente nella lista");
-                    L_warn.setVisible(true);
-                } else
-                    L_warn.setVisible(false);
-            } catch (SQLException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("SQL Error");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
-            }
+            if (StopwordsDAO.contiene(newValue.trim().toLowerCase())) {
+                L_warn.setText(newValue + " è già presente nella lista");
+                L_warn.setVisible(true);
+            } else
+                L_warn.setVisible(false);
         });
     }
 
@@ -67,15 +60,7 @@ public class GestioneStopwordsController extends Controller {
                 return;
             }
 
-            try {
-                B_aggiungi.setDisable(StopwordsDAO.contiene(newValue.trim().toLowerCase()));
-            } catch (SQLException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("SQL Error");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
-            }
+            B_aggiungi.setDisable(StopwordsDAO.contiene(newValue.trim().toLowerCase()));
         });
     }
 
@@ -95,6 +80,10 @@ public class GestioneStopwordsController extends Controller {
     private void logicaPulsanteElimina() {
         B_elimina.disableProperty().bind(
             L_stopwords.getSelectionModel().selectedItemProperty().isNull()
+            .or(Bindings.createBooleanBinding(() -> {
+                    String selezionata = L_stopwords.getSelectionModel().getSelectedItem();
+                    return selezionata != null && selezionata.length() == 1;
+                }, L_stopwords.getSelectionModel().selectedItemProperty()))
         );
     }
 
@@ -104,6 +93,7 @@ public class GestioneStopwordsController extends Controller {
             StopwordsDAO.aggiungi(T_word.getText().trim().toLowerCase());
             B_aggiungi.setDisable(true);
             L_stopwords.getItems().add(T_word.getText().trim().toLowerCase());
+            L_stopwords.getItems().setAll(L_stopwords.getItems().stream().sorted().toList());
             T_word.setText("");
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

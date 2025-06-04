@@ -7,6 +7,8 @@ import java.util.List;
 public class StopwordsDAO {
 
     public static List<String> getTutti() throws SQLException {
+        defaultStopwords();
+
         List<Object[]> risultatoQuery = DAO.eseguiSelect("SELECT * FROM Stopwords");
         List<String> elenco = new ArrayList<>();
         for (var stopword : risultatoQuery)
@@ -15,6 +17,8 @@ public class StopwordsDAO {
     }
 
     public static void aggiungi(String stopword) throws SQLException {
+        stopword = validaStopword(stopword);
+
         DAO.eseguiUpdate("""
             INSERT INTO Stopwords
             (stopword)
@@ -23,13 +27,31 @@ public class StopwordsDAO {
     }
 
     public static void rimuovi(String stopword) throws SQLException {
+        stopword = validaStopword(stopword);
+
         DAO.eseguiUpdate("DELETE FROM Stopwords WHERE stopword = ?", stopword);
     }
 
-    public static boolean contiene(String stopword) throws SQLException {
-        if (stopword == null || stopword.trim().isBlank())
-            return false;
-        return !DAO.eseguiSelect("SELECT * FROM Stopwords WHERE stopword = ?", stopword).isEmpty();
+    public static boolean contiene(String stopword) {
+        stopword = validaStopword(stopword);
+        if (stopword == null) return false;
+
+        try {
+            return !DAO.eseguiSelect("SELECT * FROM Stopwords WHERE stopword = ?", stopword).isEmpty();
+        } catch (SQLException e) {
+            return true;
+        }
+    }
+
+    private static void defaultStopwords() throws SQLException {
+        for (char c = 'A'; c <= 'Z'; c++)
+            if (!contiene(Character.toString(c)))
+                aggiungi(Character.toString(c));
+    }
+
+    private static String validaStopword(String stopword) {
+        if (stopword == null || stopword.trim().isBlank()) return null;
+        return stopword.trim().toLowerCase();
     }
 
 }

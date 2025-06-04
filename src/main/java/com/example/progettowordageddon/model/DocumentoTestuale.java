@@ -1,5 +1,6 @@
 package com.example.progettowordageddon.model;
 
+import com.example.progettowordageddon.database.StopwordsDAO;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -100,7 +101,7 @@ public class DocumentoTestuale {
         Matcher matcher = pattern.matcher(testo.toLowerCase());
         while (matcher.find()) {
             String parola = matcher.group();
-            if (!Stopwords.contiene(parola))
+            if (!StopwordsDAO.contiene(parola))
                 conteggioParole.put(parola, conteggioParole.getOrDefault(parola, 0) + 1);
         }
     }
