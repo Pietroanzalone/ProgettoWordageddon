@@ -15,25 +15,10 @@ public class IniziaQuizController extends Controller {
     private MenuButton B_lingua;
 
     @FXML
-    private MenuItem DIF_facile;
+    private MenuItem DIF_facile, DIF_media, DIF_difficile;
 
     @FXML
-    private MenuItem DIF_media;
-
-    @FXML
-    private MenuItem DIF_difficile;
-
-    @FXML
-    private MenuItem LIN_italiano;
-
-    @FXML
-    private MenuItem LIN_inglese;
-
-    @FXML
-    private MenuItem LIN_spagnolo;
-
-    @FXML
-    private MenuItem LIN_francese;
+    private MenuItem LIN_italiano, LIN_inglese, LIN_spagnolo, LIN_francese;
 
     @Override
     public void initialize() {
@@ -112,7 +97,7 @@ public class IniziaQuizController extends Controller {
         Logger.log("Lingua scelta: " + linguaScelta);
         Sessione.quizAttivo = true;
         Sessione.difficolta = difficoltaScelta;
-        cambiaSchermata("Quiz");
+        cambiaSchermata("VediTesto");
     }
 
 }
