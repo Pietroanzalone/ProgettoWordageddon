@@ -38,7 +38,6 @@ public class IniziaQuizController extends Controller {
     @Override
     public void initialize() {
         super.initialize();
-        setLogoutIcon();
         initDifficolta();
         initLingua();
     }

@@ -32,10 +32,12 @@ public class Controller {
     /**
      * @brief Metodo chiamato automaticamente all'inizializzazione del controller.
      *
-     * Inizializza la barra di navigazione usando {@link initNavbar}.
+     * Inizializza la barra di navigazione usando
+     * {@link initNavbar} e {@link setLogoutIcon}.
      */
     public void initialize() {
         initNavbar();
+        setLogoutIcon();
     }
 
     /**
@@ -91,20 +93,18 @@ public class Controller {
     /**
      * @brief Imposta l'icona del bottone di logout.
      *
-     * @note Questo metodo va utilizzato da tutti i controller,
-     *       escluso HomeController che non ha il pulsante "Logout"
-     *       al suo interno.
+     * @note Questo metodo non va utilizzato da HomeController,
+     *       che deve fare l'Override del metodo initialize
      *
      * Esempio:
      * ```java
      * @Override
      * public void initialize() {
-     *     super.initialize();
-     *     setLogoutIcon();
+     *     initNavbar();
      * }
      * ```
      */
-    protected void setLogoutIcon() {
+    private void setLogoutIcon() {
         try {
             B_logout.setGraphic(caricaImmagine("Logout.png", 20, 20));
             B_logout.setText("");
@@ -118,7 +118,7 @@ public class Controller {
      *
      * Aggiunge un listener che rende la barra di navigazione trasparente quando il mouse si sposta sotto la sua area.
      */
-    private void initNavbar() {
+    protected void initNavbar() {
         Platform.runLater(() -> {
             Scene scene = navbar.getScene();
             if (scene != null)

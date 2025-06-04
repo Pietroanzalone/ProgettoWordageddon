@@ -18,6 +18,7 @@ public class QuizController extends Controller {
 
     @Override
     public void initialize() {
+        super.initialize();
         QuizTextArea.setEditable(false);
         gestisciDifficolta(String.valueOf(Sessione.difficolta));
     }

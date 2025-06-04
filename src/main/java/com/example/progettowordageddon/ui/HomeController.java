@@ -23,4 +23,9 @@ public class HomeController extends Controller {
         cambiaSchermata("Accedi");
     };
 
+    @Override
+    public void initialize() {
+        initNavbar();
+    }
+
 }
