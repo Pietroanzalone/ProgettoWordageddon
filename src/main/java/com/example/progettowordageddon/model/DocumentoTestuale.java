@@ -5,13 +5,26 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @class DocumentoTestuale
+ * @brief Rappresenta un documento testuale associato a una lingua, difficoltà e testo contenuto.
+ *
+ * Include funzionalità per analisi testuale come conteggio parole, parole comuni, e parole più frequenti.
+ */
 public class DocumentoTestuale {
-    private String nome;
-    private Lingua lingua;
-    private Difficolta difficolta;
-    private String testo;
-    private final Map<String, Integer> conteggioParole;
+    private String nome;                      ///< Nome identificativo del documento.
+    private Lingua lingua;                    ///< Lingua del documento.
+    private Difficolta difficolta;            ///< Difficoltà del documento.
+    private String testo;                     ///< Testo contenuto nel documento.
+    private final Map<String, Integer> conteggioParole; ///< Mappa delle parole e delle rispettive frequenze.
 
+    /**
+     * @brief Costruttore del documento testuale.
+     * @param nome Nome del documento.
+     * @param lingua Lingua del documento.
+     * @param difficolta Difficoltà del documento.
+     * @param testo Testo da analizzare.
+     */
     public DocumentoTestuale(String nome, Lingua lingua, Difficolta difficolta, String testo) {
         this.nome = nome;
         this.lingua = lingua;
@@ -21,47 +34,58 @@ public class DocumentoTestuale {
         aggiornaConteggioParole();
     }
 
-    public String getNome() {
-        return nome;
-    }
+    /// @return Nome del documento.
+    public String getNome() { return nome; }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    /// @param nome Nuovo nome del documento.
+    public void setNome(String nome) { this.nome = nome; }
 
-    public Lingua getLingua() {
-        return lingua;
-    }
+    /// @return Lingua del documento.
+    public Lingua getLingua() { return lingua; }
 
-    public void setLingua(Lingua lingua) {
-        this.lingua = lingua;
-    }
+    /// @param lingua Nuova lingua del documento.
+    public void setLingua(Lingua lingua) { this.lingua = lingua; }
 
-    public Difficolta getDifficolta() {
-        return difficolta;
-    }
+    /// @return Difficoltà del documento.
+    public Difficolta getDifficolta() { return difficolta; }
 
-    public void setDifficolta(Difficolta difficolta) {
-        this.difficolta = difficolta;
-    }
+    /// @param difficolta Nuova difficoltà del documento.
+    public void setDifficolta(Difficolta difficolta) { this.difficolta = difficolta; }
 
-    public String getTesto() {
-        return testo;
-    }
+    /// @return Testo del documento.
+    public String getTesto() { return testo; }
 
+    /**
+     * @brief Imposta un nuovo testo e aggiorna il conteggio delle parole.
+     * @param testo Nuovo testo del documento.
+     */
     public void setTesto(String testo) {
         this.testo = testo;
         aggiornaConteggioParole();
     }
 
+    /**
+     * @brief Restituisce una copia del conteggio delle parole.
+     * @return Mappa contenente parole e conteggi.
+     */
     public Map<String, Integer> getConteggioParole() {
         return new HashMap<>(conteggioParole);
     }
 
+    /**
+     * @brief Verifica se una parola è contenuta nel documento.
+     * @param parola Parola da cercare.
+     * @return True se presente, false altrimenti.
+     */
     public boolean contiene(String parola) {
         return conteggioParole.containsKey(parola);
     }
 
+    /**
+     * @brief Trova le parole comuni tra questo documento e un altro.
+     * @param altro Altro documento da confrontare.
+     * @return Lista di parole comuni.
+     */
     public List<String> getParoleComuni(DocumentoTestuale altro) {
         if (altro == null) return new ArrayList<>();
         Set<String> comuniSet = new HashSet<>(conteggioParole.keySet());
@@ -69,6 +93,10 @@ public class DocumentoTestuale {
         return new ArrayList<>(comuniSet);
     }
 
+    /**
+     * @brief Restituisce le parole più frequenti del documento.
+     * @return Lista di parole con il massimo conteggio.
+     */
     public List<String> getParolePiuFrequenti() {
         List<String> parolePiuFrequenti = new ArrayList<>();
         int maxConteggio = 0;
@@ -88,6 +116,9 @@ public class DocumentoTestuale {
         return parolePiuFrequenti;
     }
 
+    /**
+     * @brief Aggiorna il conteggio delle parole ignorando le stopword.
+     */
     private void aggiornaConteggioParole() {
         conteggioParole.clear();
         if (testo == null || testo.isEmpty()) return;
@@ -100,11 +131,17 @@ public class DocumentoTestuale {
         }
     }
 
+    /// @return Rappresentazione testuale del documento.
     @Override
     public String toString() {
         return "\"" + nome + "\" [" + lingua + "] [" + difficolta + "]";
     }
 
+    /**
+     * @brief Confronta due documenti sulla base del nome.
+     * @param o Oggetto da confrontare.
+     * @return True se hanno lo stesso nome, false altrimenti.
+     */
     @Override
     public boolean equals(Object o) {
         if (o instanceof DocumentoTestuale dt)
@@ -112,9 +149,9 @@ public class DocumentoTestuale {
         return false;
     }
 
+    /// @return Hash calcolato sul nome del documento.
     @Override
     public int hashCode() {
         return nome.hashCode();
     }
-
 }

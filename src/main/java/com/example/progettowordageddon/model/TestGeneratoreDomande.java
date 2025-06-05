@@ -1,6 +1,23 @@
 package com.example.progettowordageddon.model;
 
+/**
+ * @class TestGeneratoreDomande
+ * @brief Classe di test per la generazione di domande a partire da due documenti testuali.
+ *
+ * Questa classe contiene un metodo `main` che istanzia due documenti testuali in lingua italiana
+ * e utilizza il {@link GeneratoreDomanda} per generare una {@link Domanda}.
+ * Se la domanda viene generata correttamente, viene stampata a console.
+ */
 public class TestGeneratoreDomande {
+
+    /**
+     * @brief Metodo principale per l'esecuzione del test.
+     *
+     * Crea due documenti testuali di difficoltà facile in italiano, li fornisce a un
+     * {@link GeneratoreDomanda}, genera una domanda, e la stampa se disponibile.
+     *
+     * @param args Argomenti della riga di comando (non utilizzati).
+     */
     public static void main(String[] args) {
         DocumentoTestuale doc1 = new DocumentoTestuale(
                 "La mia giornata",
@@ -30,4 +47,3 @@ public class TestGeneratoreDomande {
         }
     }
 }
-

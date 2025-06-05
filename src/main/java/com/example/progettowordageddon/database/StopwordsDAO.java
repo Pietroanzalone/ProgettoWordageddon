@@ -4,8 +4,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @class StopwordsDAO
+ * @brief Classe per la gestione delle stopword nel database.
+ *
+ * Fornisce metodi pubblici per aggiungere, rimuovere, verificare e recuperare
+ * tutte le stopword memorizzate nella tabella `Stopwords`.
+ */
 public class StopwordsDAO {
 
+    /**
+     * @brief Restituisce tutte le stopword presenti nel database.
+     *
+     * Se la tabella è vuota, inserisce un set predefinito di stopword (le lettere A-Z).
+     *
+     * @return Lista di stopword come stringhe.
+     * @throws SQLException Se si verifica un errore nella comunicazione con il database.
+     */
     public static List<String> getTutti() throws SQLException {
         defaultStopwords();
 
@@ -16,6 +31,14 @@ public class StopwordsDAO {
         return elenco;
     }
 
+    /**
+     * @brief Aggiunge una nuova stopword al database.
+     *
+     * La stringa viene validata (spazi rimossi, convertita in minuscolo) prima dell'inserimento.
+     *
+     * @param stopword La stopword da inserire.
+     * @throws SQLException Se si verifica un errore durante l'inserimento nel database.
+     */
     public static void aggiungi(String stopword) throws SQLException {
         stopword = validaStopword(stopword);
 
@@ -26,12 +49,28 @@ public class StopwordsDAO {
         """, stopword);
     }
 
+    /**
+     * @brief Rimuove una stopword dal database.
+     *
+     * La stringa viene validata prima della rimozione.
+     *
+     * @param stopword La stopword da rimuovere.
+     * @throws SQLException Se si verifica un errore durante l'eliminazione dal database.
+     */
     public static void rimuovi(String stopword) throws SQLException {
         stopword = validaStopword(stopword);
 
         DAO.eseguiUpdate("DELETE FROM Stopwords WHERE stopword = ?", stopword);
     }
 
+    /**
+     * @brief Verifica se una stopword è presente nel database.
+     *
+     * La stringa viene validata prima del controllo.
+     *
+     * @param stopword La stopword da verificare.
+     * @return true se la stopword è presente, false altrimenti.
+     */
     public static boolean contiene(String stopword) {
         stopword = validaStopword(stopword);
         if (stopword == null) return false;
@@ -43,15 +82,30 @@ public class StopwordsDAO {
         }
     }
 
+    /**
+     * @brief Inserisce stopword predefinite (lettere A-Z) se non presenti.
+     *
+     * Questo metodo è utilizzato internamente per garantire una base minima di stopword.
+     *
+     * @throws SQLException Se si verifica un errore durante l'accesso al database.
+     */
     private static void defaultStopwords() throws SQLException {
         for (char c = 'A'; c <= 'Z'; c++)
             if (!contiene(Character.toString(c)))
                 aggiungi(Character.toString(c));
     }
 
+    /**
+     * @brief Valida e normalizza una stopword.
+     *
+     * Rimuove gli spazi e converte la stringa in minuscolo. Restituisce `null`
+     * se la stringa è nulla o vuota.
+     *
+     * @param stopword La stopword da validare.
+     * @return La stopword normalizzata, oppure null se non valida.
+     */
     private static String validaStopword(String stopword) {
         if (stopword == null || stopword.trim().isBlank()) return null;
         return stopword.trim().toLowerCase();
     }
-
 }

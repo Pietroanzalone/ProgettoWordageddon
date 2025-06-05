@@ -4,10 +4,22 @@ import com.example.progettowordageddon.model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+/**
+ * @class IniziaQuizController
+ * @brief Controller per la schermata di avvio del quiz.
+ *
+ * Gestisce la selezione della lingua e della difficoltà prima di iniziare un quiz.
+ * Consente all'utente di configurare le impostazioni e poi avviare la sessione quiz.
+ */
 public class IniziaQuizController extends Controller {
+
+    /** Lingua attualmente selezionata (default: ITALIANO). */
     private Lingua linguaScelta = Lingua.ITALIANO;
+
+    /** Difficoltà attualmente selezionata (default: FACILE). */
     private Difficolta difficoltaScelta = Difficolta.FACILE;
 
+    /** \cond DOXY_SKIP */
     @FXML
     private MenuButton B_difficolta;
 
@@ -19,7 +31,17 @@ public class IniziaQuizController extends Controller {
 
     @FXML
     private MenuItem LIN_italiano, LIN_inglese, LIN_spagnolo, LIN_francese;
+    /** \endcond */
 
+    /**
+     * @brief Metodo chiamato automaticamente all'inizializzazione del controller.
+     *
+     * Inizializza la barra di navigazione e imposta il comportamento
+     * dei menu di scelta per difficoltà e lingua.
+     *
+     * @see #initDifficolta()
+     * @see #initLingua()
+     */
     @Override
     public void initialize() {
         super.initialize();
@@ -27,6 +49,14 @@ public class IniziaQuizController extends Controller {
         initLingua();
     }
 
+    /**
+     * @brief Inizializza la logica dei menu di scelta della difficoltà.
+     *
+     * Imposta le azioni associate alle tre opzioni (Facile, Media, Difficile)
+     * e aggiorna lo stile del pulsante in base alla selezione.
+     *
+     * @see #styleDifficolta()
+     */
     private void initDifficolta() {
         styleDifficolta();
         DIF_facile.setOnAction(e -> {
@@ -49,6 +79,14 @@ public class IniziaQuizController extends Controller {
         });
     }
 
+    /**
+     * @brief Inizializza la logica dei menu di scelta della lingua.
+     *
+     * Imposta le azioni associate alle lingue supportate
+     * (italiano, inglese, francese, spagnolo) e aggiorna la grafica.
+     *
+     * @see #styleLingua()
+     */
     private void initLingua() {
         styleLingua();
         LIN_italiano.setOnAction(e -> {
@@ -73,6 +111,14 @@ public class IniziaQuizController extends Controller {
         });
     }
 
+    /**
+     * @brief Aggiorna lo stile visivo del pulsante "Difficoltà".
+     *
+     * Il colore cambia in base alla difficoltà selezionata:
+     * - Facile: verde chiaro
+     * - Media: giallo
+     * - Difficile: rosso chiaro
+     */
     private void styleDifficolta() {
         String color = "rgba(255, 255, 255, 0.5)";
         if ("Facile".equals(B_difficolta.getText()))
@@ -84,12 +130,25 @@ public class IniziaQuizController extends Controller {
         B_difficolta.setStyle("-fx-background-color: " + color + ";");
     }
 
+    /**
+     * @brief Imposta l'icona del pulsante lingua in base alla lingua selezionata.
+     *
+     * L'immagine viene caricata dinamicamente e sostituisce il testo.
+     */
     private void styleLingua() {
         B_lingua.setGraphic(caricaImmagine(linguaScelta.toString() + ".png", 130, 70));
         B_lingua.setText("");
         B_lingua.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
     }
 
+    /**
+     * @brief Metodo chiamato al click sul pulsante "Inizia".
+     *
+     * Avvia la sessione del quiz con le impostazioni attuali
+     * di lingua e difficoltà, e passa alla schermata "VediTesto".
+     *
+     * @see #cambiaSchermata(String)
+     */
     @FXML
     private void iniziaClicked() {
         Logger.log("Cliccato il pulsante: INIZIA");
@@ -99,5 +158,4 @@ public class IniziaQuizController extends Controller {
         Sessione.difficolta = difficoltaScelta;
         cambiaSchermata("VediTesto");
     }
-
 }

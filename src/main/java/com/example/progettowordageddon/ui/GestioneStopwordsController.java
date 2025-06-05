@@ -7,8 +7,16 @@ import javafx.scene.control.*;
 
 import java.sql.SQLException;
 
+/**
+ * @class GestioneStopwordsController
+ * @brief Controller per la gestione dell'interfaccia delle stopword.
+ *
+ * Questa classe definisce la logica di interazione dell'interfaccia per
+ * l'aggiunta, la visualizzazione e la rimozione delle stopword nel database.
+ */
 public class GestioneStopwordsController extends Controller {
 
+    /** \cond DOXY_SKIP */
     @FXML
     private TextField T_word;
 
@@ -23,7 +31,14 @@ public class GestioneStopwordsController extends Controller {
 
     @FXML
     private ListView<String> L_stopwords;
+    /** \endcond */
 
+    /**
+     * @brief Metodo chiamato automaticamente all'inizializzazione del controller.
+     *
+     * Inizializza tutti i componenti UI e imposta la logica di comportamento
+     * per avvisi, pulsanti e lista delle stopword.
+     */
     @Override
     public void initialize() {
         super.initialize();
@@ -34,6 +49,12 @@ public class GestioneStopwordsController extends Controller {
         logicaPulsanteElimina();
     }
 
+    /**
+     * @brief Gestisce la visualizzazione del messaggio di avviso se la parola è già presente.
+     *
+     * Mostra un messaggio di avviso sotto il campo di testo se la parola digitata
+     * è già presente nel database delle stopword.
+     */
     private void logicaLabelWarn() {
         L_warn.setVisible(false);
 
@@ -46,11 +67,17 @@ public class GestioneStopwordsController extends Controller {
             if (StopwordsDAO.contiene(newValue.trim().toLowerCase())) {
                 L_warn.setText(newValue + " è già presente nella lista");
                 L_warn.setVisible(true);
-            } else
+            } else {
                 L_warn.setVisible(false);
+            }
         });
     }
 
+    /**
+     * @brief Gestisce l'abilitazione/disabilitazione del pulsante "Aggiungi".
+     *
+     * Il pulsante viene disabilitato se il campo è vuoto o se la parola è già presente.
+     */
     private void logicaPulsanteAggiungi() {
         B_aggiungi.setDisable(true);
 
@@ -64,6 +91,13 @@ public class GestioneStopwordsController extends Controller {
         });
     }
 
+    /**
+     * @brief Carica la lista delle stopword dal database e la mostra ordinata.
+     *
+     * Le stopword vengono recuperate dal database e ordinate alfabeticamente.
+     *
+     * @throws SQLException se si verifica un errore durante la lettura dal database.
+     */
     private void logicaListaStopwords() {
         L_stopwords.getItems().clear();
         try {
@@ -77,16 +111,29 @@ public class GestioneStopwordsController extends Controller {
         }
     }
 
+    /**
+     * @brief Gestisce l'abilitazione del pulsante "Elimina" in base alla selezione.
+     *
+     * Il pulsante viene disabilitato se non è selezionata nessuna parola oppure
+     * se la parola selezionata ha lunghezza pari a 1.
+     */
     private void logicaPulsanteElimina() {
         B_elimina.disableProperty().bind(
-            L_stopwords.getSelectionModel().selectedItemProperty().isNull()
-            .or(Bindings.createBooleanBinding(() -> {
-                    String selezionata = L_stopwords.getSelectionModel().getSelectedItem();
-                    return selezionata != null && selezionata.length() == 1;
-                }, L_stopwords.getSelectionModel().selectedItemProperty()))
+                L_stopwords.getSelectionModel().selectedItemProperty().isNull()
+                        .or(Bindings.createBooleanBinding(() -> {
+                            String selezionata = L_stopwords.getSelectionModel().getSelectedItem();
+                            return selezionata != null && selezionata.length() == 1;
+                        }, L_stopwords.getSelectionModel().selectedItemProperty()))
         );
     }
 
+    /**
+     * @brief Metodo eseguito quando si clicca sul pulsante "Aggiungi".
+     *
+     * Aggiunge la nuova stopword nel database e aggiorna la lista visibile.
+     *
+     * @throws SQLException se si verifica un errore durante l'inserimento nel database.
+     */
     @FXML
     private void aggiungiClicked() {
         try {
@@ -104,6 +151,14 @@ public class GestioneStopwordsController extends Controller {
         }
     }
 
+    /**
+     * @brief Metodo eseguito quando si clicca sul pulsante "Elimina".
+     *
+     * Elimina la stopword selezionata dalla lista e dal database.
+     * Mostra una finestra di conferma prima di procedere.
+     *
+     * @throws SQLException se si verifica un errore durante l'eliminazione dal database.
+     */
     @FXML
     private void eliminaClicked() {
         String selezionata = L_stopwords.getSelectionModel().getSelectedItem();
@@ -121,20 +176,19 @@ public class GestioneStopwordsController extends Controller {
         conferma.setHeaderText("Vuoi davvero eliminare questa stopword?");
         conferma.setContentText("Stopword: " + selezionata);
         conferma.showAndWait()
-            .filter(risposta -> risposta == ButtonType.OK)
-            .ifPresent(risposta -> {
-                try {
-                    StopwordsDAO.rimuovi(selezionata);
-                    L_stopwords.getItems().remove(selezionata);
-                    T_word.setText(selezionata);
-                } catch (SQLException e) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Errore");
-                    alert.setHeaderText("Impossibile eliminare la stopword " + selezionata);
-                    alert.setContentText(e.getMessage());
-                    alert.showAndWait();
-                }
-            });
+                .filter(risposta -> risposta == ButtonType.OK)
+                .ifPresent(risposta -> {
+                    try {
+                        StopwordsDAO.rimuovi(selezionata);
+                        L_stopwords.getItems().remove(selezionata);
+                        T_word.setText(selezionata);
+                    } catch (SQLException e) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Errore");
+                        alert.setHeaderText("Impossibile eliminare la stopword " + selezionata);
+                        alert.setContentText(e.getMessage());
+                        alert.showAndWait();
+                    }
+                });
     }
-
 }
