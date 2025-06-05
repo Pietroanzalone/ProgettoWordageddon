@@ -7,237 +7,236 @@ public class GeneratoreDomanda {
     private final DocumentoTestuale doc2;
     private final Random random;
     private static final Map<Lingua, List<String>> parolePerLingua = Map.of(
-            Lingua.ITALIANO, List.of(
-                    "lampadina", "campanile", "scrivania", "bicicletta", "calzino", "bottiglia",
-                    "gelato", "tavolo", "matita", "telefono", "mare", "montagna", "valigia", "cuscino",
-                    "ombrello", "computer", "finestra", "libro", "quaderno", "semaforo", "cappotto", "scarpa"
-            ),
-            Lingua.INGLESE, List.of(
-                    "umbrella", "notebook", "giraffe", "bottle", "window", "keyboard",
-                    "pencil", "mountain", "suitcase", "icecream", "desk", "lamp", "shoe", "jacket",
-                    "phone", "cushion", "train", "mirror", "camera", "chair", "book", "traffic"
-            ),
-            Lingua.FRANCESE, List.of(
-                    "chapeau", "voiture", "fenêtre", "bouteille", "table", "chaussette",
-                    "lampe", "montagne", "glace", "valise", "coussin", "chaise", "portable", "livre",
-                    "stylo", "chemise", "écharpe", "sac", "ordinateur", "gâteau", "boulangerie"
-            ),
-            Lingua.SPAGNOLO, List.of(
-                    "ventana", "bicicleta", "sombrero", "botella", "camisa", "reloj",
-                    "lampara", "cuaderno", "montaña", "helado", "almohada", "escritorio", "telefono",
-                    "ordenador", "librería", "mesa", "zapato", "chaqueta", "tren", "bolso", "pastel"
-            )
+        Lingua.ITALIANO, List.of(
+            "lampadina", "campanile", "scrivania", "bicicletta", "calzino", "bottiglia",
+            "gelato", "tavolo", "matita", "telefono", "mare", "montagna", "valigia", "cuscino",
+            "ombrello", "computer", "finestra", "libro", "quaderno", "semaforo", "cappotto", "scarpa"
+        ),
+        Lingua.INGLESE, List.of(
+            "umbrella", "notebook", "giraffe", "bottle", "window", "keyboard",
+            "pencil", "mountain", "suitcase", "icecream", "desk", "lamp", "shoe", "jacket",
+            "phone", "cushion", "train", "mirror", "camera", "chair", "book", "traffic"
+        ),
+        Lingua.FRANCESE, List.of(
+            "chapeau", "voiture", "fenêtre", "bouteille", "table", "chaussette",
+            "lampe", "montagne", "glace", "valise", "coussin", "chaise", "portable", "livre",
+            "stylo", "chemise", "écharpe", "sac", "ordinateur", "gâteau", "boulangerie"
+        ),
+        Lingua.SPAGNOLO, List.of(
+            "ventana", "bicicleta", "sombrero", "botella", "camisa", "reloj",
+            "lampara", "cuaderno", "montaña", "helado", "almohada", "escritorio", "telefono",
+            "ordenador", "librería", "mesa", "zapato", "chaqueta", "tren", "bolso", "pastel"
+        )
     );
 
-
-
     public GeneratoreDomanda(DocumentoTestuale doc1, DocumentoTestuale doc2) {
+        if (doc1 == null)
+            throw new IllegalArgumentException("Il primo documento non può essere null");
+
         this.doc1 = doc1;
         this.doc2 = doc2;
         random = new Random();
     }
 
     public Domanda generaDomanda() {
-        if (doc2 == null)
-            return switch (random.nextInt(3)) {
-                case 1 -> domandaConfronto(1);
-                case 2 -> domandaEsclusione(1);
-                default -> domandaFrequenzaAssoluta(1);
-            };
-        else
-            return switch (random.nextInt(4)) {
-                case 1 -> domandaConfronto(random.nextInt(1));
-                case 2 -> domandaEsclusione(random.nextInt(1));
-                case 3 -> domandaDocumentoSpecifico(random.nextInt(1));
-                default -> domandaFrequenzaAssoluta(random.nextInt(1));
-            };
+        Domanda domanda = null;
+        int tentativi = 0;
+        while (domanda == null && tentativi < 100) {
+            if (doc2 == null)
+                domanda = switch (random.nextInt(3)) {
+                    case 1 -> domandaConfronto(getRandomIndex());
+                    case 2 -> domandaEsclusione(getRandomIndex());
+                    default -> domandaFrequenzaAssoluta(getRandomIndex());
+                };
+            else
+                domanda = switch (random.nextInt(4)) {
+                    case 1 -> domandaConfronto(getRandomIndex());
+                    case 2 -> domandaEsclusione(getRandomIndex());
+                    case 3 -> domandaDocumentoSpecifico(getRandomIndex());
+                    default -> domandaFrequenzaAssoluta(getRandomIndex());
+                };
+            tentativi++;
+        }
+        if (domanda == null)
+            throw new IllegalStateException("Impossibile generare una domanda valida");
+        return domanda;
     }
 
-    private Domanda domandaFrequenzaAssoluta(int doc) {
-        DocumentoTestuale documento = (doc == 1) ? doc1 : doc2;
+    private Domanda domandaFrequenzaAssoluta(int docIndex) {
+        var documento = getDocumento(docIndex);
+
+        // Ottengo tutte le parole del documento con la loro frequenza
         Map<String, Integer> frequenze = documento.getConteggioParole();
+        List<String> parole = new ArrayList<>(frequenze.keySet());
 
-        List<String> paroleValide = frequenze.keySet().stream()
-                .filter(p -> p.length() > 3 && frequenze.get(p) > 0)
-                .toList();
-
-        if (paroleValide.isEmpty()) return null;
-
-        String parola = paroleValide.get(random.nextInt(paroleValide.size()));
+        // Scelgo una parola a caso nel documento
+        String parola = parole.get(random.nextInt(parole.size()));
         int frequenza = frequenze.get(parola);
 
-        Set<Integer> opzioniSet = new HashSet<>();
-        opzioniSet.add(frequenza);
-        while (opzioniSet.size() < 4) {
+        // Scelgo quattro opzioni a caso, di cui una corretta
+        var opzioni = new ArrayList<Integer>();
+        opzioni.add(frequenza);
+        while (opzioni.size() < 4) {
             int fake = Math.max(0, frequenza + random.nextInt(7) - 3);
-            if (fake != frequenza) opzioniSet.add(fake);
+            if (fake != frequenza) opzioni.add(fake);
         }
-
-        List<Integer> opzioni = new ArrayList<>(opzioniSet);
         Collections.shuffle(opzioni);
 
-        int correttaIndex = opzioni.indexOf(frequenza);
-
+        // Scrivo il testo della domanda
         String testoDomanda = String.format(
-                "Quante volte compare la parola \"%s\" nel documento \"%s\"?",
-                parola, documento.getNome()
+            "Quante volte compare la parola \"%s\" nel documento \"%s\"?",
+            parola, documento.getNome()
         );
 
+        // Costruisco la domanda
         return new Domanda(
-                testoDomanda,
-                String.valueOf(opzioni.get(0)),
-                String.valueOf(opzioni.get(1)),
-                String.valueOf(opzioni.get(2)),
-                String.valueOf(opzioni.get(3)),
-                correttaIndex
+            testoDomanda,
+            String.valueOf(opzioni.get(0)),
+            String.valueOf(opzioni.get(1)),
+            String.valueOf(opzioni.get(2)),
+            String.valueOf(opzioni.get(3)),
+            opzioni.indexOf(frequenza)
         );
     }
-
 
     private Domanda domandaConfronto(int docIndex) {
-        DocumentoTestuale doc = (docIndex == 1) ? doc1 : doc2;
-        Map<String, Integer> frequenze = doc.getConteggioParole();
+        var documento = getDocumento(docIndex);
 
-        List<String> paroleValide = frequenze.keySet().stream()
-                .filter(p -> p.length() > 3 && frequenze.get(p) > 0)
-                .toList();
+        // Ottengo tutte le parole del documento con la loro frequenza
+        Map<String, Integer> frequenze = documento.getConteggioParole();
+        List<String> parole = new ArrayList<>(frequenze.keySet());
 
-        if (paroleValide.size() < 4) return null;
+        // Trovo la parola che compare più volte nel documento
+        String parolaFrequente = documento.getParolePiuFrequenti()
+                        .get(random.nextInt(documento.getParolePiuFrequenti().size()));
+        int frequenzaMax = frequenze.get(parolaFrequente);
 
-        String parolaCorretta = paroleValide.stream()
-                .max(Comparator.comparingInt(frequenze::get))
-                .orElse(null);
+        // Scelgo a caso altre 3 parole che hanno frequenza minore
+        var opzioni = new ArrayList<String>();
+        opzioni.add(parolaFrequente);
 
-        if (parolaCorretta == null) return null;
-
-        Set<String> opzioni = new HashSet<>();
-        opzioni.add(parolaCorretta);
-
-        Random rnd = new Random();
         while (opzioni.size() < 4) {
-            String casuale = paroleValide.get(rnd.nextInt(paroleValide.size()));
-            if (!opzioni.contains(casuale)) {
-                opzioni.add(casuale);
-            }
+            String parola = parole.get(random.nextInt(parole.size()));
+            if (!parola.equals(parolaFrequente) && frequenze.get(parola) < frequenzaMax)
+                opzioni.add(parola);
         }
+        Collections.shuffle(opzioni);
 
-        List<String> opzioniMescolate = new ArrayList<>(opzioni);
-        Collections.shuffle(opzioniMescolate);
+        // Scrivo il testo della domanda
+        String testoDomanda = String.format(
+            "Quale di queste parole compare più volte nel documento \"%s\"?",
+            documento.getNome()
+        );
 
-        int corretta = opzioniMescolate.indexOf(parolaCorretta);
-
-        String testoDomanda = "Quale di queste parole compare più volte nel documento \"" + doc.getNome() + "\"?";
-
+        // Costruisco la domanda
         return new Domanda(
-                testoDomanda,
-                opzioniMescolate.get(0),
-                opzioniMescolate.get(1),
-                opzioniMescolate.get(2),
-                opzioniMescolate.get(3),
-                corretta
+            testoDomanda,
+            opzioni.get(0),
+            opzioni.get(1),
+            opzioni.get(2),
+            opzioni.get(3),
+            opzioni.indexOf(parolaFrequente)
         );
     }
-
 
     private Domanda domandaEsclusione(int docIndex) {
-        DocumentoTestuale doc = (docIndex == 1) ? doc1 : doc2;
-        Map<String, Integer> frequenze = doc.getConteggioParole();
+        var documento = getDocumento(docIndex);
 
-        List<String> parolePresenti = frequenze.keySet().stream()
-                .filter(p -> p.length() > 3)
-                .toList();
+        // Ottengo tutte le parole nel documento
+        List<String> parole = new ArrayList<>(documento.getConteggioParole().keySet());
 
-        if (parolePresenti.size() < 3) return null;
+        // Ottengo una parola a caso non presente nel documento
+        String parolaNonPresente = null;
+        Collections.shuffle(parolePerLingua.get(documento.getLingua()));
+        for (var parola : parolePerLingua.get(documento.getLingua()))
+            if (!documento.contiene(parola)) {
+                parolaNonPresente = parola;
+                break;
+            }
 
-        Set<String> opzioni = new HashSet<>();
-        Random rnd = new Random();
+        // Se tutte le parole disponibili sono nel documento,
+        // annulla la creazione e restituisci null
+        if (parolaNonPresente == null)
+            return null;
 
-        while (opzioni.size() < 3) {
-            String parola = parolePresenti.get(rnd.nextInt(parolePresenti.size()));
-            opzioni.add(parola);
+        // Scelgo le quattro opzioni
+        var opzioni = new ArrayList<String>();
+        opzioni.add(parolaNonPresente);
+        while (opzioni.size() < 4) {
+            String parola = parole.get(random.nextInt(parole.size()));
+            if (!opzioni.contains(parola))
+                opzioni.add(parola);
         }
+        Collections.shuffle(opzioni);
 
-        String esclusa;
-        do {
-            esclusa = generaParolaCasualePerLingua(doc.getLingua());
-        } while (frequenze.containsKey(esclusa) || esclusa.length() <= 3);
+        // Scrivo il testo della domanda
+        String testoDomanda = String.format(
+            "Quale di queste parole non è presente nel documento \"%s\"?",
+            documento.getNome()
+        );
 
-
-        opzioni.add(esclusa);
-
-        List<String> opzioniMescolate = new ArrayList<>(opzioni);
-        Collections.shuffle(opzioniMescolate);
-        int corretta = opzioniMescolate.indexOf(esclusa);
-
-        String testoDomanda = "Quale di queste parole non compare nel documento \"" + doc.getNome() + "\"?";
-
+        // Costruisco la domanda
         return new Domanda(
-                testoDomanda,
-                opzioniMescolate.get(0),
-                opzioniMescolate.get(1),
-                opzioniMescolate.get(2),
-                opzioniMescolate.get(3),
-                corretta
+            testoDomanda,
+            opzioni.get(0),
+            opzioni.get(1),
+            opzioni.get(2),
+            opzioni.get(3),
+            opzioni.indexOf(parolaNonPresente)
         );
     }
-
-    private String generaParolaCasualePerLingua(Lingua lingua) {
-        List<String> parole = parolePerLingua.getOrDefault(lingua, List.of("defaultword"));
-        Random rnd = new Random();
-        return parole.get(rnd.nextInt(parole.size()));
-    }
-
-
 
     private Domanda domandaDocumentoSpecifico(int docIndex) {
-        if (doc1 == null || doc2 == null) return null;
+        var documento = getDocumento(docIndex);
+        var altro = getDocumento(1 - docIndex);
 
-        DocumentoTestuale docA = doc1;
-        DocumentoTestuale docB = doc2;
+        // Ottengo la lista delle parole comuni
+        List<String> paroleComuni = documento.getParoleComuni(altro);
 
-        List<String> comuni = docA.getParoleComuni(docB);
-        List<String> unicheDocA = docA.getConteggioParole().keySet().stream()
-                .filter(p -> !comuni.contains(p) && p.length() > 3)
+        // Ottengo la lista delle parole del primo documento
+        // e rimuovo quelle comuni
+        List<String> paroleEsclusive = documento.getConteggioParole().keySet().stream()
+                .filter(parola -> (!paroleComuni.contains(parola)))
                 .toList();
-        List<String> unicheDocB = docB.getConteggioParole().keySet().stream()
-                .filter(p -> !comuni.contains(p) && p.length() > 3)
-                .toList();
 
-        Random rnd = new Random();
-        boolean sceltaDocA = rnd.nextBoolean();
+        // Se non ci sono parole esclusive,
+        // annulla la creazione e restituisci null
+        if (paroleEsclusive.isEmpty()) return null;
 
-        String parola;
-        String correttaLabel;
-        if (sceltaDocA && !unicheDocA.isEmpty()) {
-            parola = unicheDocA.get(rnd.nextInt(unicheDocA.size()));
-            correttaLabel = docA.getNome();
-        } else if (!sceltaDocA && !unicheDocB.isEmpty()) {
-            parola = unicheDocB.get(rnd.nextInt(unicheDocB.size()));
-            correttaLabel = docB.getNome();
-        } else {
-            return null;
-        }
+        // Scelgo una parola a caso tra quelle esclusive
+        String parola = paroleEsclusive.get(random.nextInt(paroleEsclusive.size()));
 
-        Set<String> opzioni = new HashSet<>();
-        opzioni.add(correttaLabel);
-        while (opzioni.size() < 4) {
-            opzioni.add("Documento " + (char) ('A' + rnd.nextInt(10)));
-        }
+        // Compongo le quattro opzioni
+        var opzioni = new ArrayList<String>();
+        opzioni.add(documento.getNome());
+        opzioni.add(altro.getNome());
+        opzioni.add("Entrambi");
+        opzioni.add("Nessuno dei due");
+        Collections.shuffle(opzioni);
 
-        List<String> opzioniMescolate = new ArrayList<>(opzioni);
-        Collections.shuffle(opzioniMescolate);
-        int corretta = opzioniMescolate.indexOf(correttaLabel);
-
-        String testoDomanda = "In quale documento compare la parola \"" + parola + "\"?";
-
-        return new Domanda(
-                testoDomanda,
-                opzioniMescolate.get(0),
-                opzioniMescolate.get(1),
-                opzioniMescolate.get(2),
-                opzioniMescolate.get(3),
-                corretta
+        // Scrivo il testo della domanda
+        String testoDomanda = String.format(
+            "In quale documento compare la parola \"%s\"?",
+            parola
         );
+
+        // Costruisco la domanda
+        return new Domanda(
+            testoDomanda,
+            opzioni.get(0),
+            opzioni.get(1),
+            opzioni.get(2),
+            opzioni.get(3),
+            opzioni.indexOf(documento.getNome())
+        );
+    }
+
+    private int getRandomIndex() {
+        return random.nextInt(doc2 == null ? 1 : 2);
+    }
+
+    private DocumentoTestuale getDocumento(int index) {
+        return (index == 0) ? doc1 : doc2;
     }
     
 }

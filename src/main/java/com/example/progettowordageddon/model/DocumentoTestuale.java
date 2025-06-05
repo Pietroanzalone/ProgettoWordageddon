@@ -62,12 +62,6 @@ public class DocumentoTestuale {
         return conteggioParole.containsKey(parola);
     }
 
-    public int getConteggioParola(String parola) {
-        if (contiene(parola))
-            return conteggioParole.get(parola);
-        return 0;
-    }
-
     public List<String> getParoleComuni(DocumentoTestuale altro) {
         if (altro == null) return new ArrayList<>();
         Set<String> comuniSet = new HashSet<>(conteggioParole.keySet());
