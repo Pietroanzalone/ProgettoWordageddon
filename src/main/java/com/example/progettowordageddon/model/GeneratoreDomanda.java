@@ -29,26 +29,26 @@ public class GeneratoreDomanda {
     /** \cond DOXY_SKIP */
     static {
         parolePerLingua = Map.of(
-                Lingua.ITALIANO, List.of(
+                Lingua.ITALIANO, new ArrayList<>(List.of(
                         "lampadina", "campanile", "scrivania", "bicicletta", "calzino", "bottiglia",
                         "gelato", "tavolo", "matita", "telefono", "mare", "montagna", "valigia", "cuscino",
                         "ombrello", "computer", "finestra", "libro", "quaderno", "semaforo", "cappotto", "scarpa"
-                ),
-                Lingua.INGLESE, List.of(
+                )),
+                Lingua.INGLESE, new ArrayList<>(List.of(
                         "umbrella", "notebook", "giraffe", "bottle", "window", "keyboard",
                         "pencil", "mountain", "suitcase", "icecream", "desk", "lamp", "shoe", "jacket",
                         "phone", "cushion", "train", "mirror", "camera", "chair", "book", "traffic"
-                ),
-                Lingua.FRANCESE, List.of(
+                )),
+                Lingua.FRANCESE, new ArrayList<>(List.of(
                         "chapeau", "voiture", "fenêtre", "bouteille", "table", "chaussette",
                         "lampe", "montagne", "glace", "valise", "coussin", "chaise", "portable", "livre",
                         "stylo", "chemise", "écharpe", "sac", "ordinateur", "gâteau", "boulangerie"
-                ),
-                Lingua.SPAGNOLO, List.of(
+                )),
+                Lingua.SPAGNOLO,new ArrayList<>(List.of(
                         "ventana", "bicicleta", "sombrero", "botella", "camisa", "reloj",
                         "lampara", "cuaderno", "montaña", "helado", "almohada", "escritorio", "telefono",
                         "ordenador", "librería", "mesa", "zapato", "chaqueta", "tren", "bolso", "pastel"
-                )
+                ))
         );
 
     }

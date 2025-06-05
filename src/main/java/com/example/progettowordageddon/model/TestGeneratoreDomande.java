@@ -29,13 +29,12 @@ public class TestGeneratoreDomande {
         );
 
         DocumentoTestuale doc2 = new DocumentoTestuale(
-                "L'impero Romano",
-                Lingua.ITALIANO,
+                "The cat",
+                Lingua.INGLESE,
                 Difficolta.FACILE,
-                "Oggi mi sono svegliato presto. Ho pensato presto alla grandezze dell'impero romano "
-                        + "Poi ho parlato a mio figlio dell'impero romano. Mio figlio ha apprezzato molto. "
-                        + "Mio figlio ha detto che voleva diventare anche lui un romano, mio figlio non sa che l'impero è finito"
-        );
+                "The cat sleeps on the sofa. Every morning, the cat jumps on the table to look out of the window. "+ "" +
+                        "The dog barks, but the cat does not move. The sun enters the room and warms the carpet. " +
+                        "Everything is calm and quiet.");
 
         GeneratoreDomanda generatore = new GeneratoreDomanda(doc1, doc2);
         Domanda domanda = generatore.generaDomanda();
