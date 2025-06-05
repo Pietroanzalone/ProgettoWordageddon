@@ -2,47 +2,90 @@ package com.example.progettowordageddon.model;
 
 import java.util.*;
 
+/**
+ * @class GeneratoreDomanda
+ * @brief Il generatore di domande per il quiz.
+ *
+ * Questa classe implementa un generatore randomico di domande
+ * usando uno o due documenti testuali come base.
+ */
 public class GeneratoreDomanda {
-    private final DocumentoTestuale doc1;
-    private final DocumentoTestuale doc2;
-    private final Random random;
-    private static final Map<Lingua, List<String>> parolePerLingua = Map.of(
-        Lingua.ITALIANO, List.of(
-            "lampadina", "campanile", "scrivania", "bicicletta", "calzino", "bottiglia",
-            "gelato", "tavolo", "matita", "telefono", "mare", "montagna", "valigia", "cuscino",
-            "ombrello", "computer", "finestra", "libro", "quaderno", "semaforo", "cappotto", "scarpa"
-        ),
-        Lingua.INGLESE, List.of(
-            "umbrella", "notebook", "giraffe", "bottle", "window", "keyboard",
-            "pencil", "mountain", "suitcase", "icecream", "desk", "lamp", "shoe", "jacket",
-            "phone", "cushion", "train", "mirror", "camera", "chair", "book", "traffic"
-        ),
-        Lingua.FRANCESE, List.of(
-            "chapeau", "voiture", "fenêtre", "bouteille", "table", "chaussette",
-            "lampe", "montagne", "glace", "valise", "coussin", "chaise", "portable", "livre",
-            "stylo", "chemise", "écharpe", "sac", "ordinateur", "gâteau", "boulangerie"
-        ),
-        Lingua.SPAGNOLO, List.of(
-            "ventana", "bicicleta", "sombrero", "botella", "camisa", "reloj",
-            "lampara", "cuaderno", "montaña", "helado", "almohada", "escritorio", "telefono",
-            "ordenador", "librería", "mesa", "zapato", "chaqueta", "tren", "bolso", "pastel"
-        )
-    );
 
-    public GeneratoreDomanda(DocumentoTestuale doc1, DocumentoTestuale doc2) {
-        if (doc1 == null)
+    /** @brief Primo documento usato come base per le domande. */
+    private final DocumentoTestuale doc0;
+
+    /** @brief Secondo documento usato come base per le domande.
+     *
+     * Nel caso di quiz semplici, questo documento può anche essere null.
+     */
+    private final DocumentoTestuale doc1;
+
+    /** @brief Generatore di numeri random. */
+    private final Random random;
+
+    /** @brief Lista di parole utilizzate per alcuni tipi di domande. */
+    private static final Map<Lingua, List<String>> parolePerLingua;
+
+    /** \cond DOXY_SKIP */
+    static {
+        parolePerLingua = Map.of(
+                Lingua.ITALIANO, List.of(
+                        "lampadina", "campanile", "scrivania", "bicicletta", "calzino", "bottiglia",
+                        "gelato", "tavolo", "matita", "telefono", "mare", "montagna", "valigia", "cuscino",
+                        "ombrello", "computer", "finestra", "libro", "quaderno", "semaforo", "cappotto", "scarpa"
+                ),
+                Lingua.INGLESE, List.of(
+                        "umbrella", "notebook", "giraffe", "bottle", "window", "keyboard",
+                        "pencil", "mountain", "suitcase", "icecream", "desk", "lamp", "shoe", "jacket",
+                        "phone", "cushion", "train", "mirror", "camera", "chair", "book", "traffic"
+                ),
+                Lingua.FRANCESE, List.of(
+                        "chapeau", "voiture", "fenêtre", "bouteille", "table", "chaussette",
+                        "lampe", "montagne", "glace", "valise", "coussin", "chaise", "portable", "livre",
+                        "stylo", "chemise", "écharpe", "sac", "ordinateur", "gâteau", "boulangerie"
+                ),
+                Lingua.SPAGNOLO, List.of(
+                        "ventana", "bicicleta", "sombrero", "botella", "camisa", "reloj",
+                        "lampara", "cuaderno", "montaña", "helado", "almohada", "escritorio", "telefono",
+                        "ordenador", "librería", "mesa", "zapato", "chaqueta", "tren", "bolso", "pastel"
+                )
+        );
+
+    }
+    /** \endcond */
+
+    /**
+     * @brief Costruttore completo per la classe GeneratoreDomanda.
+     *
+     * @param doc0 Primo documento da usare come base.
+     * @param doc1 Secondo documento da usare come base.
+     *             Se è null, allora alcuni tipi di domande
+     *             sono esclusi dal generatore.
+     */
+    public GeneratoreDomanda(DocumentoTestuale doc0, DocumentoTestuale doc1) {
+        if (doc0 == null)
             throw new IllegalArgumentException("Il primo documento non può essere null");
 
+        this.doc0 = doc0;
         this.doc1 = doc1;
-        this.doc2 = doc2;
         random = new Random();
     }
 
+    /**
+     * @brief Genera una domanda da porre nel quiz.
+     *
+     * Utilizza uno o due documenti per generare una Domanda.
+     *
+     * @return Domanda del quiz.
+     * @throws IllegalStateException se non riesce a generare una domanda
+     *                               valida entro 100 tentativi randomici.
+     */
     public Domanda generaDomanda() {
         Domanda domanda = null;
-        int tentativi = 0;
-        while (domanda == null && tentativi < 100) {
-            if (doc2 == null)
+
+        // Tenta 100 volte di generare una domanda
+        for (int i = 0; domanda == null && i < 100; i++)
+            if (doc1 == null)
                 domanda = switch (random.nextInt(3)) {
                     case 1 -> domandaConfronto(getRandomIndex());
                     case 2 -> domandaEsclusione(getRandomIndex());
@@ -55,13 +98,22 @@ public class GeneratoreDomanda {
                     case 3 -> domandaDocumentoSpecifico(getRandomIndex());
                     default -> domandaFrequenzaAssoluta(getRandomIndex());
                 };
-            tentativi++;
-        }
+
+        // Se non riesce a generare una domanda, solleva l'eccezione
         if (domanda == null)
             throw new IllegalStateException("Impossibile generare una domanda valida");
         return domanda;
     }
 
+    /**
+     * @brief Genera una domanda di frequenza assoluta.
+     *
+     * Tenta di generare una domanda del tipo:
+     * "Quante volte compare la parola PAROLA nel documento DOCUMENTO?"
+     *
+     * @param docIndex Il Documento da selezionare per la domanda (0 o 1).
+     * @return Domanda se riesce a generarne una valida, null altrimenti.
+     */
     private Domanda domandaFrequenzaAssoluta(int docIndex) {
         var documento = getDocumento(docIndex);
 
@@ -99,6 +151,15 @@ public class GeneratoreDomanda {
         );
     }
 
+    /**
+     * @brief Genera una domanda di confronto.
+     *
+     * Tenta di generare una domanda del tipo:
+     * "Quale di queste parole compare più volte nel documento DOCUMENTO?"
+     *
+     * @param docIndex Il Documento da selezionare per la domanda (0 o 1).
+     * @return Domanda se riesce a generarne una valida, null altrimenti.
+     */
     private Domanda domandaConfronto(int docIndex) {
         var documento = getDocumento(docIndex);
 
@@ -139,6 +200,15 @@ public class GeneratoreDomanda {
         );
     }
 
+    /**
+     * @brief Genera una domanda di esclusione.
+     *
+     * Tenta di generare una domanda del tipo:
+     * "Quale di queste parole non è presente nel documento DOCUMENTO?"
+     *
+     * @param docIndex Il Documento da selezionare per la domanda (0 o 1).
+     * @return Domanda se riesce a generarne una valida, null altrimenti.
+     */
     private Domanda domandaEsclusione(int docIndex) {
         var documento = getDocumento(docIndex);
 
@@ -186,6 +256,15 @@ public class GeneratoreDomanda {
         );
     }
 
+    /**
+     * @brief Genera una domanda di documento specifico.
+     *
+     * Tenta di generare una domanda del tipo:
+     * "In quale documento compare la parola PAROLA?"
+     *
+     * @param docIndex Il Documento da selezionare per la domanda (0 o 1).
+     * @return Domanda se riesce a generarne una valida, null altrimenti.
+     */
     private Domanda domandaDocumentoSpecifico(int docIndex) {
         var documento = getDocumento(docIndex);
         var altro = getDocumento(1 - docIndex);
@@ -231,12 +310,14 @@ public class GeneratoreDomanda {
         );
     }
 
+    /** \cond DOXY_SKIP */
     private int getRandomIndex() {
-        return random.nextInt(doc2 == null ? 1 : 2);
+        return random.nextInt(doc1 == null ? 1 : 2);
     }
 
     private DocumentoTestuale getDocumento(int index) {
-        return (index == 0) ? doc1 : doc2;
+        return (index == 0) ? doc0 : doc1;
     }
+    /** \endcond */
     
 }
