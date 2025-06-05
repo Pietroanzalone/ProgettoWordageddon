@@ -43,21 +43,20 @@ public class Controller {
      *
      * Inizializza la barra di navigazione usando
      * {@link impostaNavbar}, {@link impostaIconaLogout}
-     * e @{@link impostaIconaHome}.
+     * e {@link impostaIconaHome}.
      *
      *
      * @note Se un controller ha la barra di navigazione che non comprende tutti
      *       e tre i pulsanti, deve assicurarsi di fare l'Override di questo
      *       metodo e usare solo i comandi che gli servono.
-     *
-     * Esempio per AccediController che ha solo i pulsanti "Esci" e "Logout":
-     * ```java
-     * @Override
-     * public void initialize() {
-     *     impostaNavbar();
-     *     impostaIconaLogout();
-     * }
-     * ```
+     *       Esempio per AccediController che ha solo i pulsanti "Esci" e "Logout":
+     *       ```java
+     *       @Override
+     *       public void initialize() {
+     *           impostaNavbar();
+     *           impostaIconaLogout();
+     *       }
+     *       ```
      */
     public void initialize() {
         impostaNavbar();
@@ -180,7 +179,8 @@ public class Controller {
     }
 
     /**
-     * @brief Carica un'immagine dalla cartella `Assets` del progetto e la restituisce come oggetto
+     * @brief Metodo di utility per caricare un'immagine dalla cartella
+     * `Assets` del progetto e la restituisce come oggetto
      * [ImageView](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/image/ImageView.html).
      *
      * L'immagine viene scalata alle dimensioni specificate tramite i parametri {@code larghezza}
@@ -192,7 +192,6 @@ public class Controller {
      * @return Un oggetto {@code ImageView} contenente l'immagine scalata, oppure {@code null} se
      * il file non viene trovato.
      */
-
     protected ImageView caricaImmagine(String nome, int larghezza, int altezza) {
         try {
             ImageView icona = new ImageView(getClass().getResource("/com/example/progettowordageddon/ui/Assets/" + nome).toExternalForm());

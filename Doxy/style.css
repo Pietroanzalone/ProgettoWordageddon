@@ -28,7 +28,8 @@ body {
     visibility: hidden;
 }
 
-#main-menu > :first-child {
+#main-menu > :first-child,
+#main-menu > :nth-child(2) {
     display: none;
 }
 

@@ -5,8 +5,19 @@ import com.example.progettowordageddon.model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+/**
+ * @class AccediController
+ * @brief Il controller per la gestione della schermata "Accedi".
+ *
+ * Questa classe definisce la logica di visualizzazione
+ * dei messaggi di errore, l'abilitazione e la disabilitazione
+ * dei pulsanti in base allo stato dei campi, e gestisce le
+ * azioni da eseguire quanto l'utente interagisce con
+ * l'interfaccia.
+ */
 public class AccediController extends Controller {
 
+    /** \cond DOXY_SKIP */
     @FXML
     private TextField T_username;
 
@@ -21,7 +32,14 @@ public class AccediController extends Controller {
 
     @FXML
     private Button B_accedi;
+    /** \endcond */
 
+    /**
+     * @brief Metodo chiamato automaticamente all'inizializzazione del controller.
+     *
+     * Inizializza la barra di navigazione usando
+     * {@link impostaNavbar} e {@link impostaIconaLogout}.
+     */
     @Override
     public void initialize() {
         impostaNavbar();
@@ -32,12 +50,29 @@ public class AccediController extends Controller {
         logicaPulsanteAccesso();
     }
 
+    /**
+     * @brief Metodo chiamato quando l'utente
+     *        interagisce col pulsante "ACCEDI"
+     *
+     * Autentica l'utente eseguendo l'accesso e
+     * salva le informazioni all'interno della
+     * Sessione, poi passa alla schermata "Utente".
+     */
     public void accediClicked() {
         Logger.log("Cliccato il pulsante: ACCEDI");
         Sessione.utente = UtentiDAO.get(T_username.getText());
         cambiaSchermata("Utente");
     }
 
+    /**
+     * @brief Definisce la logica di comparsa del
+     *        messaggio di errore sotto il campo
+     *        "Username".
+     *
+     * Questo messaggio compare quando il campo
+     * "Username" è vuoto o l'username inserito
+     * non è presente nel database.
+     */
     private void logicaUsername() {
         L_usernameWarn.setVisible(false);
         T_username.textProperty().addListener((observable, oldValue, newValue) ->
@@ -48,6 +83,15 @@ public class AccediController extends Controller {
         );
     }
 
+    /**
+     * @brief Definisce la logica di comparsa del
+     *        messaggio di errore sotto il campo
+     *        "Password".
+     *
+     * Questo messaggio compare quando il campo
+     * "Password" è vuoto o la password inserita
+     * non coincide con quella presente nel database.
+     */
     private void logicaPassword() {
         L_passwordWarn.setVisible(false);
         P_password.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -70,6 +114,14 @@ public class AccediController extends Controller {
         });
     }
 
+    /**
+     * @brief Definisce la logica di attivazione del
+     *        pulsante "Accedi".
+     *
+     * Questo pulsante è attivo solo quando i campi
+     * "Username" e "Password" non sono vuoti e non
+     * compare nessun messaggio di errore.
+     */
     private void logicaPulsanteAccesso() {
         B_accedi.disableProperty().bind(
             T_username.textProperty().isEmpty()
