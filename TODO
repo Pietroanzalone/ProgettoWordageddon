@@ -1,16 +1,6 @@
-# Schermate
-Quiz - che mostra un testo e poi fa le domande (consideriamo pure di fare due schermate differenti)
-Leaderboard - che mostra la classifica dei migliori punteggi per ogni difficoltà e lingua
-Pannello di controllo - da cui gli admin possono modificare i documenti, le stopwords e gli altri admin
-Recupera sessione - dove prende in ingresso un file e lo usa per caricare una sessione precedente
-
-# Classi model
-Sessione - Che contiene tutti i dati della sessione corrente (utente attivo, schermata attiva, punto del quiz...)
-DomandaQuiz
-Quiz
-
-# Logiche
-Quando si avvia l'applicazione, viene creato un file Sessione-YY-MM-DD.pw che contiene un dump
-degli attributi della classe Sessione. Ogni volta che questa viene modificata, viene aggiornato
-anche il file Sessione-YY-MM-DD.pw. Quando un utente clicca su "Recupera sessione", può caricare
-un file .pw precedente e continuare la sessione che aveva interrotto precedentemente.
+1. Creazione e update di un file "Sessione"
+2. Schermata e logica "Recupera sessione" che prende in input un file "Sessione" e ne ripristina i valori degli attributi
+3. Schermata che mostra una domanda del quiz
+4. Logica della schermata "GestioneDocumenti"
+5. Schermata e logica "GestioneAdmin"
+6. Schermata e logica "Leaderboard"
