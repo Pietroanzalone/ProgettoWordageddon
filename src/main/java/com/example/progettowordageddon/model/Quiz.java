@@ -7,19 +7,24 @@ import java.util.List;
 
 public class Quiz {
     private final List<Domanda> domande;
+    private DocumentoTestuale doc0;
+    private DocumentoTestuale doc1;
 
-    public Quiz(Difficolta difficolta, Lingua lingua) throws SQLException {
+    public Quiz(Difficolta difficolta, Lingua lingua) throws SQLException, IllegalStateException {
         domande = new ArrayList<>();
+
         // Tenta 100 volte di generare un quiz
-        for (int i = 0; domande.size() < 10 || i < 100; i++) {
+        for (int i = 0; i < 100 && domande.size() < 10; i++) {
             GeneratoreDomanda generatore;
             if (difficolta == Difficolta.DIFFICILE) {
-                var doc0 = getDocumentoRandom(difficolta, lingua);
-                var doc1 = getDocumentoRandom(difficolta, lingua, doc0);
+                doc0 = getDocumentoRandom(difficolta, lingua);
+                doc1 = getDocumentoRandom(difficolta, lingua, doc0);
                 generatore = new GeneratoreDomanda(doc0, doc1);
             }
-            else
-                generatore = new GeneratoreDomanda(getDocumentoRandom(difficolta, lingua), null);
+            else {
+                doc0 = getDocumentoRandom(difficolta, lingua);
+                generatore = new GeneratoreDomanda(doc0, null);
+            }
 
             domande.clear();
             while (domande.size() < 10) {
@@ -28,6 +33,10 @@ public class Quiz {
                     domande.add(domanda);
             }
         }
+
+        // Se non riesce a generare un quiz, solleva IllegalStateException
+        if (domande.size() < 10)
+            throw new IllegalStateException("Impossibile generare un quiz");
     }
 
     private DocumentoTestuale getDocumentoRandom(Difficolta difficolta, Lingua lingua) throws SQLException {
@@ -42,10 +51,47 @@ public class Quiz {
             .toList();
 
         DocumentoTestuale doc = null;
-        while (doc == null || doc.equals(diverso))
+        while (doc == null || doc.equals(diverso)) {
+            if (lista.isEmpty())
+                throw new IllegalStateException("Impossibile generare un quiz");
             doc = lista.get(new java.util.Random().nextInt(lista.size()));
+        }
         return doc;
     }
 
+    public DocumentoTestuale getDocumento0() {
+        return doc0;
+    }
+
+    public DocumentoTestuale getDocumento1() {
+        return doc1;
+    }
+
+    public List<Domanda> getDomande() {
+        return domande;
+    }
+
+    public boolean getCompletato() {
+        for (var domanda : domande)
+            if (!domanda.isRisposta())
+                return false;
+        return true;
+    }
+
+    public int getPunteggio() throws IllegalStateException {
+        if (!getCompletato())
+            throw new IllegalStateException("Quiz non ancora completato");
+        return (int) domande.stream()
+            .filter(Domanda::isCorretta)
+            .count();
+    }
+
+    public Difficolta getDifficolta() {
+        return doc0.getDifficolta();
+    }
+
+    public Lingua getLingua() {
+        return doc0.getLingua();
+    }
 
 }

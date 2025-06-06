@@ -98,7 +98,7 @@ public class Controller {
     @FXML
     private void home() {
         Logger.log("Cliccato il pulsante della navbar: HOME");
-        Sessione.quizAttivo = false;
+        Sessione.quizAttivo = null;
         cambiaSchermata("Utente");
     }
 
@@ -126,7 +126,8 @@ public class Controller {
             Sessione.schermata = nomeSchermata;
             Logger.log("Passo alla schermata " + nomeSchermata);
         } catch (IOException e) {
-            Logger.error(e.getMessage());
+            for (var message : e.getStackTrace())
+                Logger.error(String.valueOf(message));
         }
     }
 

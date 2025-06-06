@@ -4,6 +4,8 @@ import com.example.progettowordageddon.model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.sql.SQLException;
+
 /**
  * @class IniziaQuizController
  * @brief Il controller per la schermata di avvio del quiz.
@@ -154,8 +156,23 @@ public class IniziaQuizController extends Controller {
         Logger.log("Cliccato il pulsante: INIZIA");
         Logger.log("Difficolta scelta: " + difficoltaScelta.name());
         Logger.log("Lingua scelta: " + linguaScelta);
-        Sessione.quizAttivo = true;
-        Sessione.difficolta = difficoltaScelta;
+        try {
+            Sessione.quizAttivo = new Quiz(difficoltaScelta, linguaScelta);
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Errore");
+            alert.setHeaderText("SQL Exception");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+            return;
+        } catch (IllegalStateException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Errore");
+            alert.setHeaderText("Impossibile generare quiz");
+            alert.setContentText("La combinazione di difficoltà e lingua selezionata non consente la creazione di un quiz.");
+            alert.showAndWait();
+            return;
+        }
         cambiaSchermata("VediTesto");
     }
 }
