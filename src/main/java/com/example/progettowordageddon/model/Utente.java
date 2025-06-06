@@ -20,7 +20,7 @@ public class Utente {
 
     /** @brief Password dell'utente.
      *
-     * Se hashedPassword è true, è memorizzata in forma hash. */
+     * Se `hashedPassword` è `true`, è memorizzata in forma hash. */
     private String password;
 
     /** @brief Flag che indica se la password è stata già sottoposta ad hashing. */
@@ -76,6 +76,8 @@ public class Utente {
 
     /** @brief Applica l'hashing [SHA-256](https://it.wikipedia.org/wiki/Secure_Hash_Algorithm)
      * alla password, se non già hashata. Ignora la richiesta se la password è già hashata.
+     *
+     * @see hashPassword
      */
     public void hash() {
         if (hashedPassword)
@@ -86,10 +88,9 @@ public class Utente {
     }
 
     /** @brief Applica l'hashing [SHA-256](https://it.wikipedia.org/wiki/Secure_Hash_Algorithm)
-     * a una password.
+     *         a una password.
      * @param password La password da hashare.
      * @return La password hashata
-     *
      */
     public static String hashPassword(String password) {
         try {
@@ -109,22 +110,6 @@ public class Utente {
         return hexString.toString();
     }
     /** \endcond */
-
-    /** @brief Verifica se una password in chiaro corrisponde all'hash memorizzato.
-     * @param password Password in chiaro da verificare.
-     * @return True se la password è corretta.
-     */
-    public boolean verificaPassword(String password) {
-        if (!isHashedPassword()) return false;
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-            String hashed = bytesToHex(hash);
-            return hashed.equals(this.password);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("SHA-256 not supported", e);
-        }
-    }
 
     /** @brief Confronta due oggetti Utente in base all'username.
      * @param obj Oggetto da confrontare.
