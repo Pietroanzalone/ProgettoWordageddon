@@ -72,6 +72,7 @@ public class Controller {
      */
     @FXML
     private void chiudi() {
+        Logger.log("Cliccato il pulsante della navbar: CHIUDI");
         Platform.exit();
     }
 
@@ -83,6 +84,7 @@ public class Controller {
      */
     @FXML
     private void logout() {
+        Logger.log("Cliccato il pulsante della navbar: LOGOUT");
         Sessione.utente = new Utente(null, null, true, false);
         cambiaSchermata("Home");
     }
@@ -95,6 +97,7 @@ public class Controller {
      */
     @FXML
     private void home() {
+        Logger.log("Cliccato il pulsante della navbar: HOME");
         Sessione.quizAttivo = false;
         cambiaSchermata("Utente");
     }
