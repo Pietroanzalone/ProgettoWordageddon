@@ -1,5 +1,8 @@
 package com.example.progettowordageddon.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Logger {
 
     /** \cond DOXY_SKIP */
@@ -8,6 +11,7 @@ public class Logger {
     private static final String ROSSOGRASSETTO = "\u001B[1;31m";
     private static final String GIALLO = "\u001B[33m";
     private static final String BLU = "\u001B[34m";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
     /** \endcond */
 
     /**
@@ -20,7 +24,7 @@ public class Logger {
      */
     public static void log(String messaggio) {
         if (!Sessione.loggingAttivo) return;
-        System.out.println(RESET + "[" + BLU + "INFO" + RESET + "] " + messaggio);
+        Sessione.stream.println(RESET + "[" + BLU + "INFO" + RESET + "]  [" + timestamp() + "] " + messaggio);
     }
 
     /**
@@ -32,7 +36,7 @@ public class Logger {
      */
     public static void warn(String messaggio) {
         if (!Sessione.loggingAttivo) return;
-        System.out.println(RESET + "[" + GIALLO + "WARN" + RESET + "] " + messaggio);
+        Sessione.stream.println(RESET + "[" + GIALLO + "WARN" + RESET + "]  [" + timestamp() + "] " + messaggio);
     }
 
     /**
@@ -45,7 +49,7 @@ public class Logger {
      */
     public static void error(String messaggio) {
         if (!Sessione.loggingAttivo) return;
-        System.out.println(RESET + "[" + ROSSO + "ERROR" + RESET + "] " + messaggio);
+        Sessione.stream.println(RESET + "[" + ROSSO + "ERROR" + RESET + "] [" + timestamp() + "] " + messaggio);
     }
 
     /**
@@ -58,7 +62,13 @@ public class Logger {
      */
     public static void fatal(String messaggio) {
         if (!Sessione.loggingAttivo) return;
-        System.out.println(RESET + "[" + ROSSOGRASSETTO + "FATAL" + RESET + "] " + messaggio);
+        Sessione.stream.println(RESET + "[" + ROSSOGRASSETTO + "FATAL" + RESET + "] [" + timestamp() + "] " + messaggio);
     }
+
+    /** \cond DOXY_SKIP */
+    private static String timestamp() {
+        return LocalDateTime.now().format(FORMATTER);
+    }
+    /** \endcond */
 
 }

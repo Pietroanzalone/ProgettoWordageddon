@@ -1,5 +1,7 @@
 package com.example.progettowordageddon.model;
 
+import java.io.PrintStream;
+
 /**
  * @class Sessione
  * @brief Classe statica che rappresenta lo stato globale della sessione utente nell'applicazione.
@@ -15,12 +17,29 @@ public class Sessione {
      * Se `true`, le operazioni e i messaggi di log saranno abilitati.
      *
      * @default{true}
+     *
+     * @see Logger
      */
     public static boolean loggingAttivo;
 
     /** \cond DOXY_SKIP */
     static {
         loggingAttivo = true;
+    }
+    /** \endcond */
+
+    /**
+     * @brief Stream in cui viene stampato il log dell'applicazione.
+     *
+     * @default{System.out}
+     *
+     * @see Logger
+     */
+    public static PrintStream stream;
+
+    /** \cond DOXY_SKIP */
+    static {
+        stream = System.out;
     }
     /** \endcond */
 
