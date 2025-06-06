@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 
 /**
  * @class UtenteController
- * @brief Controller per la schermata utente autenticato.
+ * @brief Il controller per la schermata utente autenticato.
  *
  * Gestisce il comportamento della schermata utente, inclusa
  * la visibilità del pannello di controllo e l'accesso alle

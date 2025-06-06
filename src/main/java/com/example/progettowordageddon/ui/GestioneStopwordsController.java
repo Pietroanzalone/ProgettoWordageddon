@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 /**
  * @class GestioneStopwordsController
- * @brief Controller per la gestione dell'interfaccia delle stopword.
+ * @brief Il controller per la gestione dell'interfaccia delle stopword.
  *
  * Questa classe definisce la logica di interazione dell'interfaccia per
  * l'aggiunta, la visualizzazione e la rimozione delle stopword nel database.

@@ -10,7 +10,6 @@ import java.util.*;
  * usando uno o due documenti testuali come base.
  */
 public class GeneratoreDomanda {
-
     /** @brief Primo documento usato come base per le domande. */
     private final DocumentoTestuale doc0;
 
