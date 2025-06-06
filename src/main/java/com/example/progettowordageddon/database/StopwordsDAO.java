@@ -6,10 +6,31 @@ import java.util.List;
 
 /**
  * @class StopwordsDAO
- * @brief Classe per la gestione delle stopword nel database.
+ * @brief Classe per la gestione delle stopwords nel database.
  *
- * Fornisce metodi pubblici per aggiungere, rimuovere, verificare e recuperare
- * tutte le stopword memorizzate nella tabella `Stopwords`.
+ * Fornisce metodi per il recupero, l'inserimento e l'eliminazione di parole
+ * dalla tabella {@code Stopwords}.
+ *
+ * <h2>Struttura della tabella `Stopwords` nel database:</h2>
+ *
+ * <table>
+ *   <thead>
+ *     <tr>
+ *       <th>Campo</th>
+ *       <th>Tipo</th>
+ *       <th>Vincolo 1</th>
+ *       <th>Descrizione</th>
+ *     </tr>
+ *   </thead>
+ *   <tbody>
+ *     <tr>
+ *       <td>stopword</td>
+ *       <td>TEXT</td>
+ *       <td>PRIMARY KEY</td>
+ *       <td>Parola da ignorare nel quiz</td>
+ *     </tr>
+ *   </tbody>
+ * </table>
  */
 public class StopwordsDAO {
 

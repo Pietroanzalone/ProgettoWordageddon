@@ -10,8 +10,54 @@ import java.util.List;
  * @class DocumentiTestualiDAO
  * @brief Classe per la gestione dei documenti testuali nel database.
  *
- * Fornisce metodi per recuperare, aggiungere, aggiornare e rimuovere documenti
- * dalla tabella `DocumentiTestuali`, oltre a controllare la loro esistenza.
+ * Fornisce metodi per il recupero, l'inserimento, la modifica e l'eliminazione di documenti
+ * dalla tabella {@code DocumentiTestuali}, nonché per la ricerca tramite indice sulla lingua.
+ *
+ * <h2>Struttura della tabella `DocumentiTestuali` nel database:</h2>
+ *
+ * <table>
+ *   <thead>
+ *     <tr>
+ *       <th>Campo</th>
+ *       <th>Tipo</th>
+ *       <th colspan="2">Vincoli</th>
+ *       <th>Descrizione</th>
+ *     </tr>
+ *   </thead>
+ *   <tbody>
+ *     <tr>
+ *       <td>nome</td>
+ *       <td>TEXT</td>
+ *       <td colspan="2">PRIMARY KEY</td>
+ *       <td>Nome univoco del documento</td>
+ *     </tr>
+ *     <tr>
+ *       <td>lingua</td>
+ *       <td>TEXT</td>
+ *       <td>NOT NULL</td>
+ *       <td>CHECK IN ('ITALIANO', 'INGLESE', 'FRANCESE', 'SPAGNOLO')</td>
+ *       <td>Lingua del documento</td>
+ *     </tr>
+ *     <tr>
+ *       <td>difficolta</td>
+ *       <td>TEXT</td>
+ *       <td>NOT NULL</td>
+ *       <td>CHECK IN ('FACILE', 'MEDIA', 'DIFFICILE')</td>
+ *       <td>Livello di difficoltà del documento</td>
+ *     </tr>
+ *     <tr>
+ *       <td>testo</td>
+ *       <td>CLOB</td>
+ *       <td colspan="2">NOT NULL</td>
+ *       <td>Contenuto testuale del documento</td>
+ *     </tr>
+ *   </tbody>
+ * </table>
+ *
+ * <p><b>Indice creato:</b></p>
+ * <ul>
+ *   <li><code>idx_doc_lingua</code> su campo <code>lingua</code> per velocizzare le query per lingua</li>
+ * </ul>
  */
 public class DocumentiTestualiDAO {
 

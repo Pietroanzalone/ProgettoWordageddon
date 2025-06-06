@@ -11,8 +11,42 @@ import java.util.ArrayList;
  * @brief Classe per la gestione degli utenti nel database.
  *
  * Fornisce metodi per il recupero, l'inserimento, la modifica e l'eliminazione di utenti
- * dalla tabella `Utenti`, nonché per il controllo dell'esistenza di un utente.
+ * dalla tabella {@code Utenti}, nonché per il controllo dell'esistenza di un utente.
+ *
+ * <h2>Struttura della tabella `Utenti` nel database:</h2>
+ *
+ * <table>
+ *   <thead>
+ *     <tr>
+ *       <th>Campo</th>
+ *       <th>Tipo</th>
+ *       <th>Vincoli</th>
+ *       <th>Descrizione</th>
+ *     </tr>
+ *   </thead>
+ *   <tbody>
+ *     <tr>
+ *       <td>username</td>
+ *       <td>TEXT</td>
+ *       <td>PRIMARY KEY</td>
+ *       <td>Identificatore univoco dell'utente</td>
+ *     </tr>
+ *     <tr>
+ *       <td>password</td>
+ *       <td>TEXT</td>
+ *       <td>NOT NULL</td>
+ *       <td>Password dell'utente (potenzialmente hashata)</td>
+ *     </tr>
+ *     <tr>
+ *       <td>admin</td>
+ *       <td>BOOLEAN</td>
+ *       <td>NOT NULL</td>
+ *       <td>Indica se l'utente ha privilegi amministrativi</td>
+ *     </tr>
+ *   </tbody>
+ * </table>
  */
+
 public class UtentiDAO {
 
     /**

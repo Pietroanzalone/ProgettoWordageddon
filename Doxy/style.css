@@ -67,8 +67,12 @@ span.mlabel {
     font-weight: normal;
 }
 
-td.entry > span:first-child {
-    display: none !important;
+.directory td.entry *:not(:last-child) {
+    margin-left: -15px;
+}
+
+.directory td.entry .arrow {
+    display: none;
 }
 
 h2.memtitle > span.permalink {
