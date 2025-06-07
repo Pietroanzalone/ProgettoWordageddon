@@ -1,14 +1,23 @@
 package com.example.progettowordageddon.ui;
 
 import com.example.progettowordageddon.model.*;
-import javafx.animation.*;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.util.Duration;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class VediTestoController extends Controller {
+
+    private boolean secondoDocumento = false;
+
+    private Timeline timer;
+
+    @FXML
+    private Label L_titolo;
 
     @FXML
     private TextArea T_testo;
@@ -16,13 +25,12 @@ public class VediTestoController extends Controller {
     @FXML
     private Label L_timer;
 
-    private Timeline timer;
-
     @Override
     public void initialize() {
         super.initialize();
         T_testo.setEditable(false);
-        gestisciDifficolta(Sessione.difficolta);
+        gestisciDifficolta(Sessione.quizAttivo.getDifficolta());
+        mostraTesto(Sessione.quizAttivo.getDocumento0());
     }
 
     private void gestisciDifficolta(Difficolta difficolta) {
@@ -55,7 +63,7 @@ public class VediTestoController extends Controller {
 
             if (tempoRimanente < 0) {
                 Logger.log("Tempo scaduto");
-                cambiaSchermata("Domanda");
+                passaAvanti();
                 timer.stop();
             }
         }));
@@ -67,7 +75,24 @@ public class VediTestoController extends Controller {
     private void prontoClicked() {
         Logger.log("Cliccato il pulsante: PRONTO");
         if (timer != null) timer.stop();
-        cambiaSchermata("Domanda");
+        passaAvanti();
+    }
+
+    private void passaAvanti() {
+        if (Sessione.quizAttivo.getDifficolta() == Difficolta.DIFFICILE) {
+            if (!secondoDocumento) {
+                gestisciDifficolta(Sessione.quizAttivo.getDifficolta());
+                mostraTesto(Sessione.quizAttivo.getDocumento1());
+                secondoDocumento = true;
+            } else
+                cambiaSchermata("Domanda");
+        } else
+            cambiaSchermata("Domanda");
+    }
+
+    private void mostraTesto(DocumentoTestuale documento) {
+        L_titolo.setText(documento.getNome());
+        T_testo.setText(documento.getTesto());
     }
 
 }

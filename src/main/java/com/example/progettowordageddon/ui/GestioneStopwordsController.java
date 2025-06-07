@@ -15,7 +15,6 @@ import java.sql.SQLException;
  * l'aggiunta, la visualizzazione e la rimozione delle stopword nel database.
  */
 public class GestioneStopwordsController extends Controller {
-
     /** \cond DOXY_SKIP */
     @FXML
     private TextField T_word;

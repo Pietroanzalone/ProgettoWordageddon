@@ -70,21 +70,16 @@ public class Sessione {
     /** \endcond */
 
     /**
-     * @brief Indica se un quiz è attualmente in corso.
+     * @brief Quiz attualmente in corso.
      *
-     * @default{false}
+     * @default{null}
      */
-    public static boolean quizAttivo;
+    public static Quiz quizAttivo;
 
     /** \cond DOXY_SKIP */
     static {
-        quizAttivo = false;
+        quizAttivo = null;
     }
     /** \endcond */
-
-    /**
-     * @brief Difficoltà selezionata per il quiz o l'attività corrente.
-     */
-    public static Difficolta difficolta;
 
 }

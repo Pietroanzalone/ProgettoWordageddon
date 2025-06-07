@@ -1,6 +1,9 @@
 package com.example.progettowordageddon.model;
 
+import com.example.progettowordageddon.database.DocumentiTestualiDAO;
 import com.example.progettowordageddon.database.StopwordsDAO;
+
+import java.sql.SQLException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,7 +14,7 @@ import java.util.regex.Pattern;
  *
  * Include funzionalità per analisi testuale come conteggio parole, parole comuni, e parole più frequenti.
  */
-public class DocumentoTestuale {
+public class DocumentoTestuale implements Comparable<DocumentoTestuale> {
     private String nome;                      ///< Nome identificativo del documento.
     private Lingua lingua;                    ///< Lingua del documento.
     private Difficolta difficolta;            ///< Difficoltà del documento.
@@ -38,19 +41,28 @@ public class DocumentoTestuale {
     public String getNome() { return nome; }
 
     /// @param nome Nuovo nome del documento.
-    public void setNome(String nome) { this.nome = nome; }
+    public void setNome(String nome) throws SQLException {
+        DocumentiTestualiDAO.aggiornaNome(this.nome, nome);
+        this.nome = nome;
+    }
 
     /// @return Lingua del documento.
     public Lingua getLingua() { return lingua; }
 
     /// @param lingua Nuova lingua del documento.
-    public void setLingua(Lingua lingua) { this.lingua = lingua; }
+    public void setLingua(Lingua lingua) throws SQLException {
+        DocumentiTestualiDAO.aggiornaLingua(nome, lingua);
+        this.lingua = lingua;
+    }
 
     /// @return Difficoltà del documento.
     public Difficolta getDifficolta() { return difficolta; }
 
     /// @param difficolta Nuova difficoltà del documento.
-    public void setDifficolta(Difficolta difficolta) { this.difficolta = difficolta; }
+    public void setDifficolta(Difficolta difficolta) throws SQLException {
+        DocumentiTestualiDAO.aggiornaDifficolta(nome, difficolta);
+        this.difficolta = difficolta;
+    }
 
     /// @return Testo del documento.
     public String getTesto() { return testo; }
@@ -59,7 +71,8 @@ public class DocumentoTestuale {
      * @brief Imposta un nuovo testo e aggiorna il conteggio delle parole.
      * @param testo Nuovo testo del documento.
      */
-    public void setTesto(String testo) {
+    public void setTesto(String testo) throws SQLException {
+        DocumentiTestualiDAO.aggiornaTesto(nome, testo);
         this.testo = testo;
         aggiornaConteggioParole();
     }
@@ -153,5 +166,15 @@ public class DocumentoTestuale {
     @Override
     public int hashCode() {
         return nome.hashCode();
+    }
+
+    @Override
+    public int compareTo(DocumentoTestuale o) {
+        if (!lingua.equals(o.getLingua()))
+            return lingua.compareTo(o.getLingua());
+        if (!difficolta.equals(o.getDifficolta()))
+            return difficolta.compareTo(o.getDifficolta());
+
+        return nome.compareTo(o.getNome());
     }
 }

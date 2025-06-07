@@ -6,7 +6,7 @@ package com.example.progettowordageddon.model;
  *
  * Ogni lingua è associata a un codice di abbreviazione a tre lettere.
  */
-public enum Lingua {
+public enum Lingua implements Comparable<Lingua> {
     /** Lingua italiana. */
     ITALIANO ("ITA"),
 
@@ -33,8 +33,7 @@ public enum Lingua {
      * @brief Restituisce la rappresentazione in forma di codice della lingua.
      * @return Codice di tre lettere della lingua.
      */
-    @Override
-    public String toString() {
+    public String getCodice() {
         return codice;
     }
 }

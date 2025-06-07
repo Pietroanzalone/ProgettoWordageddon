@@ -24,3 +24,17 @@
 .list-view :empty {
     -fx-background-color: transparent;
 }
+
+.text-area {
+    -fx-font-size: 18;
+}
+
+.text-area,
+.text-area * {
+    -fx-background-radius: 10;
+}
+
+.choice-box > .label {
+    -fx-alignment: center;
+    -fx-font-size: 20;
+}
