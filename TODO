@@ -1,6 +1,5 @@
 1. Creazione e update di un file "Sessione"
 2. Schermata e logica "Recupera sessione" che prende in input un file "Sessione" e ne ripristina i valori degli attributi
 3. Schermata che mostra una domanda del quiz
-4. Logica della schermata "GestioneDocumenti"
-5. Schermata e logica "GestioneAdmin"
-6. Schermata e logica "Leaderboard"
+4. Schermata e logica "GestioneAdmin"
+5. Schermata e logica "Leaderboard"
