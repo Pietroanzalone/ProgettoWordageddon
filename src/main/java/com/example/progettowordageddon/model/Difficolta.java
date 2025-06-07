@@ -28,11 +28,11 @@ public enum Difficolta {
     }
 
     /**
-     * @brief Restituisce la rappresentazione testuale della difficoltà.
+     * @brief Restituisce la rappresentazione in forma di codice
+     * della difficoltà.
      * @return Stringa con simboli ★ corrispondente al livello.
      */
-    @Override
-    public String toString() {
+    public String getCodice() {
         return codice;
     }
 }
