@@ -1,10 +1,15 @@
 package com.example.progettowordageddon.ui;
 
+import com.example.progettowordageddon.Main;
 import com.example.progettowordageddon.model.Logger;
-import com.example.progettowordageddon.model.Sessione;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.FileChooser;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * @class UtenteController
@@ -34,13 +39,13 @@ public class UtenteController extends Controller {
     @Override
     public void initialize() {
         super.initialize();
-        if (Sessione.utente.getUsername() == null) {
+        if (Main.sessione.getUtente().getUsername() == null) {
             Logger.error("Utente non inizializzato");
             L_titolo.setText("Benvenuto, NULL");
             B_pannelloDiControllo.setVisible(false);
         } else {
-            L_titolo.setText("Benvenuto, " + Sessione.utente.getUsername());
-            B_pannelloDiControllo.setVisible(Sessione.utente.isAdmin());
+            L_titolo.setText("Benvenuto, " + Main.sessione.getUtente().getUsername());
+            B_pannelloDiControllo.setVisible(Main.sessione.getUtente().isAdmin());
         }
     }
 
@@ -58,7 +63,32 @@ public class UtenteController extends Controller {
     @FXML
     private void recuperaSessioneClicked() {
         Logger.log("Cliccato il pulsante: RECUPERA SESSIONE");
-        Logger.error("RECUPERA SESSIONE non ancora implementato");
+
+        var fileChooser = new FileChooser();
+        fileChooser.setTitle("Recupera sessione");
+        fileChooser.setInitialDirectory(new File("Sessioni"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Sessione", "*.wordageddon"));
+        File selezionato = fileChooser.showOpenDialog(L_titolo.getScene().getWindow());
+        if (selezionato == null) {
+            Logger.warn("Nessun file selezionato");
+            return;
+        }
+
+        try {
+            Main.sessione.caricaSessione(selezionato.getAbsolutePath());
+        } catch (IOException | ClassNotFoundException e) {
+            Logger.error("Impossibile caricare la sessione " + selezionato.getName());
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Errore");
+            alert.setHeaderText("Impossibile caricare la sessione");
+            alert.setContentText("Questa sessione è corrotta oppure corrisponde "
+                               + "a una versione precedente dell'applicazione.");
+            alert.showAndWait();
+            return;
+        }
+        Logger.log("Sessione caricata");
+        Logger.log("Sessione: " + Main.sessione);
+        cambiaSchermata(Main.sessione.getSchermata());
     }
 
     @FXML

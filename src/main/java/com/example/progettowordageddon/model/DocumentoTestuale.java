@@ -3,6 +3,7 @@ package com.example.progettowordageddon.model;
 import com.example.progettowordageddon.database.DocumentiTestualiDAO;
 import com.example.progettowordageddon.database.StopwordsDAO;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -14,7 +15,7 @@ import java.util.regex.Pattern;
  *
  * Include funzionalità per analisi testuale come conteggio parole, parole comuni, e parole più frequenti.
  */
-public class DocumentoTestuale implements Comparable<DocumentoTestuale> {
+public class DocumentoTestuale implements Serializable, Comparable<DocumentoTestuale> {
     private String nome;                      ///< Nome identificativo del documento.
     private Lingua lingua;                    ///< Lingua del documento.
     private Difficolta difficolta;            ///< Difficoltà del documento.

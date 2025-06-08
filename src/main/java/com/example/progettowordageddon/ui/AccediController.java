@@ -1,5 +1,6 @@
 package com.example.progettowordageddon.ui;
 
+import com.example.progettowordageddon.Main;
 import com.example.progettowordageddon.database.UtentiDAO;
 import com.example.progettowordageddon.model.*;
 import javafx.fxml.FXML;
@@ -60,7 +61,7 @@ public class AccediController extends Controller {
      */
     public void accediClicked() {
         Logger.log("Cliccato il pulsante: ACCEDI");
-        Sessione.utente = UtentiDAO.get(T_username.getText());
+        Main.sessione.setUtente(UtentiDAO.get(T_username.getText()));
         cambiaSchermata("Utente");
     }
 

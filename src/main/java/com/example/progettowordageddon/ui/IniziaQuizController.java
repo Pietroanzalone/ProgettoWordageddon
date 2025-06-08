@@ -1,5 +1,6 @@
 package com.example.progettowordageddon.ui;
 
+import com.example.progettowordageddon.Main;
 import com.example.progettowordageddon.model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -157,7 +158,7 @@ public class IniziaQuizController extends Controller {
         Logger.log("Difficolta scelta: " + difficoltaScelta.name());
         Logger.log("Lingua scelta: " + linguaScelta);
         try {
-            Sessione.quizAttivo = new Quiz(difficoltaScelta, linguaScelta);
+            Main.sessione.setQuizAttivo(new Quiz(difficoltaScelta, linguaScelta));
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Errore");

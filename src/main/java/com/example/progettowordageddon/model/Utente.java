@@ -1,5 +1,6 @@
 package com.example.progettowordageddon.model;
 
+import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -13,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
  * l'uso di dipendenze esterne. Fornisce anche metodi per verificare le credenziali
  * e rappresentare l'utente come stringa.
  */
-public class Utente {
+public class Utente implements Serializable {
 
     /** @brief Username univoco. */
     private final String username;

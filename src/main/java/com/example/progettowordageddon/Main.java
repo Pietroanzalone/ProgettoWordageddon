@@ -1,6 +1,8 @@
 package com.example.progettowordageddon;
 
 import java.io.IOException;
+
+import com.example.progettowordageddon.model.Sessione;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,6 +21,8 @@ import javafx.stage.StageStyle;
  * l'interfaccia grafica caricando il file FXML principale.
  */
 public class Main extends Application {
+
+    public static Sessione sessione = new Sessione();
 
     /**
      * @brief Metodo principale che lancia l'applicazione JavaFX.

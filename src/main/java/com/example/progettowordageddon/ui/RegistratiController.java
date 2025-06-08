@@ -1,5 +1,6 @@
 package com.example.progettowordageddon.ui;
 
+import com.example.progettowordageddon.Main;
 import com.example.progettowordageddon.database.UtentiDAO;
 import com.example.progettowordageddon.model.*;
 import javafx.fxml.FXML;
@@ -66,14 +67,15 @@ public class RegistratiController extends Controller {
     public void registratiClicked() {
         Logger.log("Cliccato il pulsante: REGISTRATI");
         try {
-            Sessione.utente = new Utente(
-                    T_username.getText(),
-                    P_password.getText(),
-                    false,
-                    false
+            var utente = new Utente(
+                T_username.getText(),
+                P_password.getText(),
+                false,
+                false
             );
-            Sessione.utente.hash();
-            UtentiDAO.aggiungi(Sessione.utente);
+            utente.hash();
+            UtentiDAO.aggiungi(utente);
+            Main.sessione.setUtente(utente);
             cambiaSchermata("Utente");
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

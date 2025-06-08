@@ -1,5 +1,7 @@
 package com.example.progettowordageddon.model;
 
+import com.example.progettowordageddon.Main;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,6 +16,11 @@ public class Logger {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
     /** \endcond */
 
+    private static boolean loggingDisattivato() {
+        if (Main.sessione == null) return true;
+        return !Main.sessione.getLoggingAttivo();
+    }
+
     /**
      * @brief Stampa un messaggio informativo in blu.
      *
@@ -23,8 +30,8 @@ public class Logger {
      *       dell'applicazione (es. "File caricato", "Utente loggato").
      */
     public static void log(String messaggio) {
-        if (!Sessione.loggingAttivo) return;
-        Sessione.stream.println(RESET + "[" + BLU + "INFO" + RESET + "]  [" + timestamp() + "] " + messaggio);
+        if (loggingDisattivato()) return;
+        Main.sessione.getStream().println(RESET + "[" + BLU + "INFO" + RESET + "]  [" + timestamp() + "] " + messaggio);
     }
 
     /**
@@ -35,8 +42,8 @@ public class Logger {
      * @note Da usare per situazioni anomale ma non critiche (es. "Configurazione mancante, uso valori di default").
      */
     public static void warn(String messaggio) {
-        if (!Sessione.loggingAttivo) return;
-        Sessione.stream.println(RESET + "[" + GIALLO + "WARN" + RESET + "]  [" + timestamp() + "] " + messaggio);
+        if (loggingDisattivato()) return;
+        Main.sessione.getStream().println(RESET + "[" + GIALLO + "WARN" + RESET + "]  [" + timestamp() + "] " + messaggio);
     }
 
     /**
@@ -48,8 +55,8 @@ public class Logger {
      *       ma che indica comunque un'anomalia (es. "File non trovato").
      */
     public static void error(String messaggio) {
-        if (!Sessione.loggingAttivo) return;
-        Sessione.stream.println(RESET + "[" + ROSSO + "ERROR" + RESET + "] [" + timestamp() + "] " + messaggio);
+        if (loggingDisattivato()) return;
+        Main.sessione.getStream().println(RESET + "[" + ROSSO + "ERROR" + RESET + "] [" + timestamp() + "] " + messaggio);
     }
 
     /**
@@ -61,8 +68,8 @@ public class Logger {
      *       come errori non gestibili o blocchi totali (es. "Database non raggiungibile").
      */
     public static void fatal(String messaggio) {
-        if (!Sessione.loggingAttivo) return;
-        Sessione.stream.println(RESET + "[" + ROSSOGRASSETTO + "FATAL" + RESET + "] [" + timestamp() + "] " + messaggio);
+        if (loggingDisattivato()) return;
+        Main.sessione.getStream().println(RESET + "[" + ROSSOGRASSETTO + "FATAL" + RESET + "] [" + timestamp() + "] " + messaggio);
     }
 
     /** \cond DOXY_SKIP */

@@ -1,7 +1,7 @@
 package com.example.progettowordageddon.ui;
 
+import com.example.progettowordageddon.Main;
 import com.example.progettowordageddon.model.Logger;
-import com.example.progettowordageddon.model.Sessione;
 import com.example.progettowordageddon.model.Utente;
 import java.io.IOException;
 import javafx.application.Platform;
@@ -85,7 +85,7 @@ public class Controller {
     @FXML
     private void logout() {
         Logger.log("Cliccato il pulsante della navbar: LOGOUT");
-        Sessione.utente = new Utente(null, null, true, false);
+        Main.sessione.setUtente(new Utente(null, null, true, false));
         cambiaSchermata("Home");
     }
 
@@ -98,7 +98,7 @@ public class Controller {
     @FXML
     private void home() {
         Logger.log("Cliccato il pulsante della navbar: HOME");
-        Sessione.quizAttivo = null;
+        Main.sessione.setQuizAttivo(null);
         cambiaSchermata("Utente");
     }
 
@@ -123,7 +123,7 @@ public class Controller {
             Parent root = loader.load();
             Scene scene = navbar.getScene();
             if (scene != null) scene.setRoot(root);
-            Sessione.schermata = nomeSchermata;
+            Main.sessione.setSchermata(nomeSchermata);
             Logger.log("Passo alla schermata " + nomeSchermata);
         } catch (IOException e) {
             for (var message : e.getStackTrace())

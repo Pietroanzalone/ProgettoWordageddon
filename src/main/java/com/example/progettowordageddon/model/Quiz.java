@@ -1,11 +1,13 @@
 package com.example.progettowordageddon.model;
 
 import com.example.progettowordageddon.database.DocumentiTestualiDAO;
+
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Quiz {
+public class Quiz implements Serializable {
     private final List<Domanda> domande;
     private DocumentoTestuale doc0;
     private DocumentoTestuale doc1;

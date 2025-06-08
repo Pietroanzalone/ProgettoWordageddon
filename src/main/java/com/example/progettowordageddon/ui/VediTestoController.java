@@ -1,5 +1,6 @@
 package com.example.progettowordageddon.ui;
 
+import com.example.progettowordageddon.Main;
 import com.example.progettowordageddon.model.*;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
@@ -16,6 +17,8 @@ public class VediTestoController extends Controller {
 
     private boolean secondoDocumento = false;
 
+    private Quiz quizAttivo;
+
     private Timeline timer;
 
     @FXML
@@ -30,9 +33,10 @@ public class VediTestoController extends Controller {
     @Override
     public void initialize() {
         super.initialize();
+        quizAttivo = Main.sessione.getQuizAttivo();
         T_testo.setEditable(false);
-        gestisciDifficolta(Sessione.quizAttivo.getDifficolta());
-        mostraTesto(Sessione.quizAttivo.getDocumento0());
+        gestisciDifficolta(quizAttivo.getDifficolta());
+        mostraTesto(quizAttivo.getDocumento0());
     }
 
     private void gestisciDifficolta(Difficolta difficolta) {
@@ -81,10 +85,10 @@ public class VediTestoController extends Controller {
     }
 
     private void passaAvanti() {
-        if (Sessione.quizAttivo.getDifficolta() == Difficolta.DIFFICILE) {
+        if (quizAttivo.getDifficolta() == Difficolta.DIFFICILE) {
             if (!secondoDocumento) {
-                gestisciDifficolta(Sessione.quizAttivo.getDifficolta());
-                mostraTesto(Sessione.quizAttivo.getDocumento1());
+                gestisciDifficolta(quizAttivo.getDifficolta());
+                mostraTesto(quizAttivo.getDocumento1());
                 secondoDocumento = true;
             } else
                 cambiaSchermata("Domanda");

@@ -1,5 +1,6 @@
 package com.example.progettowordageddon.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Objects;
  * La classe permette di gestire domande quiz, memorizzare la risposta selezionata
  * e verificare se la risposta data è corretta.
  */
-public class Domanda {
+public class Domanda implements Serializable {
 
     /** @brief Testo della domanda. */
     private final String testoDomanda;
