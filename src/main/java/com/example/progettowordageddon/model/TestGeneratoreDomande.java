@@ -29,14 +29,12 @@ public class TestGeneratoreDomande {
         );
 
         DocumentoTestuale doc2 = new DocumentoTestuale(
-                "The cat",
+                "2020 Tokyo Olympics",
                 Lingua.INGLESE,
-                Difficolta.FACILE,
-                "The cat sleeps on the sofa. Every morning, the cat jumps on the table to look out of the window. "+ "" +
-                        "The dog barks, but the cat does not move. The sun enters the room and warms the carpet. " +
-                        "Everything is calm and quiet.");
+                Difficolta.MEDIA,
+                "The 2020 Tokyo Olympics were held in 2021 due to the COVID-19 pandemic. Despite the difficulties, the event was attended by thousands of athletes from all over the world. Italy achieved historic results, with 40 medals in total. Among the most memorable feats was Marcell Jacobs' gold in the 100 metres. The races were held without an audience, but broadcast live. The Olympics were a symbol of resilience and hope for many.");
 
-        GeneratoreDomanda generatore = new GeneratoreDomanda(doc1, doc2);
+        GeneratoreDomanda generatore = new GeneratoreDomanda(doc2, doc1);
         Domanda domanda = generatore.generaDomanda();
 
         if (domanda != null) {

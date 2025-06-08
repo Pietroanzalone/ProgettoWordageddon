@@ -52,6 +52,26 @@ public class Domanda implements Serializable {
         this.corretta = corretta;
     }
 
+    public String getTestoDomanda(){
+        return testoDomanda;
+    }
+
+    public String getRisposta1(){
+        return risposta1;
+    }
+
+    public String getRisposta2(){
+        return risposta2;
+    }
+
+    public String getRisposta3(){
+        return risposta3;
+    }
+
+    public String getRisposta4(){
+        return risposta4;
+    }
+
     /**
      * @brief Imposta la risposta selezionata dall'utente.
      * @param selezionata Indice della risposta selezionata (0-3), o null.
