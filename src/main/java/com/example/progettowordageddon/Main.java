@@ -22,18 +22,23 @@ import javafx.stage.StageStyle;
  */
 public class Main extends Application {
 
-    public static Sessione sessione = new Sessione();
+    /** @brief Dati della sessione corrente (utente loggato, schermata attiva...). */
+    public static Sessione sessione;
 
     /**
      * @brief Metodo principale che lancia l'applicazione JavaFX.
      *
-     * @param args Argomenti da linea di comando (non utilizzati).
+     * @param args Argomenti da linea di comando (ignorati).
      */
     public static void main(String[] args) {
         launch();
     }
 
     /// \cond DOXYGEN_SKIP
+    static {
+        sessione = new Sessione();
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         stage.initStyle(StageStyle.UNDECORATED);

@@ -86,8 +86,6 @@ public class UtenteController extends Controller {
             alert.showAndWait();
             return;
         }
-        Logger.log("Sessione caricata");
-        Logger.log("Sessione: " + Main.sessione);
         cambiaSchermata(Main.sessione.getSchermata());
     }
 
