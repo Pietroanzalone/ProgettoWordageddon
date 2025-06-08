@@ -304,7 +304,17 @@ public class GestioneDocumentiController extends Controller {
         T_nome.setText(doc.getNome());
         C_lingua.setValue(doc.getLingua());
         C_difficolta.setValue(doc.getDifficolta());
-        T_testo.setText(doc.getTesto());
+        try {
+            T_testo.setText(doc.getTesto());
+        } catch (SQLException e) {
+            Logger.fatal("Impossibile mostrare il testo: " + e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Errore");
+            alert.setHeaderText("Impossibile caricare il testo");
+            alert.setContentText("La sessione verrà resettata");
+            alert.showAndWait()
+                .ifPresent(risposta -> cambiaSchermata("Home"));
+        }
     }
 
     /**

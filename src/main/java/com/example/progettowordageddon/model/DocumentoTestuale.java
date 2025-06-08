@@ -65,7 +65,11 @@ public class DocumentoTestuale implements Comparable<DocumentoTestuale> {
     }
 
     /// @return Testo del documento.
-    public String getTesto() { return testo; }
+    public String getTesto() throws SQLException {
+        if (testo.isBlank())
+            testo = DocumentiTestualiDAO.get(nome).getTesto();
+        return testo;
+    }
 
     /**
      * @brief Imposta un nuovo testo e aggiorna il conteggio delle parole.
@@ -81,7 +85,8 @@ public class DocumentoTestuale implements Comparable<DocumentoTestuale> {
      * @brief Restituisce una copia del conteggio delle parole.
      * @return Mappa contenente parole e conteggi.
      */
-    public Map<String, Integer> getConteggioParole() {
+    public Map<String, Integer> getConteggioParole() throws SQLException {
+        if (testo.isBlank()) setTesto(getTesto());
         return new HashMap<>(conteggioParole);
     }
 
@@ -90,7 +95,8 @@ public class DocumentoTestuale implements Comparable<DocumentoTestuale> {
      * @param parola Parola da cercare.
      * @return True se presente, false altrimenti.
      */
-    public boolean contiene(String parola) {
+    public boolean contiene(String parola) throws SQLException {
+        if (testo.isBlank()) setTesto(getTesto());
         return conteggioParole.containsKey(parola);
     }
 
@@ -99,7 +105,8 @@ public class DocumentoTestuale implements Comparable<DocumentoTestuale> {
      * @param altro Altro documento da confrontare.
      * @return Lista di parole comuni.
      */
-    public List<String> getParoleComuni(DocumentoTestuale altro) {
+    public List<String> getParoleComuni(DocumentoTestuale altro) throws SQLException {
+        if (testo.isBlank()) setTesto(getTesto());
         if (altro == null) return new ArrayList<>();
         Set<String> comuniSet = new HashSet<>(conteggioParole.keySet());
         comuniSet.retainAll(altro.getConteggioParole().keySet());
@@ -110,7 +117,8 @@ public class DocumentoTestuale implements Comparable<DocumentoTestuale> {
      * @brief Restituisce le parole più frequenti del documento.
      * @return Lista di parole con il massimo conteggio.
      */
-    public List<String> getParolePiuFrequenti() {
+    public List<String> getParolePiuFrequenti() throws SQLException {
+        if (testo.isBlank()) setTesto(getTesto());
         List<String> parolePiuFrequenti = new ArrayList<>();
         int maxConteggio = 0;
 

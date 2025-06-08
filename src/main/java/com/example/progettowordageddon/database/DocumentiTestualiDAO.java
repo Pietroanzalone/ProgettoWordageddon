@@ -68,10 +68,10 @@ public class DocumentiTestualiDAO {
      * @throws SQLException Se si verifica un errore durante l'accesso al database.
      */
     public static List<DocumentoTestuale> getTutti() throws SQLException {
-        List<Object[]> risultatoQuery = DAO.eseguiSelect("SELECT * FROM DocumentiTestuali");
+        List<Object[]> risultatoQuery = DAO.eseguiSelect("SELECT nome, lingua, difficolta FROM DocumentiTestuali");
         List<DocumentoTestuale> documenti = new ArrayList<>();
         for (var riga : risultatoQuery)
-            documenti.add(generaDocumentoTestuale(riga));
+            documenti.add(generaDocumentoTestualeSenzaTesto(riga));
         return documenti;
     }
 
@@ -196,6 +196,21 @@ public class DocumentiTestualiDAO {
                 Lingua.valueOf((String) tokens[1]),
                 Difficolta.valueOf((String) tokens[2]),
                 (String) tokens[3]
+        );
+    }
+
+    /**
+     * @brief Crea un oggetto DocumentoTestuale a partire da una riga della tabella.
+     *
+     * @param tokens Array di oggetti corrispondenti ai campi della riga.
+     * @return Oggetto DocumentoTestuale generato.
+     */
+    private static DocumentoTestuale generaDocumentoTestualeSenzaTesto(Object[] tokens) {
+        return new DocumentoTestuale(
+                (String) tokens[0],
+                Lingua.valueOf((String) tokens[1]),
+                Difficolta.valueOf((String) tokens[2]),
+                ""
         );
     }
 

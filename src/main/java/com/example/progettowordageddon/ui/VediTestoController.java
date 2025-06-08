@@ -4,10 +4,12 @@ import com.example.progettowordageddon.model.*;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.util.Duration;
 
+import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class VediTestoController extends Controller {
@@ -92,7 +94,17 @@ public class VediTestoController extends Controller {
 
     private void mostraTesto(DocumentoTestuale documento) {
         L_titolo.setText(documento.getNome());
-        T_testo.setText(documento.getTesto());
+        try {
+            T_testo.setText(documento.getTesto());
+        } catch (SQLException e) {
+            Logger.fatal("Impossibile mostrare il testo: " + e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Errore");
+            alert.setHeaderText("Impossibile caricare il testo");
+            alert.setContentText("La sessione verrà resettata");
+            alert.showAndWait()
+                .ifPresent(risposta -> cambiaSchermata("Home"));
+        }
     }
 
 }

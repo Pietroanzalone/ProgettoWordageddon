@@ -1,5 +1,6 @@
 package com.example.progettowordageddon.model;
 
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -84,19 +85,23 @@ public class GeneratoreDomanda {
 
         // Tenta 100 volte di generare una domanda
         for (int i = 0; domanda == null && i < 100; i++)
-            if (doc1 == null)
-                domanda = switch (random.nextInt(3)) {
-                    case 1 -> domandaConfronto(getRandomIndex());
-                    case 2 -> domandaEsclusione(getRandomIndex());
-                    default -> domandaFrequenzaAssoluta(getRandomIndex());
-                };
-            else
-                domanda = switch (random.nextInt(4)) {
-                    case 1 -> domandaConfronto(getRandomIndex());
-                    case 2 -> domandaEsclusione(getRandomIndex());
-                    case 3 -> domandaDocumentoSpecifico(getRandomIndex());
-                    default -> domandaFrequenzaAssoluta(getRandomIndex());
-                };
+            try {
+                if (doc1 == null)
+                    domanda = switch (random.nextInt(3)) {
+                        case 1 -> domandaConfronto(getRandomIndex());
+                        case 2 -> domandaEsclusione(getRandomIndex());
+                        default -> domandaFrequenzaAssoluta(getRandomIndex());
+                    };
+                else
+                    domanda = switch (random.nextInt(4)) {
+                        case 1 -> domandaConfronto(getRandomIndex());
+                        case 2 -> domandaEsclusione(getRandomIndex());
+                        case 3 -> domandaDocumentoSpecifico(getRandomIndex());
+                        default -> domandaFrequenzaAssoluta(getRandomIndex());
+                    };
+            } catch (SQLException e) {
+                Logger.warn("Errore durante la generazione " + i + " della domanda: " + e.getMessage());
+            }
 
         // Se non riesce a generare una domanda, solleva l'eccezione
         if (domanda == null)
@@ -113,7 +118,7 @@ public class GeneratoreDomanda {
      * @param docIndex Il Documento da selezionare per la domanda (0 o 1).
      * @return Domanda se riesce a generarne una valida, null altrimenti.
      */
-    private Domanda domandaFrequenzaAssoluta(int docIndex) {
+    private Domanda domandaFrequenzaAssoluta(int docIndex) throws SQLException {
         var documento = getDocumento(docIndex);
 
         // Ottengo tutte le parole del documento con la loro frequenza
@@ -159,7 +164,7 @@ public class GeneratoreDomanda {
      * @param docIndex Il Documento da selezionare per la domanda (0 o 1).
      * @return Domanda se riesce a generarne una valida, null altrimenti.
      */
-    private Domanda domandaConfronto(int docIndex) {
+    private Domanda domandaConfronto(int docIndex) throws SQLException {
         var documento = getDocumento(docIndex);
 
         // Ottengo tutte le parole del documento con la loro frequenza
@@ -208,7 +213,7 @@ public class GeneratoreDomanda {
      * @param docIndex Il Documento da selezionare per la domanda (0 o 1).
      * @return Domanda se riesce a generarne una valida, null altrimenti.
      */
-    private Domanda domandaEsclusione(int docIndex) {
+    private Domanda domandaEsclusione(int docIndex) throws SQLException {
         var documento = getDocumento(docIndex);
 
         // Ottengo tutte le parole nel documento
@@ -264,7 +269,7 @@ public class GeneratoreDomanda {
      * @param docIndex Il Documento da selezionare per la domanda (0 o 1).
      * @return Domanda se riesce a generarne una valida, null altrimenti.
      */
-    private Domanda domandaDocumentoSpecifico(int docIndex) {
+    private Domanda domandaDocumentoSpecifico(int docIndex) throws SQLException {
         var documento = getDocumento(docIndex);
         var altro = getDocumento(1 - docIndex);
 
