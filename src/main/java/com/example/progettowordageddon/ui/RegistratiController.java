@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 /**
  * @class RegistratiController
- * @brief Il controller per la schermata "Registrati".
+ * @brief Il controller per la gestione della schermata "Registrati".
  *
  * Questa classe gestisce la registrazione di un nuovo utente,
  * visualizzando i messaggi di errore in caso di conflitti

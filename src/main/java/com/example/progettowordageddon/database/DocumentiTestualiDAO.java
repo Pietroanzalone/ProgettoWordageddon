@@ -26,27 +26,27 @@ import java.util.List;
  *   </thead>
  *   <tbody>
  *     <tr>
- *       <td>nome</td>
+ *       <td><code>nome</code></td>
  *       <td>TEXT</td>
  *       <td colspan="2">PRIMARY KEY</td>
  *       <td>Nome univoco del documento</td>
  *     </tr>
  *     <tr>
- *       <td>lingua</td>
+ *       <td><code>lingua</code></td>
  *       <td>TEXT</td>
- *       <td>NOT NULL</td>
- *       <td>CHECK IN ('ITALIANO', 'INGLESE', 'FRANCESE', 'SPAGNOLO')</td>
+ *       <td style="width = 50%">NOT NULL</td>
+ *       <td style="width = 50%">CHECK IN ('ITALIANO', 'INGLESE', 'FRANCESE', 'SPAGNOLO')</td>
  *       <td>Lingua del documento</td>
  *     </tr>
  *     <tr>
- *       <td>difficolta</td>
+ *       <td><code>difficolta</code></td>
  *       <td>TEXT</td>
  *       <td>NOT NULL</td>
  *       <td>CHECK IN ('FACILE', 'MEDIA', 'DIFFICILE')</td>
  *       <td>Livello di difficoltà del documento</td>
  *     </tr>
  *     <tr>
- *       <td>testo</td>
+ *       <td><code>testo</code></td>
  *       <td>CLOB</td>
  *       <td colspan="2">NOT NULL</td>
  *       <td>Contenuto testuale del documento</td>
@@ -54,19 +54,17 @@ import java.util.List;
  *   </tbody>
  * </table>
  *
- * <p><b>Indice creato:</b></p>
+ * <p><b>Indici creati:</b></p>
  * <ul>
  *   <li><code>idx_doc_lingua</code> su campo <code>lingua</code> per velocizzare le query per lingua</li>
  * </ul>
  */
 public class DocumentiTestualiDAO {
 
-    /**
-     * @brief Restituisce tutti i documenti testuali presenti nel database.
-     *
-     * @return Lista di oggetti DocumentoTestuale.
-     * @throws SQLException Se si verifica un errore durante l'accesso al database.
-     */
+    /// @brief Restituisce tutti i documenti testuali presenti nel database.
+    ///
+    /// @return Lista di oggetti DocumentoTestuale.
+    /// @throws SQLException se si verifica un errore durante l'accesso al database.
     public static List<DocumentoTestuale> getTutti() throws SQLException {
         List<Object[]> risultatoQuery = DAO.eseguiSelect("SELECT nome, lingua, difficolta FROM DocumentiTestuali");
         List<DocumentoTestuale> documenti = new ArrayList<>();
@@ -75,12 +73,10 @@ public class DocumentiTestualiDAO {
         return documenti;
     }
 
-    /**
-     * @brief Aggiunge un nuovo documento testuale al database.
-     *
-     * @param doc Oggetto DocumentoTestuale da inserire.
-     * @throws SQLException Se si verifica un errore durante l'inserimento.
-     */
+    /// @brief Aggiunge un nuovo documento testuale al database.
+    ///
+    /// @param doc Oggetto DocumentoTestuale da inserire.
+    /// @throws SQLException se si verifica un errore durante l'inserimento.
     public static void aggiungi(DocumentoTestuale doc) throws SQLException {
         DAO.eseguiUpdate("""
             INSERT INTO DocumentiTestuali
@@ -89,23 +85,19 @@ public class DocumentiTestualiDAO {
         """, doc.getNome(), doc.getLingua().name(), doc.getDifficolta().name(), doc.getTesto());
     }
 
-    /**
-     * @brief Rimuove un documento testuale dal database.
-     *
-     * @param nome Nome del documento da eliminare.
-     * @throws SQLException Se si verifica un errore durante la rimozione.
-     */
+    /// @brief Rimuove un documento testuale dal database.
+    ///
+    /// @param nome Nome del documento da eliminare.
+    /// @throws SQLException se si verifica un errore durante la rimozione.
     public static void rimuovi(String nome) throws SQLException {
         DAO.eseguiUpdate("DELETE FROM DocumentiTestuali WHERE nome = ?", nome);
     }
 
-    /**
-     * @brief Recupera un documento testuale dato il suo nome.
-     *
-     * @param nome Nome del documento da cercare.
-     * @return Oggetto DocumentoTestuale se trovato, altrimenti null.
-     * @throws SQLException Se si verifica un errore durante la query.
-     */
+    /// @brief Recupera un documento testuale dato il suo nome.
+    ///
+    /// @param nome Nome del documento da cercare.
+    /// @return Oggetto DocumentoTestuale se trovato, altrimenti null.
+    /// @throws SQLException se si verifica un errore durante la query.
     public static DocumentoTestuale get(String nome) throws SQLException {
         var righe = DAO.eseguiSelect(
                 "SELECT * FROM DocumentiTestuali WHERE nome = ?", nome);
@@ -113,13 +105,11 @@ public class DocumentiTestualiDAO {
         return generaDocumentoTestuale(righe.get(0));
     }
 
-    /**
-     * @brief Aggiorna il nome di un documento testuale.
-     *
-     * @param nomeVecchio Vecchio nome del documento.
-     * @param nomeNuovo Nuovo nome da assegnare.
-     * @throws SQLException Se si verifica un errore durante l'aggiornamento.
-     */
+    /// @brief Aggiorna il nome di un documento testuale.
+    ///
+    /// @param nomeVecchio Vecchio nome del documento.
+    /// @param nomeNuovo Nuovo nome da assegnare.
+    /// @throws SQLException se si verifica un errore durante l'aggiornamento.
     public static void aggiornaNome(String nomeVecchio, String nomeNuovo) throws SQLException {
         DAO.eseguiUpdate("""
             UPDATE DocumentiTestuali
@@ -128,13 +118,11 @@ public class DocumentiTestualiDAO {
         """, nomeNuovo, nomeVecchio);
     }
 
-    /**
-     * @brief Aggiorna la lingua di un documento testuale.
-     *
-     * @param nome Nome del documento.
-     * @param lingua Nuova lingua da assegnare.
-     * @throws SQLException Se si verifica un errore durante l'aggiornamento.
-     */
+    /// @brief Aggiorna la lingua di un documento testuale.
+    ///
+    /// @param nome Nome del documento.
+    /// @param lingua Nuova lingua da assegnare.
+    /// @throws SQLException se si verifica un errore durante l'aggiornamento.
     public static void aggiornaLingua(String nome, Lingua lingua) throws SQLException {
         DAO.eseguiUpdate("""
             UPDATE DocumentiTestuali
@@ -143,13 +131,11 @@ public class DocumentiTestualiDAO {
         """, lingua.name(), nome);
     }
 
-    /**
-     * @brief Aggiorna la difficoltà di un documento testuale.
-     *
-     * @param nome Nome del documento.
-     * @param difficolta Nuova difficoltà da assegnare.
-     * @throws SQLException Se si verifica un errore durante l'aggiornamento.
-     */
+    /// @brief Aggiorna la difficoltà di un documento testuale.
+    ///
+    /// @param nome Nome del documento.
+    /// @param difficolta Nuova difficoltà da assegnare.
+    /// @throws SQLException se si verifica un errore durante l'aggiornamento.
     public static void aggiornaDifficolta(String nome, Difficolta difficolta) throws SQLException {
         DAO.eseguiUpdate("""
             UPDATE DocumentiTestuali
@@ -158,13 +144,11 @@ public class DocumentiTestualiDAO {
         """, difficolta.name(), nome);
     }
 
-    /**
-     * @brief Aggiorna il testo contenuto in un documento testuale.
-     *
-     * @param nome Nome del documento.
-     * @param testo Nuovo testo da inserire.
-     * @throws SQLException Se si verifica un errore durante l'aggiornamento.
-     */
+    /// @brief Aggiorna il testo contenuto in un documento testuale.
+    ///
+    /// @param nome Nome del documento.
+    /// @param testo Nuovo testo da inserire.
+    /// @throws SQLException se si verifica un errore durante l'aggiornamento.
     public static void aggiornaTesto(String nome, String testo) throws SQLException {
         DAO.eseguiUpdate("""
             UPDATE DocumentiTestuali
@@ -173,23 +157,19 @@ public class DocumentiTestualiDAO {
         """, testo, nome);
     }
 
-    /**
-     * @brief Verifica se un documento testuale esiste nel database.
-     *
-     * @param nome Nome del documento da cercare.
-     * @return true se esiste, false altrimenti.
-     * @throws SQLException Se si verifica un errore durante la query.
-     */
+    /// @brief Verifica se un documento testuale esiste nel database.
+    ///
+    /// @param nome Nome del documento da cercare.
+    /// @return true se esiste, false altrimenti.
+    /// @throws SQLException se si verifica un errore durante la query.
     public static boolean contiene(String nome) throws SQLException {
         return (get(nome) != null);
     }
 
-    /**
-     * @brief Crea un oggetto DocumentoTestuale a partire da una riga della tabella.
-     *
-     * @param tokens Array di oggetti corrispondenti ai campi della riga.
-     * @return Oggetto DocumentoTestuale generato.
-     */
+    /// @brief Crea un oggetto DocumentoTestuale a partire da una riga della tabella.
+    ///
+    /// @param tokens Array di oggetti corrispondenti ai campi della riga.
+    /// @return Oggetto DocumentoTestuale generato.
     private static DocumentoTestuale generaDocumentoTestuale(Object[] tokens) {
         return new DocumentoTestuale(
                 (String) tokens[0],
@@ -199,12 +179,10 @@ public class DocumentiTestualiDAO {
         );
     }
 
-    /**
-     * @brief Crea un oggetto DocumentoTestuale a partire da una riga della tabella.
-     *
-     * @param tokens Array di oggetti corrispondenti ai campi della riga.
-     * @return Oggetto DocumentoTestuale generato.
-     */
+    /// @brief Crea un oggetto DocumentoTestuale a partire da una riga della tabella senza il testo.
+    ///
+    /// @param tokens Array di oggetti corrispondenti ai campi della riga.
+    /// @return Oggetto DocumentoTestuale generato con testo vuoto.
     private static DocumentoTestuale generaDocumentoTestualeSenzaTesto(Object[] tokens) {
         return new DocumentoTestuale(
                 (String) tokens[0],

@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 
 /**
  * @class PannelloControlloController
- * @brief Il controller per la schermata del pannello di controllo amministrativo.
+ * @brief Il controller per la gestione della schermata "PannelloControllo".
  *
  * Gestisce la navigazione verso le varie funzionalità amministrative
  * come la gestione delle stopwords, degli utenti admin e dei documenti.
