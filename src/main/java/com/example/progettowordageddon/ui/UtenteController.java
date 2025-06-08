@@ -64,7 +64,7 @@ public class UtenteController extends Controller {
     @FXML
     private void leaderboardClicked() {
         Logger.log("Cliccato il pulsante: LEADERBOARD");
-        Logger.error("LEADERBOARD non ancora implementata");
+        cambiaSchermata("Leaderboard");
     }
 
     /**
