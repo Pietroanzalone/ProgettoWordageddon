@@ -5,119 +5,110 @@ import com.example.progettowordageddon.model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.util.Iterator;
 import java.util.List;
 
 
 public class DomandaController extends Controller {
 
     @FXML
-    private Button ButtonNext;
+    private Button B_avanti;
 
     @FXML
-    private Label TestoDomanda, NumeroDomanda;
+    private Label L_testoDomanda, L_numeroDomanda;
 
     @FXML
-    private ToggleButton Risposta1, Risposta2, Risposta3, Risposta4;
+    private ToggleButton TB_risposta1, TB_risposta2, TB_risposta3, TB_risposta4;
 
     @FXML
-    private ToggleGroup TgRisposte;
+    private ToggleGroup TG_risposte;
 
-    private final Quiz quiz= Main.sessione.getQuizAttivo();
+    private List<Domanda> domande;
 
-    private final List<Domanda> domande= Main.sessione.getQuizAttivo().getDomande();
-
-    private final Iterator<Domanda> iterator = domande.iterator();
-
-    private Domanda domandaCorrente = Main.sessione.getQuizAttivo().getDomande().get(0);
-
-    private int counter = 1;
+    private int domandaAttuale;
 
     @Override
     public void initialize(){
         super.initialize();
 
-        Risposta1.setToggleGroup(TgRisposte);
-        Risposta2.setToggleGroup(TgRisposte);
-        Risposta3.setToggleGroup(TgRisposte);
-        Risposta4.setToggleGroup(TgRisposte);
-
-        TgRisposte.selectedToggleProperty().addListener((obs, oldToggle, newToggle) -> {
-            if (newToggle != null) {
-                ButtonNext.setDisable(false);
-            } else {
-                ButtonNext.setDisable(true);
-            }
-        });
+        collegaPulsantiRisposta();
+        bindPulsanteAvanti();
+        caricaQuiz();
         mostraProssimaDomanda();
-
     }
 
-    private void mostraProssimaDomanda(){
-        if(iterator.hasNext()){
-            Domanda d =iterator.next();
+    private void collegaPulsantiRisposta() {
+        TB_risposta1.setToggleGroup(TG_risposte);
+        TB_risposta2.setToggleGroup(TG_risposte);
+        TB_risposta3.setToggleGroup(TG_risposte);
+        TB_risposta4.setToggleGroup(TG_risposte);
+        Logger.log("Pulsanti di risposta collegati");
+    }
 
-            NumeroDomanda.setText("Domanda N°" + counter);
-            TestoDomanda.setText(d.getTestoDomanda());
-            Risposta1.setText(d.getRisposta1());
-            Risposta2.setText(d.getRisposta2());
-            Risposta3.setText(d.getRisposta3());
-            Risposta4.setText(d.getRisposta4());
+    private void bindPulsanteAvanti() {
+        B_avanti.disableProperty().bind(
+            TG_risposte.selectedToggleProperty().isNull()
+        );
+        Logger.log("Bind pulsante AVANTI completato");
+    }
 
-            TgRisposte.selectToggle(null);
-            ButtonNext.setDisable(true);
+    private void caricaQuiz() {
+        domande = Main.sessione.getQuizAttivo().getDomande();
+        domandaAttuale = 0;
+        Logger.log("Domande caricate");
+    }
 
-            counter++;
-        } else {
-            mostraRisultatiFinali();
-        }
+    private void mostraProssimaDomanda() {
+        L_numeroDomanda.setText("Domanda " + (domandaAttuale + 1) + "/10");
 
-        }
+        Toggle selected = TG_risposte.getSelectedToggle();
+        if (selected != null)
+            selected.setSelected(false);
 
-        @FXML
-        private void ButtonNextCliccato(){
+        var domanda = domande.get(domandaAttuale);
+        L_testoDomanda.setText(domanda.getTestoDomanda());
+        TB_risposta1.setText(domanda.getRisposta1());
+        TB_risposta2.setText(domanda.getRisposta2());
+        TB_risposta3.setText(domanda.getRisposta3());
+        TB_risposta4.setText(domanda.getRisposta4());
+    }
+
+    @FXML
+    private void avantiClicked() {
+        Logger.log("Cliccato il pulsante: AVANTI");
         salvaRispostaUtente();
-        mostraProssimaDomanda();
-        }
-
+        domandaAttuale++;
+        if (domandaAttuale < 10)
+            mostraProssimaDomanda();
+        else
+            mostraRisultatiFinali();
+    }
 
     private void salvaRispostaUtente() {
-        Toggle selectedToggle = TgRisposte.getSelectedToggle();
-        if (selectedToggle != null && domandaCorrente != null) {
-            int rispostaSelezionata = -1;
+        Toggle selezionato = TG_risposte.getSelectedToggle();
+        int risposta = 0;
+        if (selezionato == TB_risposta2)
+            risposta = 1;
+        if (selezionato == TB_risposta3)
+            risposta = 2;
+        if (selezionato == TB_risposta4)
+            risposta = 3;
 
-            if (selectedToggle == Risposta1) {
-                rispostaSelezionata = 0;
-            } else if (selectedToggle == Risposta2) {
-                rispostaSelezionata = 1;
-            } else if (selectedToggle == Risposta3) {
-                rispostaSelezionata = 2;
-            } else if (selectedToggle == Risposta4) {
-                rispostaSelezionata = 3;
-            }
-
-            if (rispostaSelezionata != -1) {
-                domandaCorrente.setSelezionata(rispostaSelezionata);
-            }
-        }
+        domande.get(domandaAttuale).setSelezionata(risposta);
     }
 
     private void mostraRisultatiFinali() {
-        int punteggio = quiz.getPunteggio();
-        int totale = domande.size();
-        int sbagliate = totale - punteggio;
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Risultato del Quiz");
-        alert.setHeaderText("Hai completato il quiz!");
-        alert.setContentText("Risposte corrette: " + punteggio + " su " + totale +
-                "\nRisposte sbagliate: " + sbagliate);
-        alert.showAndWait();
-
-        ButtonNext.setDisable(true);
+        int punteggio = Main.sessione.getQuizAttivo().getPunteggio();
+        Alert risultato = new Alert(Alert.AlertType.INFORMATION);
+        risultato.setTitle("Risultato");
+        risultato.setHeaderText("Hai completato il quiz");
+        risultato.setContentText("Risposte corrette: " + punteggio + "\n"
+                               + "Risposte errate: " + (10 - punteggio));
+        risultato.showAndWait()
+            .ifPresent(risposta -> {
+//                QuizDAO.aggiungi(Main.sessione.getQuizAttivo());
+                Main.sessione.setQuizAttivo(null);
+                cambiaSchermata("Home");
+            });
     }
 
-
-
 }
-
