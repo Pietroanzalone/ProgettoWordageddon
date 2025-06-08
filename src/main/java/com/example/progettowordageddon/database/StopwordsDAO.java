@@ -114,6 +114,8 @@ public class StopwordsDAO {
         for (char c = 'A'; c <= 'Z'; c++)
             if (!contiene(Character.toString(c)))
                 aggiungi(Character.toString(c));
+
+        aggiungi("è");
     }
 
     /**

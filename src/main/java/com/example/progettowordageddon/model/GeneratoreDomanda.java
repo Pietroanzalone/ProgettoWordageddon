@@ -132,10 +132,12 @@ public class GeneratoreDomanda {
         // Scelgo quattro opzioni a caso, di cui una corretta
         var opzioni = new ArrayList<Integer>();
         opzioni.add(frequenza);
-        while (opzioni.size() < 4) {
+        for (int i = 0; opzioni.size() < 4 && i < 100; i++) {
             int fake = Math.max(0, frequenza + random.nextInt(7) - 3);
-            if (fake != frequenza) opzioni.add(fake);
+            if (fake != frequenza && !opzioni.contains(fake)) opzioni.add(fake);
         }
+        if (opzioni.size() < 4)
+            return null;
         Collections.shuffle(opzioni);
 
         // Scrivo il testo della domanda
@@ -180,11 +182,13 @@ public class GeneratoreDomanda {
         var opzioni = new ArrayList<String>();
         opzioni.add(parolaFrequente);
 
-        while (opzioni.size() < 4) {
+        for (int i = 0; opzioni.size() < 4 && i < 100; i++) {
             String parola = parole.get(random.nextInt(parole.size()));
-            if (!parola.equals(parolaFrequente) && frequenze.get(parola) < frequenzaMax)
+            if (!parola.equals(parolaFrequente) && frequenze.get(parola) < frequenzaMax && !opzioni.contains(parola))
                 opzioni.add(parola);
         }
+        if (opzioni.size() < 4)
+            return null;
         Collections.shuffle(opzioni);
 
         // Scrivo il testo della domanda
@@ -236,11 +240,13 @@ public class GeneratoreDomanda {
         // Scelgo le quattro opzioni
         var opzioni = new ArrayList<String>();
         opzioni.add(parolaNonPresente);
-        while (opzioni.size() < 4) {
+        for (int i = 0; opzioni.size() < 4 && i < 100; i++) {
             String parola = parole.get(random.nextInt(parole.size()));
             if (!opzioni.contains(parola))
                 opzioni.add(parola);
         }
+        if (opzioni.size() < 4)
+            return null;
         Collections.shuffle(opzioni);
 
         // Scrivo il testo della domanda
