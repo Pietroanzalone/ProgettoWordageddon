@@ -1,15 +1,19 @@
 package com.example.progettowordageddon.ui;
 
 import com.example.progettowordageddon.database.StopwordsDAO;
+import com.example.progettowordageddon.model.Logger;
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @class GestioneStopwordsController
- * @brief Il controller per la gestione dell'interfaccia delle stopword.
+ * @brief Il controller per la gestione della schermata "GestioneStopwords".
  *
  * Questa classe definisce la logica di interazione dell'interfaccia per
  * l'aggiunta, la visualizzazione e la rimozione delle stopword nel database.
@@ -95,19 +99,25 @@ public class GestioneStopwordsController extends Controller {
      *
      * Le stopword vengono recuperate dal database e ordinate alfabeticamente.
      *
-     * @throws SQLException se si verifica un errore durante la lettura dal database.
+     * Nel caso in cui ci sia un errore nel recuperare le stopwords dal database,
+     * mostra un messaggio di errore e resetta la sessione, tornando alla schermata "Home".
      */
     private void logicaListaStopwords() {
-        L_stopwords.getItems().clear();
+        List<String> stopwords;
         try {
-            L_stopwords.getItems().addAll(StopwordsDAO.getTutti().stream().sorted().toList());
+            stopwords = StopwordsDAO.getTutti();
         } catch (SQLException e) {
+            Logger.fatal("SQLException: " + e.getMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("SQL Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            alert.setTitle("Errore");
+            alert.setHeaderText("Impossibile caricare le stopwords dal database");
+            alert.setContentText("La sessione verrà resettata");
+            alert.showAndWait().ifPresent(risposta -> cambiaSchermata("Home"));
+            return;
         }
+
+        Collections.sort(stopwords);
+        L_stopwords.setItems(FXCollections.observableArrayList(stopwords));
     }
 
     /**
@@ -118,11 +128,11 @@ public class GestioneStopwordsController extends Controller {
      */
     private void logicaPulsanteElimina() {
         B_elimina.disableProperty().bind(
-                L_stopwords.getSelectionModel().selectedItemProperty().isNull()
-                        .or(Bindings.createBooleanBinding(() -> {
-                            String selezionata = L_stopwords.getSelectionModel().getSelectedItem();
-                            return selezionata != null && selezionata.length() == 1;
-                        }, L_stopwords.getSelectionModel().selectedItemProperty()))
+            L_stopwords.getSelectionModel().selectedItemProperty().isNull()
+                .or(Bindings.createBooleanBinding(() -> {
+                    String selezionata = L_stopwords.getSelectionModel().getSelectedItem();
+                    return selezionata != null && selezionata.length() == 1;
+                }, L_stopwords.getSelectionModel().selectedItemProperty()))
         );
     }
 

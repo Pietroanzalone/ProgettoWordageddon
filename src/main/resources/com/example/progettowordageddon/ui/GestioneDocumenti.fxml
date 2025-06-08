@@ -71,11 +71,11 @@
                                  </children>
                               </VBox>
                               <TextArea fx:id="T_testo" prefHeight="200.0" prefWidth="400.0" promptText="Testo" styleClass="text-area" stylesheets="@Stopwords.css" wrapText="true" />
-                              <TableView fx:id="TV_documenti" prefHeight="200.0" prefWidth="300.0" stylesheets="@Stopwords.css">
+                              <TableView fx:id="TV_documenti" prefHeight="200.0" prefWidth="300.0" stylesheets="@TabellaDocumenti.css">
                                 <columns>
                                   <TableColumn fx:id="TC_nome" editable="false" prefWidth="150.0" resizable="false" text="Nome" />
-                                  <TableColumn fx:id="TC_lingua" editable="false" prefWidth="75.0" resizable="false" text="Lingua" />
-                                    <TableColumn fx:id="TC_difficolta" editable="false" minWidth="75.0" prefWidth="75.0" resizable="false" text="Difficoltà" />
+                                  <TableColumn fx:id="TC_lingua" editable="false" prefWidth="74.0" resizable="false" text="Lingua" />
+                                    <TableColumn fx:id="TC_difficolta" editable="false" minWidth="74.0" prefWidth="74.0" resizable="false" text="Difficoltà" />
                                 </columns>
                               </TableView>
                            </children>
@@ -88,5 +88,15 @@
                </children></AnchorPane>
          </children>
       </VBox>
+      <Label fx:id="L_lingua" alignment="CENTER" layoutX="40.0" layoutY="371.0" mouseTransparent="true" prefHeight="45.0" prefWidth="400.0" style="-fx-font-size: 20;" text="Lingua" textAlignment="CENTER" textFill="#b2b2b2">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="L_difficolta" alignment="CENTER" layoutX="40.0" layoutY="446.0" mouseTransparent="true" prefHeight="45.0" prefWidth="400.0" style="-fx-font-size: 20;" text="Difficoltà" textAlignment="CENTER" textFill="#b2b2b2">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
