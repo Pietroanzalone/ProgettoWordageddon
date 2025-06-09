@@ -35,7 +35,7 @@ public class VediTestoController extends Controller {
         quizAttivo = Main.sessione.getQuizAttivo();
         T_testo.setEditable(false);
         gestisciDifficolta(quizAttivo.getDifficolta());
-        mostraTesto(quizAttivo.getDocumento0());
+        mostraTesto(quizAttivo.getPrimoDocumento());
     }
 
     private void gestisciDifficolta(Difficolta difficolta) {
@@ -87,7 +87,7 @@ public class VediTestoController extends Controller {
         if (quizAttivo.getDifficolta() == Difficolta.DIFFICILE) {
             if (!secondoDocumento) {
                 gestisciDifficolta(quizAttivo.getDifficolta());
-                mostraTesto(quizAttivo.getDocumento1());
+                mostraTesto(quizAttivo.getSecondoDocumento());
                 secondoDocumento = true;
             } else
                 cambiaSchermata("Domanda");

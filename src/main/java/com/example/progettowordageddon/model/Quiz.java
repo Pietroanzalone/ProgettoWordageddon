@@ -7,11 +7,35 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/// @class Quiz
+/// @brief Rappresenta un quiz composto da 10 domande generate a partire da uno o due documenti testuali.
+///
+/// Il quiz viene generato in base alla difficoltà e alla lingua specificate. Per la difficoltà
+/// \link Difficolta DIFFICILE \endlink vengono usati due documenti diversi, mentre per difficoltà più
+/// semplici si usa un solo documento. Il quiz contiene esattamente 10 domande generate casualmente,
+/// assicurandosi che non siano ripetute.
+///
+/// Se il sistema non riesce a generare 10 domande valide dopo 100 tentativi, solleva un'eccezione.
 public class Quiz implements Serializable {
-    private final List<Domanda> domande;
-    private DocumentoTestuale doc0;
-    private DocumentoTestuale doc1;
 
+    /// @brief Lista delle domande che compongono il quiz.
+    private final List<Domanda> domande;
+
+    /// @brief Primo documento usato per la generazione delle domande.
+    private DocumentoTestuale primoDocumento;
+
+    /// @brief Secondo documento (solo per la difficoltà `DIFFICILE`).
+    private DocumentoTestuale secondoDocumento;
+
+    /// @brief Costruisce un quiz generando 10 domande in base alla difficoltà e alla lingua.
+    ///
+    /// Per difficoltà DIFFICILE, usa due documenti testuali distinti.
+    /// Per altre difficoltà, ne usa solo uno.
+    ///
+    /// @param difficolta La difficoltà del quiz.
+    /// @param lingua La lingua dei documenti da cui generare le domande.
+    /// @throws SQLException Se si verifica un errore nell'accesso al database.
+    /// @throws IllegalStateException Se non è possibile generare 10 domande valide.
     public Quiz(Difficolta difficolta, Lingua lingua) throws SQLException, IllegalStateException {
         domande = new ArrayList<>();
 
@@ -19,13 +43,13 @@ public class Quiz implements Serializable {
         for (int i = 0; i < 100 && domande.size() < 10; i++) {
             GeneratoreDomanda generatore;
             if (difficolta == Difficolta.DIFFICILE) {
-                doc0 = getDocumentoRandom(difficolta, lingua);
-                doc1 = getDocumentoRandom(difficolta, lingua, doc0);
-                generatore = new GeneratoreDomanda(doc0, doc1);
+                primoDocumento = getDocumentoRandom(difficolta, lingua);
+                secondoDocumento = getDocumentoRandom(difficolta, lingua, primoDocumento);
+                generatore = new GeneratoreDomanda(primoDocumento, secondoDocumento);
             }
             else {
-                doc0 = getDocumentoRandom(difficolta, lingua);
-                generatore = new GeneratoreDomanda(doc0, null);
+                primoDocumento = getDocumentoRandom(difficolta, lingua);
+                generatore = new GeneratoreDomanda(primoDocumento, null);
             }
 
             domande.clear();
@@ -41,11 +65,16 @@ public class Quiz implements Serializable {
             throw new IllegalStateException("Impossibile generare un quiz");
     }
 
-    private DocumentoTestuale getDocumentoRandom(Difficolta difficolta, Lingua lingua) throws SQLException {
-        return getDocumentoRandom(difficolta, lingua, null);
-    }
-
-    private DocumentoTestuale getDocumentoRandom(Difficolta difficolta, Lingua lingua, DocumentoTestuale diverso) throws SQLException {
+    /// @brief Restituisce un documento casuale dalla base dati, filtrato per difficoltà e lingua.
+    ///        Se specificato, evita di restituire un documento già scelto.
+    ///
+    /// @param difficolta La difficoltà desiderata.
+    /// @param lingua La lingua desiderata.
+    /// @param diverso Documento da escludere (può essere `null`).
+    /// @return Un documento testuale casuale valido.
+    /// @throws SQLException Se si verifica un errore nel recupero dei documenti.
+    /// @throws IllegalStateException Se non esistono documenti validi con i criteri specificati.
+    private DocumentoTestuale getDocumentoRandom(Difficolta difficolta, Lingua lingua, DocumentoTestuale diverso) throws SQLException, IllegalStateException {
         List<DocumentoTestuale> lista = DocumentiTestualiDAO.getTutti();
         lista = lista.stream()
             .filter(doc -> doc.getDifficolta() == difficolta)
@@ -55,24 +84,43 @@ public class Quiz implements Serializable {
         DocumentoTestuale doc = null;
         while (doc == null || doc.equals(diverso)) {
             if (lista.isEmpty())
-                throw new IllegalStateException("Impossibile generare un quiz");
+                throw new IllegalStateException("Non esistono documenti validi con i criteri specificati");
             doc = lista.get(new java.util.Random().nextInt(lista.size()));
         }
         return doc;
     }
 
-    public DocumentoTestuale getDocumento0() {
-        return doc0;
+    /// @brief Versione sovraccarica di getDocumentoRandom che non esclude alcun documento.
+    ///
+    /// @param difficolta La difficoltà desiderata.
+    /// @param lingua La lingua desiderata.
+    /// @return Un documento testuale casuale.
+    /// @throws SQLException Se si verifica un errore nel recupero dei documenti.
+    /// @throws IllegalStateException Se non esistono documenti validi con i criteri specificati.
+    private DocumentoTestuale getDocumentoRandom(Difficolta difficolta, Lingua lingua) throws SQLException, IllegalStateException {
+        return getDocumentoRandom(difficolta, lingua, null);
     }
 
-    public DocumentoTestuale getDocumento1() {
-        return doc1;
+    /// @brief Restituisce il primo documento usato per generare il quiz.
+    /// @return Il documento principale ({@link primoDocumento}).
+    public DocumentoTestuale getPrimoDocumento() {
+        return primoDocumento;
     }
 
+    /// @brief Restituisce il secondo documento (solo se presente).
+    /// @return Il secondo documento ({@link secondoDocumento}), oppure `null` se non usato.
+    public DocumentoTestuale getSecondoDocumento() {
+        return secondoDocumento;
+    }
+
+    /// @brief Restituisce la lista delle domande del quiz.
+    /// @return Lista di oggetti Domanda.
     public List<Domanda> getDomande() {
         return domande;
     }
 
+    /// @brief Indica se tutte le domande del quiz hanno ricevuto una risposta.
+    /// @return true se tutte le domande hanno una risposta, false altrimenti.
     public boolean getCompletato() {
         for (var domanda : domande)
             if (!domanda.isRisposta())
@@ -80,6 +128,9 @@ public class Quiz implements Serializable {
         return true;
     }
 
+    /// @brief Calcola il punteggio totale del quiz (risposte corrette).
+    /// @return Numero di risposte corrette.
+    /// @throws IllegalStateException Se il quiz non è ancora stato completato.
     public int getPunteggio() throws IllegalStateException {
         if (!getCompletato())
             throw new IllegalStateException("Quiz non ancora completato");
@@ -88,12 +139,16 @@ public class Quiz implements Serializable {
             .count();
     }
 
+    /// @brief Restituisce la difficoltà del quiz.
+    /// @return La difficoltà dei documenti usati.
     public Difficolta getDifficolta() {
-        return doc0.getDifficolta();
+        return primoDocumento.getDifficolta();
     }
 
+   /// @brief Restituisce la lingua del quiz.
+   /// @return La lingua dei documenti usati.
     public Lingua getLingua() {
-        return doc0.getLingua();
+        return primoDocumento.getLingua();
     }
 
 }
