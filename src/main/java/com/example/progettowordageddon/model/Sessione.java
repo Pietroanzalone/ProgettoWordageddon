@@ -30,13 +30,20 @@ public class Sessione implements Serializable {
     }
 
     /// @brief Aggiorna il file della sessione.
+    ///
+    /// Rinomina il file della sessione per riflettere eventuali cambi di schermata,
+    /// poi vi inserisce all'interno i dati della sessione corrente.
+    /// In caso di errore, stampa un messaggio di errore con il Logger.
     private void salva() {
         try {
             var file = new File(nomeFile);
-            if (file.exists() && !file.delete())
-                Logger.error("Errore durante il salvataggio della sessione: " + nomeFile);
 
-            aggiornaNomeFile();
+            if (file.exists()) {
+                if (file.renameTo(new File(aggiornaNomeFile())))
+                    nomeFile = aggiornaNomeFile();
+                else
+                    Logger.error("Errore durante la rinominazione del file della sessione: " + nomeFile);
+            }
 
             try (var out = new ObjectOutputStream(new FileOutputStream(nomeFile))) {
                 out.writeObject(this);
@@ -48,8 +55,13 @@ public class Sessione implements Serializable {
         }
     }
 
-    private void aggiornaNomeFile() {
-        nomeFile = "Sessioni/" + schermata + "-" + creazione + ".wordageddon";
+    /// @brief Metodo di utility per aggiornare il nome del file di sessione.
+    ///
+    /// Ricostruisce il nome del file in base alla schermata attuale.
+    ///
+    /// @return Nome del file aggiornato.
+    private String aggiornaNomeFile() {
+        return "Sessioni/" + schermata + "-" + creazione + ".wordageddon";
     }
 
     /// @brief Carica una sessione da file `.wordageddon`.
