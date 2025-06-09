@@ -82,6 +82,16 @@ public class Domanda implements Serializable {
         };
     }
 
+    public String getSelezionata() {
+        return switch (selezionata) {
+            case 0 -> risposta1;
+            case 1 -> risposta2;
+            case 2 -> risposta3;
+            case 3 -> risposta4;
+            default -> null;
+        };
+    }
+
     /**
      * @brief Imposta la risposta selezionata dall'utente.
      * @param selezionata Indice della risposta selezionata (0-3), o null.

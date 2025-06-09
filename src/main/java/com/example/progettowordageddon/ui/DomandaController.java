@@ -117,8 +117,7 @@ public class DomandaController extends Controller {
                         "Errore: " + e.getMessage()
                     );
                 }
-                Main.sessione.setQuizAttivo(null);
-                cambiaSchermata("Home");
+                cambiaSchermata("RiepilogoQuiz");
             });
     }
 

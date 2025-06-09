@@ -1,0 +1,28 @@
+#riepilogo .domanda,
+#riepilogo .contenuto {
+    -fx-alignment: center
+}
+
+#riepilogo .domanda {
+    -fx-spacing: 20;
+    -fx-pref-height: 100;
+}
+
+#riepilogo .testo-domanda {
+    -fx-font-size: 18;
+}
+
+#riepilogo .numero-domanda {
+    -fx-font-size: 32;
+    -fx-alignment: center;
+}
+
+#riepilogo .risposte {
+    -fx-alignment: center;
+}
+
+#riepilogo .risposte .label {
+    -fx-font-size: 20;
+    -fx-alignment: center;
+    -fx-pref-width: 300;
+}

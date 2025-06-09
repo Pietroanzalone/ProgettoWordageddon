@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.progettowordageddon.ui.RiepilogoQuizController">
+    <children>
+        <VBox alignment="CENTER" prefHeight="720.0" prefWidth="1280.0">
+            <children>
+                <HBox id="navbar" fx:id="navbar" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="1280.0">
+                    <children>
+                        <Button id="logoutButton" fx:id="B_logout" mnemonicParsing="false" onAction="#logout" text="&lt;" textAlignment="CENTER">
+                        </Button>
+                        <Button id="homeButton" fx:id="B_home" layoutX="40.0" layoutY="15.0" mnemonicParsing="false" onAction="#home" text="H" textAlignment="CENTER">
+                            <HBox.margin>
+                                <Insets left="550.0" right="550.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button id="exitButton" fx:id="B_exit" layoutX="1230.0" layoutY="15.0" mnemonicParsing="false" onAction="#chiudi" text="X" textAlignment="CENTER" />
+                    </children>
+                </HBox>
+                <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="670.0" prefWidth="1280.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="670.0" prefWidth="1280.0">
+                     <children>
+                        <Label id="title" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" text="Riepilogo">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <ListView id="riepilogo" fx:id="LV_riepilogo" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" stylesheets="@Riepilogo.css">
+                           <VBox.margin>
+                              <Insets top="25.0" />
+                           </VBox.margin>
+                        </ListView>
+                     </children>
+                  </VBox>
+                  <Button id="avantiButton" defaultButton="true" layoutX="1110.0" layoutY="15.0" mnemonicParsing="false" onAction="#avantiClicked" prefHeight="70.0" prefWidth="130.0">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Assets/continua.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children></AnchorPane>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
