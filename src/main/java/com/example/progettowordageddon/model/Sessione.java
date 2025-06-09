@@ -18,7 +18,7 @@ public class Sessione implements Serializable {
     /// Imposta tutti gli attributi ai valori di default e genera
     /// un nuovo nome per il file basandosi sul timestamp della generazione.
     public Sessione() {
-        nomeFile = "Sessioni/Sessione-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yy-HH-mm-ss-SSS")) + ".wordageddon";
+        nomeFile = "Sessioni/Sessione-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yy-HH_mm-ssSSS")) + ".wordageddon";
         loggingAttivo = true;
         stream = System.out;
         schermata = "Home";

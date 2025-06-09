@@ -88,6 +88,7 @@ public class UtenteController extends Controller {
                 "Impossibile caricare la sessione",
                 "Questa sessione è collegata a un altro utente"
             ).showAndWait();
+            return;
         }
         cambiaSchermata(Main.sessione.getSchermata());
     }
