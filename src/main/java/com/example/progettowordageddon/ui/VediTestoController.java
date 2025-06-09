@@ -12,14 +12,25 @@ import javafx.util.Duration;
 import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * @class VediTestoController
+ * @brief Controller per la visualizzazione del testo dei documenti associati al quiz.
+ *
+ * Gestisce la visualizzazione del testo del primo e, se necessario, del secondo documento,
+ * con un timer che limita il tempo di lettura in base alla difficoltà del quiz.
+ */
 public class VediTestoController extends Controller {
 
+    /** Flag che indica se è stato mostrato il secondo documento */
     private boolean secondoDocumento = false;
 
+    /** Quiz attivo della sessione corrente */
     private Quiz quizAttivo;
 
+    /** Timer che gestisce il conto alla rovescia per la lettura */
     private Timeline timer;
 
+    /** \cond DOXY_SKIP */
     @FXML
     private Label L_titolo;
 
@@ -28,7 +39,13 @@ public class VediTestoController extends Controller {
 
     @FXML
     private Label L_timer;
+    /** \endcond */
 
+    /**
+     * @brief Inizializza il controller.
+     * Recupera il quiz attivo, imposta il campo di testo come non editabile,
+     * gestisce il timer in base alla difficoltà e mostra il primo documento.
+     */
     @Override
     public void initialize() {
         super.initialize();
@@ -38,6 +55,10 @@ public class VediTestoController extends Controller {
         mostraTesto(quizAttivo.getPrimoDocumento());
     }
 
+    /**
+     * @brief Imposta il timer in base alla difficoltà del quiz.
+     * @param difficolta Difficoltà del quiz.
+     */
     private void gestisciDifficolta(Difficolta difficolta) {
         switch (difficolta) {
             case FACILE:
@@ -55,6 +76,11 @@ public class VediTestoController extends Controller {
         }
     }
 
+    /**
+     * @brief Avvia il timer con il numero di secondi specificato.
+     * Aggiorna il label con il tempo rimanente ogni secondo.
+     * @param secondi Durata del timer in secondi.
+     */
     private void startTimer(int secondi) {
         var tempo = new AtomicInteger(secondi - 1);
         timer = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
@@ -76,6 +102,10 @@ public class VediTestoController extends Controller {
         timer.play();
     }
 
+    /**
+     * @brief Metodo chiamato al click del pulsante "Pronto".
+     * Interrompe il timer e passa alla schermata successiva.
+     */
     @FXML
     private void prontoClicked() {
         Logger.log("Cliccato il pulsante: PRONTO");
@@ -83,6 +113,11 @@ public class VediTestoController extends Controller {
         passaAvanti();
     }
 
+    /**
+     * @brief Gestisce il passaggio alla schermata successiva.
+     * Se la difficoltà è DIFFICILE e non è stato ancora mostrato il secondo documento,
+     * mostra il secondo documento; altrimenti passa alla schermata delle domande.
+     */
     private void passaAvanti() {
         if (quizAttivo.getDifficolta() == Difficolta.DIFFICILE) {
             if (!secondoDocumento) {
@@ -95,6 +130,10 @@ public class VediTestoController extends Controller {
             cambiaSchermata("Domanda");
     }
 
+    /**
+     * @brief Mostra il testo del documento testuale nella GUI.
+     * @param documento Documento da mostrare.
+     */
     private void mostraTesto(DocumentoTestuale documento) {
         L_titolo.setText(documento.getNome());
         try {
@@ -102,8 +141,8 @@ public class VediTestoController extends Controller {
         } catch (SQLException e) {
             Logger.fatal("Impossibile mostrare il testo: " + e.getMessage());
             resettaSessione(
-                "Impossibile caricare il testo",
-                "La versione verrà resettata"
+                    "Impossibile caricare il testo",
+                    "La versione verrà resettata"
             );
         }
     }

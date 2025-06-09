@@ -16,8 +16,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @class LeaderboardController
+ * @brief Controller della schermata della classifica.
+ *
+ * Gestisce la visualizzazione dei punteggi salvati nel database, con possibilità
+ * di filtrare per lingua e difficoltà.
+ */
 public class LeaderboardController extends Controller {
 
+    /** \cond DOXY_SKIP */
     @FXML
     private ChoiceBox<Lingua> C_lingua;
 
@@ -30,11 +38,32 @@ public class LeaderboardController extends Controller {
     private FilteredList<Record> filtrata;
 
     @FXML
-    private TableColumn<Record, String> TC_username, TC_punteggio, TC_difficolta, TC_lingua, TC_data;
+    private TableColumn<Record, String> TC_username;
 
     @FXML
-    private Label L_lingua, L_difficolta;
+    private TableColumn<Record, String> TC_punteggio;
 
+    @FXML
+    private TableColumn<Record, String> TC_difficolta;
+
+    @FXML
+    private TableColumn<Record, String> TC_lingua;
+
+    @FXML
+    private TableColumn<Record, String> TC_data;
+
+    @FXML
+    private Label L_lingua;
+
+    @FXML
+    private Label L_difficolta;
+
+    /** \endcond */
+
+    /**
+     * @brief Metodo di inizializzazione del controller.
+     * Carica i dati, imposta la tabella e i filtri.
+     */
     @Override
     public void initialize() {
         super.initialize();
@@ -45,6 +74,10 @@ public class LeaderboardController extends Controller {
         impostaFiltro();
     }
 
+    /**
+     * @brief Carica i dati dal database e li ordina per punteggio decrescente.
+     * In caso di errore, la sessione viene resettata e viene mostrato un messaggio.
+     */
     private void caricaDati() {
         List<Record> leaderboard;
         try {
@@ -52,8 +85,8 @@ public class LeaderboardController extends Controller {
         } catch (SQLException e) {
             Logger.fatal("SQLException: " + e.getMessage());
             resettaSessione(
-                "Impossibile caricare la leaderboard dal database",
-                "La sessione verrà resettata"
+                    "Impossibile caricare la leaderboard dal database",
+                    "La sessione verrà resettata"
             );
             return;
         }
@@ -62,6 +95,10 @@ public class LeaderboardController extends Controller {
         TV_classifica.setItems(filtrata);
     }
 
+    /**
+     * @brief Applica uno stile speciale alle righe della tabella.
+     * Evidenzia in grassetto la riga dell'utente corrente.
+     */
     private void impostaStileRighe() {
         TV_classifica.setRowFactory(tv -> new TableRow<>() {
             @Override
@@ -77,6 +114,10 @@ public class LeaderboardController extends Controller {
         });
     }
 
+    /**
+     * @brief Imposta il contenuto e la formattazione delle colonne della tabella.
+     * Collega ogni colonna ai relativi dati del record.
+     */
     private void impostaColonne() {
         TC_username.setCellValueFactory(cella -> new SimpleStringProperty(cella.getValue().getUsername()));
         TC_username.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -95,6 +136,10 @@ public class LeaderboardController extends Controller {
         TC_data.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 
+    /**
+     * @brief Inizializza le ChoiceBox con i valori possibili di lingua e difficoltà.
+     * Aggiunge anche un'opzione nulla (nessun filtro) e gestisce la visibilità delle etichette.
+     */
     private void impostaChoiceBox() {
         List<Lingua> listaLingue = FXCollections.observableArrayList(Lingua.values());
         listaLingue.add(0, null);
@@ -107,12 +152,19 @@ public class LeaderboardController extends Controller {
         L_difficolta.visibleProperty().bind(C_difficolta.valueProperty().isNull());
     }
 
-
+    /**
+     * @brief Imposta i listener per applicare dinamicamente i filtri
+     * quando cambia la selezione in uno dei due ChoiceBox.
+     */
     private void impostaFiltro() {
         C_lingua.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> applicaFiltro());
         C_difficolta.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> applicaFiltro());
     }
 
+    /**
+     * @brief Applica i filtri selezionati (lingua e difficoltà) alla lista dei record.
+     * Vengono mostrati solo i record che corrispondono ai filtri scelti.
+     */
     private void applicaFiltro() {
         Lingua lingua = C_lingua.getValue();
         Difficolta difficolta = C_difficolta.getValue();

@@ -7,7 +7,7 @@ import java.util.Objects;
  * @class Domanda
  * @brief Rappresenta una domanda a scelta multipla con quattro risposte e una risposta corretta.
  *
- * La classe permette di gestire domande quiz, memorizzare la risposta selezionata
+ * La classe permette di gestire domande per quiz, memorizzare la risposta selezionata
  * e verificare se la risposta data è corretta.
  */
 public class Domanda implements Serializable {
@@ -52,26 +52,50 @@ public class Domanda implements Serializable {
         this.correttaIdx = correttaIdx;
     }
 
-    public String getTestoDomanda(){
+    /**
+     * @brief Restituisce il testo della domanda.
+     * @return Una stringa che rappresenta la domanda.
+     */
+    public String getTestoDomanda() {
         return testoDomanda;
     }
 
-    public String getRisposta1(){
+    /**
+     * @brief Restituisce la prima opzione di risposta.
+     * @return La prima risposta possibile.
+     */
+    public String getRisposta1() {
         return risposta1;
     }
 
-    public String getRisposta2(){
+    /**
+     * @brief Restituisce la seconda opzione di risposta.
+     * @return La seconda risposta possibile.
+     */
+    public String getRisposta2() {
         return risposta2;
     }
 
-    public String getRisposta3(){
+    /**
+     * @brief Restituisce la terza opzione di risposta.
+     * @return La terza risposta possibile.
+     */
+    public String getRisposta3() {
         return risposta3;
     }
 
-    public String getRisposta4(){
+    /**
+     * @brief Restituisce la quarta opzione di risposta.
+     * @return La quarta risposta possibile.
+     */
+    public String getRisposta4() {
         return risposta4;
     }
 
+    /**
+     * @brief Restituisce il testo della risposta corretta.
+     * @return La risposta corretta tra le quattro opzioni.
+     */
     public String getCorretta() {
         return switch (correttaIdx) {
             case 0 -> risposta1;
@@ -82,6 +106,10 @@ public class Domanda implements Serializable {
         };
     }
 
+    /**
+     * @brief Restituisce il testo della risposta selezionata.
+     * @return La risposta selezionata, oppure null se non selezionata.
+     */
     public String getSelezionata() {
         return switch (selezionata) {
             case 0 -> risposta1;
@@ -94,15 +122,15 @@ public class Domanda implements Serializable {
 
     /**
      * @brief Imposta la risposta selezionata dall'utente.
-     * @param selezionata Indice della risposta selezionata (0-3), o null.
+     * @param selezionata Indice della risposta selezionata (0-3), oppure null se non selezionata.
      */
     public void setSelezionata(Integer selezionata) {
         this.selezionata = selezionata;
     }
 
     /**
-     * @brief Verifica se una risposta è stata selezionata.
-     * @return true se l'utente ha risposto, false altrimenti.
+     * @brief Verifica se l'utente ha selezionato una risposta.
+     * @return true se una risposta è stata selezionata, false altrimenti.
      */
     public boolean isRisposta() {
         return selezionata != null;
@@ -110,23 +138,25 @@ public class Domanda implements Serializable {
 
     /**
      * @brief Verifica se la risposta selezionata è corretta.
-     * @return true se la risposta selezionata corrisponde a quella corretta, false altrimenti.
+     * @return true se la risposta selezionata corrisponde alla risposta corretta, false altrimenti.
      */
     public boolean isCorretta() {
         return selezionata == correttaIdx;
     }
 
     /**
-     * @brief Verifica l'uguaglianza con un altro oggetto Domanda.
-     * @param obj Oggetto da confrontare.
-     * @return true se l'hash è identico, false altrimenti.
+     * @brief Verifica se due oggetti Domanda sono uguali.
+     *
+     * Due domande sono considerate uguali se il testo della domanda e la risposta corretta coincidono.
+     *
+     * @param obj Oggetto con cui confrontare.
+     * @return true se le domande sono uguali, false altrimenti.
      */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Domanda d))
             return false;
         return Objects.equals(testoDomanda, d.getTestoDomanda())
-            && Objects.equals(getCorretta(), d.getCorretta());
+                && Objects.equals(getCorretta(), d.getCorretta());
     }
-
 }

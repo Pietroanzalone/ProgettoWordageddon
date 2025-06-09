@@ -32,6 +32,8 @@ public class Quiz implements Serializable {
     /// Per difficoltà DIFFICILE, usa due documenti testuali distinti.
     /// Per altre difficoltà, ne usa solo uno.
     ///
+    /// Tenta 100 volte di generare un quiz
+    ///
     /// @param difficolta La difficoltà del quiz.
     /// @param lingua La lingua dei documenti da cui generare le domande.
     /// @throws SQLException Se si verifica un errore nell'accesso al database.
@@ -39,7 +41,7 @@ public class Quiz implements Serializable {
     public Quiz(Difficolta difficolta, Lingua lingua) throws SQLException, IllegalStateException {
         domande = new ArrayList<>();
 
-        // Tenta 100 volte di generare un quiz
+
         for (int i = 0; i < 100 && domande.size() < 10; i++) {
             GeneratoreDomanda generatore;
             if (difficolta == Difficolta.DIFFICILE) {
@@ -60,7 +62,6 @@ public class Quiz implements Serializable {
             }
         }
 
-        // Se non riesce a generare un quiz, solleva IllegalStateException
         if (domande.size() < 10)
             throw new IllegalStateException("Impossibile generare un quiz");
     }
