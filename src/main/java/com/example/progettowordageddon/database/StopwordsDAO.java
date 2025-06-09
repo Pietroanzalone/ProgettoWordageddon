@@ -115,7 +115,8 @@ public class StopwordsDAO {
             if (!contiene(Character.toString(c)))
                 aggiungi(Character.toString(c));
 
-        aggiungi("è");
+        if (!contiene("è"))
+            aggiungi("è");
     }
 
     /**

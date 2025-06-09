@@ -48,7 +48,7 @@ public class GestioneStopwordsController extends Controller {
 
         logicaLabelWarn();
         logicaPulsanteAggiungi();
-        logicaListaStopwords();
+        caricaDati();
         logicaPulsanteElimina();
     }
 
@@ -102,7 +102,7 @@ public class GestioneStopwordsController extends Controller {
      * Nel caso in cui ci sia un errore nel recuperare le stopwords dal database,
      * mostra un messaggio di errore e resetta la sessione, tornando alla schermata "Home".
      */
-    private void logicaListaStopwords() {
+    private void caricaDati() {
         List<String> stopwords;
         try {
             stopwords = StopwordsDAO.getTutti();
