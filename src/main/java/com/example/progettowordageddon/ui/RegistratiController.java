@@ -78,11 +78,10 @@ public class RegistratiController extends Controller {
             Main.sessione.setUtente(utente);
             cambiaSchermata("Utente");
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setHeaderText("SQL Exception");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            mostraErrore(
+                "Impossibile caricare l'utente dal database",
+                "Errore: " + e.getMessage()
+            ).showAndWait();
         }
     }
 

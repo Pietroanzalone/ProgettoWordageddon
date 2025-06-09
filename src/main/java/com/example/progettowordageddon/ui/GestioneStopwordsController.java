@@ -108,11 +108,10 @@ public class GestioneStopwordsController extends Controller {
             stopwords = StopwordsDAO.getTutti();
         } catch (SQLException e) {
             Logger.fatal("SQLException: " + e.getMessage());
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setHeaderText("Impossibile caricare le stopwords dal database");
-            alert.setContentText("La sessione verrà resettata");
-            alert.showAndWait().ifPresent(risposta -> cambiaSchermata("Home"));
+            resettaSessione(
+                "Impossibile caricare le stopwords dal database",
+                "La sessione verrà resettata"
+            );
             return;
         }
 
@@ -152,11 +151,10 @@ public class GestioneStopwordsController extends Controller {
             L_stopwords.getItems().setAll(L_stopwords.getItems().stream().sorted().toList());
             T_word.setText("");
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("SQL Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            mostraErrore(
+                "Impossibile aggiungere la stopword",
+                "Errore: " + e.getMessage()
+            ).showAndWait();
         }
     }
 
@@ -172,32 +170,28 @@ public class GestioneStopwordsController extends Controller {
     private void eliminaClicked() {
         String selezionata = L_stopwords.getSelectionModel().getSelectedItem();
         if (selezionata == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Nessuna selezione");
-            alert.setHeaderText("Nessuna stopword selezionata");
-            alert.setContentText("Seleziona una stopword dalla lista per eliminarla");
-            alert.showAndWait();
+            mostraErrore(
+                "Nessuna stopword selezionata",
+                "Seleziona una stopword dalla lista per eliminarla"
+            ).showAndWait();
             return;
         }
 
-        Alert conferma = new Alert(Alert.AlertType.CONFIRMATION);
-        conferma.setTitle("Conferma eliminazione");
-        conferma.setHeaderText("Vuoi davvero eliminare questa stopword?");
-        conferma.setContentText("Stopword: " + selezionata);
-        conferma.showAndWait()
-                .filter(risposta -> risposta == ButtonType.OK)
-                .ifPresent(risposta -> {
-                    try {
-                        StopwordsDAO.rimuovi(selezionata);
-                        L_stopwords.getItems().remove(selezionata);
-                        T_word.setText(selezionata);
-                    } catch (SQLException e) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Errore");
-                        alert.setHeaderText("Impossibile eliminare la stopword " + selezionata);
-                        alert.setContentText(e.getMessage());
-                        alert.showAndWait();
-                    }
-                });
+        chiediConferma(
+            "Vuoi davvero eliminare questa stopword?",
+            "Stopword: " + selezionata,
+            () -> {
+                try {
+                    StopwordsDAO.rimuovi(selezionata);
+                    L_stopwords.getItems().remove(selezionata);
+                    T_word.setText(selezionata);
+                } catch (SQLException e) {
+                    mostraErrore(
+                        "Impossibile eliminare la stopword " + selezionata,
+                        "Errore: " + e.getMessage()
+                    ).showAndWait();
+                }
+            }
+        );
     }
 }

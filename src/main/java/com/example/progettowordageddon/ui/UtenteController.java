@@ -3,7 +3,6 @@ package com.example.progettowordageddon.ui;
 import com.example.progettowordageddon.Main;
 import com.example.progettowordageddon.model.Logger;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
@@ -78,12 +77,10 @@ public class UtenteController extends Controller {
             Main.sessione.caricaSessione(selezionato.getAbsolutePath());
         } catch (IOException | ClassNotFoundException e) {
             Logger.error("Impossibile caricare la sessione " + selezionato.getName());
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setHeaderText("Impossibile caricare la sessione");
-            alert.setContentText("Questa sessione è corrotta oppure corrisponde "
-                               + "a una versione precedente dell'applicazione.");
-            alert.showAndWait();
+            mostraErrore(
+                "Impossibile caricare la sessione",
+                "Questa sessione è danneggiata o corrisponde a una versione precedente dell'applicazione"
+            ).showAndWait();
             return;
         }
         cambiaSchermata(Main.sessione.getSchermata());

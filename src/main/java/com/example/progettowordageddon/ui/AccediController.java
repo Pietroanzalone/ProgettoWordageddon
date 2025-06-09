@@ -103,11 +103,10 @@ public class AccediController extends Controller {
             String hash = Utente.hashPassword(newValue);
             var u = UtentiDAO.get(T_username.getText());
             if (u == null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Errore");
-                alert.setHeaderText("SQL Exception");
-                alert.setContentText(null);
-                alert.showAndWait();
+                mostraErrore(
+                    "Errore SQL",
+                    "Errore di caricamento dell'utente selezionato"
+                ).showAndWait();
                 L_passwordWarn.setVisible(true);
                 return;
             }

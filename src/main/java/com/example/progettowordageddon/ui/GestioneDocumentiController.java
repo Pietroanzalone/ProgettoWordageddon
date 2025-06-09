@@ -96,11 +96,10 @@ public class GestioneDocumentiController extends Controller {
             documenti = DocumentiTestualiDAO.getTutti();
         } catch (SQLException e) {
             Logger.fatal("SQLException: " + e.getMessage());
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setHeaderText("Impossibile caricare i documenti dal database");
-            alert.setContentText("La sessione verrà resettata");
-            alert.showAndWait().ifPresent(risposta -> cambiaSchermata("Home"));
+            resettaSessione(
+                "Impossibile caricare i documenti dal database",
+                "La sessione verrà resettata"
+            );
             return;
         }
 
@@ -308,12 +307,10 @@ public class GestioneDocumentiController extends Controller {
             T_testo.setText(doc.getTesto());
         } catch (SQLException e) {
             Logger.fatal("Impossibile mostrare il testo: " + e.getMessage());
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setHeaderText("Impossibile caricare il testo");
-            alert.setContentText("La sessione verrà resettata");
-            alert.showAndWait()
-                .ifPresent(risposta -> cambiaSchermata("Home"));
+            resettaSessione(
+                "Impossibile caricare il testo",
+                "La sessione verrà resettata"
+            );
         }
     }
 
@@ -349,11 +346,10 @@ public class GestioneDocumentiController extends Controller {
             modalitaModifica.set(false);
         } catch (SQLException e) {
             Logger.error("SQLException: " + e.getMessage());
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setHeaderText("Impossibile modificare il documento");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            mostraErrore(
+                "Impossibile modificare il documento",
+                "Errore: " + e.getMessage()
+            ).showAndWait();
         }
         TV_documenti.refresh();
     }
@@ -378,11 +374,10 @@ public class GestioneDocumentiController extends Controller {
             impostaCampi(null);
         } catch (SQLException e) {
             Logger.error("SQLException: " + e.getMessage());
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setHeaderText("Impossibile aggiungere il documento");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            mostraErrore(
+                "Impossibile aggiungere il documento",
+                "Errore: " + e.getMessage()
+            ).showAndWait();
         }
         TV_documenti.refresh();
     }
@@ -397,26 +392,22 @@ public class GestioneDocumentiController extends Controller {
     private void eliminaClicked() {
         Logger.log("Cliccato il pulsante: ELIMINA");
         var selezionato = TV_documenti.getSelectionModel().getSelectedItem();
-        Alert conferma = new Alert(Alert.AlertType.CONFIRMATION);
-        conferma.setTitle("Conferma eliminazione");
-        conferma.setHeaderText("Vuoi davvero eliminare questo documento?");
-        conferma.setContentText("Documento: " + selezionato);
-        conferma.showAndWait()
-            .filter(risposta -> risposta == ButtonType.OK)
-            .ifPresent(risposta -> {
+        chiediConferma(
+            "Vuoi davvero eliminare questo documento?",
+            "Documento: " + selezionato,
+            () -> {
                 try {
                     DocumentiTestualiDAO.rimuovi(selezionato.getNome());
                     TV_documenti.getItems().remove(selezionato);
                     TV_documenti.getSelectionModel().clearSelection();
                 } catch (SQLException e) {
-                    Logger.error("SQLException: " + e.getMessage());
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Errore");
-                    alert.setHeaderText("Impossibile eliminare il documento");
-                    alert.setContentText(e.getMessage());
-                    alert.showAndWait();
+                    mostraErrore(
+                        "Impossibile eliminare il documento",
+                        "Errore: " + e.getMessage()
+                    ).showAndWait();
                 }
-            });
+            }
+        );
     }
 
 }

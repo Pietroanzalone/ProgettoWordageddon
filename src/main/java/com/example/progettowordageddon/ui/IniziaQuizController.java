@@ -160,18 +160,16 @@ public class IniziaQuizController extends Controller {
         try {
             Main.sessione.setQuizAttivo(new Quiz(difficoltaScelta, linguaScelta));
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setHeaderText("SQL Exception");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            mostraErrore(
+                "Impossibile caricare i documenti dal database",
+                "Errore: " + e.getMessage()
+            ).showAndWait();
             return;
         } catch (IllegalStateException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setHeaderText("Impossibile generare quiz");
-            alert.setContentText("La combinazione di difficoltà e lingua selezionata non consente la creazione di un quiz.");
-            alert.showAndWait();
+            mostraErrore(
+                "Impossibile generare un quiz",
+                "La combinazione di difficoltà e lingua selezionate non consente la creazione di un quiz"
+            ).showAndWait();
             return;
         }
         cambiaSchermata("VediTesto");
