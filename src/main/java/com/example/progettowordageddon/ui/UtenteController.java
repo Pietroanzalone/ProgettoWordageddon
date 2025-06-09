@@ -82,6 +82,12 @@ public class UtenteController extends Controller {
                 "Questa sessione è danneggiata o corrisponde a una versione precedente dell'applicazione"
             ).showAndWait();
             return;
+        } catch (IllegalArgumentException e) {
+            Logger.error("Impossibile caricare la sessione " + selezionato.getName());
+            mostraErrore(
+                "Impossibile caricare la sessione",
+                "Questa sessione è collegata a un altro utente"
+            ).showAndWait();
         }
         cambiaSchermata(Main.sessione.getSchermata());
     }

@@ -44,12 +44,17 @@ public class Sessione implements Serializable {
     /// @param pathFile Percorso assoluto del file da cui caricare la sessione.
     /// @throws IOException se il file è danneggiato o non corrisponde all'attuale versione dell'applicazione.
     /// @throws ClassNotFoundException se una delle classi della sessione salvata non è più presente nell'applicazione.
-    public void caricaSessione(String pathFile) throws IOException, ClassNotFoundException {
+    /// @throws IllegalArgumentException se l'utente della sessione caricata non corrisponde a quello attualmente loggato.
+    public void caricaSessione(String pathFile) throws IOException, ClassNotFoundException, IllegalArgumentException {
         Sessione sessione;
 
         try (var in = new ObjectInputStream(new FileInputStream(pathFile))) {
             sessione = (Sessione) in.readObject();
             sessione.setStream(System.out);
+        }
+
+        if (!utente.equals(sessione.getUtente())) {
+            throw new IllegalArgumentException("Utente errato");
         }
 
         setLoggingAttivo(sessione.getLoggingAttivo());
