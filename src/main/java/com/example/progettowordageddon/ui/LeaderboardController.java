@@ -1,5 +1,6 @@
 package com.example.progettowordageddon.ui;
 
+import com.example.progettowordageddon.Main;
 import com.example.progettowordageddon.database.LeaderboardDAO;
 import com.example.progettowordageddon.model.*;
 import com.example.progettowordageddon.model.Record;
@@ -38,6 +39,7 @@ public class LeaderboardController extends Controller {
     public void initialize() {
         super.initialize();
         caricaDati();
+        impostaStileRighe();
         impostaColonne();
         impostaChoiceBox();
         impostaFiltro();
@@ -58,6 +60,21 @@ public class LeaderboardController extends Controller {
         Collections.sort(leaderboard);
         filtrata = new FilteredList<>(FXCollections.observableArrayList(leaderboard), p -> true);
         TV_classifica.setItems(filtrata);
+    }
+
+    private void impostaStileRighe() {
+        TV_classifica.setRowFactory(tv -> new TableRow<>() {
+            @Override
+            protected void updateItem(Record item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null)
+                    setStyle("");
+                else if (Main.sessione.getUtente().getUsername().equals(item.getUsername()))
+                    setStyle("-fx-font-weight: bold");
+                else
+                    setStyle("");
+            }
+        });
     }
 
     private void impostaColonne() {

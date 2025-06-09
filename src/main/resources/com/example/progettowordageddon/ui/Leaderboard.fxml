@@ -29,24 +29,44 @@
                 </HBox>
                 <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="670.0" prefWidth="1280.0">
                <children>
-                  <Label fx:id="title" layoutX="468.0" layoutY="26.0" text="Classifica" />
-                  <ChoiceBox fx:id="C_lingua" layoutX="310.0" layoutY="134.0" prefHeight="40.0" prefWidth="234.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: bababb; -fx-border-radius: 15; -fx-border-style: solid; -fx-border-width: 1;" stylesheets="@Stopwords.css" />
-                  <ChoiceBox fx:id="C_difficolta" layoutX="761.0" layoutY="133.0" prefHeight="40.0" prefWidth="234.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: bababb; -fx-border-radius: 15; -fx-border-style: solid; -fx-border-width: 1;" stylesheets="@Stopwords.css" />
-                  <TableView fx:id="TV_classifica" layoutX="109.0" layoutY="194.0" prefHeight="408.0" prefWidth="1063.0" stylesheets="@TabellaDocumenti.css">
-                    <columns>
-                      <TableColumn fx:id="TC_username" editable="false" prefWidth="222.0" text="Username" />
-                      <TableColumn fx:id="TC_punteggio" editable="false" minWidth="0.0" prefWidth="206.0" text="Punteggio" />
-                        <TableColumn fx:id="TC_difficolta" editable="false" minWidth="0.0" prefWidth="215.0" text="Difficoltà" />
-                        <TableColumn fx:id="TC_lingua" prefWidth="199.0" text="Lingua" />
-                        <TableColumn fx:id="TC_data" prefWidth="618.0" text="Data" />
-                    </columns>
-                  </TableView>
-                  <Label fx:id="L_lingua" alignment="CENTER" layoutX="310.0" layoutY="135.0" mouseTransparent="true" prefHeight="38.0" prefWidth="234.0" style="-fx-font-size: 20;" text="Lingua" textAlignment="CENTER" textFill="#b2b2b2">
+                  <VBox alignment="TOP_CENTER" prefHeight="670.0" prefWidth="1280.0">
+                     <children>
+                        <Label fx:id="title" text="Classifica" />
+                        <HBox alignment="CENTER" prefHeight="48.0" prefWidth="1280.0" spacing="300.0">
+                           <children>
+                              <ChoiceBox fx:id="C_lingua" prefHeight="40.0" prefWidth="234.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: bababb; -fx-border-radius: 15; -fx-border-style: solid; -fx-border-width: 1;" stylesheets="@Stopwords.css" />
+                              <ChoiceBox fx:id="C_difficolta" prefHeight="40.0" prefWidth="234.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: bababb; -fx-border-radius: 15; -fx-border-style: solid; -fx-border-width: 1;" stylesheets="@Stopwords.css" />
+                           </children>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </HBox>
+                        <TableView id="leaderboard" fx:id="TV_classifica" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="1200.0" stylesheets="@TabellaDocumenti.css">
+                          <columns>
+                            <TableColumn fx:id="TC_username" editable="false" prefWidth="280.0" resizable="false" text="Username" />
+                            <TableColumn fx:id="TC_punteggio" editable="false" minWidth="0.0" prefWidth="200.0" resizable="false" text="Punteggio" />
+                              <TableColumn fx:id="TC_difficolta" editable="false" minWidth="0.0" prefWidth="240.0" resizable="false" text="Difficoltà" />
+                              <TableColumn fx:id="TC_lingua" editable="false" prefWidth="240.0" resizable="false" text="Lingua" />
+                              <TableColumn fx:id="TC_data" editable="false" prefWidth="238.0" resizable="false" text="Data" />
+                          </columns>
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </TableView>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets top="30.0" />
+                     </padding>
+                  </VBox>
+                  <Label fx:id="L_lingua" alignment="CENTER" layoutX="256.0" layoutY="137.0" mouseTransparent="true" prefHeight="38.0" prefWidth="234.0" style="-fx-font-size: 20;" text="Lingua" textAlignment="CENTER" textFill="#b2b2b2">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="L_difficolta" alignment="CENTER" layoutX="761.0" layoutY="134.0" mouseTransparent="true" prefHeight="40.0" prefWidth="234.0" style="-fx-font-size: 20;" text="Difficoltà" textAlignment="CENTER" textFill="#b2b2b2">
+                  <Label fx:id="L_difficolta" alignment="CENTER" layoutX="790.0" layoutY="136.0" mouseTransparent="true" prefHeight="40.0" prefWidth="234.0" style="-fx-font-size: 20;" text="Difficoltà" textAlignment="CENTER" textFill="#b2b2b2">
                      <font>
                         <Font size="20.0" />
                      </font>

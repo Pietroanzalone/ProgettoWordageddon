@@ -29,3 +29,19 @@
     -fx-background-color: #E7EFF8;
     -fx-alignment: center-left;
 }
+
+#leaderboard .column-header-background {
+    -fx-font-size: 24;
+}
+
+#leaderboard {
+    -fx-font-size: 20;
+}
+
+#leaderboard .table-row-cell:odd {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #e8e8e8 0%, #a4bdc1 100%);
+}
+
+#leaderboard .table-row-cell:selected {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #d6d6d6 0%, #798d90 100%);
+}
