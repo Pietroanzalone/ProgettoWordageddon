@@ -118,3 +118,34 @@
     -fx-graphic-text-gap: 0;
     -fx-content-display: center;
 }
+
+#domanda {
+    -fx-font-size: 28;
+}
+
+#risposte .rispostaButton {
+    -fx-background-radius: 25;
+    -fx-border-radius: 23;
+    -fx-font-size: 32;
+}
+
+#risposte .rispostaButton:hover {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, #8f8f8f, 5, 0.1, 3, 3);
+    -fx-background-color: #e7f5f8;
+}
+
+#risposte .rispostaButton:selected {
+    -fx-background-color: #f1f1a7;
+    -fx-font-weight: bolder;
+    -fx-border-color: #74735f;
+}
+
+#avantiButton {
+    -fx-background-radius: 30;
+    -fx-background-color: #cbdee2;
+    -fx-border-width: 2;
+    -fx-border-color: linear-gradient(from 0% 0% to 100% 100%, #bbbbbb 0%, #82989b 100%);
+    -fx-border-radius: 27;
+    -fx-border-style: solid;
+}
