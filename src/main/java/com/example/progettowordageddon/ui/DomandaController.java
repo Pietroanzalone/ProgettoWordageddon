@@ -1,10 +1,13 @@
 package com.example.progettowordageddon.ui;
 
 import com.example.progettowordageddon.Main;
+import com.example.progettowordageddon.database.LeaderboardDAO;
 import com.example.progettowordageddon.model.*;
+import com.example.progettowordageddon.model.Record;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -105,7 +108,15 @@ public class DomandaController extends Controller {
                                + "Risposte errate: " + (10 - punteggio));
         risultato.showAndWait()
             .ifPresent(risposta -> {
-//                QuizDAO.aggiungi(Main.sessione.getQuizAttivo());
+                try {
+                    LeaderboardDAO.aggiungi(new Record(Main.sessione.getUtente().getUsername(), Main.sessione.getQuizAttivo()));
+                } catch (SQLException e) {
+                    Logger.error("Impossibile salvare il quiz nella leaderboard");
+                    mostraErrore(
+                        "Impossibile salvare il quiz nella leaderboard",
+                        "Errore: " + e.getMessage()
+                    );
+                }
                 Main.sessione.setQuizAttivo(null);
                 cambiaSchermata("Home");
             });

@@ -121,7 +121,7 @@ public class Quiz implements Serializable {
 
     /// @brief Indica se tutte le domande del quiz hanno ricevuto una risposta.
     /// @return true se tutte le domande hanno una risposta, false altrimenti.
-    public boolean getCompletato() {
+    public boolean isCompletato() {
         for (var domanda : domande)
             if (!domanda.isRisposta())
                 return false;
@@ -132,7 +132,7 @@ public class Quiz implements Serializable {
     /// @return Numero di risposte corrette.
     /// @throws IllegalStateException Se il quiz non è ancora stato completato.
     public int getPunteggio() throws IllegalStateException {
-        if (!getCompletato())
+        if (!isCompletato())
             throw new IllegalStateException("Quiz non ancora completato");
         return (int) domande.stream()
             .filter(Domanda::isCorretta)
