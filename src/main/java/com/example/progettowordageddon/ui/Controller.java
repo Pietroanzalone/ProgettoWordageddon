@@ -1,15 +1,16 @@
 package com.example.progettowordageddon.ui;
 
 import com.example.progettowordageddon.Main;
-import com.example.progettowordageddon.model.Logger;
-import com.example.progettowordageddon.model.Utente;
+import com.example.progettowordageddon.model.*;
 import java.io.IOException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -206,6 +207,83 @@ public class Controller {
             Logger.error("File " + nome + " non trovato");
             return null;
         }
+    }
+
+    /**
+     * @brief Metodo di utility per resettare la sessione.
+     *
+     * Mostra un messaggio di errore e poi ritorna alla
+     * schermata iniziale, creando una nuova sessione.
+     *
+     * @param header Titolo del messaggio di errore.
+     * @param content Corpo del messaggio di errore.
+     */
+    protected void resettaSessione(String header, String content) {
+        mostraErrore(header, content)
+            .showAndWait()
+            .ifPresent(risposta -> {
+                cambiaSchermata("Home");
+                Main.sessione = new Sessione();
+            });
+    }
+
+    /**
+     * @brief Metodo di utility per mostrare un messaggio di errore.
+     *
+     * @note
+     * Esempio di utilizzo:
+     * ```java
+     * try {
+     *     // DAO.eseguiQuery(...);
+     * } catch (SQLException e) {
+     *     mostraErrore(
+     *         "Qualcosa è andato storto",
+     *         e.getMessage()
+     *     ).showAndWait();
+     * }
+     * ```
+     *
+     * @param header Titolo del messaggio di errore.
+     * @param content Corpo del messaggio di errore.
+     * @return Messaggio di errore da mostrare.
+     */
+    protected Alert mostraErrore(String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore");
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        return alert;
+    }
+
+    /**
+     * @brief Metodo di utility per mostrare un messaggio di conferma.
+     *
+     * @note
+     * Esempio di utilizzo:
+     * ```java
+     * @FXML
+     * private void eliminaClicked() {
+     *     chiediConferma(
+     *         "Vuoi davvero eliminare questo documento?",
+     *         "Documento: " + documento,
+     *         () -> {
+     *             eliminaDocumento();
+     *             Logger.log("Documento eliminato");
+     *         }
+     *     )
+     * }
+     * ```
+     *
+     * @param header Titolo del messaggio di conferma.
+     * @param content Corpo del messaggio di conferma.
+     * @param operazione Operazione da eseguire in caso di conferma.
+     */
+    protected void chiediConferma(String header, String content, Runnable operazione) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Conferma operazione");
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait().filter(risposta -> risposta == ButtonType.OK).ifPresent(risposta -> operazione.run());
     }
 
 }
