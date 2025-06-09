@@ -11,30 +11,45 @@ import java.time.format.DateTimeFormatter;
 /// come l'utente attivo, lo stato del quiz, la schermata corrente e la difficoltà selezionata.
 public class Sessione implements Serializable {
     /// @brief Nome del file in cui è salvata la sessione.
-    private final String nomeFile;
+    private String nomeFile;
+
+    private final String creazione;
 
     /// @brief Costruttore completo di una nuova sessione.
     ///
     /// Imposta tutti gli attributi ai valori di default e genera
     /// un nuovo nome per il file basandosi sul timestamp della generazione.
     public Sessione() {
-        nomeFile = "Sessioni/Sessione-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yy-HH_mm-ssSSS")) + ".wordageddon";
+        creazione = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yy-HH_mm-ssSSS"));
+        schermata = "Home";
+        nomeFile = "Sessioni/" + schermata + "-" + creazione + ".wordageddon";
         loggingAttivo = true;
         stream = System.out;
-        schermata = "Home";
         utente = new Utente(null, null, true, false);
         quizAttivo = null;
     }
 
     /// @brief Aggiorna il file della sessione.
     private void salva() {
-        try (var out = new ObjectOutputStream(new FileOutputStream(nomeFile))) {
-            out.writeObject(this);
-            Logger.log("Sessione salvata");
-            Logger.log("Sessione: " + this);
+        try {
+            var file = new File(nomeFile);
+            if (file.exists() && !file.delete())
+                Logger.error("Errore durante il salvataggio della sessione: " + nomeFile);
+
+            aggiornaNomeFile();
+
+            try (var out = new ObjectOutputStream(new FileOutputStream(nomeFile))) {
+                out.writeObject(this);
+                Logger.log("Sessione salvata");
+                Logger.log("Sessione: " + this);
+            }
         } catch (IOException e) {
             Logger.error("Errore durante il salvataggio della sessione: " + e.getMessage());
         }
+    }
+
+    private void aggiornaNomeFile() {
+        nomeFile = "Sessioni/" + schermata + "-" + creazione + ".wordageddon";
     }
 
     /// @brief Carica una sessione da file `.wordageddon`.
