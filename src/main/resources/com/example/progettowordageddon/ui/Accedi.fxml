@@ -68,7 +68,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <Button fx:id="B_accedi" mnemonicParsing="false" onAction="#accediClicked" styleClass="mainButton" text="ACCEDI">
+                              <Button fx:id="B_accedi" defaultButton="true" mnemonicParsing="false" onAction="#accediClicked" styleClass="mainButton" text="ACCEDI">
                                  <VBox.margin>
                                     <Insets top="65.0" />
                                  </VBox.margin>
