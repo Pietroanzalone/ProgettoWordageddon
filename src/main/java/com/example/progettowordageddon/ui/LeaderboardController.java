@@ -19,6 +19,7 @@ import java.util.List;
 /**
  * @class LeaderboardController
  * @brief Controller della schermata della classifica.
+ * @ingroup ui
  *
  * Gestisce la visualizzazione dei punteggi salvati nel database, con possibilità
  * di filtrare per lingua e difficoltà.

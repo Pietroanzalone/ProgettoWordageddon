@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * @class DomandaController
  * @brief Controller per la gestione dell'interfaccia utente del quiz a scelta multipla.
+ * @ingroup ui
  *
  * Gestisce il caricamento e la visualizzazione delle domande, la selezione delle risposte
  * da parte dell'utente e il calcolo del punteggio finale.

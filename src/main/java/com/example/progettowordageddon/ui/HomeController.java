@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 /**
  * @class HomeController
  * @brief Il controller per la gestione della schermata "Home".
+ * @ingroup ui
  *
  * Questa classe gestisce i pulsanti iniziali dell'applicazione
  * che permettono all'utente di accedere o registrarsi.

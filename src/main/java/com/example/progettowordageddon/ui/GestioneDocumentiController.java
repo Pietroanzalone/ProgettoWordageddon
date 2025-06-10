@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 /**
  * @class GestioneDocumentiController
  * @brief Il controller per la gestione della schermata "GestioneDocumenti".
+ * @ingroup ui
  *
  * Questa classe definisce la logica di interazione dell'interfaccia per
  * l'aggiunta, la visualizzazione, la modifica e la rimozione dei

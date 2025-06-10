@@ -10,6 +10,7 @@ import java.sql.SQLException;
 /**
  * @class IniziaQuizController
  * @brief Il controller per la gestione della schermata "IniziaQuiz".
+ * @ingroup ui
  *
  * Gestisce la selezione della lingua e della difficoltà prima di iniziare un quiz.
  * Consente all'utente di configurare le impostazioni e poi avviare la sessione quiz.

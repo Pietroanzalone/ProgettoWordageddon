@@ -14,6 +14,7 @@ import java.util.List;
 /**
  * @class GestioneStopwordsController
  * @brief Il controller per la gestione della schermata "GestioneStopwords".
+ * @ingroup ui
  *
  * Questa classe definisce la logica di interazione dell'interfaccia per
  * l'aggiunta, la visualizzazione e la rimozione delle stopword nel database.
