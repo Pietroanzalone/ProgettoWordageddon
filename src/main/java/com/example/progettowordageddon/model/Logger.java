@@ -33,7 +33,9 @@ public class Logger {
      *
      * @param messaggio Il messaggio da stampare.
      *
-     * @note Da usare per messaggi di stato generali, informazioni sul normale funzionamento 
+     * \image html LoggerInfo.png width=80%
+     *
+     * @note Da usare per messaggi di stato generali, informazioni sul normale funzionamento
      *       dell'applicazione (es. "File caricato", "Utente loggato").
      */
     public static void log(String messaggio) {
@@ -45,6 +47,8 @@ public class Logger {
      * @brief Stampa un messaggio di warning (avviso) in giallo.
      *
      * @param messaggio Il messaggio di avviso.
+     *
+     * \image html LoggerWarn.png width=80%
      *
      * @note Da usare per situazioni anomale ma non critiche (es. "Configurazione mancante, uso valori di default").
      */
@@ -58,6 +62,8 @@ public class Logger {
      *
      * @param messaggio Il messaggio di errore.
      *
+     * \image html LoggerError.png width=80%
+     *
      * @note Da usare quando si verifica un errore recuperabile o gestibile,
      *       ma che indica comunque un'anomalia (es. "File non trovato").
      */
@@ -70,6 +76,8 @@ public class Logger {
      * @brief Stampa un messaggio di errore critico (fatale) in rosso.
      *
      * @param messaggio Il messaggio critico.
+     *
+     * \image html LoggerFatal.png width=80%
      *
      * @note Da usare in casi gravi che impediscono il proseguimento del programma,
      *       come errori non gestibili o blocchi totali (es. "Database non raggiungibile").

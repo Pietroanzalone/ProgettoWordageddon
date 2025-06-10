@@ -14,6 +14,10 @@ body {
     margin: 0 10%;
 }
 
+#doc-content {
+    overflow-x: clip;
+}
+
 #projectnumber {
     font-style: italic;
 }
@@ -98,4 +102,13 @@ html {
     html:not(.dark-mode) {
         --note-color-bg: #251c00;
     }
+}
+
+img:not([alt="Logo"]) {
+    transition: all 300ms ease;
+}
+
+img:not([alt="Logo"]):hover {
+    transform: scale(1.5);
+    box-shadow: 0 0 50px 15px rgba(0,0,0,0.75);
 }

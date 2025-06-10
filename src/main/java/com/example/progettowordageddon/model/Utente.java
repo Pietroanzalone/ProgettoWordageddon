@@ -14,6 +14,8 @@ import java.security.NoSuchAlgorithmException;
  * tramite [SHA-256](https://it.wikipedia.org/wiki/Secure_Hash_Algorithm) senza
  * l'uso di dipendenze esterne. Fornisce anche metodi per verificare le credenziali
  * e rappresentare l'utente come stringa.
+ *
+ * \image html SeqDia_AutenticazioneUtente.png width=80%
  */
 public class Utente implements Serializable {
 
