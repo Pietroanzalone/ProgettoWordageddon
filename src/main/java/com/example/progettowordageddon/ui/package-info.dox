@@ -1,0 +1,17 @@
+/*!
+\defgroup ui UI
+\brief Contiene tutte le classi di tipo controller che implementano vari aspetti della logica
+         dell'applicazione Wordageddon
+
+Questo modulo include la classe Controller e tutte le sue sottoclassi che gestiscono le diverse logiche di:
+        visualizzazione di messaggi di errore, comunicazione tra interfacce, interazione con pulsanti dell'applicazione,
+        comunicazione con il database.
+
+\subsection subsec_controller Classe Controller
+
+La classe <code>Controller</code> è la classe principale che viene estesa da tutte le altre
+classi del package. Fornisce metodi di utlity, come la gestione della barra di navigazione, che
+verrano usati da tutte le sottoclassi per gestire gli input dell'utente.
+
+\image html SeqDia_CambiaSchermata.png width=100%
+ */

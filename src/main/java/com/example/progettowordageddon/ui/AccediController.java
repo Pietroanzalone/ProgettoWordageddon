@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 /**
  * @class AccediController
  * @brief Il controller per la gestione della schermata "Accedi".
+ * @ingroup ui
  *
  * Questa classe definisce la logica di visualizzazione
  * dei messaggi di errore, l'abilitazione e la disabilitazione

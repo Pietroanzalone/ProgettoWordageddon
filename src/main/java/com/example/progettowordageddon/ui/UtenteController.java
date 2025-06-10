@@ -13,6 +13,7 @@ import java.io.IOException;
 /**
  * @class UtenteController
  * @brief Il controller per la gestione della schermata "Utente".
+ * @ingroup ui
  *
  * Gestisce il comportamento della schermata utente, inclusa
  * la visibilità del pannello di controllo e l'accesso alle

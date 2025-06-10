@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * @class VediTestoController
  * @brief Controller per la visualizzazione del testo dei documenti associati al quiz.
+ * @ingroup ui
  *
  * Gestisce la visualizzazione del testo del primo e, se necessario, del secondo documento,
  * con un timer che limita il tempo di lettura in base alla difficoltà del quiz.

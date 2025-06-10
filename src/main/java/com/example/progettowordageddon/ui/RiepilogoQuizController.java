@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 
 /// @class RiepilogoQuizController
 /// @brief Controller JavaFX per la schermata di riepilogo delle risposte al quiz.
+/// @ingroup ui
 ///
 /// Questa classe controlla la visualizzazione della lista delle domande e delle risposte
 /// selezionate e corrette, al termine di un quiz. Permette inoltre di avanzare alla schermata

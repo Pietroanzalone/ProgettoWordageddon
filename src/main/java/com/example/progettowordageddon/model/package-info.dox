@@ -12,7 +12,7 @@ La classe <code>GeneratoreDomanda</code> è la principale responsabile della
 generazione di un quiz nella lingua e difficoltà selezionate
 dall'utente.
 Essa infatti è utilizzata nel costruttore della classe <code>Quiz</code>
-secondo quanto specificato nel seguente diagramma di sequenza.
+secondo quanto specificato nel seguente diagramma di flusso.
 
 \image html SeqDia_GenerazioneQuiz.png width=100%
 
