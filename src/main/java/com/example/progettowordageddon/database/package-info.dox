@@ -1,0 +1,15 @@
+/*!
+\defgroup database Database
+\brief Contiene tutte le classi e componenti necessarie alla comunicazione con il database sqlite.
+
+Questo modulo include tutte le classi relative alla creazione, aggiunta e rimozione di tutti i dati,
+ovvero utenti, domande, documenti e sessioni di gioco.
+
+\subsection subsec_DAO Database Access Object
+
+La classe <code>DAO</code> fornisce i metodi di utility per eseguire le query SELECT, INSERT e DELETE.
+Ogni classe DAO gestisce una tabella del database e fornisce metodi per accedervi o modificarla.
+
+\image html SeqDia_InserisciUtente.png width=100%
+
+*/
