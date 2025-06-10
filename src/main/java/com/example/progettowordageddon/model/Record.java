@@ -57,52 +57,78 @@ public class Record implements Comparable<Record> {
         this.timestamp = LocalDateTime.now();
     }
 
-    /** @return Username dell'utente. */
+    /**
+     * @brief Restituisce l'username dell'utente che sta giocando
+     * @return Username dell'utente.
+     */
+
     public String getUsername() {
         return username;
     }
 
-    /** @param username Imposta l'username dell'utente. */
+    /**
+     * @brief Aggiorna l'username dell'utente che sta giocando
+     * @param username Imposta l'username dell'utente.
+     */
+
     public void setUsername(String username) {
         this.username = username;
     }
 
-    /** @return Punteggio ottenuto. */
+    /**
+     * @brief Restituisce il punteggio ottenuto
+     * @return Punteggio ottenuto.
+     */
+
     public int getPunteggio() {
         return punteggio;
     }
 
-    /** @param punteggio Imposta il punteggio ottenuto. */
+    /**
+     * @brief Imposta il punteggio ottenuto
+     * @param punteggio punteggio ottenuto. */
     public void setPunteggio(int punteggio) {
         this.punteggio = punteggio;
     }
 
-    /** @return Lingua del quiz. */
+    /**
+     * @brief Restituisce la lingua del quiz
+     * @return Lingua del quiz. */
     public Lingua getLingua() {
         return lingua;
     }
 
-    /** @param lingua Imposta la lingua del quiz. */
+    /**
+     * @brief Imposta la lingua del quiz
+     * @param lingua lingua del quiz. */
     public void setLingua(Lingua lingua) {
         this.lingua = lingua;
     }
 
-    /** @return Difficoltà del quiz. */
+    /**
+     * @brief Restituisce la difficolta del quiz
+     * @return Difficoltà del quiz. */
     public Difficolta getDifficolta() {
         return difficolta;
     }
 
-    /** @param difficolta Imposta la difficoltà del quiz. */
+    /**
+     * @brief Imposta la difficoltà del quiz
+     * @param difficolta difficoltà del quiz. */
     public void setDifficolta(Difficolta difficolta) {
         this.difficolta = difficolta;
     }
 
-    /** @return Timestamp di completamento del quiz. */
+    /**
+     * @brief Restituisce il timestamp di completamento del quiz
+     * @return Timestamp di completamento del quiz. */
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    /** @param timestamp Imposta il timestamp di completamento del quiz. */
+    /**
+     * @brief Imposta il timestamp di completamento del quiz
+     * @param timestamp timestamp di completamento del quiz. */
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
