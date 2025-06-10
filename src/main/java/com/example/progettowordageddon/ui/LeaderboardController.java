@@ -35,7 +35,7 @@ public class LeaderboardController extends Controller {
     @FXML
     private TableView<Record> TV_classifica;
 
-    private FilteredList<Record> filtrata;
+
 
     @FXML
     private TableColumn<Record, String> TC_username;
@@ -60,9 +60,15 @@ public class LeaderboardController extends Controller {
 
     /** \endcond */
 
+    /** @brief Lista filtrata dei record, utilizzata per applicare i filtri di ricerca. */
+    private FilteredList<Record> filtrata;
+
     /**
      * @brief Metodo di inizializzazione del controller.
-     * Carica i dati, imposta la tabella e i filtri.
+     *
+     * Carica i dati dal database, configura la tabella con stili e colonne,
+     * inizializza i controlli di filtro e imposta i listener per il
+     * filtraggio dinamico dei risultati.
      */
     @Override
     public void initialize() {

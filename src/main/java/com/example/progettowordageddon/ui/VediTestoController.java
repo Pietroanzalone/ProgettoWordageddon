@@ -21,13 +21,13 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class VediTestoController extends Controller {
 
-    /** Flag che indica se è stato mostrato il secondo documento */
+    /** @brief Flag che indica se è stato mostrato il secondo documento. */
     private boolean secondoDocumento = false;
 
-    /** Quiz attivo della sessione corrente */
+    /** @brief Quiz attivo della sessione corrente. */
     private Quiz quizAttivo;
 
-    /** Timer che gestisce il conto alla rovescia per la lettura */
+    /** @brief Timer che gestisce il conto alla rovescia per la lettura del testo. */
     private Timeline timer;
 
     /** \cond DOXY_SKIP */
@@ -43,8 +43,9 @@ public class VediTestoController extends Controller {
 
     /**
      * @brief Inizializza il controller.
-     * Recupera il quiz attivo, imposta il campo di testo come non editabile,
-     * gestisce il timer in base alla difficoltà e mostra il primo documento.
+     *
+     * Recupera il quiz attivo dalla sessione, configura il campo di testo come non editabile,
+     * imposta il timer in base alla difficoltà del quiz e mostra il primo documento da leggere.
      */
     @Override
     public void initialize() {
@@ -115,8 +116,9 @@ public class VediTestoController extends Controller {
 
     /**
      * @brief Gestisce il passaggio alla schermata successiva.
-     * Se la difficoltà è DIFFICILE e non è stato ancora mostrato il secondo documento,
-     * mostra il secondo documento; altrimenti passa alla schermata delle domande.
+     *
+     * Per la difficoltà DIFFICILE mostra prima il secondo documento, poi passa alle domande.
+     * Per le altre difficoltà passa direttamente alla schermata delle domande del quiz.
      */
     private void passaAvanti() {
         if (quizAttivo.getDifficolta() == Difficolta.DIFFICILE) {
