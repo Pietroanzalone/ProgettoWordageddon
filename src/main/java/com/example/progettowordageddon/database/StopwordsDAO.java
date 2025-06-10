@@ -19,7 +19,7 @@ import java.util.List;
  *     <tr>
  *       <th>Campo</th>
  *       <th>Tipo</th>
- *       <th>Vincolo 1</th>
+ *       <th>Vincoli</th>
  *       <th>Descrizione</th>
  *     </tr>
  *   </thead>

@@ -70,7 +70,7 @@ public class LeaderboardDAO {
 
     /**
      * @brief Recupera tutti i record presenti nella tabella Quiz.
-     * @return Lista di {@link Record} rappresentanti la leaderboard.
+     * @return Lista di record rappresentanti la leaderboard.
      * @throws SQLException Se si verifica un errore nella query al database.
      */
     public static List<Record> getTutti() throws SQLException {
@@ -98,7 +98,7 @@ public class LeaderboardDAO {
      * @brief Recupera un record specifico identificato da username e timestamp.
      * @param username Username dell'utente.
      * @param timestamp Data e ora di completamento del quiz.
-     * @return Il {@link Record} corrispondente o null se non trovato.
+     * @return Il record corrispondente o null se non trovato.
      * @throws SQLException Se si verifica un errore nella query.
      */
     public static Record get(String username, LocalDateTime timestamp) throws SQLException {
@@ -114,9 +114,9 @@ public class LeaderboardDAO {
     }
 
     /**
-     * @brief Metodo helper che trasforma un array di oggetti ottenuto dal DB in un oggetto {@link Record}.
+     * @brief Metodo helper che trasforma un array di oggetti ottenuto dal DB in un record.
      * @param tokens Array di oggetti contenente i valori di una riga della tabella Quiz.
-     * @return Nuovo oggetto {@link Record} creato dai valori passati.
+     * @return Nuovo record creato dai valori passati.
      */
     private static Record generaRecord(Object[] tokens) {
         return new Record(
