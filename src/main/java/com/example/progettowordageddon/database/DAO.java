@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 /// @brief Classe per l'accesso al database SQLite.
+/// @ingroup database
 ///
 /// Questa classe fornisce metodi protetti statici per eseguire query di selezione
 /// e aggiornamento sul database tramite JDBC.

@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * @class DocumentiTestualiDAO
  * @brief Classe per la gestione dei documenti testuali nel database.
+ * @ingroup database
  *
  * Fornisce metodi per il recupero, l'inserimento, la modifica e l'eliminazione di documenti
  * dalla tabella {@code DocumentiTestuali}, nonché per la ricerca tramite indice sulla lingua.

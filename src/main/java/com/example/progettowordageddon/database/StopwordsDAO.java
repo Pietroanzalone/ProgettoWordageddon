@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * @class StopwordsDAO
  * @brief Classe per la gestione delle stopwords nel database.
+ * @ingroup database
  *
  * Fornisce metodi per il recupero, l'inserimento e l'eliminazione di parole
  * dalla tabella {@code Stopwords}.

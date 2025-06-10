@@ -9,6 +9,7 @@ import java.util.ArrayList;
 /**
  * @class UtentiDAO
  * @brief Classe per la gestione degli utenti nel database.
+ * @ingroup database
  *
  * Fornisce metodi per il recupero, l'inserimento, la modifica e l'eliminazione di utenti
  * dalla tabella {@code Utenti}, nonché per il controllo dell'esistenza di un utente.

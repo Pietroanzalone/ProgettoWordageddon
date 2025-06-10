@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * @class LeaderboardDAO
  * @brief Classe per la gestione dei quiz nel database.
+ * @ingroup database
  *
  * Fornisce metodi per il recupero, l'inserimento e la ricerca di record dalla tabella {@code Quiz}
  *
