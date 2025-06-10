@@ -20,9 +20,10 @@ delle parole più frequenti presenti in un insieme di documenti testuali.
 
 \section struttura_sec Packages del programma
 
-- \ref model "Model"
-- \ref database "Database"
-- \ref ui "UI"
+- \ref mainClass "Classe Main"
+- \ref model "Package Model"
+- \ref database "Package Database"
+- \ref ui "Package UI"
 
 \section contatti_sec Contatti e supporto
 

@@ -11,6 +11,7 @@ import javafx.stage.StageStyle;
 
 
 /**
+ * @anchor mainClass
  * @class Main
  * @brief Il punto di ingresso dell'applicazione Wordageddon.
  *

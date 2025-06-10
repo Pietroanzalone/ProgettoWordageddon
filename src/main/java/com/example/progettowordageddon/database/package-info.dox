@@ -10,6 +10,6 @@ ovvero utenti, domande, documenti e sessioni di gioco.
 La classe <code>DAO</code> fornisce i metodi di utility per eseguire le query `SELECT`, `INSERT` e `DELETE`.
 Ogni classe DAO gestisce una tabella del database e fornisce metodi per accedervi o modificarla.
 
-\image html SeqDia_InserisciUtente.png width=100%
+\image html ClaDia_DAO.png width=100%
 
 */
