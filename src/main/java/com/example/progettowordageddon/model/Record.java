@@ -61,7 +61,6 @@ public class Record implements Comparable<Record> {
      * @brief Restituisce l'username dell'utente che sta giocando
      * @return Username dell'utente.
      */
-
     public String getUsername() {
         return username;
     }
