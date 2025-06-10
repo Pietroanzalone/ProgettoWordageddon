@@ -22,7 +22,10 @@ public class RiepilogoQuizController extends Controller {
 
 
     /// @brief Metodo chiamato all'inizializzazione del controller.
-    /// Carica i dati del quiz attivo e imposta la visualizzazione personalizzata delle celle.
+    ///
+    /// Inizializza la schermata di riepilogo caricando le domande del quiz
+    /// completato e configurando la visualizzazione personalizzata delle celle
+    /// per mostrare risposte corrette e selezionate.
     @Override
     public void initialize() {
         super.initialize();
@@ -33,7 +36,8 @@ public class RiepilogoQuizController extends Controller {
 
     /// @brief Carica le domande del quiz attivo nella lista visuale.
     ///
-    /// Estrae il quiz attivo dalla sessione e popola la `ListView` con tutte le domande presenti.
+    /// Estrae il quiz attivo dalla sessione corrente e popola la `ListView`
+    /// con tutte le domande presenti nel quiz completato.
     private void caricaDati() {
         var quiz = Main.sessione.getQuizAttivo();
         for (var domanda : quiz.getDomande())
@@ -90,7 +94,9 @@ public class RiepilogoQuizController extends Controller {
 
     /// @brief Metodo associato al pulsante "Avanti".
     ///
-    /// Resetta il quiz attivo nella sessione e cambia schermata mostrando la leaderboard.
+    /// Pulisce il quiz attivo dalla sessione (liberando la memoria)
+    /// e naviga alla schermata della leaderboard per visualizzare
+    /// i punteggi salvati.
     @FXML
     private void avantiClicked() {
         Main.sessione.setQuizAttivo(null);
