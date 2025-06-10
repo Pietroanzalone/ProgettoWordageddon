@@ -43,34 +43,55 @@ public class DocumentoTestuale implements Serializable, Comparable<DocumentoTest
         aggiornaConteggioParole();
     }
 
-    /// @return Nome del documento.
+    /** @brief Restituisce il nome del documento.
+     * @return Il nome del documento.
+     */
+
     public String getNome() { return nome; }
 
-    /// @param nome Nuovo nome del documento.
+    /** @brief Aggiorna il nome del documento.
+     * @param Il nome del documento.
+     */
+
     public void setNome(String nome) throws SQLException {
         DocumentiTestualiDAO.aggiornaNome(this.nome, nome);
         this.nome = nome;
     }
 
-    /// @return Lingua del documento.
+    /** @brief Restituisce la lingua del documento.
+     * @return La lingua del documento.
+     */
+
     public Lingua getLingua() { return lingua; }
 
-    /// @param lingua Nuova lingua del documento.
+    /** @brief Aggiorna la lingua del documento.
+     * @param La lingua del documento.
+     */
+
     public void setLingua(Lingua lingua) throws SQLException {
         DocumentiTestualiDAO.aggiornaLingua(nome, lingua);
         this.lingua = lingua;
     }
 
-    /// @return Difficoltà del documento.
+    /** @brief Restituisce la difficoltà del documento.
+     * @return La difficoltà del documento.
+     */
+
     public Difficolta getDifficolta() { return difficolta; }
 
-    /// @param difficolta Nuova difficoltà del documento.
+    /** @brief Aggiorna la difficoltà del documento.
+     * @param La difficoltà del documento.
+     */
+
     public void setDifficolta(Difficolta difficolta) throws SQLException {
         DocumentiTestualiDAO.aggiornaDifficolta(nome, difficolta);
         this.difficolta = difficolta;
     }
 
-    /// @return Testo del documento.
+    /** @brief Restituisce il testo del documento.
+     * @return Il testo del documento.
+     */
+
     public String getTesto() throws SQLException {
         if (testo.isBlank())
             testo = DocumentiTestualiDAO.get(nome).getTesto();
@@ -81,6 +102,7 @@ public class DocumentoTestuale implements Serializable, Comparable<DocumentoTest
      * @brief Imposta un nuovo testo e aggiorna il conteggio delle parole.
      * @param testo Nuovo testo del documento.
      */
+
     public void setTesto(String testo) throws SQLException {
         DocumentiTestualiDAO.aggiornaTesto(nome, testo);
         this.testo = testo;
@@ -91,6 +113,7 @@ public class DocumentoTestuale implements Serializable, Comparable<DocumentoTest
      * @brief Restituisce una copia del conteggio delle parole.
      * @return Mappa contenente parole e conteggi.
      */
+
     public Map<String, Integer> getConteggioParole() throws SQLException {
         if (testo.isBlank()) setTesto(getTesto());
         return new HashMap<>(conteggioParole);
@@ -101,6 +124,7 @@ public class DocumentoTestuale implements Serializable, Comparable<DocumentoTest
      * @param parola Parola da cercare.
      * @return True se presente, false altrimenti.
      */
+
     public boolean contiene(String parola) throws SQLException {
         if (testo.isBlank()) setTesto(getTesto());
         return conteggioParole.containsKey(parola);
@@ -111,6 +135,7 @@ public class DocumentoTestuale implements Serializable, Comparable<DocumentoTest
      * @param altro Altro documento da confrontare.
      * @return Lista di parole comuni.
      */
+
     public List<String> getParoleComuni(DocumentoTestuale altro) throws SQLException {
         if (testo.isBlank()) setTesto(getTesto());
         if (altro == null) return new ArrayList<>();
@@ -158,17 +183,19 @@ public class DocumentoTestuale implements Serializable, Comparable<DocumentoTest
         }
     }
 
-    /// @return Rappresentazione testuale del documento.
+    /** \cond DOXY_SKIP */
     @Override
     public String toString() {
         return "\"" + nome + "\" [" + lingua + "] [" + difficolta + "]";
     }
+    /** \endcond */
 
     /**
      * @brief Confronta due documenti sulla base del nome.
      * @param o Oggetto da confrontare.
      * @return True se hanno lo stesso nome, false altrimenti.
      */
+
     @Override
     public boolean equals(Object o) {
         if (o instanceof DocumentoTestuale dt)
@@ -176,12 +203,12 @@ public class DocumentoTestuale implements Serializable, Comparable<DocumentoTest
         return false;
     }
 
-    /// @return Hash calcolato sul nome del documento.
+    /** \cond DOXY_SKIP */
     @Override
     public int hashCode() {
         return nome.hashCode();
     }
-
+    /** \endcond */
 
     /**@brief Confronto tra questo documento testuale ed un altro
      * Il confronto avviene in base alla lingua, alla difficoltà e infine al nome.
