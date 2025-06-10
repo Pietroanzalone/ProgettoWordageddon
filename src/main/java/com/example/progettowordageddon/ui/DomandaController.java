@@ -41,6 +41,9 @@ public class DomandaController extends Controller {
     /**
      * @brief Metodo chiamato all'inizializzazione del controller.
      *
+     * Inizializza l'interfaccia del quiz collegando i pulsanti di risposta,
+     * configurando il binding del pulsante Avanti, caricando le domande
+     * e mostrando la prima domanda del quiz.
      */
     @Override
     public void initialize(){
@@ -118,6 +121,9 @@ public class DomandaController extends Controller {
 
     /**
      * @brief Salva l'indice della risposta selezionata dall'utente per la domanda attuale.
+     *
+     * Gli indici delle risposte sono: 0=risposta1, 1=risposta2, 2=risposta3, 3=risposta4.
+     * Se nessuna risposta è selezionata, viene usato l'indice 0 come default.
      */
     private void salvaRispostaUtente() {
         Toggle selezionato = TG_risposte.getSelectedToggle();

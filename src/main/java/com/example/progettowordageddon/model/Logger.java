@@ -23,6 +23,16 @@ public class Logger {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
     /** \endcond */
 
+
+    /**
+     * @brief Verifica se il logging è disattivato per la sessione corrente.
+     *
+     * @return true se il logging è disattivato (sessione nulla o logging non attivo),
+     *         false se il logging è attivo.
+     *
+     * @note Questo metodo viene chiamato prima di ogni operazione di logging
+     *       per evitare output non desiderato quando il logging è disabilitato.
+     */
     private static boolean loggingDisattivato() {
         if (Main.sessione == null) return true;
         return !Main.sessione.getLoggingAttivo();

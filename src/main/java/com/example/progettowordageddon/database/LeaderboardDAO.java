@@ -10,9 +10,61 @@ import java.util.List;
 
 /**
  * @class LeaderboardDAO
- * @brief Classe DAO per gestire l'accesso ai dati della leaderboard nel database.
+ * @brief Classe per la gestione dei quiz nel database.
  *
- * Fornisce metodi per recuperare, aggiungere e cercare record relativi ai quiz completati.
+ * Fornisce metodi per il recupero, l'inserimento e la ricerca di record dalla tabella {@code Quiz}
+ *
+ * <h2>Struttura della tabella `Quiz` nel database:</h2>
+ *
+ * <table>
+ *   <thead>
+ *     <tr>
+ *       <th>Campo</th>
+ *       <th>Tipo</th>
+ *       <th colspan="2">Vincoli</th>
+ *       <th>Descrizione</th>
+ *     </tr>
+ *   </thead>
+ *   <tbody>
+ *       <tr>
+ *           <td><code>username</code></td>
+ *           <td>TEXT</td>
+ *           <td style="width = 50%">PRIMARY KEY</td>
+ *           <td style="width = 50%">FOREIGN KEY</td>
+ *           <td>Username del giocatore che ha effettuato il Quiz</td>
+ *       </tr>
+ *       <tr>
+ *           <td><code>lingua</code></td>
+ *           <td>TEXT</td>
+ *            <td style="width = 50%">NOT NULL</td>
+ *            <td style="width = 50%">CHECK IN ('ITALIANO', 'INGLESE', 'FRANCESE', 'SPAGNOLO')</td>
+ *            <td>Lingua a cui fa riferimento il testo del quiz</td>
+ *       </tr>
+ *       <tr>
+ *         <td><code>difficolta</code></td>
+ *         <td>TEXT</td>
+ *         <td>NOT NULL</td>
+ *         <td>CHECK IN ('FACILE', 'MEDIA', 'DIFFICILE')</td>
+ *         <td>Livello di difficoltà del documento</td>
+ *       </tr>
+ *       <tr>
+ *           <td><code>dataora</code></td>
+ *           <td>DATETIME</td>
+ *           <td>PRIMARY KEY</td>
+ *           <td></td>
+ *           <td>Data e ora in cui il quiz è stato effettuato</td>
+ *       </tr>
+ *       <tr>
+ *           <td><code>punteggio</code></td>
+ *           <td>INTEGER</td>
+ *           <td colspan="2">NOT NULL</td>
+ *           <td>Punteggio ottenuto nel quiz</td>
+ *       </tr>
+ *
+ *   </tbody>
+ * </table>
+ *
+ *
  */
 public class LeaderboardDAO {
 
