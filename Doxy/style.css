@@ -28,9 +28,12 @@ body {
     visibility: hidden;
 }
 
-#main-menu > :first-child,
-#main-menu > :nth-child(2) {
+#main-menu > * {
     display: none;
+}
+
+.main-menu-btn {
+    visibility: hidden;
 }
 
 ul.sm-nowrap > :not(:first-child) {

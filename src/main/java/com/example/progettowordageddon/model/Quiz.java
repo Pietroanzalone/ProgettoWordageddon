@@ -9,6 +9,7 @@ import java.util.List;
 
 /// @class Quiz
 /// @brief Rappresenta un quiz composto da 10 domande generate a partire da uno o due documenti testuali.
+/// @ingroup model
 ///
 /// Il quiz viene generato in base alla difficoltà e alla lingua specificate. Per la difficoltà
 /// \link Difficolta DIFFICILE \endlink vengono usati due documenti diversi, mentre per difficoltà più

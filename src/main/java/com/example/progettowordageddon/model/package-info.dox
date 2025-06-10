@@ -1,0 +1,19 @@
+/*!
+\defgroup model Model
+\brief Contiene tutte le classi e componenti del modello logico
+       dell'applicazione Wordageddon.
+
+Questo modulo include tutte le classi relative alla rappresentazione
+dei dati, come utenti, domande, documenti e sessioni di gioco.
+
+\subsection subsec_quizGen Generazione del quiz
+
+La classe <code>GeneratoreDomanda</code> è la principale responsabile della
+generazione di un quiz nella lingua e difficoltà selezionate
+dall'utente.
+Essa infatti è utilizzata nel costruttore della classe <code>Quiz</code>
+secondo quanto specificato nel seguente diagramma di sequenza.
+
+\image html SeqDia_GenerazioneQuiz.png width=100%
+
+*/

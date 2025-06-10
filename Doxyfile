@@ -2,7 +2,7 @@
 
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = "Wordageddon"
-PROJECT_NUMBER         = 1.0-SNAPSHOT
+PROJECT_NUMBER         = 1.0
 PROJECT_BRIEF          =
 PROJECT_LOGO           = ./Doxy/Pages/progetto.png
 PROJECT_ICON           = ./Doxy/Pages/progetto.png
@@ -126,7 +126,7 @@ EXCLUDE_SYMBOLS        =
 EXAMPLE_PATH           =
 EXAMPLE_PATTERNS       = *
 EXAMPLE_RECURSIVE      = NO
-IMAGE_PATH             =
+IMAGE_PATH             = Doxy/Pages/assets
 INPUT_FILTER           =
 FILTER_PATTERNS        =
 FILTER_SOURCE_FILES    = NO

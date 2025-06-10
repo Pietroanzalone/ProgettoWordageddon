@@ -6,6 +6,7 @@ import java.util.*;
 /**
  * @class GeneratoreDomanda
  * @brief Il generatore di domande per il quiz.
+ * @ingroup model
  *
  * Questa classe implementa un generatore randomico di domande
  * usando uno o due documenti testuali come base.

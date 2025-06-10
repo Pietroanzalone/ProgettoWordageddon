@@ -1,0 +1,36 @@
+/*!
+\mainpage Documentazione del Progetto
+
+\section intro_sec Introduzione
+
+Benvenuti nella documentazione ufficiale di **Wordageddon**.
+
+Questo progetto ha lo scopo di sviluppare un'applicazione desktop
+con finalità ludico-educative, che sfidi l'utente nella memorizzazione
+delle parole più frequenti presenti in un insieme di documenti testuali.
+
+\section features_sec Caratteristiche principali
+
+- Sviluppo di un'interfaccia grafica user-friendly
+- Connessione a un database SQL per salvare i documenti testuali e
+  le partite precedentemente giocate
+- Sviluppo di un sistema di autenticazione degli utenti e degli admin
+- Generazione di una leaderboard sempre aggiornata, dove vengono
+  mostrati i migliori punteggi divisi per lingua e difficoltà.
+
+\section struttura_sec Packages del programma
+
+- \ref model "Model"
+- \ref database "Database"
+- \ref ui "UI"
+
+\section contatti_sec Contatti e supporto
+
+Per segnalazioni, richieste o contributi:
+
+- Repository: [https://github.com/Pietroanzalone/ProgettoWordageddon](https://github.com/Pietroanzalone/ProgettoWordageddon)
+- Email: p.anzalone@studenti.unisa.it
+
+---
+Generato automaticamente con Doxygen.
+*/

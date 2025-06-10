@@ -6,6 +6,7 @@ import java.util.Objects;
 /**
  * @class Domanda
  * @brief Rappresenta una domanda a scelta multipla con quattro risposte e una risposta corretta.
+ * @ingroup model
  *
  * La classe permette di gestire domande per quiz, memorizzare la risposta selezionata
  * e verificare se la risposta data è corretta.

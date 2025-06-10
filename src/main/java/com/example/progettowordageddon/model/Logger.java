@@ -5,6 +5,13 @@ import com.example.progettowordageddon.Main;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/// @class Logger
+/// @brief Gestisce la stampa dei messaggi di log per sviluppatori.
+/// @ingroup model
+///
+/// La classe implementa un sistema di logging user-friendly che
+/// mostra a terminale (`System.out`) messaggi come informazioni
+/// o errori dell'applicazione.
 public class Logger {
 
     /** \cond DOXY_SKIP */

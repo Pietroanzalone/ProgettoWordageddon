@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 /**
  * @class DocumentoTestuale
  * @brief Rappresenta un documento testuale associato a una lingua, difficoltà e testo contenuto.
+ * @ingroup model
  *
  * Include funzionalità per analisi testuale come conteggio parole, parole comuni, e parole più frequenti.
  */

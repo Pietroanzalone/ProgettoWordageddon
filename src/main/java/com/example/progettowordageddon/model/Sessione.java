@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 /// @class Sessione
 /// @brief Classe che rappresenta lo stato globale della sessione utente nell'applicazione.
+/// @ingroup model
 ///
 /// Questa classe tiene traccia delle informazioni relative alla sessione corrente,
 /// come l'utente attivo, lo stato del quiz, la schermata corrente e la difficoltà selezionata.

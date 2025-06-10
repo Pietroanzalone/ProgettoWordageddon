@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 /**
  * @class Record
  * @brief Rappresenta una singola voce della classifica (leaderboard).
+ * @ingroup model
  *
  * Contiene informazioni sull'utente, punteggio ottenuto, lingua, difficoltà e timestamp.
  * Implementa {@link Comparable} per consentire l'ordinamento nella leaderboard.

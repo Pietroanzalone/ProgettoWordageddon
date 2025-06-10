@@ -8,6 +8,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * @class Utente
  * @brief Un utente dell'applicazione.
+ * @ingroup model
  *
  * La classe gestisce le credenziali dell'utente, incluso l'hashing della password
  * tramite [SHA-256](https://it.wikipedia.org/wiki/Secure_Hash_Algorithm) senza
