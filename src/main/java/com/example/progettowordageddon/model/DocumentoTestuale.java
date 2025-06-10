@@ -46,13 +46,11 @@ public class DocumentoTestuale implements Serializable, Comparable<DocumentoTest
     /** @brief Restituisce il nome del documento.
      * @return Il nome del documento.
      */
-
     public String getNome() { return nome; }
 
     /** @brief Aggiorna il nome del documento.
-     * @param Il nome del documento.
+     * @param nome Il nome del documento.
      */
-
     public void setNome(String nome) throws SQLException {
         DocumentiTestualiDAO.aggiornaNome(this.nome, nome);
         this.nome = nome;
@@ -65,7 +63,7 @@ public class DocumentoTestuale implements Serializable, Comparable<DocumentoTest
     public Lingua getLingua() { return lingua; }
 
     /** @brief Aggiorna la lingua del documento.
-     * @param La lingua del documento.
+     * @param lingua La lingua del documento.
      */
 
     public void setLingua(Lingua lingua) throws SQLException {
@@ -80,7 +78,7 @@ public class DocumentoTestuale implements Serializable, Comparable<DocumentoTest
     public Difficolta getDifficolta() { return difficolta; }
 
     /** @brief Aggiorna la difficoltà del documento.
-     * @param La difficoltà del documento.
+     * @param difficolta La difficoltà del documento.
      */
 
     public void setDifficolta(Difficolta difficolta) throws SQLException {
@@ -218,17 +216,17 @@ public class DocumentoTestuale implements Serializable, Comparable<DocumentoTest
      * Difficoltà (da FACILE a DIFFICILE)
      * Nome del documento (ordine alfabetico)
      *
-     * @param o DocumentoTestuale da confrontare
+     * @param documento DocumentoTestuale da confrontare
      * @return Ritorna un intero negativo, zero o un intero positivo se
      * l'oggetto è minore, uguale o maggiore del DocumentoTestuale o.
      */
     @Override
-    public int compareTo(DocumentoTestuale o) {
-        if (!lingua.equals(o.getLingua()))
-            return lingua.compareTo(o.getLingua());
-        if (!difficolta.equals(o.getDifficolta()))
-            return difficolta.compareTo(o.getDifficolta());
+    public int compareTo(DocumentoTestuale documento) {
+        if (!lingua.equals(documento.getLingua()))
+            return lingua.compareTo(documento.getLingua());
+        if (!difficolta.equals(documento.getDifficolta()))
+            return difficolta.compareTo(documento.getDifficolta());
 
-        return nome.compareTo(o.getNome());
+        return nome.compareTo(documento.getNome());
     }
 }
