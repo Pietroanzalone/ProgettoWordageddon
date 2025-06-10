@@ -10,10 +10,19 @@ import java.time.format.DateTimeFormatter;
 ///
 /// Questa classe tiene traccia delle informazioni relative alla sessione corrente,
 /// come l'utente attivo, lo stato del quiz, la schermata corrente e la difficoltà selezionata.
+///
+/// Inoltre, implementa metodi per salvare automaticamente la sessione in un file `.wordageddon`
+/// nella cartella `Sessioni` del progetto, e importare i dati da quest'ultimo per ripristinare
+/// sessioni chiuse precedentemente.
 public class Sessione implements Serializable {
     /// @brief Nome del file in cui è salvata la sessione.
+    /// @see aggiornaNomeFile
     private String nomeFile;
 
+    /// @brief Rappresenta la data e l'ora in cui è stata creata la sessione.
+    /// @note Esempio:\n
+    ///       Per una sessione creata il 09 giugno 2025 alle 20:48:15.041,
+    ///       il valore di questo attributo sarà `"09_giu_25-20_48-15041"`.
     private final String creazione;
 
     /// @brief Costruttore completo di una nuova sessione.
@@ -32,9 +41,9 @@ public class Sessione implements Serializable {
 
     /// @brief Aggiorna il file della sessione.
     ///
-    /// Rinomina il file della sessione per riflettere eventuali cambi di schermata,
-    /// poi vi inserisce all'interno i dati della sessione corrente.
-    /// In caso di errore, stampa un messaggio di errore con il Logger.
+    /// Crea il file della sessione (o lo rinomina se è gia creato) nella cartella
+    /// `Sessioni` del progetto, poi vi inserisce all'interno i dati della sessione
+    /// corrente. In caso di errore, stampa un messaggio con il Logger.
     private void salva() {
         try {
             var file = new File(nomeFile);
@@ -59,6 +68,10 @@ public class Sessione implements Serializable {
     /// @brief Metodo di utility per aggiornare il nome del file di sessione.
     ///
     /// Ricostruisce il nome del file in base alla schermata attuale.
+    ///
+    /// @note `PannelloControllo-09_giu_25-20_40-15041.wordageddon` è
+    ///       presumibilmente il nome di una sessione creata il 09 giugno 2025
+    ///       alle 20:40, dove l'ultima schermata aperta è stata `"PannelloControllo"`.
     ///
     /// @return Nome del file aggiornato.
     private String aggiornaNomeFile() {

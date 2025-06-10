@@ -136,7 +136,7 @@ public class DomandaController extends Controller {
         if (selezionato == TB_risposta4)
             risposta = 3;
 
-        domande.get(domandaAttuale).setSelezionata(risposta);
+        domande.get(domandaAttuale).setSelezionataIndex(risposta);
     }
 
     /**

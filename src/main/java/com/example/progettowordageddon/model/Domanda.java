@@ -29,10 +29,10 @@ public class Domanda implements Serializable {
     private final String risposta4;
 
     /** @brief Indice (0-3) della risposta corretta. */
-    private final int correttaIdx;
+    private final int correttaIndex;
 
     /** @brief Indice (0-3) della risposta selezionata, o null se non risposto. */
-    private Integer selezionata;
+    private Integer selezionataIndex;
 
     /**
      * @brief Costruttore della classe Domanda.
@@ -42,15 +42,15 @@ public class Domanda implements Serializable {
      * @param risposta2 Seconda risposta.
      * @param risposta3 Terza risposta.
      * @param risposta4 Quarta risposta.
-     * @param correttaIdx Indice della risposta corretta (0-3).
+     * @param correttaIndex Indice della risposta corretta (0-3).
      */
-    public Domanda(String testoDomanda, String risposta1, String risposta2, String risposta3, String risposta4, int correttaIdx) {
+    public Domanda(String testoDomanda, String risposta1, String risposta2, String risposta3, String risposta4, int correttaIndex) {
         this.testoDomanda = testoDomanda;
         this.risposta1 = risposta1;
         this.risposta2 = risposta2;
         this.risposta3 = risposta3;
         this.risposta4 = risposta4;
-        this.correttaIdx = correttaIdx;
+        this.correttaIndex = correttaIndex;
     }
 
     /**
@@ -98,7 +98,7 @@ public class Domanda implements Serializable {
      * @return La risposta corretta tra le quattro opzioni.
      */
     public String getCorretta() {
-        return switch (correttaIdx) {
+        return switch (correttaIndex) {
             case 0 -> risposta1;
             case 1 -> risposta2;
             case 2 -> risposta3;
@@ -109,10 +109,11 @@ public class Domanda implements Serializable {
 
     /**
      * @brief Restituisce il testo della risposta selezionata.
-     * @return La risposta selezionata, oppure null se non selezionata.
+     * @return La risposta selezionata, oppure `null` se non è stata ancora risposta.
+     * @see isRisposta
      */
-    public String getSelezionata() {
-        return switch (selezionata) {
+    public String getSelezionataIndex() {
+        return switch (selezionataIndex) {
             case 0 -> risposta1;
             case 1 -> risposta2;
             case 2 -> risposta3;
@@ -123,18 +124,19 @@ public class Domanda implements Serializable {
 
     /**
      * @brief Imposta la risposta selezionata dall'utente.
-     * @param selezionata Indice della risposta selezionata (0-3), oppure null se non selezionata.
+     * @param selezionataIndex Indice della risposta selezionata (0-3),
+     *                         oppure `null` se non è stata ancora risposta.
      */
-    public void setSelezionata(Integer selezionata) {
-        this.selezionata = selezionata;
+    public void setSelezionataIndex(Integer selezionataIndex) {
+        this.selezionataIndex = selezionataIndex;
     }
 
     /**
      * @brief Verifica se l'utente ha selezionato una risposta.
-     * @return true se una risposta è stata selezionata, false altrimenti.
+     * @return `true` se una risposta è stata selezionata, `false` altrimenti.
      */
     public boolean isRisposta() {
-        return selezionata != null;
+        return selezionataIndex != null;
     }
 
     /**
@@ -142,7 +144,7 @@ public class Domanda implements Serializable {
      * @return true se la risposta selezionata corrisponde alla risposta corretta, false altrimenti.
      */
     public boolean isCorretta() {
-        return selezionata == correttaIdx;
+        return selezionataIndex == correttaIndex;
     }
 
     /**
@@ -158,6 +160,6 @@ public class Domanda implements Serializable {
         if (!(obj instanceof Domanda d))
             return false;
         return Objects.equals(testoDomanda, d.getTestoDomanda())
-                && Objects.equals(getCorretta(), d.getCorretta());
+            && Objects.equals(getCorretta(), d.getCorretta());
     }
 }

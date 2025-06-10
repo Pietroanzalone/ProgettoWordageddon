@@ -61,7 +61,7 @@ public class RiepilogoQuizController extends Controller {
                     Label L_corretta = new Label(item.getCorretta());
                     L_corretta.getStyleClass().add("risposta-corretta");
 
-                    Label L_selezionata = new Label(item.getSelezionata());
+                    Label L_selezionata = new Label(item.getSelezionataIndex());
                     L_selezionata.getStyleClass().add("risposta-selezionata");
 
                     Label L_numeroDomanda = new Label(String.valueOf(getIndex() + 1));

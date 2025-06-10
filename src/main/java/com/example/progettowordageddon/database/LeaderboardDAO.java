@@ -50,8 +50,7 @@ import java.util.List;
  *       <tr>
  *           <td><code>dataora</code></td>
  *           <td>DATETIME</td>
- *           <td>PRIMARY KEY</td>
- *           <td></td>
+ *           <td colspan="2">PRIMARY KEY</td>
  *           <td>Data e ora in cui il quiz è stato effettuato</td>
  *       </tr>
  *       <tr>
