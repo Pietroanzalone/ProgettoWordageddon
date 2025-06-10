@@ -182,6 +182,17 @@ public class DocumentoTestuale implements Serializable, Comparable<DocumentoTest
         return nome.hashCode();
     }
 
+
+    /**@brief Confronto tra questo documento testuale ed un altro
+     * Il confronto avviene in base alla lingua, alla difficoltà e infine al nome.
+     * L'ordine di priorità è:
+     * Lingua (ordine alfabetico)
+     * Difficoltà (ordine alfabetico)
+     * Nome del documento (ordine alfabetico)
+     * @param o DocumentoTestuale da confrontare
+     * @return Ritorna un intero negativo, zero o un intero positivo se
+     * l'oggetto è minore, uguale o maggiore del DocumentoTestuale o.
+     */
     @Override
     public int compareTo(DocumentoTestuale o) {
         if (!lingua.equals(o.getLingua()))
