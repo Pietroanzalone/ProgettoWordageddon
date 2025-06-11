@@ -49,15 +49,11 @@ import java.util.ArrayList;
  *
  * @image html ClaDia_UtentiDAO.png width=80%
  */
-
 public class UtentiDAO {
 
-    /**
-     * @brief Restituisce tutti gli utenti presenti nel database.
-     *
-     * @return Lista di oggetti Utente.
-     * @throws SQLException Se si verifica un errore nella comunicazione con il database.
-     */
+    /// @brief Restituisce tutti gli utenti presenti nel database.
+    /// @return Lista di oggetti Utente.
+    /// @throws SQLException Se si verifica un errore nella comunicazione con il database.
     public static List<Utente> getTutti() throws SQLException {
         List<Object[]> risultatoQuery = DAO.eseguiSelect("SELECT * FROM Utenti");
         List<Utente> utenti = new ArrayList<>();
@@ -66,16 +62,13 @@ public class UtentiDAO {
         return utenti;
     }
 
-    /**
-     * @brief Recupera un utente dal database dato il suo username.
-     *
-     * @param username Nome utente da cercare.
-     * @return Oggetto Utente se trovato, altrimenti null.
-     */
+    /// @brief Recupera un utente dal database dato il suo username.
+    /// @param username Nome utente da cercare.
+    /// @return Oggetto Utente se trovato, altrimenti null.
     public static Utente get(String username) {
         try {
             var righe = DAO.eseguiSelect(
-                    "SELECT * FROM Utenti WHERE username = ?", username);
+                "SELECT * FROM Utenti WHERE username = ?", username);
             if (righe.isEmpty()) return null;
             return generaUtente(righe.get(0));
         } catch (SQLException e) {
@@ -84,24 +77,19 @@ public class UtentiDAO {
         }
     }
 
-    /**
-     * @brief Verifica se un utente esiste nel database.
-     *
-     * @param username Username da verificare.
-     * @return true se l'utente esiste, false altrimenti.
-     */
+    /// @brief Verifica se un utente esiste nel database.
+    /// @param username Username da verificare.
+    /// @return true se l'utente esiste, false altrimenti.
     public static boolean contiene(String username) {
         return (get(username) != null);
     }
 
-    /**
-     * @brief Aggiunge un nuovo utente al database.
-     *
-     * Se la password non è già hashata, viene hashata prima dell'inserimento.
-     *
-     * @param utente Oggetto Utente da inserire.
-     * @throws SQLException Se si verifica un errore durante l'inserimento.
-     */
+    /// @brief Aggiunge un nuovo utente al database.
+    ///
+    /// Se la password non è già hashata, viene hashata prima dell'inserimento.
+    ///
+    /// @param utente Oggetto Utente da inserire.
+    /// @throws SQLException Se si verifica un errore durante l'inserimento.
     public static void aggiungi(Utente utente) throws SQLException {
         if (!utente.isHashedPassword())
             utente.hash();
@@ -113,23 +101,17 @@ public class UtentiDAO {
         """, utente.getUsername(), utente.getPassword(), utente.isAdmin());
     }
 
-    /**
-     * @brief Rimuove un utente dal database.
-     *
-     * @param username Nome utente da eliminare.
-     * @throws SQLException Se si verifica un errore durante la rimozione.
-     */
+    /// @brief Rimuove un utente dal database.
+    /// @param username Nome utente da eliminare.
+    /// @throws SQLException Se si verifica un errore durante la rimozione.
     public static void rimuovi(String username) throws SQLException {
         DAO.eseguiUpdate("DELETE FROM Utenti WHERE username = ?", username);
     }
 
-    /**
-     * @brief Aggiorna lo stato admin di un utente.
-     *
-     * @param username Username dell'utente.
-     * @param admin true per rendere admin, false altrimenti.
-     * @throws SQLException Se si verifica un errore durante l'aggiornamento.
-     */
+    /// @brief Aggiorna lo stato admin di un utente.
+    /// @param username Username dell'utente.
+    /// @param admin true per rendere admin, false altrimenti.
+    /// @throws SQLException Se si verifica un errore durante l'aggiornamento.
     public static void aggiornaAdmin(String username, boolean admin) throws SQLException {
         DAO.eseguiUpdate("""
             UPDATE Utenti
@@ -138,18 +120,15 @@ public class UtentiDAO {
         """, admin, username);
     }
 
-    /**
-     * @brief Genera un oggetto Utente a partire da una riga della tabella.
-     *
-     * @param tokens Array di oggetti corrispondente ai campi della riga.
-     * @return Oggetto Utente generato.
-     */
+    /// @brief Genera un oggetto Utente a partire da una riga della tabella.
+    /// @param tokens Array di oggetti corrispondente ai campi della riga.
+    /// @return Oggetto Utente generato.
     private static Utente generaUtente(Object[] tokens) {
         return new Utente(
-                (String) tokens[0],
-                (String) tokens[1],
-                true,
-                ((int) tokens[2] == 1)
+            (String) tokens[0],
+            (String) tokens[1],
+            true,
+            ((int) tokens[2] == 1)
         );
     }
 

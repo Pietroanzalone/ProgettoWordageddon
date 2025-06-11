@@ -5,15 +5,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /// @class Sessione
-/// @brief Classe che rappresenta lo stato globale della sessione utente nell'applicazione.
+/// @brief Classe che rappresenta lo stato globale della sessione utente
+///        nell'applicazione.
 /// @ingroup model
 ///
-/// Questa classe tiene traccia delle informazioni relative alla sessione corrente,
-/// come l'utente attivo, lo stato del quiz, la schermata corrente e la difficoltà selezionata.
+/// Questa classe tiene traccia delle informazioni relative alla sessione
+/// corrente, come l'utente attivo, lo stato del quiz, la schermata corrente
+/// e la difficoltà selezionata.
 ///
-/// Inoltre, implementa metodi per salvare automaticamente la sessione in un file `.wordageddon`
-/// nella cartella `Sessioni` del progetto, e importare i dati da quest'ultimo per ripristinare
-/// sessioni chiuse precedentemente.
+/// Inoltre, implementa metodi per salvare automaticamente la sessione in un
+/// file `.wordageddon` nella cartella `Sessioni` del progetto, e importare
+/// i dati da quest'ultimo per ripristinare sessioni chiuse precedentemente.
 public class Sessione implements Serializable {
     /// @brief Nome del file in cui è salvata la sessione.
     /// @see aggiornaNomeFile
@@ -41,9 +43,10 @@ public class Sessione implements Serializable {
 
     /// @brief Aggiorna il file della sessione.
     ///
-    /// Crea il file della sessione (o lo rinomina se è gia creato) nella cartella
-    /// `Sessioni` del progetto, poi vi inserisce all'interno i dati della sessione
-    /// corrente. In caso di errore, stampa un messaggio con il Logger.
+    /// Crea il file della sessione (o lo rinomina se è gia creato) nella
+    /// cartella `Sessioni` del progetto, poi vi inserisce all'interno i dati
+    /// della sessione corrente. In caso di errore, stampa un messaggio con
+    /// il Logger.
     private void salva() {
         try {
             var file = new File(nomeFile);
@@ -71,7 +74,8 @@ public class Sessione implements Serializable {
     ///
     /// @note `PannelloControllo-09_giu_25-20_40-15041.wordageddon` è
     ///       presumibilmente il nome di una sessione creata il 09 giugno 2025
-    ///       alle 20:40, dove l'ultima schermata aperta è stata `"PannelloControllo"`.
+    ///       alle 20:40, dove l'ultima schermata aperta è stata
+    ///       `"PannelloControllo"`.
     ///
     /// @return Nome del file aggiornato.
     private String aggiornaNomeFile() {
@@ -80,12 +84,19 @@ public class Sessione implements Serializable {
 
     /// @brief Carica una sessione da file `.wordageddon`.
     ///
-    /// Aggiorna i valori della sessione corrente in base a quelli contenuti nel file.
+    /// Aggiorna i valori della sessione corrente in base a quelli contenuti
+    /// nel file.
     ///
-    /// @param pathFile Percorso assoluto del file da cui caricare la sessione.
-    /// @throws IOException se il file è danneggiato o non corrisponde all'attuale versione dell'applicazione.
-    /// @throws ClassNotFoundException se una delle classi della sessione salvata non è più presente nell'applicazione.
-    /// @throws IllegalArgumentException se l'utente della sessione caricata non corrisponde a quello attualmente loggato.
+    /// @param pathFile Percorso assoluto del file da cui caricare la
+    ///                 sessione.
+    /// @throws IOException se il file è danneggiato o non corrisponde
+    ///                     all'attuale versione dell'applicazione.
+    /// @throws ClassNotFoundException se una delle classi della sessione
+    ///                                salvata non è più presente
+    ///                                nell'applicazione.
+    /// @throws IllegalArgumentException se l'utente della sessione caricata
+    ///                                  non corrisponde a quello attualmente
+    ///                                  loggato.
     public void caricaSessione(String pathFile) throws IOException, ClassNotFoundException, IllegalArgumentException {
         Sessione sessione;
 
@@ -117,15 +128,14 @@ public class Sessione implements Serializable {
     private boolean loggingAttivo;
 
     /// @brief Restituisce `true` se il logging è attivo.
-    ///
     /// @return {@link loggingAttivo}
     public boolean getLoggingAttivo() {
         return loggingAttivo;
     }
 
     /// @brief Imposta lo stato del logging.
-    ///
-    /// @param loggingAttivo `true` per abilitare il logging, `false` per disabilitarlo.
+    /// @param loggingAttivo `true` per abilitare il logging, `false` per
+    ///                      disabilitarlo.
     public void setLoggingAttivo(boolean loggingAttivo) {
         this.loggingAttivo = loggingAttivo;
         salva();
@@ -138,14 +148,12 @@ public class Sessione implements Serializable {
     private transient PrintStream stream;
 
     /// @brief Restituisce lo stream in cui viene stampato il log.
-    ///
     /// @return {@link stream}
     public PrintStream getStream() {
         return stream;
     }
 
     /// @brief Imposta lo stream per il logging.
-    ///
     /// @param stream Oggetto `PrintStream` dove stampare i log.
     public void setStream(PrintStream stream) {
         this.stream = stream;
@@ -158,14 +166,12 @@ public class Sessione implements Serializable {
     private String schermata;
 
     /// @brief Restituisce la schermata attualmente visualizzata.
-    ///
     /// @return {@link schermata}
     public String getSchermata() {
         return schermata;
     }
 
     /// @brief Imposta la schermata corrente.
-    ///
     /// @param schermata Nome della nuova schermata.
     public void setSchermata(String schermata) {
         this.schermata = schermata;
@@ -178,14 +184,12 @@ public class Sessione implements Serializable {
     private Utente utente;
 
     /// @brief Restituisce l'utente attualmente loggato.
-    ///
     /// @return {@link utente}
     public Utente getUtente() {
         return utente;
     }
 
     /// @brief Imposta l'utente corrente.
-    ///
     /// @param utente Oggetto `Utente` che rappresenta l'utente attivo.
     public void setUtente(Utente utente) {
         this.utente = utente;
@@ -198,14 +202,12 @@ public class Sessione implements Serializable {
     public Quiz quizAttivo;
 
     /// @brief Restituisce il quiz attivo.
-    ///
     /// @return {@link quizAttivo}
     public Quiz getQuizAttivo() {
         return quizAttivo;
     }
 
     /// @brief Imposta il quiz attivo nella sessione.
-    ///
     /// @param quizAttivo Oggetto `Quiz` attualmente in corso.
     public void setQuizAttivo(Quiz quizAttivo) {
         this.quizAttivo = quizAttivo;
@@ -213,14 +215,13 @@ public class Sessione implements Serializable {
     }
 
     /// @brief Rappresentazione testuale della sessione.
-    ///
     /// @return Stringa contenente informazioni sullo stato della sessione.
     @Override
     public String toString() {
-        return nomeFile + "\n"
-                + "loggingAttivo = " + loggingAttivo + "\n"
-                + "utente = " + utente + "\n"
-                + "schermata = " + schermata + "\n"
+        return nomeFile + "\n\t"
+                + "loggingAttivo = " + loggingAttivo + "\n\t"
+                + "utente = " + utente + "\n\t"
+                + "schermata = " + schermata + "\n\t"
                 + "quizAttivo = " + (quizAttivo != null);
     }
 

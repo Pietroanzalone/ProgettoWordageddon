@@ -1,10 +1,12 @@
 package com.example.progettowordageddon.model;
 
 /// @class Difficolta
-/// @brief Rappresenta il livello di difficoltà associato a un documento o contenuto.
+/// @brief Rappresenta il livello di difficoltà associato a un documento o
+///        contenuto.
 /// @ingroup model
 ///
-/// Ogni valore enum ha un codice testuale associato rappresentato da simboli ★.
+/// Ogni valore enum ha un codice testuale associato rappresentato da
+/// simboli ★.
 public enum Difficolta {
     /// @brief Livello di difficoltà facile.
     FACILE    ("★"),

@@ -13,11 +13,11 @@ class DAO {
     /// @brief URL di connessione al database SQLite
     private static final String DB_URL;
 
-    /** \cond DOXY_SKIP */
+    /// @cond DOXY_SKIP
     static {
         DB_URL = "jdbc:sqlite:database/WordageddonDB.db";
     }
-    /** \endcond */
+    /// @endcond
 
     /// @brief Stabilisce una connessione al database.
     ///

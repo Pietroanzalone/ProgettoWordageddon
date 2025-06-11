@@ -8,15 +8,18 @@ import java.util.List;
 import java.util.ArrayList;
 
 /// @class Quiz
-/// @brief Rappresenta un quiz composto da 10 domande generate a partire da uno o due documenti testuali.
+/// @brief Rappresenta un quiz composto da 10 domande generate a partire da
+///        uno o due documenti testuali.
 /// @ingroup model
 ///
-/// Il quiz viene generato in base alla difficoltà e alla lingua specificate. Per la difficoltà
-/// \link Difficolta DIFFICILE \endlink vengono usati due documenti diversi, mentre per difficoltà più
-/// semplici si usa un solo documento. Il quiz contiene esattamente 10 domande generate casualmente,
+/// Il quiz viene generato in base alla difficoltà e alla lingua specificate.
+/// Per la difficoltà @link Difficolta DIFFICILE @endlink vengono usati due
+/// documenti diversi, mentre per difficoltà più semplici si usa un solo
+/// documento. Il quiz contiene esattamente 10 domande generate casualmente,
 /// assicurandosi che non siano ripetute.
 ///
-/// Se il sistema non riesce a generare 10 domande valide dopo 100 tentativi, solleva un'eccezione.
+/// Se il sistema non riesce a generare 10 domande valide dopo 100 tentativi,
+/// solleva un'eccezione.
 public class Quiz implements Serializable {
 
     /// @brief Lista delle domande che compongono il quiz.
@@ -28,17 +31,18 @@ public class Quiz implements Serializable {
     /// @brief Secondo documento (solo per la difficoltà `DIFFICILE`).
     private DocumentoTestuale secondoDocumento;
 
-    /// @brief Costruisce un quiz generando 10 domande in base alla difficoltà e alla lingua.
+    /// @brief Costruisce un quiz generando 10 domande in base alla
+    ///        difficoltà e alla lingua.
     ///
     /// Per difficoltà `DIFFICILE`, usa due documenti testuali distinti.
     /// Per altre difficoltà, ne usa solo uno.
-    ///
     /// @image html SeqDia_newQuiz.png width=50%
     ///
     /// @param difficolta La difficoltà del quiz.
     /// @param lingua La lingua dei documenti da cui generare le domande.
     /// @throws SQLException Se si verifica un errore nell'accesso al database.
-    /// @throws IllegalStateException Se non è possibile generare 10 domande valide.
+    /// @throws IllegalStateException Se non è possibile generare 10 domande
+    ///                               valide.
     public Quiz(Difficolta difficolta, Lingua lingua) throws SQLException, IllegalStateException {
         domande = new ArrayList<>();
         GeneratoreDomanda generatore;
@@ -72,15 +76,18 @@ public class Quiz implements Serializable {
     }
 
 
-    /// @brief Restituisce un documento casuale dalla base dati, filtrato per difficoltà e lingua.
-    ///        Se specificato, evita di restituire un documento già scelto.
+    /// @brief Restituisce un documento casuale dalla base dati, filtrato per
+    ///        difficoltà e lingua. Se specificato, evita di restituire un
+    ///        documento già scelto.
     ///
     /// @param difficolta La difficoltà desiderata.
     /// @param lingua La lingua desiderata.
     /// @param diverso Documento da escludere (può essere `null`).
     /// @return Un documento testuale casuale valido.
-    /// @throws SQLException Se si verifica un errore nel recupero dei documenti.
-    /// @throws IllegalStateException Se non esistono documenti validi con i criteri specificati.
+    /// @throws SQLException Se si verifica un errore nel recupero dei
+    ///                      documenti.
+    /// @throws IllegalStateException Se non esistono documenti validi con i
+    ///                               criteri specificati.
     private DocumentoTestuale getDocumentoRandom(Difficolta difficolta, Lingua lingua, DocumentoTestuale diverso) throws SQLException, IllegalStateException {
         List<DocumentoTestuale> lista = DocumentiTestualiDAO.getTutti();
         lista = lista.stream()
@@ -97,13 +104,16 @@ public class Quiz implements Serializable {
         return doc;
     }
 
-    /// @brief Versione sovraccarica di getDocumentoRandom che non esclude alcun documento.
+    /// @brief Versione sovraccarica di getDocumentoRandom che non esclude
+    ///        alcun documento.
     ///
     /// @param difficolta La difficoltà desiderata.
     /// @param lingua La lingua desiderata.
     /// @return Un documento testuale casuale.
-    /// @throws SQLException Se si verifica un errore nel recupero dei documenti.
-    /// @throws IllegalStateException Se non esistono documenti validi con i criteri specificati.
+    /// @throws SQLException Se si verifica un errore nel recupero dei
+    ///                      documenti.
+    /// @throws IllegalStateException Se non esistono documenti validi con i
+    ///                               criteri specificati.
     private DocumentoTestuale getDocumentoRandom(Difficolta difficolta, Lingua lingua) throws SQLException, IllegalStateException {
         return getDocumentoRandom(difficolta, lingua, null);
     }
@@ -115,7 +125,8 @@ public class Quiz implements Serializable {
     }
 
     /// @brief Restituisce il secondo documento (solo se presente).
-    /// @return Il secondo documento ({@link secondoDocumento}), oppure `null` se non usato.
+    /// @return Il secondo documento ({@link secondoDocumento}), oppure
+    ///         `null` se non usato.
     public DocumentoTestuale getSecondoDocumento() {
         return secondoDocumento;
     }

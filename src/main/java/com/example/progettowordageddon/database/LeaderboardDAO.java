@@ -68,11 +68,9 @@ import java.util.List;
  */
 public class LeaderboardDAO {
 
-    /**
-     * @brief Recupera tutti i record presenti nella tabella Quiz.
-     * @return Lista di record rappresentanti la leaderboard.
-     * @throws SQLException Se si verifica un errore nella query al database.
-     */
+    /// @brief Recupera tutti i record presenti nella tabella Quiz.
+    /// @return Lista di record rappresentanti la leaderboard.
+    /// @throws SQLException Se si verifica un errore nella query al database.
     public static List<Record> getTutti() throws SQLException {
         List<Object[]> risultatoQuery = DAO.eseguiSelect("SELECT * FROM Quiz");
         List<Record> classifica = new ArrayList<>();
@@ -81,16 +79,14 @@ public class LeaderboardDAO {
         return classifica;
     }
 
-    /**
-     * @brief Recupera tutti i record associati a un determinato utente.
-     *
-     * Filtra i record della tabella `Quiz` in base allo username
-     * fornito, restituendo tutti i quiz svolti dall'utente.
-     *
-     * @param username Nome utente per cui recuperare i record.
-     * @return Lista di record appartenenti all'utente specificato.
-     * @throws SQLException Se si verifica un errore durante la query al database.
-     */
+    /// @brief Recupera tutti i record associati a un determinato utente.
+    ///
+    /// Filtra i record della tabella `Quiz` in base allo username
+    /// fornito, restituendo tutti i quiz svolti dall'utente.
+    ///
+    /// @param username Nome utente per cui recuperare i record.
+    /// @return Lista di record appartenenti all'utente specificato.
+    /// @throws SQLException Se si verifica un errore durante la query al database.
     public static List<Record> getPerUtente(String username) throws SQLException {
         var lista = getTutti();
         return lista.stream()
@@ -98,11 +94,9 @@ public class LeaderboardDAO {
                 .toList();
     }
 
-    /**
-     * @brief Inserisce un nuovo record nella tabella Quiz.
-     * @param record Il record da aggiungere.
-     * @throws SQLException Se si verifica un errore nell'inserimento nel database.
-     */
+    /// @brief Inserisce un nuovo record nella tabella Quiz.
+    /// @param record Il record da aggiungere.
+    /// @throws SQLException Se si verifica un errore nell'inserimento nel database.
     public static void aggiungi(Record record) throws SQLException {
         DAO.eseguiUpdate("""
             INSERT INTO Quiz
@@ -111,11 +105,9 @@ public class LeaderboardDAO {
         """, record.getUsername(), record.getPunteggio(), record.getLingua(), record.getDifficolta(), record.getTimestamp());
     }
 
-    /**
-     * @brief Metodo helper che trasforma un array di oggetti ottenuto dal DB in un record.
-     * @param tokens Array di oggetti contenente i valori di una riga della tabella Quiz.
-     * @return Nuovo record creato dai valori passati.
-     */
+    /// @brief Metodo helper che trasforma un array di oggetti ottenuto dal DB in un record.
+    /// @param tokens Array di oggetti contenente i valori di una riga della tabella Quiz.
+    /// @return Nuovo record creato dai valori passati.
     private static Record generaRecord(Object[] tokens) {
         return new Record(
                 (String) tokens[0],                    // username

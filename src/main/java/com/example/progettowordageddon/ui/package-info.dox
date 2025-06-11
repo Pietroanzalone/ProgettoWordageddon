@@ -13,5 +13,5 @@ La classe <code>Controller</code> è la classe principale che viene estesa da tu
 classi del package. Fornisce metodi di utlity, come la gestione della barra di navigazione, che
 verrano usati da tutte le sottoclassi per gestire gli input dell'utente.
 
-\image html SeqDia_CambioSchermata.png width=100%
+\image html SeqDia_CambioSchermata.png width=60%
  */

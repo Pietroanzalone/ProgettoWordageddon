@@ -6,7 +6,7 @@
 Questo modulo include tutte le classi relative alla rappresentazione
 dei dati, come utenti, domande, documenti e sessioni di gioco.
 
-\image html ClaDia_model.png width=80%
+\image html ClaDia_model.png width=60%
 
 \subsection subsec_quizGen Generazione del quiz
 

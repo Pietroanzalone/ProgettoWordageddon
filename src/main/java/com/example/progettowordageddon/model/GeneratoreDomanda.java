@@ -3,32 +3,28 @@ package com.example.progettowordageddon.model;
 import java.sql.SQLException;
 import java.util.*;
 
-/**
- * @class GeneratoreDomanda
- * @brief Il generatore di domande per il quiz.
- * @ingroup model
- *
- * Questa classe implementa un generatore randomico di domande
- * usando uno o due documenti testuali come base.
- */
+/// @class GeneratoreDomanda
+/// @brief Il generatore di domande per il quiz.
+/// @ingroup model
+///
+/// Questa classe implementa un generatore randomico di domande
+/// usando uno o due documenti testuali come base.
 public class GeneratoreDomanda {
-    /** @brief Primo documento usato come base per le domande. */
+    /// @brief Primo documento usato come base per le domande.
     private final DocumentoTestuale primoDocumento;
 
-    /** @brief Secondo documento usato come base per le domande.
-     *
-     * Nel caso di quiz di difficoltà `FACILE` o `MEDIA`, questo
-     * documento è `null`.
-     */
+    /// @brief Secondo documento usato come base per le domande.
+    /// Nel caso di quiz di difficoltà `FACILE` o `MEDIA`, questo
+    /// documento è `null`.
     private final DocumentoTestuale secondoDocumento;
 
-    /** @brief Generatore di numeri random. */
+    /// @brief Generatore di numeri random.
     private final Random random;
 
-    /** @brief Lista di parole utilizzate per alcuni tipi di domande. */
+    /// @brief Lista di parole utilizzate per alcuni tipi di domande.
     private static final Map<Lingua, List<String>> parolePerLingua;
 
-    /** \cond DOXY_SKIP */
+    /// @cond DOXY_SKIP
     static {
         parolePerLingua = Map.of(
                 Lingua.ITALIANO, new ArrayList<>(List.of(
@@ -54,16 +50,13 @@ public class GeneratoreDomanda {
         );
 
     }
-    /** \endcond */
+    /// @endcond
 
-    /**
-     * @brief Costruttore completo per la classe GeneratoreDomanda.
-     *
-     * @param primoDocumento Primo documento da usare come base.
-     * @param secondoDocumento Secondo documento da usare come base.
-     *             Se è null, allora alcuni tipi di domande
-     *             sono esclusi dal generatore.
-     */
+    /// @brief Costruttore completo per la classe GeneratoreDomanda.
+    /// @param primoDocumento Primo documento da usare come base.
+    /// @param secondoDocumento Secondo documento da usare come base.
+    ///        Se è `null`, allora alcuni tipi di domande
+    ///        sono esclusi dal generatore.
     public GeneratoreDomanda(DocumentoTestuale primoDocumento, DocumentoTestuale secondoDocumento) {
         if (primoDocumento == null)
             throw new IllegalArgumentException("Il primo documento non può essere null");
@@ -73,15 +66,12 @@ public class GeneratoreDomanda {
         random = new Random();
     }
 
-    /**
-     * @brief Genera una domanda da porre nel quiz.
-     *
-     * Utilizza uno o due documenti per generare una Domanda.
-     *
-     * @return Domanda del quiz.
-     * @throws IllegalStateException se non riesce a generare una domanda
-     *                               valida entro 100 tentativi randomici.
-     */
+    /// @brief Genera una domanda da porre nel quiz.
+    ///
+    /// Utilizza uno o due documenti per generare una Domanda.
+    /// @return Domanda del quiz.
+    /// @throws IllegalStateException se non riesce a generare una domanda
+    ///                               valida entro 100 tentativi randomici.
     public Domanda generaDomanda() {
         Domanda domanda = null;
 
@@ -114,15 +104,12 @@ public class GeneratoreDomanda {
         return domanda;
     }
 
-    /**
-     * @brief Genera una domanda del tipo "frequenza assoluta".
-     *
-     * Tenta di generare una domanda del tipo:
-     * *"Quante volte compare la parola PAROLA nel documento DOCUMENTO?"*.
-     *
-     * @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
-     * @return Domanda se riesce a generarne una valida, `null` altrimenti.
-     */
+    /// @brief Genera una domanda del tipo "frequenza assoluta".
+    ///
+    /// Tenta di generare una domanda del tipo:
+    /// *"Quante volte compare la parola PAROLA nel documento DOCUMENTO?"*.
+    /// @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
+    /// @return Domanda se riesce a generarne una valida, `null` altrimenti.
     private Domanda domandaFrequenzaAssoluta(int docIndex) throws SQLException {
         var documento = getDocumento(docIndex);
 
@@ -162,15 +149,12 @@ public class GeneratoreDomanda {
         );
     }
 
-    /**
-     * @brief Genera una domanda del tipo "frequenza specifica".
-     *
-     * Tenta di generare una domanda del tipo:
-     * *"Quale parola compare esattamente FREQUENZA volte nel documento DOCUMENTO?"*.
-     *
-     * @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
-     * @return Domanda se riesce a generarne una valida, `null` altrimenti.
-     */
+    /// @brief Genera una domanda del tipo "frequenza specifica".
+    ///
+    /// Tenta di generare una domanda del tipo:
+    /// *"Quale parola compare esattamente FREQUENZA volte nel documento DOCUMENTO?"*.
+    /// @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
+    /// @return Domanda se riesce a generarne una valida, `null` altrimenti.
     private Domanda domandaFrequenzaSpecifica(int docIndex) throws SQLException {
         var documento = getDocumento(docIndex);
 
@@ -219,15 +203,12 @@ public class GeneratoreDomanda {
         );
     }
 
-    /**
-     * @brief Genera una domanda del tipo "confronto".
-     *
-     * Tenta di generare una domanda del tipo:
-     * *"Quale di queste parole compare più volte nel documento DOCUMENTO?"*.
-     *
-     * @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
-     * @return Domanda se riesce a generarne una valida, `null` altrimenti.
-     */
+    /// @brief Genera una domanda del tipo "confronto".
+    ///
+    /// Tenta di generare una domanda del tipo:
+    /// *"Quale di queste parole compare più volte nel documento DOCUMENTO?"*.
+    /// @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
+    /// @return Domanda se riesce a generarne una valida, `null` altrimenti.
     private Domanda domandaConfronto(int docIndex) throws SQLException {
         var documento = getDocumento(docIndex);
 
@@ -270,15 +251,12 @@ public class GeneratoreDomanda {
         );
     }
 
-    /**
-     * @brief Genera una domanda del tipo "esclusione".
-     *
-     * Tenta di generare una domanda del tipo:
-     * *"Quale di queste parole non è presente nel documento DOCUMENTO?"*.
-     *
-     * @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
-     * @return Domanda se riesce a generarne una valida, `null` altrimenti.
-     */
+    /// @brief Genera una domanda del tipo "esclusione".
+    ///
+    /// Tenta di generare una domanda del tipo:
+    /// *"Quale di queste parole non è presente nel documento DOCUMENTO?"*.
+    /// @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
+    /// @return Domanda se riesce a generarne una valida, `null` altrimenti.
     private Domanda domandaEsclusione(int docIndex) throws SQLException {
         var documento = getDocumento(docIndex);
 
@@ -328,15 +306,12 @@ public class GeneratoreDomanda {
         );
     }
 
-    /**
-     * @brief Genera una domanda del tipo "documento specifico".
-     *
-     * Tenta di generare una domanda del tipo:
-     * *"In quale documento compare la parola PAROLA?"*.
-     *
-     * @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
-     * @return Domanda se riesce a generarne una valida, `null` altrimenti.
-     */
+    /// @brief Genera una domanda del tipo "documento specifico".
+    ///
+    /// Tenta di generare una domanda del tipo:
+    /// *"In quale documento compare la parola PAROLA?"*.
+    /// @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
+    /// @return Domanda se riesce a generarne una valida, `null` altrimenti.
     private Domanda domandaDocumentoSpecifico(int docIndex) throws SQLException {
         var documento = getDocumento(docIndex);
         var altro = getDocumento(1 - docIndex);
@@ -382,15 +357,12 @@ public class GeneratoreDomanda {
         );
     }
 
-    /**
-     * @brief Genera una domanda del tipo "confronto frequenze".
-     *
-     * Tenta di generare una domanda del tipo:
-     * *"In quale documento compare più volte la parola PAROLA?"*.
-     *
-     * @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
-     * @return Domanda se riesce a generarne una valida, `null` altrimenti.
-     */
+    /// @brief Genera una domanda del tipo "confronto frequenze".
+    /// 
+    /// Tenta di generare una domanda del tipo:
+    /// *"In quale documento compare più volte la parola PAROLA?"*.
+    /// @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
+    /// @return Domanda se riesce a generarne una valida, `null` altrimenti.
     private Domanda domandaConfrontoFrequenze(int docIndex) throws SQLException {
         var documento = getDocumento(docIndex);
         var altro = getDocumento(1 - docIndex);

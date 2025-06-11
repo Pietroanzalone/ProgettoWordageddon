@@ -6,27 +6,29 @@ package com.example.progettowordageddon.model;
 ///
 /// Ogni lingua è associata a un codice di abbreviazione a tre lettere.
 public enum Lingua implements Comparable<Lingua> {
-    /// Lingua italiana.
+    /// L%ingua italiana.
     ITALIANO ("ITA"),
 
-    /// Lingua inglese.
+    /// L%ingua inglese.
     INGLESE  ("ENG"),
 
-    /// Lingua francese.
+    /// L%ingua francese.
     FRANCESE ("FRA"),
 
-    /// Lingua spagnola.
+    /// L%ingua spagnola.
     SPAGNOLO ("ESP");
 
-    private final String codice; ///< Codice abbreviazione della lingua.
+    /// Codice abbreviazione della lingua.
+    private final String codice;
 
-    /// @brief Costruttore dell'enumerazione Lingua.
+    /// @brief Costruttore.
     /// @param codice Codice associato alla lingua.
     Lingua(String codice) {
         this.codice = codice;
     }
 
-    /// @brief Restituisce la rappresentazione in forma di codice della lingua.
+    /// @brief Restituisce la rappresentazione in forma di codice della
+    ///        lingua.
     /// @return Codice di tre lettere della lingua.
     public String getCodice() {
         return codice;

@@ -2,39 +2,35 @@ package com.example.progettowordageddon.model;
 
 import java.time.LocalDateTime;
 
-/**
- * @class Record
- * @brief Rappresenta una singola voce della classifica (leaderboard).
- * @ingroup model
- *
- * Contiene informazioni sull'utente, punteggio ottenuto, lingua, difficoltà e timestamp.
- * Implementa {@link Comparable} per consentire l'ordinamento nella leaderboard.
- */
+/// @class Record
+/// @brief Rappresenta una singola voce della classifica (leaderboard).
+/// @ingroup model
+///
+/// Contiene informazioni sull'utente, punteggio ottenuto, lingua,
+/// difficoltà e timestamp.
 public class Record implements Comparable<Record> {
 
-    /** @brief Username dell'utente che ha completato il quiz. */
+    /// @brief Username dell'utente che ha completato il quiz.
     private String username;
 
-    /** @brief Punteggio ottenuto dall'utente. */
+    /// @brief Punteggio ottenuto dall'utente.
     private int punteggio;
 
-    /** @brief Lingua del quiz completato. */
+    /// @brief Lingua del quiz completato.
     private Lingua lingua;
 
-    /** @brief Difficoltà del quiz completato. */
+    /// @brief Difficoltà del quiz completato.
     private Difficolta difficolta;
 
-    /** @brief Data e ora in cui il quiz è stato completato. */
+    /// @brief Data e ora in cui il quiz è stato completato.
     private LocalDateTime timestamp;
 
-    /**
-     * @brief Costruttore completo.
-     * @param username Username dell'utente.
-     * @param punteggio Punteggio ottenuto.
-     * @param lingua Lingua del quiz.
-     * @param difficolta Difficoltà del quiz.
-     * @param timestamp Data e ora di completamento.
-     */
+    /// @brief Costruttore completo.
+    /// @param username Username dell'utente.
+    /// @param punteggio Punteggio ottenuto.
+    /// @param lingua Lingua del quiz.
+    /// @param difficolta Difficoltà del quiz.
+    /// @param timestamp Data e ora di completamento.
     public Record(String username, int punteggio, Lingua lingua, Difficolta difficolta, LocalDateTime timestamp) {
         this.username = username;
         this.punteggio = punteggio;
@@ -43,12 +39,10 @@ public class Record implements Comparable<Record> {
         this.timestamp = timestamp;
     }
 
-    /**
-     * @brief Costruttore a partire da un oggetto {@link Quiz}.
-     * Imposta il timestamp all'ora attuale.
-     * @param username Username dell'utente.
-     * @param quiz Quiz completato da cui si estraggono dati.
-     */
+    ///@brief Costruttore a partire da un oggetto {@link Quiz}.
+    ///Imposta il timestamp all'ora attuale.
+    ///@param username Username dell'utente.
+    ///@param quiz Quiz completato da cui si estraggono dati.
     public Record(String username, Quiz quiz){
         this.username = username;
         this.punteggio = quiz.getPunteggio();
@@ -57,95 +51,77 @@ public class Record implements Comparable<Record> {
         this.timestamp = LocalDateTime.now();
     }
 
-    /**
-     * @brief Restituisce l'username dell'utente che sta giocando
-     * @return Username dell'utente.
-     */
+    /// @brief Restituisce l'username dell'utente che sta giocando
+    /// @return Username dell'utente.
     public String getUsername() {
         return username;
     }
 
-    /**
-     * @brief Aggiorna l'username dell'utente che sta giocando
-     * @param username Nuovo username dell'utente.
-     */
+    /// @brief Aggiorna l'username dell'utente che sta giocando
+    /// @param username Nuovo username dell'utente.
     public void setUsername(String username) {
         this.username = username;
     }
 
-    /**
-     * @brief Restituisce il punteggio ottenuto
-     * @return Punteggio ottenuto.
-     */
+    /// @brief Restituisce il punteggio ottenuto
+    /// @return Punteggio ottenuto.
     public int getPunteggio() {
         return punteggio;
     }
 
-    /**
-     * @brief Imposta il punteggio ottenuto
-     * @param punteggio Nuovo punteggio ottenuto.
-     */
+    /// @brief Imposta il punteggio ottenuto
+    /// @param punteggio Nuovo punteggio ottenuto.
     public void setPunteggio(int punteggio) {
         this.punteggio = punteggio;
     }
 
-    /**
-     * @brief Restituisce la lingua del quiz
-     * @return Lingua del quiz.
-     */
+    /// @brief Restituisce la lingua del quiz
+    /// @return Lingua del quiz.
     public Lingua getLingua() {
         return lingua;
     }
 
-    /**
-     * @brief Imposta la lingua del quiz
-     * @param lingua Nuova lingua del quiz.
-     */
+    /// @brief Imposta la lingua del quiz
+    /// @param lingua Nuova lingua del quiz.
     public void setLingua(Lingua lingua) {
         this.lingua = lingua;
     }
 
-    /**
-     * @brief Restituisce la difficolta del quiz
-     * @return Difficoltà del quiz. */
+    /// @brief Restituisce la difficolta del quiz
+    /// @return Difficoltà del quiz.
     public Difficolta getDifficolta() {
         return difficolta;
     }
 
-    /**
-     * @brief Imposta la difficoltà del quiz
-     * @param difficolta Nuova difficoltà del quiz. */
+    /// @brief Imposta la difficoltà del quiz
+    /// @param difficolta Nuova difficoltà del quiz.
     public void setDifficolta(Difficolta difficolta) {
         this.difficolta = difficolta;
     }
 
-    /**
-     * @brief Restituisce la data e ora di completamento del quiz
-     * @return Data e ora di completamento del quiz. */
+    /// @brief Restituisce la data e ora di completamento del quiz
+    /// @return Data e ora di completamento del quiz.
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    /**
-     * @brief Imposta la data e ora di completamento del quiz
-     * @param timestamp Nuova data e ora di completamento del quiz. */
+    /// @brief Imposta la data e ora di completamento del quiz
+    /// @param timestamp Nuova data e ora di completamento del quiz.
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
-    /**
-     * @brief Confronta due record per l'ordinamento.
-     *
-     * La logica di ordinamento è definita per:\n
-     * 1) Punteggio (decrescente)\n
-     * 2) Difficoltà (decrescente)\n
-     * 3) Timestamp (decrescente)\n
-     * 4) Username (crescente)
-     * @param record Record da confrontare.
-     * @return Un valore negativo se questo record
-     *         precede l'altro, un valore positivo
-     *         se lo segue, `0` se sono uguali.
-     */
+    /// @brief Confronta due record per l'ordinamento.
+    ///
+    /// La logica di ordinamento è definita per:
+    /// 1. Punteggio
+    /// 2. Difficoltà
+    /// 3. Timestamp
+    /// 4. Username
+    /// @param record R%ecord da confrontare.
+    /// @return Un valore negativo se questo record
+    ///         precede l'altro, un valore positivo
+    ///         se lo segue, `0` se sono uguali.
     @Override
     public int compareTo(Record record) {
         int punt = punteggio - record.getPunteggio();
@@ -159,17 +135,16 @@ public class Record implements Comparable<Record> {
         return user;                   // username crescente
     }
 
-    /**
-     * @brief Genera una rappresentazione testuale del record.
-     *
-     * Questo metodo è utilizzato nella schermata "Utente" per
-     * mostrare l'ultimo quiz tentato da un utente.
-     * Mostra un quiz con il formato `"LINGUA DIFFICOLTA PUNTEGGIO / 10"`.
-     *
-     * @return Rappresentazione testuale del record.
-     */
+    /// @brief Genera una rappresentazione testuale del record.
+    ///
+    /// Questo metodo è utilizzato nella schermata "Utente" per
+    /// mostrare l'ultimo quiz tentato da un utente.
+    /// Mostra un quiz con il formato `"LINGUA DIFFICOLTA PUNTEGGIO / 10"`.
+    ///
+    /// @return Rappresentazione testuale del record.
     @Override
     public String toString() {
         return lingua.name() + " " + difficolta.name() + " " + punteggio + " / 10";
     }
+
 }

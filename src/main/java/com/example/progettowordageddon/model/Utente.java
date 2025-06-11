@@ -15,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
  * l'uso di dipendenze esterne. Fornisce anche metodi per verificare le credenziali
  * e rappresentare l'utente come stringa.
  *
- * \image html SeqDia_AutenticazioneUtente.png width=80%
+ * \image html SeqDia_AutenticazioneUtente.png width=60%
  */
 public class Utente implements Serializable {
 

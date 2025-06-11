@@ -10,32 +10,28 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
-/**
- * @anchor mainClass
- * @class Main
- * @brief Il punto di ingresso dell'applicazione Wordageddon.
- *
- * La classe Main estende
- * [Application](https://docs.oracle.com/javase/8/javafx/api/javafx/application/Application.html)
- * e contiene il metodo {@code main} per l'avvio dell'applicazione
- * e il metodo {@code start} che inizializza
- * l'interfaccia grafica caricando il file FXML principale.
- */
+/// @anchor mainClass
+/// @class Main
+/// @brief Il punto di ingresso dell'applicazione Wordageddon.
+///
+/// La classe Main estende
+/// [Application](https://docs.oracle.com/javase/8/javafx/api/javafx/application/Application.html)
+/// e contiene il metodo `main` per l'avvio dell'applicazione
+/// e il metodo `start` che inizializza
+/// l'interfaccia grafica caricando il file FXML principale.
 public class Main extends Application {
 
-    /** @brief Dati della sessione corrente (utente loggato, schermata attiva...). */
+    /// @brief Dati della sessione corrente (utente loggato, schermata attiva...).
     public static Sessione sessione;
 
-    /**
-     * @brief Metodo principale che lancia l'applicazione JavaFX.
-     *
-     * @param args Argomenti da linea di comando (ignorati).
-     */
+    /// @brief Metodo principale che lancia l'applicazione JavaFX.
+    ///
+    /// @param args Argomenti da linea di comando (ignorati).
     public static void main(String[] args) {
         launch();
     }
 
-    /// \cond DOXYGEN_SKIP
+    /// @cond DOXY_SKIP
     static {
         sessione = new Sessione();
     }
@@ -49,6 +45,6 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
-    /// \endcond
+    /// @endcond
 
 }
