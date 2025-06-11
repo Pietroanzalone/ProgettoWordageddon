@@ -36,7 +36,8 @@ public class AccediController extends Controller {
     private Button B_accedi;
     /// \endcond
 
-    /// @brief Metodo chiamato automaticamente all'inizializzazione del controller.
+    /// @brief Metodo chiamato automaticamente all'inizializzazione del
+    ///        controller.
     ///
     /// Inizializza la barra di navigazione usando
     /// {@link impostaNavbar} e {@link impostaIconaLogout}.
