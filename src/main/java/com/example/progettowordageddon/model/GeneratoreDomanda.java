@@ -13,13 +13,14 @@ import java.util.*;
  */
 public class GeneratoreDomanda {
     /** @brief Primo documento usato come base per le domande. */
-    private final DocumentoTestuale doc0;
+    private final DocumentoTestuale primoDocumento;
 
     /** @brief Secondo documento usato come base per le domande.
      *
-     * Nel caso di quiz semplici, questo documento può anche essere null.
+     * Nel caso di quiz di difficoltà `FACILE` o `MEDIA`, questo
+     * documento è `null`.
      */
-    private final DocumentoTestuale doc1;
+    private final DocumentoTestuale secondoDocumento;
 
     /** @brief Generatore di numeri random. */
     private final Random random;
@@ -58,17 +59,17 @@ public class GeneratoreDomanda {
     /**
      * @brief Costruttore completo per la classe GeneratoreDomanda.
      *
-     * @param doc0 Primo documento da usare come base.
-     * @param doc1 Secondo documento da usare come base.
+     * @param primoDocumento Primo documento da usare come base.
+     * @param secondoDocumento Secondo documento da usare come base.
      *             Se è null, allora alcuni tipi di domande
      *             sono esclusi dal generatore.
      */
-    public GeneratoreDomanda(DocumentoTestuale doc0, DocumentoTestuale doc1) {
-        if (doc0 == null)
+    public GeneratoreDomanda(DocumentoTestuale primoDocumento, DocumentoTestuale secondoDocumento) {
+        if (primoDocumento == null)
             throw new IllegalArgumentException("Il primo documento non può essere null");
 
-        this.doc0 = doc0;
-        this.doc1 = doc1;
+        this.primoDocumento = primoDocumento;
+        this.secondoDocumento = secondoDocumento;
         random = new Random();
     }
 
@@ -87,7 +88,7 @@ public class GeneratoreDomanda {
         // Tenta 100 volte di generare una domanda
         for (int i = 0; domanda == null && i < 100; i++)
             try {
-                if (doc1 == null)
+                if (secondoDocumento == null)
                     domanda = switch (random.nextInt(4)) {
                         case 1 -> domandaConfronto(getRandomIndex());
                         case 2 -> domandaEsclusione(getRandomIndex());
@@ -440,11 +441,11 @@ public class GeneratoreDomanda {
 
     /** \cond DOXY_SKIP */
     private int getRandomIndex() {
-        return random.nextInt(doc1 == null ? 1 : 2);
+        return random.nextInt(secondoDocumento == null ? 1 : 2);
     }
 
     private DocumentoTestuale getDocumento(int index) {
-        return (index == 0) ? doc0 : doc1;
+        return (index == 0) ? primoDocumento : secondoDocumento;
     }
     /** \endcond */
     
