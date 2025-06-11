@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 /// e delle risposte, selezionate e corrette, al termine di un quiz.
 /// Permette inoltre di avanzare alla schermata successiva ("Leaderboard").
 ///
-/// \image html RiepilogoQuiz.png width=80%
+/// \image html RiepilogoQuiz.png width=50%
 public class RiepilogoQuizController extends Controller {
 
     /** \cond DOXY_SKIP */

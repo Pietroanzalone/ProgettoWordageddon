@@ -20,7 +20,7 @@ import java.util.List;
  * la selezione delle risposte da parte dell'utente e il calcolo del punteggio
  * finale.
  *
- * \image html Domanda.png width=80%
+ * \image html Domanda.png width=50%
  */
 public class DomandaController extends Controller {
 

@@ -18,7 +18,7 @@ import java.sql.SQLException;
  * o campi non validi, e abilita/disabilita il pulsante in
  * base allo stato dei campi.
  *
- * \image html Registrati.png width=80%
+ * \image html Registrati.png width=50%
  */
 public class RegistratiController extends Controller {
 

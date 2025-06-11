@@ -16,7 +16,7 @@ import javafx.scene.control.*;
 /// azioni da eseguire quanto l'utente interagisce con
 /// l'interfaccia.
 ///
-/// @image html Accedi.png width=80%
+/// @image html Accedi.png width=50%
 public class AccediController extends Controller {
 
     /// \cond DOXY_SKIP

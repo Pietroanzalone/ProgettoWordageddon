@@ -24,7 +24,7 @@ import java.util.List;
  * la visibilità del pannello di controllo e l'accesso alle
  * funzionalità disponibili.
  *
- * \image html Utente.png width=80%
+ * \image html Utente.png width=50%
  */
 public class UtenteController extends Controller {
 

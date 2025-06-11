@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * se necessario, del secondo documento, con un timer che limita il
  * tempo di lettura in base alla difficoltà del quiz.
  *
- * \image html VediTesto.png width=80%
+ * \image html VediTesto.png width=50%
  */
 public class VediTestoController extends Controller {
 

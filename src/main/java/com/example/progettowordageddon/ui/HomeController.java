@@ -12,7 +12,7 @@ import javafx.fxml.FXML;
  * che permettono all'utente di accedere o registrarsi.
  * Ogni pulsante porta alla relativa schermata di login o registrazione.
  *
- * \image html Home.png width=80%
+ * \image html Home.png width=50%
  */
 public class HomeController extends Controller {
 

@@ -23,7 +23,7 @@ import javafx.scene.input.MouseEvent;
  * l'aggiunta, la visualizzazione, la modifica e la rimozione dei
  * documenti testuali nel database.
  *
- * \image html GestioneDocumenti.png width=80%
+ * \image html GestioneDocumenti.png width=50%
  */
 public class GestioneDocumentiController extends Controller {
 

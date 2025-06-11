@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * Gestisce la selezione della lingua e della difficoltà prima di iniziare un quiz.
  * Consente all'utente di configurare le impostazioni e poi avviare la sessione quiz.
  *
- * \image html IniziaQuiz.png width=80%
+ * \image html IniziaQuiz.png width=50%
  */
 public class IniziaQuizController extends Controller {
 

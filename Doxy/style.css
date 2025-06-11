@@ -103,3 +103,13 @@ html {
         --note-color-bg: #251c00;
     }
 }
+
+img[src="progetto.png"] {
+    border-radius: 20%;
+    border: 2px solid grey !important;
+}
+
+img[src="progetto.png"]:not([alt="Logo"]) {
+    box-shadow: 3px 4px 3px 1px rgba(0, 0, 0, 0.3);
+    border: 5px solid grey !important;
+}

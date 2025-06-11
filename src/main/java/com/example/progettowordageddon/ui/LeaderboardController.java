@@ -25,7 +25,7 @@ import java.util.List;
  * salvati nel database. Inoltre, gestisce la logica di filtraggio dei
  * record da visualizzare in base a lingua e difficoltà
  *
- * \image html Leaderboard.png width=80%
+ * \image html Leaderboard.png width=50%
  */
 public class LeaderboardController extends Controller {
 
