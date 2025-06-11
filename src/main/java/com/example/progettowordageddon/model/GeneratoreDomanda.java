@@ -114,13 +114,13 @@ public class GeneratoreDomanda {
     }
 
     /**
-     * @brief Genera una domanda di frequenza assoluta.
+     * @brief Genera una domanda del tipo "frequenza assoluta".
      *
      * Tenta di generare una domanda del tipo:
-     * "Quante volte compare la parola PAROLA nel documento DOCUMENTO?"
+     * *"Quante volte compare la parola PAROLA nel documento DOCUMENTO?"*.
      *
-     * @param docIndex Il Documento da selezionare per la domanda (0 o 1).
-     * @return Domanda se riesce a generarne una valida, null altrimenti.
+     * @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
+     * @return Domanda se riesce a generarne una valida, `null` altrimenti.
      */
     private Domanda domandaFrequenzaAssoluta(int docIndex) throws SQLException {
         var documento = getDocumento(docIndex);
@@ -162,13 +162,13 @@ public class GeneratoreDomanda {
     }
 
     /**
-     * @brief Genera una domanda di frequenza specifica.
+     * @brief Genera una domanda del tipo "frequenza specifica".
      *
      * Tenta di generare una domanda del tipo:
-     * "Quale parola compare esattamente FREQUENZA volte nel documento DOCUMENTO?"
+     * *"Quale parola compare esattamente FREQUENZA volte nel documento DOCUMENTO?"*.
      *
-     * @param docIndex Il Documento da selezionare per la domanda (0 o 1).
-     * @return Domanda se riesce a generarne una valida, null altrimenti.
+     * @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
+     * @return Domanda se riesce a generarne una valida, `null` altrimenti.
      */
     private Domanda domandaFrequenzaSpecifica(int docIndex) throws SQLException {
         var documento = getDocumento(docIndex);
@@ -219,13 +219,13 @@ public class GeneratoreDomanda {
     }
 
     /**
-     * @brief Genera una domanda di confronto.
+     * @brief Genera una domanda del tipo "confronto".
      *
      * Tenta di generare una domanda del tipo:
-     * "Quale di queste parole compare più volte nel documento DOCUMENTO?"
+     * *"Quale di queste parole compare più volte nel documento DOCUMENTO?"*.
      *
-     * @param docIndex Il Documento da selezionare per la domanda (0 o 1).
-     * @return Domanda se riesce a generarne una valida, null altrimenti.
+     * @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
+     * @return Domanda se riesce a generarne una valida, `null` altrimenti.
      */
     private Domanda domandaConfronto(int docIndex) throws SQLException {
         var documento = getDocumento(docIndex);
@@ -270,13 +270,13 @@ public class GeneratoreDomanda {
     }
 
     /**
-     * @brief Genera una domanda di esclusione.
+     * @brief Genera una domanda del tipo "esclusione".
      *
      * Tenta di generare una domanda del tipo:
-     * "Quale di queste parole non è presente nel documento DOCUMENTO?"
+     * *"Quale di queste parole non è presente nel documento DOCUMENTO?"*.
      *
-     * @param docIndex Il Documento da selezionare per la domanda (0 o 1).
-     * @return Domanda se riesce a generarne una valida, null altrimenti.
+     * @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
+     * @return Domanda se riesce a generarne una valida, `null` altrimenti.
      */
     private Domanda domandaEsclusione(int docIndex) throws SQLException {
         var documento = getDocumento(docIndex);
@@ -328,13 +328,13 @@ public class GeneratoreDomanda {
     }
 
     /**
-     * @brief Genera una domanda di documento specifico.
+     * @brief Genera una domanda del tipo "documento specifico".
      *
      * Tenta di generare una domanda del tipo:
-     * "In quale documento compare la parola PAROLA?"
+     * *"In quale documento compare la parola PAROLA?"*.
      *
-     * @param docIndex Il Documento da selezionare per la domanda (0 o 1).
-     * @return Domanda se riesce a generarne una valida, null altrimenti.
+     * @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
+     * @return Domanda se riesce a generarne una valida, `null` altrimenti.
      */
     private Domanda domandaDocumentoSpecifico(int docIndex) throws SQLException {
         var documento = getDocumento(docIndex);
@@ -382,13 +382,13 @@ public class GeneratoreDomanda {
     }
 
     /**
-     * @brief Genera una domanda di confronto frequenze.
+     * @brief Genera una domanda del tipo "confronto frequenze".
      *
      * Tenta di generare una domanda del tipo:
-     * "In quale documento compare più volte la parola PAROLA?"
+     * *"In quale documento compare più volte la parola PAROLA?"*.
      *
-     * @param docIndex Il Documento da selezionare per la domanda (0 o 1).
-     * @return Domanda se riesce a generarne una valida, null altrimenti.
+     * @param docIndex Il Documento da selezionare per la domanda (`0` o `1`).
+     * @return Domanda se riesce a generarne una valida, `null` altrimenti.
      */
     private Domanda domandaConfrontoFrequenze(int docIndex) throws SQLException {
         var documento = getDocumento(docIndex);
