@@ -1,0 +1,115 @@
+.footer {
+    visibility: hidden;
+}
+
+* {
+    font-family: "Segoe UI", sans-serif;
+}
+
+code {
+    font-family: "JetBrains Mono", monospace;
+}
+
+body {
+    margin: 0 10%;
+}
+
+#doc-content {
+    overflow-x: clip;
+}
+
+#projectnumber {
+    font-style: italic;
+}
+
+.navpath ul {
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.summary {
+    visibility: hidden;
+}
+
+#main-menu > * {
+    display: none;
+}
+
+.main-menu-btn {
+    visibility: hidden;
+}
+
+ul.sm-nowrap > :not(:first-child) {
+    display: none;
+}
+
+.levels {
+    display: none;
+}
+
+#row_0_,
+#row_0_0_,
+#row_0_0_0_ {
+    display: none;
+}
+
+.navelem:first-child,
+.navelem:nth-child(2) {
+    display: none;
+}
+
+span.mlabel {
+    font-size: 10pt;
+}
+
+.arrow ~ a {
+    font-size: x-large;
+}
+
+.paramname,
+.fragment span,
+.fragment a {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: normal;
+}
+
+.directory td.entry *:not(:last-child) {
+    margin-left: -15px;
+}
+
+.directory td.entry .arrow {
+    display: none;
+}
+
+h2.memtitle > span.permalink {
+    display: none;
+}
+
+dt {
+    font-size: large;
+}
+
+html {
+    --header-background-color: #f0f3ff;
+    --scrollbar-background-color: #f0f3ff;
+    --memdecl-background-color: #f0f3ff;
+    --nav-background-color: #f0f3ff;
+    --search-filter-background-color: #f0f3ff;
+}
+
+@media (prefers-color-scheme: dark) {
+    html:not(.dark-mode) {
+        --note-color-bg: #251c00;
+    }
+}
+
+img[src="progetto.png"] {
+    border-radius: 20%;
+    border: 2px solid grey !important;
+}
+
+img[src="progetto.png"]:not([alt="Logo"]) {
+    box-shadow: 3px 4px 3px 1px rgba(0, 0, 0, 0.3);
+    border: 5px solid grey !important;
+}
