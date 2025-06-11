@@ -18,6 +18,8 @@ import java.io.IOException;
  * Gestisce il comportamento della schermata utente, inclusa
  * la visibilità del pannello di controllo e l'accesso alle
  * funzionalità disponibili.
+ *
+ * \image html Utente.png width=80%
  */
 public class UtenteController extends Controller {
 

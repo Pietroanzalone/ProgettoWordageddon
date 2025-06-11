@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
  *
  * Gestisce la navigazione verso le varie funzionalità amministrative
  * come la gestione delle stopwords, degli utenti admin e dei documenti.
+ *
+ * \image html PannelloControllo.png width=80%
  */
 public class PannelloControlloController extends Controller {
 

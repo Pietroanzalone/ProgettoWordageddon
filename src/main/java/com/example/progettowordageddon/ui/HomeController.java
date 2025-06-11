@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
  * Questa classe gestisce i pulsanti iniziali dell'applicazione
  * che permettono all'utente di accedere o registrarsi.
  * Ogni pulsante porta alla relativa schermata di login o registrazione.
+ *
+ * \image html Home.png width=80%
  */
 public class HomeController extends Controller {
 

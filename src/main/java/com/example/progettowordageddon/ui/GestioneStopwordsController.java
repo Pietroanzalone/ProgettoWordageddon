@@ -18,6 +18,8 @@ import java.util.List;
  *
  * Questa classe definisce la logica di interazione dell'interfaccia per
  * l'aggiunta, la visualizzazione e la rimozione delle stopword nel database.
+ *
+ * \image html GestioneStopwords.png width=80%
  */
 public class GestioneStopwordsController extends Controller {
     /** \cond DOXY_SKIP */

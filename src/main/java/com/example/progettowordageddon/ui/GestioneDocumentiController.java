@@ -22,6 +22,8 @@ import javafx.scene.input.MouseEvent;
  * Questa classe definisce la logica di interazione dell'interfaccia per
  * l'aggiunta, la visualizzazione, la modifica e la rimozione dei
  * documenti testuali nel database.
+ *
+ * \image html GestioneDocumenti.png width=80%
  */
 public class GestioneDocumentiController extends Controller {
 

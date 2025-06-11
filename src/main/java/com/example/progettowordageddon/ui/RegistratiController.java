@@ -17,6 +17,8 @@ import java.sql.SQLException;
  * visualizzando i messaggi di errore in caso di conflitti
  * o campi non validi, e abilita/disabilita il pulsante in
  * base allo stato dei campi.
+ *
+ * \image html Registrati.png width=80%
  */
 public class RegistratiController extends Controller {
 

@@ -16,6 +16,8 @@ import javafx.scene.control.*;
  * dei pulsanti in base allo stato dei campi, e gestisce le
  * azioni da eseguire quanto l'utente interagisce con
  * l'interfaccia.
+ *
+ * \image html Accedi.png width=80%
  */
 public class AccediController extends Controller {
 
