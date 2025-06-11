@@ -17,6 +17,8 @@ import java.util.ArrayList;
 /// assicurandosi che non siano ripetute.
 ///
 /// Se il sistema non riesce a generare 10 domande valide dopo 100 tentativi, solleva un'eccezione.
+///
+/// \image html SeqDia_newQuiz.png width=80%
 public class Quiz implements Serializable {
 
     /// @brief Lista delle domande che compongono il quiz.
