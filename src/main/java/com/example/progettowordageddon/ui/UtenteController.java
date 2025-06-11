@@ -2,13 +2,18 @@ package com.example.progettowordageddon.ui;
 
 import com.example.progettowordageddon.Main;
 import com.example.progettowordageddon.model.Logger;
+import com.example.progettowordageddon.model.Record;
+import com.example.progettowordageddon.database.LeaderboardDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
-
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * @class UtenteController
@@ -29,6 +34,12 @@ public class UtenteController extends Controller {
 
     @FXML
     private Label L_titolo;
+
+    @FXML
+    private GridPane GP_info;
+
+    @FXML
+    private Label L_punteggioMedio, L_ultimoQuiz, L_migliorPunteggio;
     /** \endcond */
 
     /**
@@ -45,10 +56,89 @@ public class UtenteController extends Controller {
             Logger.error("Utente non inizializzato");
             L_titolo.setText("Benvenuto, NULL");
             B_pannelloDiControllo.setVisible(false);
+            GP_info.setVisible(false);
         } else {
             L_titolo.setText("Benvenuto, " + Main.sessione.getUtente().getUsername());
             B_pannelloDiControllo.setVisible(Main.sessione.getUtente().isAdmin());
+            impostaInfoBox();
         }
+    }
+
+    /**
+     * @brief Visualizza le informazioni dei quiz dell'utente nella info box.
+     *
+     * Recupera tutti i record dell'utente corrente, calcola il miglior punteggio,
+     * l'ultimo quiz svolto e la media dei punteggi, mostrandoli nella UI.
+     * In caso di errore o assenza di record, la info box viene nascosta.
+     */
+    private void impostaInfoBox() {
+        try {
+            var lista = LeaderboardDAO.getPerUtente(Main.sessione.getUtente().getUsername());
+
+            if (lista.isEmpty()) {
+                GP_info.setVisible(false);
+                return;
+            }
+            setMigliorPunteggio(lista);
+            setUltimoQuiz(lista);
+            setPunteggioMedio(lista);
+        } catch (SQLException e) {
+            GP_info.setVisible(false);
+            mostraErrore(
+                    "Impossibile caricare gli ultimi quiz",
+                    "Errore: " + e.getMessage()
+            ).showAndWait();
+        }
+    }
+
+    /**
+     * @brief Visualizza il punteggio medio dell'utente.
+     *
+     * Calcola il punteggio medio tra i record forniti e lo
+     * visualizza nel campo corrispondente.
+     *
+     * @param lista Lista di record filtrata per l'utente corrente.
+     */
+    private void setPunteggioMedio(List<Record> lista) {
+        assert(!lista.isEmpty());
+        double media = lista.stream()
+                .mapToInt(Record::getPunteggio)
+                .average()
+                .getAsDouble();
+        L_punteggioMedio.setText(String.format("%.1f", media) + " / 10");
+    }
+
+    /**
+     * @brief Visualizza l'ultimo quiz tentato dall'utente.
+     *
+     * Calcola il quiz più recente tra i record forniti e lo
+     * visualizza nel campo corrispondente.
+     *
+     * @param lista Lista di record filtrata per l'utente corrente.
+     */
+    private void setUltimoQuiz(List<Record> lista) {
+        assert(!lista.isEmpty());
+        Record ultimo = lista.stream()
+                .max(Comparator.comparing(Record::getTimestamp))
+                .get();
+        L_ultimoQuiz.setText(ultimo.toString());
+    }
+
+    /**
+     * @brief Visualizza il miglior punteggio ottenuto dall'utente.
+     *
+     * Calcola il punteggio massimo tra i record forniti e lo
+     * visualizza nel campo corrispondente.
+     *
+     * @param lista Lista di record filtrata per l'utente corrente.
+     */
+    private void setMigliorPunteggio(List<Record> lista) {
+        assert(!lista.isEmpty());
+        int migliorPunteggio = lista.stream()
+                .max(Comparator.comparingInt(Record::getPunteggio))
+                .get()
+                .getPunteggio();
+        L_migliorPunteggio.setText(migliorPunteggio + " / 10");
     }
 
     /**

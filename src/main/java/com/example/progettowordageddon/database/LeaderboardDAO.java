@@ -101,7 +101,7 @@ public class LeaderboardDAO {
      * @return Il record corrispondente o null se non trovato.
      * @throws SQLException Se si verifica un errore nella query.
      */
-    public static Record get(String username, LocalDateTime timestamp) throws SQLException {
+    public static Record get(String username, LocalDateTime timestamp) {
         try {
             var righe = DAO.eseguiSelect(
                     "SELECT * FROM Quiz WHERE username = ? AND dataora = ?", username, timestamp);
@@ -111,6 +111,23 @@ public class LeaderboardDAO {
             Logger.error("SQL Exception: " + e.getMessage());
             return null;
         }
+    }
+
+    /**
+     * @brief Recupera tutti i record associati a un determinato utente.
+     *
+     * Filtra i record della tabella `Quiz` in base allo username
+     * fornito, restituendo tutti i quiz svolti dall'utente.
+     *
+     * @param username Nome utente per cui recuperare i record.
+     * @return Lista di record appartenenti all'utente specificato.
+     * @throws SQLException Se si verifica un errore durante la query al database.
+     */
+    public static List<Record> getPerUtente(String username) throws SQLException {
+        var lista = getTutti();
+        return lista.stream()
+            .filter(p -> username.equals(p.getUsername()))
+            .toList();
     }
 
     /**

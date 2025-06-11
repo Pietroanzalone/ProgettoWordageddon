@@ -1,0 +1,9 @@
+.nome {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
+}
+
+.valore {
+    -fx-font-size: 24;
+}

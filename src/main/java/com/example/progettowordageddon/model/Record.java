@@ -158,4 +158,18 @@ public class Record implements Comparable<Record> {
         if (data != 0) return -data;   // timestamp decrescente
         return user;                   // username crescente
     }
+
+    /**
+     * @brief Genera una rappresentazione testuale del record.
+     *
+     * Questo metodo è utilizzato nella schermata "Utente" per
+     * mostrare l'ultimo quiz tentato da un utente.
+     * Mostra un quiz con il formato `"LINGUA DIFFICOLTA PUNTEGGIO / 10"`.
+     *
+     * @return Rappresentazione testuale del record.
+     */
+    @Override
+    public String toString() {
+        return lingua.name() + " " + difficolta.name() + " " + punteggio + " / 10";
+    }
 }
