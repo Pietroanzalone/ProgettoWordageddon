@@ -4,8 +4,8 @@ import com.example.progettowordageddon.database.DocumentiTestualiDAO;
 
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 /// @class Quiz
 /// @brief Rappresenta un quiz composto da 10 domande generate a partire da uno o due documenti testuali.
@@ -41,31 +41,36 @@ public class Quiz implements Serializable {
     /// @throws IllegalStateException Se non è possibile generare 10 domande valide.
     public Quiz(Difficolta difficolta, Lingua lingua) throws SQLException, IllegalStateException {
         domande = new ArrayList<>();
-
+        GeneratoreDomanda generatore;
 
         for (int i = 0; i < 100 && domande.size() < 10; i++) {
-            GeneratoreDomanda generatore;
+            domande.clear();
+
             if (difficolta == Difficolta.DIFFICILE) {
                 primoDocumento = getDocumentoRandom(difficolta, lingua);
                 secondoDocumento = getDocumentoRandom(difficolta, lingua, primoDocumento);
                 generatore = new GeneratoreDomanda(primoDocumento, secondoDocumento);
-            }
-            else {
+            } else {
                 primoDocumento = getDocumentoRandom(difficolta, lingua);
+                secondoDocumento = null;
                 generatore = new GeneratoreDomanda(primoDocumento, null);
             }
 
-            domande.clear();
-            while (domande.size() < 10) {
-                Domanda domanda = generatore.generaDomanda();
-                if (!domande.contains(domanda))
-                    domande.add(domanda);
+            for (int j = 0; j < 100 && domande.size() < 10; j++) {
+                try {
+                    var domanda = generatore.generaDomanda();
+                    if (!domande.contains(domanda))
+                        domande.add(domanda);
+                } catch (IllegalStateException e) {
+                    Logger.warn(e.getMessage() + " - 1: " + primoDocumento + " - 2: " + secondoDocumento);
+                }
             }
         }
 
         if (domande.size() < 10)
             throw new IllegalStateException("Impossibile generare un quiz");
     }
+
 
     /// @brief Restituisce un documento casuale dalla base dati, filtrato per difficoltà e lingua.
     ///        Se specificato, evita di restituire un documento già scelto.
