@@ -32,6 +32,8 @@ import java.util.List;
  *     </tr>
  *   </tbody>
  * </table>
+ *
+ * @image html ClaDia_StopwordsDAO.png width=80%
  */
 public class StopwordsDAO {
 
@@ -51,6 +53,25 @@ public class StopwordsDAO {
         for (var stopword : risultatoQuery)
             elenco.add((String) stopword[0]);
         return elenco;
+    }
+
+    /**
+     * @brief Verifica se una stopword è presente nel database.
+     *
+     * La stringa viene validata prima del controllo.
+     *
+     * @param stopword La stopword da verificare.
+     * @return true se la stopword è presente, false altrimenti.
+     */
+    public static boolean contiene(String stopword) {
+        stopword = validaStopword(stopword);
+        if (stopword == null) return false;
+
+        try {
+            return !DAO.eseguiSelect("SELECT * FROM Stopwords WHERE stopword = ?", stopword).isEmpty();
+        } catch (SQLException e) {
+            return true;
+        }
     }
 
     /**
@@ -86,25 +107,6 @@ public class StopwordsDAO {
     }
 
     /**
-     * @brief Verifica se una stopword è presente nel database.
-     *
-     * La stringa viene validata prima del controllo.
-     *
-     * @param stopword La stopword da verificare.
-     * @return true se la stopword è presente, false altrimenti.
-     */
-    public static boolean contiene(String stopword) {
-        stopword = validaStopword(stopword);
-        if (stopword == null) return false;
-
-        try {
-            return !DAO.eseguiSelect("SELECT * FROM Stopwords WHERE stopword = ?", stopword).isEmpty();
-        } catch (SQLException e) {
-            return true;
-        }
-    }
-
-    /**
      * @brief Inserisce stopword predefinite (lettere A-Z) se non presenti.
      *
      * Questo metodo è utilizzato internamente per garantire una base minima di stopword.
@@ -133,4 +135,5 @@ public class StopwordsDAO {
         if (stopword == null || stopword.trim().isBlank()) return null;
         return stopword.trim().toLowerCase();
     }
+
 }

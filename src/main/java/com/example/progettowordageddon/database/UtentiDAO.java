@@ -1,7 +1,7 @@
 package com.example.progettowordageddon.database;
 
-import com.example.progettowordageddon.model.*;
-
+import com.example.progettowordageddon.model.Utente;
+import com.example.progettowordageddon.model.Logger;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
@@ -46,6 +46,8 @@ import java.util.ArrayList;
  *     </tr>
  *   </tbody>
  * </table>
+ *
+ * @image html ClaDia_UtentiDAO.png width=80%
  */
 
 public class UtentiDAO {
@@ -62,6 +64,34 @@ public class UtentiDAO {
         for (var riga : risultatoQuery)
             utenti.add(generaUtente(riga));
         return utenti;
+    }
+
+    /**
+     * @brief Recupera un utente dal database dato il suo username.
+     *
+     * @param username Nome utente da cercare.
+     * @return Oggetto Utente se trovato, altrimenti null.
+     */
+    public static Utente get(String username) {
+        try {
+            var righe = DAO.eseguiSelect(
+                    "SELECT * FROM Utenti WHERE username = ?", username);
+            if (righe.isEmpty()) return null;
+            return generaUtente(righe.get(0));
+        } catch (SQLException e) {
+            Logger.error("SQL Exception: " + e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * @brief Verifica se un utente esiste nel database.
+     *
+     * @param username Username da verificare.
+     * @return true se l'utente esiste, false altrimenti.
+     */
+    public static boolean contiene(String username) {
+        return (get(username) != null);
     }
 
     /**
@@ -94,57 +124,6 @@ public class UtentiDAO {
     }
 
     /**
-     * @brief Recupera un utente dal database dato il suo username.
-     *
-     * @param username Nome utente da cercare.
-     * @return Oggetto Utente se trovato, altrimenti null.
-     */
-    public static Utente get(String username) {
-        try {
-            var righe = DAO.eseguiSelect(
-                    "SELECT * FROM Utenti WHERE username = ?", username);
-            if (righe.isEmpty()) return null;
-            return generaUtente(righe.get(0));
-        } catch (SQLException e) {
-            Logger.error("SQL Exception: " + e.getMessage());
-            return null;
-        }
-    }
-
-    /**
-     * @brief Aggiorna lo username di un utente.
-     *
-     * @param usernameVecchio Vecchio username.
-     * @param usernameNuovo Nuovo username da assegnare.
-     * @throws SQLException Se si verifica un errore durante l'aggiornamento.
-     */
-    public static void aggiornaUsername(String usernameVecchio, String usernameNuovo) throws SQLException {
-        DAO.eseguiUpdate("""
-            UPDATE Utenti
-            SET username = ?
-            WHERE username = ?
-        """, usernameNuovo, usernameVecchio);
-    }
-
-    /**
-     * @brief Aggiorna la password di un utente.
-     *
-     * La password viene hashata prima di essere salvata.
-     *
-     * @param username Username dell'utente.
-     * @param password Nuova password da impostare.
-     * @throws SQLException Se si verifica un errore durante l'aggiornamento.
-     */
-    public static void aggiornaPassword(String username, String password) throws SQLException {
-        Utente.hashPassword(password);
-        DAO.eseguiUpdate("""
-            UPDATE Utenti
-            SET password = ?
-            WHERE username = ?
-        """, password, username);
-    }
-
-    /**
      * @brief Aggiorna lo stato admin di un utente.
      *
      * @param username Username dell'utente.
@@ -157,16 +136,6 @@ public class UtentiDAO {
             SET admin = ?
             WHERE username = ?
         """, admin, username);
-    }
-
-    /**
-     * @brief Verifica se un utente esiste nel database.
-     *
-     * @param username Username da verificare.
-     * @return true se l'utente esiste, false altrimenti.
-     */
-    public static boolean contiene(String username) {
-        return (get(username) != null);
     }
 
     /**

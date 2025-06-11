@@ -1,8 +1,8 @@
 package com.example.progettowordageddon.database;
 
-import com.example.progettowordageddon.model.*;
 import com.example.progettowordageddon.model.Record;
-
+import com.example.progettowordageddon.model.Difficolta;
+import com.example.progettowordageddon.model.Lingua;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -64,7 +64,7 @@ import java.util.List;
  *   </tbody>
  * </table>
  *
- *
+ * @image html ClaDia_LeaderboardDAO.png width=80%
  */
 public class LeaderboardDAO {
 
@@ -82,38 +82,6 @@ public class LeaderboardDAO {
     }
 
     /**
-     * @brief Inserisce un nuovo record nella tabella Quiz.
-     * @param record Il record da aggiungere.
-     * @throws SQLException Se si verifica un errore nell'inserimento nel database.
-     */
-    public static void aggiungi(Record record) throws SQLException {
-        DAO.eseguiUpdate("""
-            INSERT INTO Quiz
-            (username, punteggio, lingua, difficolta, dataora)
-            VALUES (?, ?, ?, ?, ?)
-        """, record.getUsername(), record.getPunteggio(), record.getLingua(), record.getDifficolta(), record.getTimestamp());
-    }
-
-    /**
-     * @brief Recupera un record specifico identificato da username e timestamp.
-     * @param username Username dell'utente.
-     * @param timestamp Data e ora di completamento del quiz.
-     * @return Il record corrispondente o null se non trovato.
-     * @throws SQLException Se si verifica un errore nella query.
-     */
-    public static Record get(String username, LocalDateTime timestamp) {
-        try {
-            var righe = DAO.eseguiSelect(
-                    "SELECT * FROM Quiz WHERE username = ? AND dataora = ?", username, timestamp);
-            if (righe.isEmpty()) return null;
-            return generaRecord(righe.get(0));
-        } catch (SQLException e) {
-            Logger.error("SQL Exception: " + e.getMessage());
-            return null;
-        }
-    }
-
-    /**
      * @brief Recupera tutti i record associati a un determinato utente.
      *
      * Filtra i record della tabella `Quiz` in base allo username
@@ -126,8 +94,21 @@ public class LeaderboardDAO {
     public static List<Record> getPerUtente(String username) throws SQLException {
         var lista = getTutti();
         return lista.stream()
-            .filter(p -> username.equals(p.getUsername()))
-            .toList();
+                .filter(p -> username.equals(p.getUsername()))
+                .toList();
+    }
+
+    /**
+     * @brief Inserisce un nuovo record nella tabella Quiz.
+     * @param record Il record da aggiungere.
+     * @throws SQLException Se si verifica un errore nell'inserimento nel database.
+     */
+    public static void aggiungi(Record record) throws SQLException {
+        DAO.eseguiUpdate("""
+            INSERT INTO Quiz
+            (username, punteggio, lingua, difficolta, dataora)
+            VALUES (?, ?, ?, ?, ?)
+        """, record.getUsername(), record.getPunteggio(), record.getLingua(), record.getDifficolta(), record.getTimestamp());
     }
 
     /**
@@ -144,4 +125,5 @@ public class LeaderboardDAO {
                 LocalDateTime.parse((String) tokens[3]) // timestamp
         );
     }
+
 }

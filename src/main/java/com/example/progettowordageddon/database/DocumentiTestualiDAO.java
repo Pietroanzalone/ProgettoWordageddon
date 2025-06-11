@@ -59,6 +59,8 @@ import java.util.List;
  * <ul>
  *   <li><code>idx_doc_lingua</code> su campo <code>lingua</code> per velocizzare le query per lingua</li>
  * </ul>
+ *
+ * @image html ClaDia_DAO.png width=80%
  */
 public class DocumentiTestualiDAO {
 
