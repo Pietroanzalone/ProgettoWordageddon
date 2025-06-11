@@ -81,7 +81,7 @@ public class Controller {
     @FXML
     private void logout() {
         Logger.log("Cliccato il pulsante della navbar: LOGOUT");
-        Main.sessione.setUtente(new Utente(null, null, true, false));
+        Main.sessione = new Sessione();
         cambiaSchermata("Home");
     }
 
