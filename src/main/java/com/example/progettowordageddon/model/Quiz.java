@@ -17,8 +17,6 @@ import java.util.ArrayList;
 /// assicurandosi che non siano ripetute.
 ///
 /// Se il sistema non riesce a generare 10 domande valide dopo 100 tentativi, solleva un'eccezione.
-///
-/// \image html SeqDia_newQuiz.png width=50%
 public class Quiz implements Serializable {
 
     /// @brief Lista delle domande che compongono il quiz.
@@ -32,10 +30,10 @@ public class Quiz implements Serializable {
 
     /// @brief Costruisce un quiz generando 10 domande in base alla difficoltà e alla lingua.
     ///
-    /// Per difficoltà DIFFICILE, usa due documenti testuali distinti.
+    /// Per difficoltà `DIFFICILE`, usa due documenti testuali distinti.
     /// Per altre difficoltà, ne usa solo uno.
     ///
-    /// Tenta 100 volte di generare un quiz
+    /// @image html SeqDia_newQuiz.png width=50%
     ///
     /// @param difficolta La difficoltà del quiz.
     /// @param lingua La lingua dei documenti da cui generare le domande.
