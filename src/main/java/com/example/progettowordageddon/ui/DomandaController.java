@@ -12,11 +12,15 @@ import java.util.List;
 
 /**
  * @class DomandaController
- * @brief Controller per la gestione dell'interfaccia utente del quiz a scelta multipla.
+ * @brief Il controller per la gestione della schermata "Domanda".
  * @ingroup ui
  *
- * Gestisce il caricamento e la visualizzazione delle domande, la selezione delle risposte
- * da parte dell'utente e il calcolo del punteggio finale.
+ * Questa classe definisce la logica di visualizzazione delle domande del quiz e
+ * la disabilitazione del pulsante "Avanti" in alto a destra. Inoltre, gestisce
+ * la selezione delle risposte da parte dell'utente e il calcolo del punteggio
+ * finale.
+ *
+ * \image html Domanda.png width=80%
  */
 public class DomandaController extends Controller {
 
@@ -169,4 +173,5 @@ public class DomandaController extends Controller {
                     cambiaSchermata("RiepilogoQuiz");
                 });
     }
+
 }

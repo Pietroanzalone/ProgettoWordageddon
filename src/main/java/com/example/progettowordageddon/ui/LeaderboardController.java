@@ -18,11 +18,14 @@ import java.util.List;
 
 /**
  * @class LeaderboardController
- * @brief Controller della schermata della classifica.
+ * @brief Il controller per la gestione della schermata "Leaderboard".
  * @ingroup ui
  *
- * Gestisce la visualizzazione dei punteggi salvati nel database, con possibilità
- * di filtrare per lingua e difficoltà.
+ * Questa classe definisce la logica di visualizzazione dei punteggi
+ * salvati nel database. Inoltre, gestisce la logica di filtraggio dei
+ * record da visualizzare in base a lingua e difficoltà
+ *
+ * \image html Leaderboard.png width=80%
  */
 public class LeaderboardController extends Controller {
 
@@ -36,28 +39,11 @@ public class LeaderboardController extends Controller {
     @FXML
     private TableView<Record> TV_classifica;
 
-
+    @FXML
+    private TableColumn<Record, String> TC_username, TC_punteggio, TC_difficolta, TC_lingua, TC_data;
 
     @FXML
-    private TableColumn<Record, String> TC_username;
-
-    @FXML
-    private TableColumn<Record, String> TC_punteggio;
-
-    @FXML
-    private TableColumn<Record, String> TC_difficolta;
-
-    @FXML
-    private TableColumn<Record, String> TC_lingua;
-
-    @FXML
-    private TableColumn<Record, String> TC_data;
-
-    @FXML
-    private Label L_lingua;
-
-    @FXML
-    private Label L_difficolta;
+    private Label L_lingua, L_difficolta;
 
     /** \endcond */
 
@@ -182,4 +168,5 @@ public class LeaderboardController extends Controller {
             return linguaCorretta && difficoltaCorretta;
         });
     }
+
 }

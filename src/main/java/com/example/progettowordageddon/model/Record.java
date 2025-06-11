@@ -67,9 +67,8 @@ public class Record implements Comparable<Record> {
 
     /**
      * @brief Aggiorna l'username dell'utente che sta giocando
-     * @param username Imposta l'username dell'utente.
+     * @param username Nuovo username dell'utente.
      */
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -78,28 +77,30 @@ public class Record implements Comparable<Record> {
      * @brief Restituisce il punteggio ottenuto
      * @return Punteggio ottenuto.
      */
-
     public int getPunteggio() {
         return punteggio;
     }
 
     /**
      * @brief Imposta il punteggio ottenuto
-     * @param punteggio punteggio ottenuto. */
+     * @param punteggio Nuovo punteggio ottenuto.
+     */
     public void setPunteggio(int punteggio) {
         this.punteggio = punteggio;
     }
 
     /**
      * @brief Restituisce la lingua del quiz
-     * @return Lingua del quiz. */
+     * @return Lingua del quiz.
+     */
     public Lingua getLingua() {
         return lingua;
     }
 
     /**
      * @brief Imposta la lingua del quiz
-     * @param lingua lingua del quiz. */
+     * @param lingua Nuova lingua del quiz.
+     */
     public void setLingua(Lingua lingua) {
         this.lingua = lingua;
     }
@@ -113,41 +114,44 @@ public class Record implements Comparable<Record> {
 
     /**
      * @brief Imposta la difficoltà del quiz
-     * @param difficolta difficoltà del quiz. */
+     * @param difficolta Nuova difficoltà del quiz. */
     public void setDifficolta(Difficolta difficolta) {
         this.difficolta = difficolta;
     }
 
     /**
-     * @brief Restituisce il timestamp di completamento del quiz
-     * @return Timestamp di completamento del quiz. */
+     * @brief Restituisce la data e ora di completamento del quiz
+     * @return Data e ora di completamento del quiz. */
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
     /**
-     * @brief Imposta il timestamp di completamento del quiz
-     * @param timestamp timestamp di completamento del quiz. */
+     * @brief Imposta la data e ora di completamento del quiz
+     * @param timestamp Nuova data e ora di completamento del quiz. */
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
     /**
      * @brief Confronta due record per l'ordinamento.
-     * Ordinamento prioritario per:
-     * 1) Punteggio (decrescente)
-     * 2) Difficoltà (decrescente)
-     * 3) Timestamp (decrescente)
+     *
+     * La logica di ordinamento è definita per:\n
+     * 1) Punteggio (decrescente)\n
+     * 2) Difficoltà (decrescente)\n
+     * 3) Timestamp (decrescente)\n
      * 4) Username (crescente)
-     * @param o Record da confrontare
-     * @return valore negativo se questo record deve precedere o, positivo se dopo, 0 se uguali
+     * @param record Record da confrontare.
+     * @return Un valore negativo se questo record
+     *         precede l'altro, un valore positivo
+     *         se lo segue, `0` se sono uguali.
      */
     @Override
-    public int compareTo(Record o) {
-        int punt = punteggio - o.getPunteggio();
-        int diff = difficolta.compareTo(o.difficolta);
-        int data = timestamp.compareTo(o.getTimestamp());
-        int user = username.compareTo(o.getUsername());
+    public int compareTo(Record record) {
+        int punt = punteggio - record.getPunteggio();
+        int diff = difficolta.compareTo(record.difficolta);
+        int data = timestamp.compareTo(record.getTimestamp());
+        int user = username.compareTo(record.getUsername());
 
         if (punt != 0) return -punt;   // punteggio decrescente
         if (diff != 0) return -diff;   // difficoltà decrescente

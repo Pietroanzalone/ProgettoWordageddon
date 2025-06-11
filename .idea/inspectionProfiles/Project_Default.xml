@@ -7,5 +7,6 @@
       <option name="ADDITIONAL_TAGS" value="brief,class" />
     </inspection_tool>
     <inspection_tool class="JavadocReference" enabled="true" level="INFORMATION" enabled_by_default="true" editorAttributes="WARNING_ATTRIBUTES" />
+    <inspection_tool class="OptionalGetWithoutIsPresent" enabled="false" level="WARNING" enabled_by_default="false" />
   </profile>
 </component>

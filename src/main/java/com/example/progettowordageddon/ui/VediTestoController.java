@@ -14,11 +14,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @class VediTestoController
- * @brief Controller per la visualizzazione del testo dei documenti associati al quiz.
+ * @brief Il controller per la gestione della schermata "VediTesto".
  * @ingroup ui
  *
- * Gestisce la visualizzazione del testo del primo e, se necessario, del secondo documento,
- * con un timer che limita il tempo di lettura in base alla difficoltà del quiz.
+ * Questa classe gestisce la visualizzazione del testo del primo e,
+ * se necessario, del secondo documento, con un timer che limita il
+ * tempo di lettura in base alla difficoltà del quiz.
+ *
+ * \image html VediTesto.png width=80%
  */
 public class VediTestoController extends Controller {
 

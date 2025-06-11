@@ -45,4 +45,5 @@ public class PannelloControlloController extends Controller {
         Logger.log("Cliccato il pulsante: GESTIONE DOCUMENTI");
         cambiaSchermata("GestioneDocumenti");
     }
+
 }

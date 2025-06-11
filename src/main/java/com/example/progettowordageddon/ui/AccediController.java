@@ -53,20 +53,6 @@ public class AccediController extends Controller {
     }
 
     /**
-     * @brief Metodo chiamato quando l'utente
-     *        interagisce col pulsante "ACCEDI"
-     *
-     * Autentica l'utente eseguendo l'accesso e
-     * salva le informazioni all'interno della
-     * Sessione, poi passa alla schermata "Utente".
-     */
-    public void accediClicked() {
-        Logger.log("Cliccato il pulsante: ACCEDI");
-        Main.sessione.setUtente(UtentiDAO.get(T_username.getText()));
-        cambiaSchermata("Utente");
-    }
-
-    /**
      * @brief Definisce la logica di comparsa del
      *        messaggio di errore sotto il campo
      *        "Username".
@@ -78,10 +64,10 @@ public class AccediController extends Controller {
     private void logicaUsername() {
         L_usernameWarn.setVisible(false);
         T_username.textProperty().addListener((observable, oldValue, newValue) ->
-            L_usernameWarn.setVisible(
-                !newValue.isEmpty()
-                && !UtentiDAO.contiene(newValue)
-            )
+                L_usernameWarn.setVisible(
+                        !newValue.isEmpty()
+                                && !UtentiDAO.contiene(newValue)
+                )
         );
     }
 
@@ -105,8 +91,8 @@ public class AccediController extends Controller {
             var u = UtentiDAO.get(T_username.getText());
             if (u == null) {
                 mostraErrore(
-                    "Errore SQL",
-                    "Errore di caricamento dell'utente selezionato"
+                        "Errore SQL",
+                        "Errore di caricamento dell'utente selezionato"
                 ).showAndWait();
                 L_passwordWarn.setVisible(true);
                 return;
@@ -125,11 +111,26 @@ public class AccediController extends Controller {
      */
     private void logicaPulsanteAccesso() {
         B_accedi.disableProperty().bind(
-            T_username.textProperty().isEmpty()
-            .or(P_password.textProperty().isEmpty())
-            .or(L_usernameWarn.visibleProperty())
-            .or(L_passwordWarn.visibleProperty())
+                T_username.textProperty().isEmpty()
+                        .or(P_password.textProperty().isEmpty())
+                        .or(L_usernameWarn.visibleProperty())
+                        .or(L_passwordWarn.visibleProperty())
         );
+    }
+
+    /**
+     * @brief Metodo chiamato quando l'utente
+     *        interagisce col pulsante "ACCEDI"
+     *
+     * Autentica l'utente eseguendo l'accesso e
+     * salva le informazioni all'interno della
+     * Sessione, poi passa alla schermata "Utente".
+     */
+    @FXML
+    public void accediClicked() {
+        Logger.log("Cliccato il pulsante: ACCEDI");
+        Main.sessione.setUtente(UtentiDAO.get(T_username.getText()));
+        cambiaSchermata("Utente");
     }
 
 }

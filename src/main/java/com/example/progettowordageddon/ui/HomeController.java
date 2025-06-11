@@ -15,6 +15,17 @@ import javafx.fxml.FXML;
 public class HomeController extends Controller {
 
     /**
+     * @brief Metodo chiamato automaticamente all'inizializzazione del controller.
+     *
+     * Inizializza la barra di navigazione.
+     * Utilizza il metodo {@link #impostaNavbar()} della classe base.
+     */
+    @Override
+    public void initialize() {
+        impostaNavbar();
+    }
+
+    /**
      * @brief Metodo chiamato quando si clicca sul pulsante "REGISTRATI".
      *
      * Registra il log dell'interazione e cambia la schermata attuale
@@ -44,14 +55,4 @@ public class HomeController extends Controller {
         cambiaSchermata("Accedi");
     }
 
-    /**
-     * @brief Metodo chiamato automaticamente all'inizializzazione del controller.
-     *
-     * Inizializza la barra di navigazione.
-     * Utilizza il metodo {@link #impostaNavbar()} della classe base.
-     */
-    @Override
-    public void initialize() {
-        impostaNavbar();
-    }
 }

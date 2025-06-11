@@ -60,6 +60,17 @@ public class UtenteController extends Controller {
         cambiaSchermata("IniziaQuiz");
     }
 
+    /**
+     * @brief Metodo eseguito al click del pulsante "Recupera Sessione".
+     *
+     * Apre una finestra di dialogo per selezionare un file di sessione salvato (.wordageddon).
+     * Tenta di caricare la sessione selezionata. In caso di errore, mostra un messaggio
+     * di errore appropriato. Se il file selezionato non appartiene all'utente corrente,
+     * viene bloccato il caricamento.
+     *
+     * Dopo un caricamento corretto, la schermata corrente viene aggiornata in base allo stato
+     * della sessione.
+     */
     @FXML
     private void recuperaSessioneClicked() {
         Logger.log("Cliccato il pulsante: RECUPERA SESSIONE");
@@ -93,6 +104,13 @@ public class UtenteController extends Controller {
         }
         cambiaSchermata(Main.sessione.getSchermata());
     }
+
+    /**
+     * @brief Metodo eseguito al click del pulsante "Leaderboard".
+     *
+     * Cambia la schermata attiva mostrando la classifica generale dei punteggi
+     * ottenuti dagli utenti nei quiz. La schermata fornisce una panoramica dei migliori risultati.
+     */
 
     @FXML
     private void leaderboardClicked() {

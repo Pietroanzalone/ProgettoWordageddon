@@ -57,36 +57,6 @@ public class RegistratiController extends Controller {
     }
 
     /**
-     * @brief Metodo eseguito al click del pulsante "REGISTRATI".
-     *
-     * Crea un nuovo utente, lo inserisce nel database,
-     * lo salva nella sessione e cambia schermata.
-     *
-     * @throws SQLException Se si verifica un errore nell'inserimento dell'utente.
-     */
-    @FXML
-    public void registratiClicked() {
-        Logger.log("Cliccato il pulsante: REGISTRATI");
-        try {
-            var utente = new Utente(
-                T_username.getText(),
-                P_password.getText(),
-                false,
-                false
-            );
-            utente.hash();
-            UtentiDAO.aggiungi(utente);
-            Main.sessione.setUtente(utente);
-            cambiaSchermata("Utente");
-        } catch (SQLException e) {
-            mostraErrore(
-                "Impossibile caricare l'utente dal database",
-                "Errore: " + e.getMessage()
-            ).showAndWait();
-        }
-    }
-
-    /**
      * @brief Logica per la visualizzazione del messaggio di errore
      *        relativo al campo "Username".
      *
@@ -126,6 +96,36 @@ public class RegistratiController extends Controller {
                         .or(L_usernameWarn.visibleProperty())
                         .or(L_passwordWarn.visibleProperty())
         );
+    }
+
+    /**
+     * @brief Metodo eseguito al click del pulsante "REGISTRATI".
+     *
+     * Crea un nuovo utente, lo inserisce nel database,
+     * lo salva nella sessione e cambia schermata.
+     *
+     * @throws SQLException Se si verifica un errore nell'inserimento dell'utente.
+     */
+    @FXML
+    public void registratiClicked() {
+        Logger.log("Cliccato il pulsante: REGISTRATI");
+        try {
+            var utente = new Utente(
+                T_username.getText(),
+                P_password.getText(),
+                false,
+                false
+            );
+            utente.hash();
+            UtentiDAO.aggiungi(utente);
+            Main.sessione.setUtente(utente);
+            cambiaSchermata("Utente");
+        } catch (SQLException e) {
+            mostraErrore(
+                "Impossibile caricare l'utente dal database",
+                "Errore: " + e.getMessage()
+            ).showAndWait();
+        }
     }
 
 }
