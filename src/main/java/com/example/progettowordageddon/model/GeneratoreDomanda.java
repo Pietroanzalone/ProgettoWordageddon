@@ -88,16 +88,19 @@ public class GeneratoreDomanda {
         for (int i = 0; domanda == null && i < 100; i++)
             try {
                 if (doc1 == null)
-                    domanda = switch (random.nextInt(3)) {
-                        case 1 -> domandaConfronto(getRandomIndex());
-                        case 2 -> domandaEsclusione(getRandomIndex());
-                        default -> domandaFrequenzaAssoluta(getRandomIndex());
-                    };
-                else
                     domanda = switch (random.nextInt(4)) {
                         case 1 -> domandaConfronto(getRandomIndex());
                         case 2 -> domandaEsclusione(getRandomIndex());
-                        case 3 -> domandaDocumentoSpecifico(getRandomIndex());
+                        case 3 -> domandaFrequenzaSpecifica(getRandomIndex());
+                        default -> domandaFrequenzaAssoluta(getRandomIndex());
+                    };
+                else
+                    domanda = switch (random.nextInt(6)) {
+                        case 1 -> domandaConfronto(getRandomIndex());
+                        case 2 -> domandaEsclusione(getRandomIndex());
+                        case 3 -> domandaFrequenzaSpecifica(getRandomIndex());
+                        case 4 -> domandaDocumentoSpecifico(getRandomIndex());
+                        case 5 -> domandaConfrontoFrequenze(getRandomIndex());
                         default -> domandaFrequenzaAssoluta(getRandomIndex());
                     };
             } catch (SQLException e) {
@@ -155,6 +158,63 @@ public class GeneratoreDomanda {
             String.valueOf(opzioni.get(2)),
             String.valueOf(opzioni.get(3)),
             opzioni.indexOf(frequenza)
+        );
+    }
+
+    /**
+     * @brief Genera una domanda di frequenza specifica.
+     *
+     * Tenta di generare una domanda del tipo:
+     * "Quale parola compare esattamente FREQUENZA volte nel documento DOCUMENTO?"
+     *
+     * @param docIndex Il Documento da selezionare per la domanda (0 o 1).
+     * @return Domanda se riesce a generarne una valida, null altrimenti.
+     */
+    private Domanda domandaFrequenzaSpecifica(int docIndex) throws SQLException {
+        var documento = getDocumento(docIndex);
+
+        // Ottengo tutte le parole del documento con la loro frequenza
+        Map<String, Integer> frequenze = documento.getConteggioParole();
+        List<String> parole = new ArrayList<>(frequenze.keySet());
+
+        // Scelgo una parola a caso nel documento tra quelle
+        // che hanno frequenza maggiore di 1
+        List<String> paroleNonUniche = parole.stream().filter(p -> frequenze.get(p) > 1).toList();
+
+        // Se non ci sono parole con frequenza maggiore di 1,
+        // annulla la creazione e restituisci null
+        if (paroleNonUniche.isEmpty())
+            return null;
+
+        String parola = paroleNonUniche.get(random.nextInt(paroleNonUniche.size()));
+        int frequenza = frequenze.get(parola);
+
+        // Scelgo quattro opzioni a caso, di cui una corretta
+        var opzioni = new ArrayList<String>();
+        opzioni.add(parola);
+        for (int i = 0; opzioni.size() < 4 && i < 100; i++) {
+            String errata = parole.get(random.nextInt(parole.size()));
+            if (frequenza != frequenze.get(errata))
+                opzioni.add(errata);
+        }
+        if (opzioni.size() < 4)
+            return null;
+        Collections.shuffle(opzioni);
+
+        // Scrivo il testo della domanda
+        String testoDomanda = String.format(
+            "Quale parola compare esattamente %d volte nel documento \"%s\"?",
+            frequenza, documento.getNome()
+        );
+
+        // Costruisco la domanda
+        return new Domanda(
+            testoDomanda,
+            String.valueOf(opzioni.get(0)),
+            String.valueOf(opzioni.get(1)),
+            String.valueOf(opzioni.get(2)),
+            String.valueOf(opzioni.get(3)),
+            opzioni.indexOf(parola)
         );
     }
 
@@ -318,6 +378,63 @@ public class GeneratoreDomanda {
             opzioni.get(2),
             opzioni.get(3),
             opzioni.indexOf(documento.getNome())
+        );
+    }
+
+    /**
+     * @brief Genera una domanda di confronto frequenze.
+     *
+     * Tenta di generare una domanda del tipo:
+     * "In quale documento compare più volte la parola PAROLA?"
+     *
+     * @param docIndex Il Documento da selezionare per la domanda (0 o 1).
+     * @return Domanda se riesce a generarne una valida, null altrimenti.
+     */
+    private Domanda domandaConfrontoFrequenze(int docIndex) throws SQLException {
+        var documento = getDocumento(docIndex);
+        var altro = getDocumento(1 - docIndex);
+
+        // Ottengo la lista delle parole comuni
+        List<String> paroleComuni = documento.getParoleComuni(altro);
+
+        // Se non ci sono parole esclusive,
+        // annulla la creazione e restituisci null
+        if (paroleComuni.isEmpty()) return null;
+
+        // Scelgo una parola a caso tra quelle comuni
+        String parola = paroleComuni.get(random.nextInt(paroleComuni.size()));
+
+        // Controllo la frequenza della parola
+        // nei due documenti
+        int frequenzaPrimo = documento.getConteggioParole().get(parola);
+        int frequenzaSecondo = altro.getConteggioParole().get(parola);
+        String corretta = "Stessa frequenza";
+        if (frequenzaPrimo > frequenzaSecondo)
+            corretta = documento.getNome();
+        if (frequenzaPrimo < frequenzaSecondo)
+            corretta = altro.getNome();
+
+        // Compongo le quattro opzioni
+        var opzioni = new ArrayList<String>();
+        opzioni.add(documento.getNome());
+        opzioni.add(altro.getNome());
+        opzioni.add("Stessa frequenza");
+        opzioni.add("Solo in " + documento.getNome());
+
+        // Scrivo il testo della domanda
+        String testoDomanda = String.format(
+            "In quale documento compare più volte la parola \"%s\"?",
+            parola
+        );
+
+        // Costruisco la domanda
+        return new Domanda(
+            testoDomanda,
+            opzioni.get(0),
+            opzioni.get(1),
+            opzioni.get(2),
+            opzioni.get(3),
+            opzioni.indexOf(corretta)
         );
     }
 
