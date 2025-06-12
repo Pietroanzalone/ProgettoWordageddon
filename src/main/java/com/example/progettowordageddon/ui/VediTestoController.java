@@ -89,6 +89,11 @@ public class VediTestoController extends Controller {
     private void startTimer(int secondi) {
         var tempo = new AtomicInteger(secondi - 1);
         timer = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            if (Main.sessione.getQuizAttivo() == null) {
+                timer.stop();
+                return;
+            }
+
             int tempoRimanente = tempo.getAndDecrement();
             int minutiRimanenti = tempoRimanente / 60;
             int secondiRimanenti = tempoRimanente % 60;
