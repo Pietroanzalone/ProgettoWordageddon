@@ -49,7 +49,7 @@ import java.util.ArrayList;
  *
  * @image html ClaDia_UtentiDAO.png width=80%
  */
-public class UtentiDAO {
+public final class UtentiDAO {
 
     /// @brief Restituisce tutti gli utenti presenti nel database.
     /// @return Lista di oggetti Utente.
