@@ -102,7 +102,7 @@ public class UtenteController extends Controller {
     private void setPunteggioMedio(List<Record> lista) {
         assert(!lista.isEmpty());
         double media = lista.stream()
-                .mapToInt(Record::getPunteggio)
+                .mapToInt(Record::punteggio)
                 .average()
                 .getAsDouble();
         L_punteggioMedio.setText(String.format("%.1f", media) + " / 10");
@@ -119,7 +119,7 @@ public class UtenteController extends Controller {
     private void setUltimoQuiz(List<Record> lista) {
         assert(!lista.isEmpty());
         Record ultimo = lista.stream()
-                .max(Comparator.comparing(Record::getTimestamp))
+                .max(Comparator.comparing(Record::timestamp))
                 .get();
         L_ultimoQuiz.setText(ultimo.toString());
     }
@@ -135,9 +135,9 @@ public class UtenteController extends Controller {
     private void setMigliorPunteggio(List<Record> lista) {
         assert(!lista.isEmpty());
         int migliorPunteggio = lista.stream()
-                .max(Comparator.comparingInt(Record::getPunteggio))
+                .max(Comparator.comparingInt(Record::punteggio))
                 .get()
-                .getPunteggio();
+                .punteggio();
         L_migliorPunteggio.setText(migliorPunteggio + " / 10");
     }
 

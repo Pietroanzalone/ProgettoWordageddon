@@ -99,7 +99,7 @@ public class LeaderboardController extends Controller {
                 super.updateItem(item, empty);
                 if (empty || item == null)
                     setStyle("");
-                else if (Main.sessione.getUtente().getUsername().equals(item.getUsername()))
+                else if (Main.sessione.getUtente().getUsername().equals(item.username()))
                     setStyle("-fx-font-weight: bold");
                 else
                     setStyle("");
@@ -112,20 +112,20 @@ public class LeaderboardController extends Controller {
      * Collega ogni colonna ai relativi dati del record.
      */
     private void impostaColonne() {
-        TC_username.setCellValueFactory(cella -> new SimpleStringProperty(cella.getValue().getUsername()));
+        TC_username.setCellValueFactory(cella -> new SimpleStringProperty(cella.getValue().username()));
         TC_username.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        TC_punteggio.setCellValueFactory(cella -> new SimpleStringProperty(((Integer) cella.getValue().getPunteggio()).toString()));
+        TC_punteggio.setCellValueFactory(cella -> new SimpleStringProperty(((Integer) cella.getValue().punteggio()).toString()));
         TC_punteggio.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        TC_lingua.setCellValueFactory(cella -> new SimpleStringProperty(cella.getValue().getLingua().name()));
+        TC_lingua.setCellValueFactory(cella -> new SimpleStringProperty(cella.getValue().lingua().name()));
         TC_lingua.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        TC_difficolta.setCellValueFactory(cella -> new SimpleStringProperty(cella.getValue().getDifficolta().name()));
+        TC_difficolta.setCellValueFactory(cella -> new SimpleStringProperty(cella.getValue().difficolta().name()));
         TC_difficolta.setCellFactory(TextFieldTableCell.forTableColumn());
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-        TC_data.setCellValueFactory(cella -> new SimpleStringProperty(cella.getValue().getTimestamp().format(formatter)));
+        TC_data.setCellValueFactory(cella -> new SimpleStringProperty(cella.getValue().timestamp().format(formatter)));
         TC_data.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 
@@ -163,8 +163,8 @@ public class LeaderboardController extends Controller {
         Difficolta difficolta = C_difficolta.getValue();
 
         filtrata.setPredicate(record -> {
-            boolean linguaCorretta = (lingua == null) || lingua == record.getLingua();
-            boolean difficoltaCorretta = (difficolta == null) || difficolta == record.getDifficolta();
+            boolean linguaCorretta = (lingua == null) || lingua == record.lingua();
+            boolean difficoltaCorretta = (difficolta == null) || difficolta == record.difficolta();
             return linguaCorretta && difficoltaCorretta;
         });
     }
