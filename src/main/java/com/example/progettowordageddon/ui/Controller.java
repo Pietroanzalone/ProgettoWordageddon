@@ -22,7 +22,7 @@ import javafx.scene.layout.HBox;
 /// Implementa funzioni di base, come il cambio di schermata e la chiusura
 /// dell'applicazione. Inoltre, gestisce interamente la logica della barra
 /// di navigazione in alto.
-public class Controller {
+abstract class Controller {
 
     /// @cond DOXY_SKIP
     @FXML

@@ -66,7 +66,7 @@ import java.util.List;
  *
  * @image html ClaDia_LeaderboardDAO.png width=80%
  */
-public class LeaderboardDAO {
+public final class LeaderboardDAO {
 
     /// @brief Recupera tutti i record presenti nella tabella Quiz.
     /// @return Lista di record rappresentanti la leaderboard.
@@ -90,7 +90,7 @@ public class LeaderboardDAO {
     public static List<Record> getPerUtente(String username) throws SQLException {
         var lista = getTutti();
         return lista.stream()
-                .filter(p -> username.equals(p.getUsername()))
+                .filter(p -> username.equals(p.username()))
                 .toList();
     }
 
@@ -102,7 +102,7 @@ public class LeaderboardDAO {
             INSERT INTO Quiz
             (username, punteggio, lingua, difficolta, dataora)
             VALUES (?, ?, ?, ?, ?)
-        """, record.getUsername(), record.getPunteggio(), record.getLingua(), record.getDifficolta(), record.getTimestamp());
+        """, record.username(), record.punteggio(), record.lingua(), record.difficolta(), record.timestamp());
     }
 
     /// @brief Metodo helper che trasforma un array di oggetti ottenuto dal DB in un record.

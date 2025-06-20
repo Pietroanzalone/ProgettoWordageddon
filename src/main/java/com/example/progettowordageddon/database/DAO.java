@@ -9,7 +9,7 @@ import java.util.ArrayList;
 ///
 /// Questa classe fornisce metodi protetti statici per eseguire query di selezione
 /// e aggiornamento sul database tramite JDBC.
-class DAO {
+abstract class DAO {
     /// @brief URL di connessione al database SQLite
     private static final String DB_URL;
 

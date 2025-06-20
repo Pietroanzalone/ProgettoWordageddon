@@ -35,7 +35,7 @@ import java.util.List;
  *
  * @image html ClaDia_StopwordsDAO.png width=80%
  */
-public class StopwordsDAO {
+public final class StopwordsDAO {
 
     /// @brief Restituisce tutte le stopword presenti nel database.
     ///

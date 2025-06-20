@@ -62,7 +62,7 @@ import java.util.List;
  *
  * @image html ClaDia_DAO.png width=80%
  */
-public class DocumentiTestualiDAO {
+public final class DocumentiTestualiDAO {
 
     /// @brief Restituisce tutti i documenti testuali presenti nel database.
     ///
