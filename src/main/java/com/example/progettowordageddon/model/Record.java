@@ -32,7 +32,7 @@ public record Record(String username, int punteggio, Lingua lingua, Difficolta d
     @Override
     public int compareTo(Record record) {
         int punt = punteggio - record.punteggio();
-        int diff = difficolta.compareTo(record.difficolta);
+        int diff = difficolta.compareTo(record.difficolta());
         int data = timestamp.compareTo(record.timestamp());
         int user = username.compareTo(record.username());
 
